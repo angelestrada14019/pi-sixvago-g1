@@ -1,4 +1,4 @@
-package com.example.proyectoIntegrador.util;
+package com.example.proyectoIntegrador;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
