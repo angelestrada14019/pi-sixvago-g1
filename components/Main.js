@@ -1,4 +1,4 @@
-import "./main.css"
+import main from "./main.css"
 import Cards from "./Cards.js"
 
 const Main = () => {

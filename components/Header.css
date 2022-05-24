@@ -23,6 +23,12 @@ nav{
     width: 25%;
     justify-content: flex-end;
 }
+.hamburguesa{
+    display:none;
+    cursor: pointer;
+    width: 24px;
+    height: 12px;
+}
 .boton-nav {
     color: #fff;
     padding: 10px 15px;
@@ -39,6 +45,7 @@ nav{
     overflow: hidden;
     border: 2px solid #212529;
     color: #212529;
+    user-select: none;
 }
 .boton-nav:hover {
     color: #fff;

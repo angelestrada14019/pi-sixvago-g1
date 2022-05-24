@@ -1,4 +1,4 @@
-import "./footer.css";
+import footer from "./footer.css";
 
 const Footer = () => {
   return (
@@ -7,10 +7,10 @@ const Footer = () => {
         <h3>©2021 Digital Booking</h3>
       </div>
       <div className="footer-icons">
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-linkedin-in"></i>
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-instagram"></i>
+        <i className="fa-brands fa-facebook"></i>
+        <i className="fa-brands fa-linkedin-in"></i>
+        <i className="fa-brands fa-twitter"></i>
+        <i className="fa-brands fa-instagram"></i>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@
   bottom: 0;
   color: white;
   background-color: #1dbeb4;
+  z-index: 2;
 }
 
 .footer-copyright{
