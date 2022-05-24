@@ -1,0 +1,108 @@
+.section-h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin-left: 40px;
+  color: #383b58;
+}
+
+.cards-section {
+  padding-top: 15px;
+  background-color: rgba(223, 223, 223, 0.65);
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  margin: 7px;
+  background: #ffffff;
+  border: 1px solid #dfe4ea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  min-width: 40%;
+  max-width: 635px;
+  height: 283px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 21px 16px 11px 16px;
+}
+
+.card-img {
+  object-fit: cover;
+  min-width: 50%;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.card-category {
+  font-family: "Quicksand";
+  color: rgba(56, 59, 88, 0.5);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+
+.card-location {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.card-description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 59px;
+  margin-bottom: 8px;
+}
+
+.card-button {
+  cursor: pointer;
+  min-width: 50%;
+  min-height: 40px;
+  margin-bottom: 12px;
+  background: #1dbeb4;
+  color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 393px;
+    height: 491px;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px 13px 15px;
+  }
+
+  .card-img {
+    width: 100%;
+    max-height: 205px;
+    border-radius: 8px 8px 0px 0px;
+  }
+}

@@ -1,0 +1,127 @@
+.container-buscador-main {
+  position: sticky;
+  top: 86px;
+  min-width: 100%;
+  text-align: center;
+  background-color: rgba(84, 87, 118, 1);
+}
+
+.container-buscador-main h2 {
+  user-select: none;
+  color: #ffffff;
+  padding-top: 22px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.container-buscador-main i,
+.container-buscador-main p {
+  pointer-events: none;
+}
+
+.container-buscador-inputs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 23px;
+  padding-bottom: 26px;
+}
+
+.container-buscador-inputs i {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.buscador-select {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 30%;
+  height: 40px;
+  margin-right: 8px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  color: #7f7f7f;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.buscador-date {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 30%;
+  height: 40px;
+  margin-right: 8px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  color: #7f7f7f;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.buscador-button {
+  cursor: pointer;
+  min-width: 15%;
+  max-width: 20%;
+  min-height: 40px;
+  background: #1dbeb4;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.12));
+}
+
+.buscador-select-options {
+  position: absolute;
+  top: 115%;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 5px 5px;
+  z-index: 1;
+}
+
+
+@media (max-width: 768px) {
+  .container-buscador-main h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-buscador-main h2 {
+    font-size: 24px;
+    padding-top: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 28px;
+    margin-bottom: -8px;
+  }
+  .container-buscador-inputs {
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+  .buscador-select,
+  .buscador-date {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 35px;
+  }
+  .buscador-button {
+    min-width: 90%;
+    min-height: 35px;
+  }
+}
