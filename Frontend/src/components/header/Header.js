@@ -77,8 +77,7 @@ const Header = () => {
               <div className="user-avatar-container">
                 <h2>
                   {`
-                ${JSON.parse(localStorage.getItem("user")).username.slice(0, 1)}
-                ${JSON.parse(localStorage.getItem("user")).lastname.slice(0, 1)}
+                ${JSON.parse(localStorage.getItem("user")).username.slice(0, 1)}${JSON.parse(localStorage.getItem("user")).lastname.slice(0, 1)}
                 `}
                 </h2>
               </div>
