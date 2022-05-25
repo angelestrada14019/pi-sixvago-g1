@@ -82,47 +82,7 @@ nav {
   height: 100%;
   background: #212529;
 }
-.user-loggedIn-main-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-}
-.user-avatar-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 47px;
-  height: 47px;
-  margin-right: 10px;
-  background-color: #383b58;
-  border-radius: 50%;
-  font-family: "Quicksand";
-  font-weight: 700;
-  font-size: 18px;
-  text-align: center;
-  color: #ffffff;
-}
-.user-welcome-container {
-  display: flex;
-  position: relative;
-  align-items: center;
-  height: 47px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 27px;
-}
-.user-welcome-username{
-  color: #1DBEB4;
-}
-.user-logout-container {
-  position: absolute;
-  top: -20%;
-  right: 0;
-  cursor: pointer;
-}
+
 @media (max-width: 578px) {
   header {
     box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.548);
