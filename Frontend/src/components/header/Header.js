@@ -9,6 +9,7 @@ const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (openLogin || openSignUp) {
@@ -16,7 +17,8 @@ const Header = () => {
     } else if (!openLogin || !openSignUp) {
       document.body.style.overflow = "auto";
     }
-  }, [openLogin, openSignUp]);
+    setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
+  }, [openLogin, openSignUp, isLoggedIn]);
 
   const handleClick = (e) => {
     if (e.target.id === "crear") {
@@ -29,6 +31,14 @@ const Header = () => {
       setOpenLogin(true);
       setOpenSignUp(false);
     }
+  };
+
+  const handleLogout = () => {
+    setToggleNavButton("");
+    setOpenLogin(false);
+    setOpenSignUp(false);
+    setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn", false);
   };
 
   return (
@@ -48,15 +58,15 @@ const Header = () => {
           />
         </div>
         <nav>
-          {toggleNavButton === "crear" ? (
+          {toggleNavButton === "crear" && !isLoggedIn ? (
             <div className="boton-nav" id="iniciar" onClick={handleClick}>
               <p>Iniciar sesion</p>
             </div>
-          ) : toggleNavButton === "iniciar" ? (
+          ) : toggleNavButton === "iniciar" && !isLoggedIn ? (
             <div className="boton-nav" id="crear" onClick={handleClick}>
               <p>Crear cuenta</p>
             </div>
-          ) : (
+          ) : !isLoggedIn ? (
             <>
               <div className="boton-nav" id="iniciar" onClick={handleClick}>
                 <p>Iniciar sesion</p>
@@ -65,10 +75,41 @@ const Header = () => {
                 <p>Crear cuenta</p>
               </div>
             </>
+          ) : !isLoggedIn ? null : (
+            <div className="user-loggedIn-main-container">
+              <div className="user-avatar-container">
+                <h2>
+                  {`
+                ${JSON.parse(localStorage.getItem("user")).username.slice(0, 1)}
+                ${JSON.parse(localStorage.getItem("user")).lastname.slice(0, 1)}
+                `}
+                </h2>
+              </div>
+              <div className="user-welcome-container">
+                <li type="none">
+                  <ul>
+                    <p>Hola, </p>
+                  </ul>
+                  <ul className="user-welcome-username">
+                    <p>{`
+                    ${JSON.parse(localStorage.getItem("user")).username}
+                    ${JSON.parse(localStorage.getItem("user")).lastname}        
+                    `}</p>
+                  </ul>
+                </li>
+                <div className="user-logout-container" onClick={handleLogout}>
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+            </div>
           )}
         </nav>
       </header>
-      <Login show={openLogin} setOpenLogin={setOpenLogin} />
+      <Login
+        show={openLogin}
+        setOpenLogin={setOpenLogin}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       <Register show={openSignUp} />
     </>
   );

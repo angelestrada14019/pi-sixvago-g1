@@ -10,7 +10,7 @@ const Login = ({ show, setOpenLogin }) => {
         user.password === e.target.password.value
       ) {
         setOpenLogin(false);
-        alert("Bienvenido");
+        localStorage.setItem("isLoggedIn", true);
       } else {
         alert("Usuario o contraseña incorrectos");
       }
