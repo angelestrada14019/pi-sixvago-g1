@@ -27,6 +27,7 @@
 .formulario-login h1 {
   color: #1dbeb4;
   padding: 0px 0px 20px 0px;
+  font-size:24px;
 }
 .formulario-login input {
   background: #ffffff;
@@ -60,4 +61,13 @@
 .formulario-login p {
   padding: 15px;
   font-size: 13px;
+}
+@media screen and (max-width: 578px){
+  .formulario-login{
+    width: 550px;
+  }
+  #boton-login{
+    width: 300px;
+    height: 40px;
+  }
 }

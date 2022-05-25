@@ -4,13 +4,14 @@ import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
 import Login from "../login/Login";
 import Register from "../login/Register";
+import Sidebar from "./sidebar"
 
 const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [showSidebar, setShowSidebar] = useState(false);
   useEffect(() => {
     if (openLogin || openSignUp) {
       document.body.style.overflow = "hidden";
@@ -19,7 +20,12 @@ const Header = () => {
     }
     setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
   }, [openLogin, openSignUp, isLoggedIn]);
-
+  
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar)
+    console.log(showSidebar);
+  };
+  
   const handleClick = (e) => {
     if (e.target.id === "crear") {
       setToggleNavButton("crear");
@@ -45,34 +51,25 @@ const Header = () => {
     <>
       <header>
         <div className="logo">
-          <img src={logo} alt="logo" />
-          <h1>Sixvago</h1>
-        </div>
-        <div className="menu-hamburger">
-          <img
-            className="hamburguesa"
-            id="responsive-nav"
-            onClick={handleClick}
-            src={menu}
-            alt="menu"
-          />
+          <a href=""><img src={logo} alt="logo" /></a>
+          <h1><a href="">Sixvago</a></h1>
         </div>
         <nav>
           {toggleNavButton === "crear" && !isLoggedIn ? (
-            <div className="boton-nav" id="iniciar" onClick={handleClick}>
-              <p>Iniciar sesion</p>
+            <div>
+              <p className="boton-nav" id="iniciar" onClick={handleClick}>Iniciar sesion</p>
             </div>
           ) : toggleNavButton === "iniciar" && !isLoggedIn ? (
-            <div className="boton-nav" id="crear" onClick={handleClick}>
-              <p>Crear cuenta</p>
+            <div>
+              <p className="boton-nav" id="crear" onClick={handleClick}>Crear cuenta</p>
             </div>
           ) : !isLoggedIn ? (
             <>
-              <div className="boton-nav" id="iniciar" onClick={handleClick}>
-                <p>Iniciar sesion</p>
+              <div>
+                <p className="boton-nav" id="iniciar" onClick={handleClick}>Iniciar sesion</p>
               </div>
-              <div className="boton-nav" id="crear" onClick={handleClick}>
-                <p>Crear cuenta</p>
+              <div>
+                <p className="boton-nav" id="crear" onClick={handleClick}>Crear cuenta</p>
               </div>
             </>
           ) : !isLoggedIn ? null : (
@@ -103,6 +100,15 @@ const Header = () => {
               </div>
             </div>
           )}
+          <div className="menu-hamburger">
+          <img
+            className="hamburguesa"
+            id="responsive-nav"
+            onClick={toggleSidebar}
+            src={menu}
+            alt="menu"
+          />
+        </div>
         </nav>
       </header>
       <Login
@@ -111,6 +117,7 @@ const Header = () => {
         setIsLoggedIn={setIsLoggedIn}
       />
       <Register show={openSignUp} />
+      <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar}/>
     </>
   );
 };

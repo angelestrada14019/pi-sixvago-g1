@@ -26,7 +26,8 @@
 
 .formulario-signup h1 {
   color: #1dbeb4;
-  padding: 0px 0px 10px 0px;
+  padding: 0px 0px 20px 0px;
+  font-size: 24px;
 }
 
 .formulario-signup input {
@@ -90,4 +91,28 @@
 .text-danger {
   color: red;
   font-size: 12px;
+}
+@media (max-width: 578px){
+  .otros-datos input{
+    width: 300px;
+    height: 40px;
+  }
+  #boton-signup{
+    width: 300px;
+    height: 40px;
+  }
+  .nombre-apellido{
+    display: flex;
+    flex-direction: column;
+  }
+  .nombre-apellido input{ 
+  width: 300px;
+  height: 40px;
+  }
+  .nombre-apellido div{
+    padding: 0px 0px 10px;
+  }
+  .formulario-signup h1 {
+    padding: 10px 0px 0px 0px
+  }
 }
