@@ -20,12 +20,12 @@ const Header = () => {
     }
     setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
   }, [openLogin, openSignUp, isLoggedIn]);
-  
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar)
     console.log(showSidebar);
   };
-  
+
   const handleClick = (e) => {
     if (e.target.id === "crear") {
       setToggleNavButton("crear");
@@ -73,41 +73,17 @@ const Header = () => {
               </div>
             </>
           ) : !isLoggedIn ? null : (
-            <div className="user-loggedIn-main-container">
-              <div className="user-avatar-container">
-                <h2>
-                  {`
-                ${JSON.parse(localStorage.getItem("user")).username.slice(0, 1)}${JSON.parse(localStorage.getItem("user")).lastname.slice(0, 1)}
-                `}
-                </h2>
-              </div>
-              <div className="user-welcome-container">
-                <li type="none">
-                  <ul>
-                    <p>Hola, </p>
-                  </ul>
-                  <ul className="user-welcome-username">
-                    <p>{`
-                    ${JSON.parse(localStorage.getItem("user")).username}
-                    ${JSON.parse(localStorage.getItem("user")).lastname}        
-                    `}</p>
-                  </ul>
-                </li>
-                <div className="user-logout-container" onClick={handleLogout}>
-                  <i class="fa-solid fa-xmark"></i>
-                </div>
-              </div>
-            </div>
+            <UserWelcome handleLogout={handleLogout} />
           )}
           <div className="menu-hamburger">
-          <img
-            className="hamburguesa"
-            id="responsive-nav"
-            onClick={toggleSidebar}
-            src={menu}
-            alt="menu"
-          />
-        </div>
+            <img
+              className="hamburguesa"
+              id="responsive-nav"
+              onClick={toggleSidebar}
+              src={menu}
+              alt="menu"
+            />
+          </div>
         </nav>
       </header>
       <Login
@@ -116,7 +92,7 @@ const Header = () => {
         setIsLoggedIn={setIsLoggedIn}
       />
       <Register show={openSignUp} />
-      <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar}/>
+      <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar} />
     </>
   );
 };
