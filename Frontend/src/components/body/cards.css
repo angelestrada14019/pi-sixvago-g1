@@ -14,7 +14,10 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 1em;
   justify-content: center;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .card {
@@ -91,6 +94,7 @@
   .card {
     display: flex;
     flex-direction: column;
+    min-width: 317px;
     width: 393px;
     height: 491px;
   }

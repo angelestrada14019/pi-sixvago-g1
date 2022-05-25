@@ -1,7 +1,7 @@
 import "./locationsList.css";
 import listado from "../listado.json";
 
-const LocationsList = ({ setLocation }) => {
+const LocationsList = ({ setLocation, setOpenLocations }) => {
   return (
     <>
       {listado.map((loc, i) => {
@@ -10,7 +10,10 @@ const LocationsList = ({ setLocation }) => {
             className="single-location-container"
             key={i}
             id={`${loc.location}`}
-            onClick={(e) => setLocation(e.target.id)}
+            onClick={(e) => {
+              setLocation(e.target.id);
+              setOpenLocations(false);
+            }}
           >
             <i className="fa-solid fa-location-dot"></i>
             <li type="none">

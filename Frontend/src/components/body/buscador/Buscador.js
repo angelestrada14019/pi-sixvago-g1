@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./buscador.css";
 import CustomCalendar from "./CustomCalendar";
 import LocationsList from "./LocationsList";
@@ -9,24 +9,28 @@ const Buscador = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [location, setLocation] = useState("");
-
-  const options = {
+  const localDateOptions = {
     month: "long",
     day: "numeric",
   };
 
   const handleClick = (e) => {
-    if (e.target.className === "buscador-date") setOpenCalendar(!openCalendar);
+    if (e.target.className === "buscador-date") {
+      setOpenCalendar(!openCalendar);
+      setOpenLocations(false);
+    }
     if (e.target.className === "calendar-button-aplicar")
       setOpenCalendar(!openCalendar);
-    if (e.target.className === "buscador-select")
+    if (e.target.className === "buscador-select") {
       setOpenLocations(!openLocations);
+      setOpenCalendar(false);
+    }
   };
 
   const handleCheckInOut = (date) => {
     if (date[0]) {
-      setCheckIn(date[0].toLocaleDateString(undefined, options));
-      setCheckOut(date[1].toLocaleDateString(undefined, options));
+      setCheckIn(date[0].toLocaleDateString(undefined, localDateOptions));
+      setCheckOut(date[1].toLocaleDateString(undefined, localDateOptions));
     } else if (checkIn !== "") {
       return;
     } else {
@@ -45,7 +49,10 @@ const Buscador = () => {
             <p>{!location ? "¿A dónde vamos?" : `${location}`}</p>
             {!openLocations ? null : (
               <div className="buscador-select-options">
-                <LocationsList setLocation={setLocation} />
+                <LocationsList
+                  setLocation={setLocation}
+                  setOpenLocations={setOpenLocations}
+                />
               </div>
             )}
           </div>

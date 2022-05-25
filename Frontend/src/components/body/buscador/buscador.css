@@ -3,7 +3,7 @@
   top: 86px;
   min-width: 100%;
   text-align: center;
-  background-color: rgba(84, 87, 118, 1);
+  background-color: #545776;
 }
 
 .container-buscador-main h2 {
@@ -17,6 +17,7 @@
 
 .container-buscador-main i,
 .container-buscador-main p {
+  user-select: none;
   pointer-events: none;
 }
 
@@ -69,6 +70,7 @@
 
 .buscador-button {
   cursor: pointer;
+  user-select: none;
   min-width: 15%;
   max-width: 20%;
   min-height: 40px;
@@ -83,10 +85,17 @@
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.12));
 }
 
+.buscador-button:hover {
+  background: #1dbeb3a2;
+}
+
 .buscador-select-options {
   position: absolute;
   top: 115%;
   width: 100%;
+  height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 0px 5px 5px;

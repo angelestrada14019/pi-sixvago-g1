@@ -6,13 +6,14 @@
 .cardCategory {
   display: flex;
   flex-wrap: wrap;
-  margin: 15px;
   justify-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .renderCategory {
-  min-width: 317px;
-  max-width: 317px;
+  width: 20%;
+  min-width: 315px;
   margin: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -41,6 +42,17 @@
   height: 200px;
   border-radius: 15px 15px;
 }
+@media (max-width: 1510px) {
+  .cardCategory {
+    gap: 0;
+    margin: 0;
+  }
+  /* .renderCategory {
+    width: 27%;
+    margin-left: 2.7em;
+    margin-right: 2.7em;
+  } */
+}
 
 @media (max-width: 768px) {
   .renderCategory {
@@ -55,6 +67,6 @@
   }
   .renderCategory {
     min-width: 317px;
-    max-width: 396px;
+    width: 90%;
   }
 }

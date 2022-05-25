@@ -31,6 +31,9 @@
   top: 87%;
   left: 55%;
 }
+.calendar-button-aplicar:hover {
+  background: #1dbeb3a2;
+}
 
 .react-calendar {
   width: 100%;
