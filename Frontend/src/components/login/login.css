@@ -38,6 +38,18 @@
   font-size: 15px;
   padding-left: 20px;
 }
+.formulario-login i{
+  margin-left: -30px;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgba(153, 153, 153, 0.253);
+}
+.formulario-login i:hover{
+  color: rgba(0, 0, 0, 0.555);
+}
+#eyes-input{
+  padding: 0px;
+}
 .formulario-login label {
   font-size: 13px;
   font-weight: 600;

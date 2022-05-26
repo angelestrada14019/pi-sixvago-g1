@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./login.css";
 
 const Login = ({ show, setOpenLogin }) => {
+  const [inputType, setInputType] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user"));
@@ -37,11 +39,13 @@ const Login = ({ show, setOpenLogin }) => {
           </div>
           <div>
             <label>Contraseña</label>
+            <p id="eyes-input">
             <input
-              type="password"
+              type={inputType ? "text": "password"}
               id="password"
               placeholder="Ingrese su contraseña"
-            />
+            /><i className="fa-solid fa-eye" onClick={()=> setInputType(!inputType)}></i>
+            </p>
           </div>
         </div>
         <div className="boton">

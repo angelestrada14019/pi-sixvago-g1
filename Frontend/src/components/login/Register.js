@@ -8,11 +8,9 @@ class Register extends React.Component {
       input: {},
       errors: {},
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
     let input = this.state.input;
     input[event.target.name] = event.target.value;
@@ -164,6 +162,7 @@ class Register extends React.Component {
             </div>
             <div>
               <label>Constraseña</label>
+              <p>
               <input
                 type="password"
                 name="password"
@@ -172,6 +171,8 @@ class Register extends React.Component {
                 placeholder="Ingrese su contraseña"
                 id="password"
               />
+              <i className="fa-solid fa-eye"></i>
+              </p>
               <div className="text-danger">{this.state.errors.password}</div>
             </div>
             <div>
