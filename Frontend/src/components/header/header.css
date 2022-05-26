@@ -11,12 +11,12 @@ header {
   top: 0;
   width: 100%;
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
 }
 .logo {
   display: flex;
   width: 60%;
-  padding: 15px 0px;
+  padding: 5px 0px;
 }
 .logo img {
   margin-right: 10px;
@@ -28,7 +28,12 @@ header {
   line-height: 23px;
   display: flex;
   align-items: flex-end;
-  color: #545776;
+  color: black;
+}
+.logo h1 a{
+  list-style: none;
+  text-decoration: none;
+  color: black;
 }
 nav {
   display: flex;

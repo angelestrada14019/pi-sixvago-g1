@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./login.css";
 
-const Login = ({ show, setOpenLogin }) => {
+const Login = ({ show, setOpenLogin, handleClick }) => {
   const [inputType, setInputType] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ const Login = ({ show, setOpenLogin }) => {
           </button>
         </div>
         <p>
-          Aun no tienes una cuenta? <a href="">Registrate aqui</a>
+          Aun no tienes una cuenta? <span id="crear" onClick={handleClick} >Registrate aqui</span>
         </p>
       </form>
     </div>
