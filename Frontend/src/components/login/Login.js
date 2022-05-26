@@ -54,7 +54,7 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
           </button>
         </div>
         <p>
-          Aun no tienes una cuenta? <span id="crear" onClick={handleClick} >Registrate aqui</span>
+          Aun no tienes una cuenta? <span id="crear" className="redireccionLogin" onClick={handleClick} >Registrate aqui</span>
         </p>
       </form>
     </div>

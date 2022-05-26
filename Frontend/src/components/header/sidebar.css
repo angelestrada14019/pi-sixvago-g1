@@ -77,7 +77,7 @@
 .exit-sesion{
     display: flex;
     justify-content: flex-end;
-    height: 277px;
+    height: 100%;
     align-items: flex-end;
 }
 .exit-sesion span{

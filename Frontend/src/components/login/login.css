@@ -70,6 +70,10 @@
   background-color: #117770;
   color: white;
 }
+.redireccionLogin{
+  color: #1dbeb4;
+  cursor: pointer;
+}
 .formulario-login p {
   padding: 15px;
   font-size: 13px;

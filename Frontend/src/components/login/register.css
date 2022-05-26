@@ -96,10 +96,15 @@
 }
 .formulario-signup p {
   font-size: 13px;
+  padding: 10px 0px 0px 0px;
 }
 .text-danger {
   color: red;
   font-size: 12px;
+}
+.redireccionReg{
+  color: #1dbeb4;
+  cursor: pointer;
 }
 @media (max-width: 578px){
   .otros-datos input{
