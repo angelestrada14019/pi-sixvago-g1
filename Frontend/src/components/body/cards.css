@@ -34,6 +34,7 @@
 
 .card-body {
   display: flex;
+  position: relative;
   flex-direction: column;
   padding: 21px 16px 11px 16px;
 }
@@ -51,14 +52,43 @@
   font-size: 14px;
   line-height: 18px;
 }
-
+.fa-star {
+  margin-left: 2px;
+  font-size: 12px;
+  color: #ffc107;
+}
 .card-title {
   font-weight: 700;
   font-size: 24px;
   line-height: 28px;
   margin-bottom: 20px;
 }
-
+.card-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  right: 5%;
+}
+.card-rating h2 {
+  width: 35px;
+  height: 25px;
+  background: #383b58;
+  border: 1px solid #383b58;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  color: #f3f1ed;
+}
+.card-rating p {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  color: #383b58;
+}
 .card-location {
   font-weight: 500;
   font-size: 14px;
