@@ -194,7 +194,7 @@ class Register extends React.Component {
             <button id="boton-signup">Crear cuenta</button>
           </div>
           <p>
-            Ya tienes una cuenta? <a href="">Inicia sesion</a>
+            Ya tienes una cuenta? <span id="iniciar" className="redireccionReg" onClick={this.props.handleClick}>Inicia sesion</span>
           </p>
         </form>
       </div>

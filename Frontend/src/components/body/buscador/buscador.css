@@ -4,6 +4,7 @@
   min-width: 100%;
   text-align: center;
   background-color: #545776;
+  z-index: 1;
 }
 
 .container-buscador-main h2 {

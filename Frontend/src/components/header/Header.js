@@ -1,5 +1,5 @@
 import "./header.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/SixVago.png";
 import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
 import Login from "../login/Login";
@@ -56,7 +56,7 @@ const Header = () => {
       <header>
         <div className="logo">
           <a href=""><img src={logo} alt="logo" /></a>
-          <h1><a href="">Sixvago</a></h1>
+          <h1><a href="">Sentite como en casa</a></h1>
         </div>
         <nav>
           {toggleNavButton === "crear" && !isLoggedIn ? (
@@ -94,8 +94,9 @@ const Header = () => {
         show={openLogin}
         setOpenLogin={setOpenLogin}
         setIsLoggedIn={setIsLoggedIn}
+        handleClick={handleClick}
       />
-      <Register show={openSignUp} />
+      <Register show={openSignUp} handleClick={handleClick}/>
       <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar} isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
     </>
   );
