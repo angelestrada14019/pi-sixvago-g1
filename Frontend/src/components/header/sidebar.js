@@ -1,7 +1,8 @@
 import React from 'react';
 import "./sidebar.css"
+import UserWelcome from './UserWelcome';
 
-const Sidebar = ({ show, handleClick, toggleNavButton, close }) => {
+const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handleLogout }) => {
     //toggleSidebar
     console.log(show);
     return (
@@ -12,12 +13,39 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close }) => {
                 </div>
             </div>
             <div className="sidebar-header">
-                <h3>
-                    Menú
-                </h3>
+
+                {!isLoggedIn ? <h3>Menú</h3> :
+                    <div className='user-welcome-media'><UserWelcome /></div>}
             </div>
             <div className="sidebar-body">
                 {toggleNavButton === "crear" ? (
+                    <ul>
+                        <li id='iniciar' onClick={(e) => handleClick(e)}>
+                            <a href="#">
+                                <span>Iniciar sesion</span>
+                            </a>
+                        </li>
+                    </ul>
+                ) : toggleNavButton === "iniciar" ? (
+                    <>
+                        <ul>
+                            <li id='crear' onClick={(e) => handleClick(e)}>
+                                <a href="#">
+                                    <span>Crear cuenta</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </>
+                ) : (
+                    <>
+                        <ul>
+                            <li id='crear' onClick={(e) => handleClick(e)}>
+                                <a href="#">
+                                    <span>Crear cuenta</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <hr />
                         <ul>
                             <li id='iniciar' onClick={(e) => handleClick(e)}>
                                 <a href="#">
@@ -25,36 +53,19 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close }) => {
                                 </a>
                             </li>
                         </ul>
-                ) : toggleNavButton === "iniciar" ? (
-                    <>
-                    <ul>
-                        <li id='crear' onClick={(e) => handleClick(e)}>
-                            <a href="#">
-                                <span>Crear cuenta</span>
-                            </a>
-                        </li>
-                    </ul>
                     </>
-                ) : (
-                    <>
-                    <ul>
-                    <li id='crear' onClick={(e)=>handleClick(e)}>
-                        <a href="#">
-                            <span>Crear cuenta</span>
-                        </a>
-                    </li>
-                </ul>
-                <hr />
-                <ul>
-                    <li id='iniciar' onClick={(e)=>handleClick(e)}>
-                        <a href="#">
-                            <span>Iniciar sesion</span>
-                        </a>
-                    </li>
-                </ul>
-                </>
                 )}
+            {!isLoggedIn ? null :
+            <div className='exit-sesion'>
+                <p>¿Deseas <span onClick={handleLogout}>cerrar sesión</span>?</p></div>}
             </div>
+            <hr/>
+                <div className='sidebar-footer'>
+                    <i className="fa-brands fa-facebook"></i>
+                    <i className="fa-brands fa-linkedin-in"></i>
+                    <i className="fa-brands fa-twitter"></i>
+                    <i className="fa-brands fa-instagram"></i>
+                </div>
         </div>
 
     )

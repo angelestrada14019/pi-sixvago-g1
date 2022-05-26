@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Login from "../login/Login";
 import Register from "../login/Register";
 import Sidebar from "./sidebar"
+import UserWelcome from "./UserWelcome";
+
 
 const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
@@ -31,11 +33,13 @@ const Header = () => {
       setToggleNavButton("crear");
       setOpenLogin(false);
       setOpenSignUp(true);
+      setShowSidebar(false);
     }
     if (e.target.id === "iniciar") {
       setToggleNavButton("iniciar");
       setOpenLogin(true);
       setOpenSignUp(false);
+      setShowSidebar(false);
     }
   };
 
@@ -73,7 +77,7 @@ const Header = () => {
               </div>
             </>
           ) : !isLoggedIn ? null : (
-            <UserWelcome handleLogout={handleLogout} />
+            <div className="user-welcome-normal" ><UserWelcome handleLogout={handleLogout} /></div>
           )}
           <div className="menu-hamburger">
             <img
@@ -92,7 +96,7 @@ const Header = () => {
         setIsLoggedIn={setIsLoggedIn}
       />
       <Register show={openSignUp} />
-      <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar} />
+      <Sidebar show={showSidebar} handleClick={handleClick} toggleNavButton={toggleNavButton} close={toggleSidebar} isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
     </>
   );
 };
