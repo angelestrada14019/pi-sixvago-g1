@@ -14,7 +14,7 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
         setOpenLogin(false);
         localStorage.setItem("isLoggedIn", true);
       } else {
-        alert("Usuario o contraseña incorrectos");
+        alert("Por favor vuelva a intentarlo, sus credenciales son inválidas");
       }
     } else {
       alert("No existe");
