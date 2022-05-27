@@ -21,8 +21,7 @@ const Card = ({ data }) => {
         <h2 className="card-title">{`${data.title}`}</h2>
         <p className="card-location">{`${data.location}`}</p>
         <p className="card-description">{`${data.description
-          .slice(0, 100)
-          .concat(" mas...")}`}</p>
+          .slice(0, 100)}`}<span> mas...</span></p>
         <button className="card-button">Ver más</button>
       </div>
     </div>
