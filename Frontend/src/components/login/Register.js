@@ -38,6 +38,10 @@ class Register extends React.Component {
       input["confirm_password"] = "";
       this.setState({ input: input });
       this.setState({ success: true });
+      setTimeout(() => {
+        this.props.setOpenSignUp(false);
+        this.props.setOpenLogin(true);
+      }, 2000);
     }
   }
 
@@ -150,7 +154,7 @@ class Register extends React.Component {
               variant="filled"
               sx={{ marginBottom: "10px" }}
             >
-              Registro exitoso.
+              Registro exitoso. Puedes iniciar sesion.
             </Alert>
           </Snackbar>
         ) : null}

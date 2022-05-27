@@ -14,6 +14,12 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   useEffect(() => {
+    if (openLogin) {
+      setToggleNavButton("iniciar");
+    }
+    if (openSignUp) {
+      setToggleNavButton("crear");
+    }
     if (openLogin || openSignUp) {
       document.body.style.overflow = "hidden";
     } else if (!openLogin || !openSignUp) {
@@ -29,13 +35,13 @@ const Header = () => {
 
   const handleClick = (e) => {
     if (e.target.id === "crear") {
-      setToggleNavButton("crear");
+      //setToggleNavButton("crear");
       setOpenLogin(false);
       setOpenSignUp(true);
       setShowSidebar(false);
     }
     if (e.target.id === "iniciar") {
-      setToggleNavButton("iniciar");
+      //setToggleNavButton("iniciar");
       setOpenLogin(true);
       setOpenSignUp(false);
       setShowSidebar(false);
@@ -109,7 +115,12 @@ const Header = () => {
         setIsLoggedIn={setIsLoggedIn}
         handleClick={handleClick}
       />
-      <Register show={openSignUp} handleClick={handleClick} />
+      <Register
+        show={openSignUp}
+        handleClick={handleClick}
+        setOpenLogin={setOpenLogin}
+        setOpenSignUp={setOpenSignUp}
+      />
       <Sidebar
         show={showSidebar}
         handleClick={handleClick}

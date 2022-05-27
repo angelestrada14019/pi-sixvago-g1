@@ -19,9 +19,11 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
         setOpenLogin(false);
         localStorage.setItem("isLoggedIn", true);
       } else {
+        // alerta de malas credenciales
         setInfo(true);
       }
     } else {
+      // por aca no pasa si ya hay un item en el localstorage
       setAlert(true);
     }
   };
