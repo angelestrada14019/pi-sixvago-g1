@@ -3,8 +3,6 @@ import "./sidebar.css"
 import UserWelcome from './UserWelcome';
 
 const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handleLogout }) => {
-    //toggleSidebar
-    console.log(show);
     return (
         <div className={show ? "sidebar active" : "sidebar"}>
             <div className="exit">

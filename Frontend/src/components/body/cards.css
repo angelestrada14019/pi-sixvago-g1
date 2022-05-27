@@ -103,6 +103,10 @@
   margin-top: 59px;
   margin-bottom: 8px;
 }
+.card-description span {
+  cursor: pointer;
+  color: rgb(52, 183, 243);
+}
 
 .card-button {
   cursor: pointer;

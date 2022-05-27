@@ -1,3 +1,4 @@
+import { Alert, Snackbar } from "@mui/material";
 import React from "react";
 import "./register.css";
 
@@ -7,10 +8,15 @@ class Register extends React.Component {
     this.state = {
       input: {},
       errors: {},
+      success: false,
+      showPassword: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handlePasswordVisibility = this.handlePasswordVisibility.bind(this);
   }
+
   handleChange(event) {
     let input = this.state.input;
     input[event.target.name] = event.target.value;
@@ -22,9 +28,7 @@ class Register extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     if (this.validate()) {
-      console.log(this.state);
       localStorage.setItem("user", JSON.stringify(this.state.input));
       let input = {};
       input["username"] = "";
@@ -33,7 +37,7 @@ class Register extends React.Component {
       input["password"] = "";
       input["confirm_password"] = "";
       this.setState({ input: input });
-      alert("Se registro con exito");
+      this.setState({ success: true });
     }
   }
 
@@ -113,12 +117,43 @@ class Register extends React.Component {
     return isValid;
   }
 
+  handleClose(event, reason) {
+    if (reason === "clickaway") {
+      this.setState({ success: false });
+      return;
+    }
+    this.setState({ success: false });
+  };
+
+  handlePasswordVisibility() {
+    this.setState({
+      showPassword: !this.state.showPassword,
+    });
+  }
+
   render() {
     return (
       <div
         className={`register-container ${this.props.show ? "show" : null}`}
         id="register-container"
       >
+        {this.state.success === true ? (
+          <Snackbar
+            sx={{ marginBottom: "4rem" }}
+            open={this.state.success}
+            autoHideDuration={6000}
+            onClose={this.handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          >
+            <Alert
+              severity="success"
+              variant="filled"
+              sx={{ marginBottom: "10px" }}
+            >
+              Registro exitoso.
+            </Alert>
+          </Snackbar>
+        ) : null}
         <form className="formulario-signup" onSubmit={this.handleSubmit}>
           <h1>Crear cuenta</h1>
           <div className="nombre-apellido">
@@ -163,15 +198,18 @@ class Register extends React.Component {
             <div>
               <label>Constraseña</label>
               <p>
-              <input
-                type="password"
-                name="password"
-                value={this.state.input.password}
-                onChange={this.handleChange}
-                placeholder="Ingrese su contraseña"
-                id="password"
-              />
-              <i className="fa-solid fa-eye"></i>
+                <input
+                  type={this.state.showPassword ? "text" : "password"}
+                  name="password"
+                  value={this.state.input.password}
+                  onChange={this.handleChange}
+                  placeholder="Ingrese su contraseña"
+                  id="password"
+                />
+                <i
+                  className="fa-solid fa-eye"
+                  onClick={ () => this.handlePasswordVisibility() }
+                ></i>
               </p>
               <div className="text-danger">{this.state.errors.password}</div>
             </div>
@@ -194,7 +232,14 @@ class Register extends React.Component {
             <button id="boton-signup">Crear cuenta</button>
           </div>
           <p>
-            Ya tienes una cuenta? <span id="iniciar" className="redireccionReg" onClick={this.props.handleClick}>Inicia sesion</span>
+            Ya tienes una cuenta?{" "}
+            <span
+              id="iniciar"
+              className="redireccionReg"
+              onClick={this.props.handleClick}
+            >
+              Inicia sesion
+            </span>
           </p>
         </form>
       </div>
