@@ -113,8 +113,8 @@
   min-width: 50%;
   min-height: 40px;
   margin-bottom: 12px;
-  background: #1dbeb4;
-  color: #ffffff;
+  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
+  color: #262626;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
   border: none;
   border-radius: 5px;

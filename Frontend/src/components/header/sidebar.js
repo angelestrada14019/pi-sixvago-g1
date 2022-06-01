@@ -16,11 +16,12 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handle
                     <div className='user-welcome-media'><UserWelcome /></div>}
             </div>
             <div className="sidebar-body">
+            
                 {toggleNavButton === "crear" ? (
                     <ul>
                         <li id='iniciar' onClick={(e) => handleClick(e)}>
                             <a href="#">
-                                <span>Iniciar sesion</span>
+                                <span className='boton-iniciar'>Iniciar sesion</span>
                             </a>
                         </li>
                     </ul>
@@ -29,7 +30,7 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handle
                         <ul>
                             <li id='crear' onClick={(e) => handleClick(e)}>
                                 <a href="#">
-                                    <span>Crear cuenta</span>
+                                    <span className='boton-crear'>Crear cuenta</span>
                                 </a>
                             </li>
                         </ul>
@@ -39,7 +40,7 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handle
                         <ul>
                             <li id='crear' onClick={(e) => handleClick(e)}>
                                 <a href="#">
-                                    <span>Crear cuenta</span>
+                                    <span className='boton-crear'>Crear cuenta</span>
                                 </a>
                             </li>
                         </ul>
@@ -47,7 +48,7 @@ const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handle
                         <ul>
                             <li id='iniciar' onClick={(e) => handleClick(e)}>
                                 <a href="#">
-                                    <span>Iniciar sesion</span>
+                                    <span className='boton-iniciar'>Iniciar sesion</span>
                                 </a>
                             </li>
                         </ul>

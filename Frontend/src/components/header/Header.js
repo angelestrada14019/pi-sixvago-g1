@@ -1,5 +1,5 @@
 import "./header.css";
-import logo from "../../assets/SixVago.png";
+import logo from "../../assets/SixVago-dorado.png";
 import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
 import Login from "../login/Login";
@@ -63,9 +63,6 @@ const Header = () => {
           <a href="">
             <img src={logo} alt="logo" />
           </a>
-          <h1>
-            <a href="">Sentite como en casa</a>
-          </h1>
         </div>
         <nav>
           {toggleNavButton === "crear" && !isLoggedIn ? (

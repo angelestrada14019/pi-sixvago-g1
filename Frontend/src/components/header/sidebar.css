@@ -17,15 +17,16 @@
 .sidebar-header{
     height: 25%;
     width: 303px;
-    background-color:#1DBEB4;
-    color:white;
+    background-color:#262626;
+    color:wheat;
     display:flex;
     align-items: flex-end;
     justify-content: flex-end;
+    border-bottom: 2px solid wheat;
 }
 .exit{
-    background-color:#1DBEB4;
     height: 10%;
+    background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
 }
 .exit i{
     font-size: 30px;
@@ -44,6 +45,7 @@
     flex-direction:column;
     align-items: flex-end;
     height: 55%;
+    background-color: #262626;
 }
 .sidebar-body li{
     margin:30px 0px;
@@ -59,8 +61,15 @@
 .slidebar-body span{
     pointer-events: none;
 }
+.boton-iniciar{
+    color: wheat;
+}
+.boton-crear{
+    color:wheat;
+}
 .sidebar-body hr{
-    width: 260px;
+    width: 220px;
+    border-color: wheat;
 }
 .sidebar-footer{
     width: 100%;
@@ -68,6 +77,8 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    height: 10%;
+    background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
 }
 .sidebar-footer i {
     padding: 15px 8px;
@@ -79,10 +90,11 @@
     justify-content: flex-end;
     height: 100%;
     align-items: flex-end;
+    color: wheat;
 }
 .exit-sesion span{
     padding: 0px 4px 0px 4px;
-    color: #1DBEB4;
+    color: #ffffff;
     cursor: pointer;
     font-weight: 600;
 }

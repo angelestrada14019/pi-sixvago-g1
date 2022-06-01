@@ -25,7 +25,7 @@
 }
 
 .formulario-signup h1 {
-  color: #1dbeb4;
+  color: #262626;
   padding: 0px 0px 20px 0px;
   font-size: 24px;
 }
@@ -81,18 +81,18 @@
 #boton-signup {
   width: 206px;
   height: 40px;
-  background: #1dbeb4;
+  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   border-color: #1dbeb4;
   border-style: inherit;
-  color: white;
+  color: #262626;
   cursor: pointer;
   transition: 0.3s;
 }
 #boton-signup:hover {
-  background-color: #117770;
-  color: white;
+  background: linear-gradient(90deg, rgb(158, 139, 82) 10%, rgba(255,245,218,1) 50%, rgb(148, 122, 53) 110%);
+  color: #262626;
 }
 .formulario-signup p {
   font-size: 13px;

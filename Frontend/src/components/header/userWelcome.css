@@ -11,13 +11,13 @@
   width: 47px;
   height: 47px;
   margin-right: 10px;
-  background-color: #383b58;
+  background:linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
   border-radius: 50%;
   font-family: "Quicksand";
   font-weight: 700;
   font-size: 18px;
   text-align: center;
-  color: #ffffff;
+  color: #262626;
 }
 .user-welcome-container {
   display: flex;
@@ -29,9 +29,10 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 27px;
+  color: wheat;
 }
 .user-welcome-username{
-  color: #1DBEB4;
+  color: White;
 }
 .user-logout-container {
   position: absolute;
@@ -56,6 +57,6 @@
     line-height: 20px;
   }
   .user-welcome-media .user-welcome-username p{
-    color: black;
+    color: rgb(255, 255, 255);
   }
 }

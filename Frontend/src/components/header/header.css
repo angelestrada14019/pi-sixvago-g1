@@ -10,7 +10,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: #262626;
   z-index: 3;
 }
 .logo {
@@ -19,7 +19,7 @@ header {
   padding: 5px 0px;
 }
 .logo img {
-  margin-right: 10px;
+  width: 200px;
 }
 .logo h1 {
   font-style: italic;
@@ -28,11 +28,6 @@ header {
   line-height: 23px;
   display: flex;
   align-items: flex-end;
-  color: black;
-}
-.logo h1 a{
-  list-style: none;
-  text-decoration: none;
   color: black;
 }
 nav {
@@ -47,8 +42,8 @@ nav {
 .hamburguesa {
   display: none;
   cursor: pointer;
-  width: 24px;
-  height: 12px;
+  width: 30px;
+  height: 20px;
 }
 .boton-nav {
   color: #fff;
@@ -64,18 +59,18 @@ nav {
   outline: none;
   border-radius: 5px;
   z-index: 0;
-  background: #fff;
+  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
   overflow: hidden;
   border: 2px solid #212529;
   color: #212529;
   user-select: none;
 }
 .boton-nav:hover {
-  color: #fff;
+  color: #262626;
 }
 .boton-nav:hover:after {
-  width: 100%;
-}
+  width: 100%;}
+  
 .boton-nav:after {
   content: "";
   position: absolute;
@@ -85,7 +80,7 @@ nav {
   top: 0;
   width: 0;
   height: 100%;
-  background: #212529;
+  background: rgba(255, 255, 255, 0.438)
 }
 
 @media (max-width: 578px) {
@@ -100,6 +95,7 @@ nav {
   }
   .hamburguesa {
     display: block;
+    background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
   }
   .boton-nav {
     display: none;
