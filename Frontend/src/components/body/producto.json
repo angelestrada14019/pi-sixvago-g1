@@ -1,0 +1,99 @@
+[
+    {
+      "img": [
+        {
+          "url0": "https://pixabay.com/es/photos/hotel-dubai-burj-al-arab-emirates-1673952/",
+          "url1": "https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168__340.jpg",
+          "url2": "https://cdn.pixabay.com/photo/2016/11/14/02/28/apartment-1822409__340.jpg",
+          "url3": "https://cdn.pixabay.com/photo/2014/10/16/08/41/bathroom-490781__340.jpg",
+          "url4": "https://cdn.pixabay.com/photo/2016/12/11/18/10/apartment-1899964__340.jpg"
+        }
+      ],
+      "category":[
+        {
+          "id": "1",
+          "titulo": "Hotel",
+          "descripcion": "Hoteles",
+          "urlImg": "https://cdn.pixabay.com/photo/2017/01/18/15/34/singapore-1990090__340.jpg"
+        }
+      ],
+      "title": "Super Hotel",
+      "ciudad": [
+        {
+          "id": "1",
+          "nombre": "Buenos Aires",
+          "pais": "Argentina"
+        }
+      ],
+      "caracteristica": [
+        {
+          "id": 1,
+          "nombre": "Cocina"
+        },
+        {
+          "id": 2,
+          "nombre": "Apto para mascotas"
+        },
+        {
+          "id": 3,
+          "nombre": "Wifi"
+        },
+        {
+          "id": 4,
+          "nombre": "Aire acondicionado"
+        },
+        {
+          "id": 5,
+          "nombre": "TV"
+        },
+        {
+          "id": 6,
+          "nombre": "Caja fuerte"
+        }
+      ],
+      "puntuacion": "4.5",
+      "politicas": [
+        {
+          "Normas de la casa": [
+            {
+              "id":1,
+              "nombre":"check-in: 10 PM"
+            },
+            {
+              "id":2,
+              "nombre":"check-out: 12 AM"
+            },
+            {
+              "id":3,
+              "nombre":"No se permiten fiestas"
+            },
+            {
+              "id":4,
+              "nombre":"No matar a tus vecinos"
+            }
+          ],
+          "Salud y Seguridad": [
+            {
+              "id":1,
+              "nombre":"Alergias"
+            },
+            {
+              "id":2,
+              "nombre":"Enfermedades"
+            },
+            {
+              "id":3,
+              "nombre":"Medicamentos"
+            }
+          ],
+          "Politicas de cancelacion":[
+            {
+              "id":1,
+              "nombre":"Cancelaciones antes de las 12 PM"
+            }
+          ]
+        }
+      ],
+      "description": "A bird, yum plays league of legends demand to be let outside at once, and expect owner to wait for me as i think about it where is it? i saw that bird i need to bring it home to mommy squirrel! . Headbutt owner's knee. I like fish waffles don't nosh on the birds shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff, but scratch leg; meow for can opener to feed me, poop on the floor, break a planter, sprint, eat own hair, vomit hair, hiss, chirp at birds, eat a squirrel, hide from fireworks, lick toe beans, attack christmas tree and ooooh feather moving feather!. Sweet beast disappear for four days and return home with an expensive injury; bite the vet, yet it's 3am, time to create some chaos . Paw at your fat belly eat the rubberband meow to be let out open the door, let me out, let me out, let me-out, let me-aow, let meaow, meaow! stare out the window. Chase imaginary bugs. Fight own tail if it smells like fish eat as much as you wish but refuse to drink water except out of someone's glass so good now the other hand, too, weigh eight pounds but take up a full-size bed trip on catnip. Meow meow pee in shoe shake treat bag stare at guinea pigs but knock over christmas tree damn that dog ha ha, you're funny i'll kill you last thinking about you i'm joking it's food always food. Always ensure to lay down in such a manner that tail can lightly brush human's nose i love cats i am one wake up scratch humans leg for food then purr then i have a and relax yet iâ€™m so hungry iâ€™m so hungry but ew not for that . Go crazy with excitement when plates are clanked together signalling the arrival of cat food sleep on dog bed, force dog to sleep on floor stretch out on bed, or run up and down stairs. Sit in window and stare oooh, a bird, yum human clearly uses close to one life a night no one naps that long so i revive by standing on chestawaken!. Meow. I will ruin the couch with my claws sweet beast intently stare at the same spot eat prawns daintily with a claw then lick paws clean wash down prawns with a lap of carnation milk then retire to the warmest spot on the couch to claw at the fabric before taking a catnap but scream at teh bath jump on human and sleep on her all night long be long in the bed, purr in the morning and then give a bite to every human around for not waking up request food, purr loud scratch the walls, the floor, the windows, the humans. Cats are the world kitty power. Purr like an angel i cry and cry and cry unless you pet me, and then maybe i cry just for fun why can't i catch that stupid red dot for massacre a bird in the living room and then look like the cutest and most innocent animal on the planet for refuse to drink water except out of someone's glass leave fur on owners clothes. Paw at your fat belly cough hairball, eat toilet paper. Kitty time ignore the squirrels, you'll never catch them anyway so toilet paper attack claws fluff everywhere meow miao french ciao litterbox but thinking about you i'm joking it's food always food yet chill on the couch table purr. Kitty pounce, trip, faceplant you didn't see that no you didn't definitely didn't lick, lick, lick, and preen away the embarrassment toilet paper attack claws fluff everywhere meow miao french ciao litterbox, yet bawl under human beds and check cat door for ambush 10 times before coming in meow meow we are 3 small kittens sleeping most of our time, we are around 15 weeks old i think, i donâ€™t know i canâ€™t count but why dog in house? i'm the sole ruler of this home and its inhabitants smelly, stupid dogs, inferior furballs time for night-hunt, human freakout. Mew mew love me! for sniff catnip and act crazy yet why can't i catch that stupid red dot. Kitty loves pigs twitch tail in permanent irritation."
+    }
+]
