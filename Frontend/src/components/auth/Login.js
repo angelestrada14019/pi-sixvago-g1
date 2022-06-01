@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import "./login.css";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-const Login = ({ show, setOpenLogin, handleClick }) => {
+const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
   const [inputType, setInputType] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-
+    let refContainer = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user"));
@@ -37,9 +37,14 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
     setInfo(false);
     setAlert(false);
   };
+  const CloseWindow = () => {
+    setOpenLogin(false); 
+    setToggleNavButton("");   
+  }
 
   return (
     <div
+    ref={refContainer}
       className={`login-container ${show ? "show" : null}`}
       id="login-container"
     >
@@ -73,6 +78,9 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
           </Alert>
         </Snackbar>
       )}
+      <div>
+          <p onClick={CloseWindow}>Cerrar</p>
+      </div>
       <form className="formulario-login" onSubmit={handleSubmit}>
         <h1>Iniciar sesion</h1>
         <div className="otros-datos">

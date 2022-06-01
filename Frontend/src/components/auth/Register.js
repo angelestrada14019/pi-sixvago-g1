@@ -134,6 +134,10 @@ class Register extends React.Component {
       showPassword: !this.state.showPassword,
     });
   }
+   CloseWindow = () => {
+    this.props.setOpenSignUp(false);
+    this.props.setToggleNavButton("");   
+  }
 
   render() {
     return (
@@ -158,6 +162,9 @@ class Register extends React.Component {
             </Alert>
           </Snackbar>
         ) : null}
+        <div>
+          <p onClick={this.CloseWindow}>Cerrar</p>
+      </div>
         <form className="formulario-signup" onSubmit={this.handleSubmit}>
           <h1>Crear cuenta</h1>
           <div className="nombre-apellido">

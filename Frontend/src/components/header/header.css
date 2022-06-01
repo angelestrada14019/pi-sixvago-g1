@@ -50,7 +50,7 @@ nav {
   padding: 10px 15px;
   font-weight: bold;
   min-width: 140px;
-  max-height: 40px;
+  max-height: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;

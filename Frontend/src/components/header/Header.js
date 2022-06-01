@@ -2,10 +2,11 @@ import "./header.css";
 import logo from "../../assets/SixVago-dorado.png";
 import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
-import Login from "../login/Login";
-import Register from "../login/Register";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
@@ -26,7 +27,7 @@ const Header = () => {
       document.body.style.overflow = "auto";
     }
     setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
-  }, [openLogin, openSignUp, isLoggedIn]);
+  });
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -60,9 +61,12 @@ const Header = () => {
     <>
       <header>
         <div className="logo">
-          <a href="">
+          {/* <a href="">
             <img src={logo} alt="logo" />
-          </a>
+          </a> */}
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <nav>
           {toggleNavButton === "crear" && !isLoggedIn ? (
@@ -109,12 +113,14 @@ const Header = () => {
       <Login
         show={openLogin}
         setOpenLogin={setOpenLogin}
+        setToggleNavButton={setToggleNavButton}
         setIsLoggedIn={setIsLoggedIn}
         handleClick={handleClick}
       />
       <Register
         show={openSignUp}
         handleClick={handleClick}
+        setToggleNavButton={setToggleNavButton}
         setOpenLogin={setOpenLogin}
         setOpenSignUp={setOpenSignUp}
       />

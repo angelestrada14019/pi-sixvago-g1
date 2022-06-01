@@ -1,0 +1,6 @@
+.headerProducto{
+    position: sticky;
+    top: 86px;
+    min-width: 100%;
+    text-align: center;
+}

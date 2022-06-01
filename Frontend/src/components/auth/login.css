@@ -1,4 +1,5 @@
-.register-container {
+.login-container {
+  top: 86px;
   height: 0px;
   width: 100%;
   display: flex;
@@ -11,26 +12,24 @@
   z-index: 2;
 }
 
-.register-container.show {
+.login-container.show {
   top: initial;
   height: 100%;
   -webkit-transition: height 1.5s ease-in-out;
 }
 
-.formulario-signup {
-  padding: 20px;
+.formulario-login {
+  padding: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.formulario-signup h1 {
+.formulario-login h1 {
   color: #262626;
   padding: 0px 0px 20px 0px;
-  font-size: 24px;
+  font-size:24px;
 }
-
-.formulario-signup input {
+.formulario-login input {
   background: #ffffff;
   border-color: white;
   border-style: inherit;
@@ -39,94 +38,52 @@
   font-size: 15px;
   padding-left: 20px;
 }
-.formulario-signup label {
-  font-size: 13px;
-  font-weight: 600;
-}
-.nombre-apellido {
-  display: flex;
-  padding: 0px 0px 10px;
-}
-
-.nombre-apellido input {
-  width: 218px;
-  height: 40px;
-}
-
-.nombre-apellido div {
-  display: flex;
-  flex-direction: column;
-  padding: 0px 10px;
-}
-
-.otros-datos div {
-  display: flex;
-  flex-direction: column;
-  padding: 0px 0px 10px;
-}
-.otros-datos i{
+.formulario-login i{
   margin-left: -30px;
   cursor: pointer;
   font-size: 15px;
   color: rgba(153, 153, 153, 0.253);
 }
-.otros-datos i:hover{
+.formulario-login i:hover{
   color: rgba(0, 0, 0, 0.555);
 }
-
-.otros-datos input {
-  width: 448px;
-  height: 40px;
+#eyes-input{
+  padding: 0px;
 }
-#boton-signup {
+.formulario-login label {
+  font-size: 13px;
+  font-weight: 600;
+}
+#boton-login {
   width: 206px;
   height: 40px;
   background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
-  border-color: #1dbeb4;
+  border-color: wheat;
   border-style: inherit;
   color: #262626;
   cursor: pointer;
   transition: 0.3s;
 }
-#boton-signup:hover {
+#boton-login:hover {
   background: linear-gradient(90deg, rgb(158, 139, 82) 10%, rgba(255,245,218,1) 50%, rgb(148, 122, 53) 110%);
   color: #262626;
 }
-.formulario-signup p {
-  font-size: 13px;
-  padding: 10px 0px 0px 0px;
-}
-.text-danger {
-  color: red;
-  font-size: 12px;
-}
-.redireccionReg{
-  color: #1dbeb4;
+.redireccionLogin{
+  color: rgb(158, 139, 82);
   cursor: pointer;
 }
-@media (max-width: 578px){
-  .otros-datos input{
+.formulario-login p {
+  padding: 15px;
+  font-size: 13px;
+}
+@media screen and (max-width: 578px){
+  .formulario-login{
+    width: 550px;
+  }
+  #boton-login{
     width: 300px;
     height: 40px;
-  }
-  #boton-signup{
-    width: 300px;
-    height: 40px;
-  }
-  .nombre-apellido{
-    display: flex;
-    flex-direction: column;
-  }
-  .nombre-apellido input{ 
-  width: 300px;
-  height: 40px;
-  }
-  .nombre-apellido div{
-    padding: 0px 0px 10px;
-  }
-  .formulario-signup h1 {
-    padding: 10px 0px 0px 0px
   }
 }
