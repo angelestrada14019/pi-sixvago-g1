@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "./calendar.css";
-
+//import 'react-calendar/dist/Calendar.css';
 const CustomCalendar = ({ handleCheckInOut }) => {
   const [date, setDate] = useState(new Date());
 

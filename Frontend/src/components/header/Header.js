@@ -27,7 +27,7 @@ const Header = () => {
       document.body.style.overflow = "auto";
     }
     setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
-  });
+  }, [openLogin, openSignUp, isLoggedIn]);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
