@@ -5,6 +5,9 @@
     height: 100%;
 }
 .icon_social{
+    margin-left: 5px;
+}
+.icon_social i{
     margin-left: 10px;
 }
 .container-gallery_image{
