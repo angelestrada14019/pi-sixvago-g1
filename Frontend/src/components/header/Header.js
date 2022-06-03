@@ -27,7 +27,7 @@ const Header = () => {
       document.body.style.overflow = "auto";
     }
     setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
-  });
+  }, [openLogin, openSignUp, isLoggedIn]);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -61,11 +61,13 @@ const Header = () => {
     <>
       <header>
         <div className="logo">
-          {/* <a href="">
+          <Link to="/" onClick={()=>{
+              setOpenLogin(false);
+                setOpenSignUp(false);
+                setToggleNavButton("");
+          }}>
             <img src={logo} alt="logo" />
-          </a> */}
-          <Link to="/">
-            <img src={logo} alt="logo" />
+
           </Link>
         </div>
         <nav>

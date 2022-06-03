@@ -37,10 +37,7 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
     setInfo(false);
     setAlert(false);
   };
-  const CloseWindow = () => {
-    setOpenLogin(false); 
-    setToggleNavButton("");   
-  }
+  
 
   return (
     <div
@@ -78,9 +75,7 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
           </Alert>
         </Snackbar>
       )}
-      <div>
-          <p onClick={CloseWindow}>Cerrar</p>
-      </div>
+      
       <form className="formulario-login" onSubmit={handleSubmit}>
         <h1>Iniciar sesion</h1>
         <div className="otros-datos">
