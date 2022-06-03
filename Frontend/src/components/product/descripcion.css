@@ -1,0 +1,16 @@
+.descripcion{
+    margin-top: 5%;
+}
+.titleDescription{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    font-family: Roboto;
+
+}
+.descriptionP{
+    font-size: 1.2em;
+    font-family: Roboto;
+    max-width: 80%;
+    
+}

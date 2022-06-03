@@ -1,14 +1,22 @@
 import React from 'react';
-import json from '../body/listado.json';
+import json from '../body/producto.json';
+import "./ImagenesProd.css";
 
 const ImagenesProd = () => {
+    //const array = Object.keys(json.img);
     return (
-        <div className="cards">
-            {json.map((item, i) => (
-            <img src={`${json.img.url[i]}`} alt="probando"></img>
-            ))}
-        </div>
-    );
+        //Map all the imgs from the json file
+        json.map((obj, index) => {
+            return (
+                <div key={index} className="img-container">
+                    {obj.img.map((img, index) => {
+                        return (
+                            <img key={index} src={img.url} alt={img.alt} className={`${"selector"+index} img-fluid`}/>
+                        )
+                    })}
+                </div>
+            )}
+    ));
 }
 
 export default ImagenesProd;
