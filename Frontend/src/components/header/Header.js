@@ -31,7 +31,6 @@ const Header = () => {
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
-    console.log(showSidebar);
   };
 
   const handleClick = (e) => {
@@ -61,37 +60,59 @@ const Header = () => {
     <>
       <header>
         <div className="logo">
-          <Link to="/" onClick={()=>{
+          <Link
+            to="/"
+            onClick={() => {
               setOpenLogin(false);
-                setOpenSignUp(false);
-                setToggleNavButton("");
-          }}>
+              setOpenSignUp(false);
+              setToggleNavButton("");
+            }}
+          >
             <img src={logo} alt="logo" />
-
           </Link>
         </div>
         <nav>
           {toggleNavButton === "crear" && !isLoggedIn ? (
             <div>
-              <p className="boton-nav" id="iniciar" onClick={handleClick}>
+              <p
+                role="button"
+                className="boton-nav"
+                id="iniciar"
+                onClick={handleClick}
+              >
                 Iniciar sesion
               </p>
             </div>
           ) : toggleNavButton === "iniciar" && !isLoggedIn ? (
             <div>
-              <p className="boton-nav" id="crear" onClick={handleClick}>
+              <p
+                role="button"
+                className="boton-nav"
+                id="crear"
+                onClick={handleClick}
+              >
                 Crear cuenta
               </p>
             </div>
           ) : !isLoggedIn ? (
             <>
               <div>
-                <p className="boton-nav" id="iniciar" onClick={handleClick}>
+                <p
+                  role="button"
+                  className="boton-nav"
+                  id="iniciar"
+                  onClick={handleClick}
+                >
                   Iniciar sesion
                 </p>
               </div>
               <div>
-                <p className="boton-nav" id="crear" onClick={handleClick}>
+                <p
+                  role="button"
+                  className="boton-nav"
+                  id="crear"
+                  onClick={handleClick}
+                >
                   Crear cuenta
                 </p>
               </div>
