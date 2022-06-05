@@ -1,4 +1,10 @@
-import { render, fireEvent, screen, cleanup } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  act,
+  screen,
+  cleanup,
+} from "@testing-library/react";
 import { prettyDOM } from "@testing-library/dom";
 import Login from "../auth/Login";
 import "@testing-library/jest-dom/extend-expect";
@@ -16,38 +22,28 @@ describe("Login", () => {
     expect(component.container).toBeInTheDocument();
   });
 
-  test("email input should validate missing @", async () => {
-    const email = component.getByLabelText("Correo electronico");
+  test("alert if user doesnt exist", async () => {
+    const email = screen.getByLabelText("Correo electronico");
     const password = component.getByLabelText("Contraseña");
-    fireEvent.change(email, {
-      target: {
-        value: "gabs@gmail.com",
-      },
+    const submit = component.getByRole("button", { name: "Ingresar" });
+    act(() => {
+      fireEvent.change(email, {
+        target: {
+          value: "asdas@asd.com",
+        },
+      });
+      fireEvent.change(password, {
+        target: {
+          value: "asdasd",
+        },
+      });
+      fireEvent.submit(submit);
     });
-    fireEvent.change(password, {
-      target: {
-        value: "asdasd",
-      },
-    });
-    const ingresar = component.getByRole("button", { name: "Ingresar" });
-    fireEvent.submit(ingresar);
-    expect(email).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Ups! Parece que el usuario no existe. Por favor, verifica tus datos."
+      )
+    ).toBeInTheDocument();
   });
-
-  test("email input should validate missing .com", async () => {
-    const email = component.getByLabelText("Correo electronico");
-    const password = component.getByLabelText("Contraseña");
-    fireEvent.change(email, {
-      target: {
-        value: "gabs@gmail",
-      },
-    });
-    fireEvent.change(password, {
-      target: {
-        value: "asdasd",
-      },
-    });
-    const ingresar = component.getByRole("button", { name: "Ingresar" });
-    fireEvent.submit(ingresar);
-  });
+  
 });

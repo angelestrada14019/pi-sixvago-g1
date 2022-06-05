@@ -67,6 +67,7 @@ describe("Header", () => {
     act(() => {
       fireEvent.click(loginButton);
     });
+
     const form = screen.getByText("Iniciar sesion").parentNode.parentNode;
     expect(form.classList.contains("show")).toBe(true);
   });
