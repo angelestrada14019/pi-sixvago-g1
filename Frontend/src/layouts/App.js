@@ -8,7 +8,7 @@ function App(props) {
     <>
       <CssBaseline />
       <Header />
-      <Outlet/>      
+      <Outlet />
       <Footer />
     </>
   );

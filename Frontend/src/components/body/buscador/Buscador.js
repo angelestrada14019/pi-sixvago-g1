@@ -41,10 +41,10 @@ const Buscador = () => {
 
   return (
     <>
-      <div className="container-buscador-main">
+      <div role="search" className="container-buscador-main">
         <h2>Busca ofertas en hoteles, casas y mucho más</h2>
         <div className="container-buscador-inputs">
-          <div className="buscador-select" onClick={handleClick}>
+          <div role="button" className="buscador-select" onClick={handleClick}>
             <i className="fa-solid fa-location-dot"></i>
             <p>{!location ? "¿A dónde vamos?" : `${location}`}</p>
             {!openLocations ? null : (
@@ -56,7 +56,7 @@ const Buscador = () => {
               </div>
             )}
           </div>
-          <div className="buscador-date" onClick={handleClick}>
+          <div role="button" className="buscador-date" onClick={handleClick}>
             <i className="fa-solid fa-calendar-day"></i>
             <p>
               {checkIn !== ""
@@ -65,6 +65,7 @@ const Buscador = () => {
             </p>
             {openCalendar && (
               <CustomCalendar
+                role="calendar"
                 className="custom-calendar"
                 handleCheckInOut={handleCheckInOut}
               />
