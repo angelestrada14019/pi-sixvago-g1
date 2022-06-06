@@ -1,0 +1,91 @@
+.rmdp-day.rmdp-selected span:not(.highlight){
+    background-color: transparent;
+    color: rgb(148, 148, 148);
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(200, 200, 200);
+}
+.rmdp-day.rmdp-today span {
+    background-color: #f0f0f0;
+    color: #000;
+}
+.rmdp-week-day{
+    color: #000;
+}
+.rmdp-arrow{
+    border-color: #000;
+}
+.rmdp-arrow-container:hover{
+    background-color: wheat;
+    
+}
+.rmdp-arrow-container:hover .rmdp-arrow{
+    border-color: #000;
+}
+.calendarAvailableDay_container {
+    width: 100%;
+    margin-top: 86px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.calendarAvailableDay_container{
+    background-color: #e8e7e7;
+    padding: 30px 5px;
+}
+.calendarAvailableDay_boxReservation{
+    background-color: white;
+    padding: 40px 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.244);
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.calendarAvailableDay_boxReservation p{
+    font-size: 20px;
+    font-weight: bold;
+}
+.calendarAvailableDay_boxReservation button{
+    margin-top: 40px;
+    background-color: wheat;
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.calendarAvailableDay_container_singleCalendar{
+    display: none;
+}
+@media (max-width: 768px){
+    .calendarAvailableDay_container{
+        flex-direction: column;
+    }
+    .calendarAvailableDay_boxReservation{
+        background-color: transparent;
+        border-radius: none;
+        box-shadow: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+    .calendarAvailableDay_boxReservation button{
+        margin-top: 0;
+        margin-left: 10px;
+        width: 100%;
+    }
+}
+@media (max-width: 576px){
+    .calendarAvailableDay_container_doubleCalendar{
+        display: none;
+    }
+    .calendarAvailableDay_container_singleCalendar{
+        display: block;
+    }
+}

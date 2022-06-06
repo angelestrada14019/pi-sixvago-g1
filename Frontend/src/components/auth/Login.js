@@ -7,7 +7,7 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
   const [inputType, setInputType] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-    let refContainer = useRef();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user"));
@@ -37,14 +37,10 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
     setInfo(false);
     setAlert(false);
   };
-  const CloseWindow = () => {
-    setOpenLogin(false); 
-    setToggleNavButton("");   
-  }
+  
 
   return (
     <div
-    ref={refContainer}
       className={`login-container ${show ? "show" : null}`}
       id="login-container"
     >
@@ -78,14 +74,11 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
           </Alert>
         </Snackbar>
       )}
-      <div>
-          <p onClick={CloseWindow}>Cerrar</p>
-      </div>
-      <form className="formulario-login" onSubmit={handleSubmit}>
+      <form role="form" className="formulario-login" onSubmit={handleSubmit}>
         <h1>Iniciar sesion</h1>
         <div className="otros-datos">
           <div>
-            <label>Correo electronico</label>
+            <label htmlFor="userEmail">Correo electronico</label>
             <input
               type="email"
               id="userEmail"
@@ -93,7 +86,7 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
             />
           </div>
           <div>
-            <label>Contraseña</label>
+            <label htmlFor="userPassword">Contraseña</label>
             <p id="eyes-input">
               <input
                 type={inputType ? "text" : "password"}

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Card = ({ data }) => {
   return (
     <div className="card">
@@ -20,9 +22,15 @@ const Card = ({ data }) => {
 
         <h2 className="card-title">{`${data.title}`}</h2>
         <p className="card-location">{`${data.location}`}</p>
-        <p className="card-description">{`${data.description
-          .slice(0, 100)}`}<span> mas...</span></p>
-        <button className="card-button">Ver más</button>
+        <p className="card-description">
+          {`${data.description.slice(0, 100)}`}
+        <Link to={`/producto/${data.id}`}>
+          <span> mas...</span>
+        </Link>
+        </p>
+        <Link to={`/producto/${data.id}`}>
+          <button className="card-button">Ver más</button>
+        </Link>
       </div>
     </div>
   );
