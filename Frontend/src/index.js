@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Producto from "./pages/Producto";
 import App from "./layouts/App";
 import NotFound from "./pages/NotFound";
-import Caracteristicas from "./components/product/Caracteristicas";
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -20,7 +20,7 @@ root.render(
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
           </Route>
-          <Route path="caracteristicas" element={<Caracteristicas />} />
+
         </Route>
           <Route path="*" element={<NotFound/>} />
       </Routes>
