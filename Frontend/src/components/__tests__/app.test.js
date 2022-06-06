@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom/extend-expect";
 import {
   render,
   fireEvent,
@@ -9,9 +8,7 @@ import {
 import { createMemoryHistory } from "history";
 import { prettyDOM } from "@testing-library/dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import Header from "../header/Header";
-import Login from "../auth/Login";
-import Register from "../auth/Register";
+import App from "../../layouts/App";
 
 let component = null;
 
@@ -19,7 +16,7 @@ describe("Header", () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <Header />
+        <App />
       </Router>
     );
   });
@@ -70,5 +67,9 @@ describe("Header", () => {
 
     const form = screen.getByText("Iniciar sesion").parentNode.parentNode;
     expect(form.classList.contains("show")).toBe(true);
+  });
+
+  test("footer is rendered", async () => {
+    expect(screen.getByText("©2022 Sixvago")).toBeInTheDocument();
   });
 });

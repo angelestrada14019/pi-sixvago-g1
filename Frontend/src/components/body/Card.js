@@ -24,11 +24,13 @@ const Card = ({ data }) => {
         <p className="card-location">{`${data.location}`}</p>
         <p className="card-description">
           {`${data.description.slice(0, 100)}`}
-          <Link to={`/producto/${data.id}`}>
-            <span> mas...</span>
-          </Link>
+        <Link to={`/producto/${data.id}`}>
+          <span> mas...</span>
+        </Link>
         </p>
-        <button className="card-button">Ver más</button>
+        <Link to={`/producto/${data.id}`}>
+          <button className="card-button">Ver más</button>
+        </Link>
       </div>
     </div>
   );

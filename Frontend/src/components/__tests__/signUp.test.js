@@ -7,7 +7,6 @@ import {
 } from "@testing-library/react";
 import { prettyDOM } from "@testing-library/dom";
 import Register from "../auth/Register";
-import "@testing-library/jest-dom/extend-expect";
 
 let component = null;
 
@@ -22,6 +21,7 @@ describe("Register", () => {
     const form = component.getByRole("form");
     expect(form).toBeInTheDocument();
   });
+
 
   test("succesful register", async () => {
     const firstname = component.getByLabelText("Nombre");

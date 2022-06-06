@@ -9,6 +9,7 @@ import App from "./layouts/App";
 import NotFound from "./pages/NotFound";
 
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ root.render(
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
           </Route>
+
         </Route>
           <Route path="*" element={<NotFound/>} />
       </Routes>
