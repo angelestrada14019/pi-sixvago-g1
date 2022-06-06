@@ -39,27 +39,33 @@
       "caracteristica": [
         {
           "id": 1,
-          "nombre": "Cocina"
+          "nombre": "Cocina",
+          "icono": "fa-solid fa-kitchen-set"
         },
         {
           "id": 2,
-          "nombre": "Apto para mascotas"
+          "nombre": "Apto para mascotas",
+          "icono": "fa-solid fa-kitchen-set"
         },
         {
           "id": 3,
-          "nombre": "Wifi"
+          "nombre": "Wifi",
+          "icono": "fa-solid fa-kitchen-set"
         },
         {
           "id": 4,
-          "nombre": "Aire acondicionado"
+          "nombre": "Aire acondicionado",
+          "icono": "fa-solid fa-kitchen-set"
         },
         {
           "id": 5,
-          "nombre": "TV"
+          "nombre": "TV",
+          "icono": "fa-solid fa-kitchen-set"
         },
         {
           "id": 6,
-          "nombre": "Caja fuerte"
+          "nombre": "Caja fuerte",
+          "icono": "fa-solid fa-kitchen-set"
         }
       ],
       "puntuacion": "4.5",
