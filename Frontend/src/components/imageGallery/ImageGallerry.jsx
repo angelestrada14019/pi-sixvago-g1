@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import "./imageGallery.css";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/system";
-import CloseIcon from "@mui/icons-material/Close";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 const images = [
   {
     id: 0,
@@ -58,8 +55,8 @@ const ImageGallerry = () => {
   return (
     <div className="image_gallery_container">
       <div className="icon_social">
-        <i class="fa-solid fa-share-nodes"></i>
-        <i class="fa-regular fa-heart"></i>
+        <i className="fa-solid fa-share-nodes"></i>
+        <i className="fa-regular fa-heart"></i>
       </div>
       <div className="gallery">
         {images.slice(0, 5).map((image) => (
@@ -82,7 +79,7 @@ const ImageGallerry = () => {
               className="close_gallerry_image-button"
               onClick={() => setOpen(false)}
             >
-              <CloseIcon />
+              <i class="fa-solid fa-xmark"></i>
             </div>
             <ImageGallery
               autoPlay={true}
@@ -98,8 +95,8 @@ const ImageGallerry = () => {
       </div>
       <div className="container-gallery_image">
         <div className="icon_social">
-          <i class="fa-solid fa-share-nodes"></i>
-          <i class="fa-regular fa-heart"></i>
+          <i className="fa-solid fa-share-nodes"></i>
+          <i className="fa-regular fa-heart"></i>
         </div>
 
         <ImageGallery

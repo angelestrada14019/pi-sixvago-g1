@@ -23,18 +23,25 @@
 .rmdp-arrow-container:hover .rmdp-arrow{
     border-color: #000;
 }
-.calendarAvailableDay_container {
-    width: 100%;
+.calendarAvailableDay{
     margin-top: 86px;
     margin-bottom: 100px;
+    background-color: #e8e7e7;
+    padding: 30px 5px;
+}
+.calendarAvailableDay h2{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.calendarAvailableDay_container {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     
-}
-.calendarAvailableDay_container{
-    background-color: #e8e7e7;
-    padding: 30px 5px;
 }
 .calendarAvailableDay_boxReservation{
     background-color: white;

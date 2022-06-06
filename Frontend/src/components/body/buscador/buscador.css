@@ -1,6 +1,6 @@
 .container-buscador-main {
   position: sticky;
-  top: 86px;
+  top: 84px; /* 86px */
   min-width: 100%;
   text-align: center;
   background-color: #000000d9;
