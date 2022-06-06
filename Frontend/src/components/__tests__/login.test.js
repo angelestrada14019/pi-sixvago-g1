@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { prettyDOM } from "@testing-library/dom";
 import Login from "../auth/Login";
-import "@testing-library/jest-dom/extend-expect";
+
 
 let component = null;
 
