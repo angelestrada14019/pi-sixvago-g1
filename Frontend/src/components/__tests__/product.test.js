@@ -6,29 +6,23 @@ import {
   act,
 } from "@testing-library/react";
 import { prettyDOM } from "@testing-library/dom";
-import {
-  BrowserRouter as Router,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Producto from "../../pages/Producto";
 
+let component = null;
 
-let component = null
+describe("first", () => {
+  beforeEach(() => {
+    component = render(
+      <Router>
+        <Producto />
+      </Router>
+    );
+  });
 
-describe('first', () => {
-    beforeEach(() => {
-        component = render(
-            <Router>
-                <Producto />
-            </Router>
-        );
-    });
+  afterEach(() => cleanup());
 
-    afterEach(() => cleanup());
-    
-    test('Should render imgs', () => {
-        expect(screen.getAllByRole('img')).toBeTruthy();
-    });
- })
+  test("Should render imgs", () => {
+    expect(screen.getAllByRole("img")).toBeTruthy();
+  });
+});
