@@ -22,27 +22,27 @@ jobs_install:
     - desarrollo 
 
 
-jobs_desarrollo_tests_back:
-  image: maven:3.3.9-jdk-8
-  stage: test
-  script: 
-      - cd ./backend
-      - echo "Maven test started"
-      - "mvn clean test"
-  only:
-    - desarrollo 
+# jobs_desarrollo_tests_back:
+#   image: maven:3.3.9-jdk-8
+#   stage: test
+#   script: 
+#       - cd ./backend
+#       - echo "Maven test started"
+#       - "mvn clean test"
+#   only:
+#     - desarrollo 
 
-jobs_desarrollo_tests_front:
-  image: node:16.0.0
-  stage: test
-  script: 
-      - cd ./Frontend
-      - echo "test_jest"
-      - "npm run test"
-  only:
-    - desarrollo 
-  dependencies:
-    - jobs_install
+# jobs_desarrollo_tests_front:
+#   image: node:16.0.0
+#   stage: test
+#   script: 
+#       - cd ./Frontend
+#       - echo "test_jest"
+#       - "npm run test"
+#   only:
+#     - desarrollo 
+#   dependencies:
+#     - jobs_install
 
 jobs_desarrollo_container_back:
   image: docker:latest
