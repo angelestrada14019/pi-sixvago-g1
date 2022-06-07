@@ -1,0 +1,67 @@
+stages:
+  - install
+  - test
+  - build
+  - container
+  - deploy
+
+job_install:
+  image: node:16.0.0
+  stage: install
+  script: 
+    - cd ./Frontend
+    - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+  only:
+    - desarrollo 
+
+
+jobs_desarrollo_tests_back:
+  image: maven:3.3.9-jdk-8
+  stage: test
+  script: 
+      - cd ./backend
+      - echo "Maven test started"
+      - "mvn clean test"
+  only:
+    - desarrollo 
+
+jobs_desarrollo_tests_front:
+  image: node:16.0.0
+  stage: test
+  script: 
+      - cd ./Frontend
+      - echo "test_jest"
+      - "npm run test"
+  only:
+    - desarrollo 
+  dependencies:
+    - jobs_install
+
+jobs_desarrollo_container_back:
+  image: docker:latest
+  stage: container
+  services:
+    - docker:dind
+  before_script:
+    - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+
+  script: 
+    - cd ./backend
+    - echo "Docker build started"
+    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG .
+    - echo "Docker push started"
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG
+    - echo "Docker tag started"
+    - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG $CI_REGISTRY/${CI_PROJECT_PATH}:latest
+    - echo "Docker push latest"
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
+  only:
+    - desarrollo
