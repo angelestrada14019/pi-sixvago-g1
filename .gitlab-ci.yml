@@ -5,21 +5,21 @@ stages:
   - container
   - deploy
 
-# jobs_install:
-#   image: node:16.0.0
-#   stage: install
-#   script: 
-#     - cd ./Frontend
-#     - npm install
-#   artifacts:
-#     expire_in: 1hr
-#     paths:
-#       - node_modules/
-#   cache:
-#     paths:
-#       - node_modules/
-#   only:
-#     - desarrollo 
+jobs_install:
+  image: node:16.0.0
+  stage: install
+  script: 
+    - cd ./Frontend
+    - npm install
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+  only:
+    - desarrollo 
 
 
 jobs_desarrollo_tests_back:
@@ -28,21 +28,21 @@ jobs_desarrollo_tests_back:
       - cd ./backend
       - pwd
       - echo "Maven test started"
-      - mvn clean test
+      # - mvn clean test
   only:
     - desarrollo 
 
-# jobs_desarrollo_tests_front:
-#   image: node:16.0.0
-#   stage: test
-#   script: 
-#       - cd ./Frontend
-#       - echo "test_jest"
-#       - "npm run test"
-#   only:
-#     - desarrollo 
-#   dependencies:
-#     - jobs_install
+jobs_desarrollo_tests_front:
+  image: node:16.0.0
+  stage: test
+  script: 
+      - cd ./Frontend
+      - echo "test_jest"
+      - "npm run test"
+  only:
+    - desarrollo 
+  dependencies:
+    - jobs_install
 
 jobs_desarrollo_container_back:
   image: docker:latest
