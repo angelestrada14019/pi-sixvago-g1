@@ -5,7 +5,7 @@ stages:
   - container
   - deploy
 
-job_install:
+jobs_install:
   image: node:16.0.0
   stage: install
   script: 
