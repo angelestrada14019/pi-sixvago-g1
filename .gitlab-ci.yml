@@ -28,7 +28,7 @@ jobs_desarrollo_tests_back:
       - cd ./backend
       - pwd
       - echo "Maven test started"
-      # - mvn clean test
+      - mvn clean test
   only:
     - desarrollo 
 
@@ -38,7 +38,7 @@ jobs_desarrollo_tests_front:
   script: 
       - cd ./Frontend
       - echo "test_jest"
-      - "npm run test"
+      - "npm test"
   only:
     - desarrollo 
   dependencies:
