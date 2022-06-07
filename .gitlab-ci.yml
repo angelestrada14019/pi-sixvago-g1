@@ -36,7 +36,7 @@ jobs_desarrollo_tests_front:
   image: node:16.0.0
   stage: test
   script: 
-      - cd ./Frontend
+      - cd ./Frontend/src
       - echo "test_jest"
       - "npm test"
   only:
