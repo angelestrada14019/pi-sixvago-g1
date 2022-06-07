@@ -3,7 +3,7 @@
     top: 86px;
     min-width: 100%;
     text-align: center;
-    
+    z-index: 1;
 }
 
 .lodging-section {
@@ -38,6 +38,7 @@
     border: 0px solid;
     margin-right: 50px;
     font-size: 35px;
+    cursor: pointer;
 }
 
 .locationData{

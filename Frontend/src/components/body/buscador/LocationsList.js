@@ -1,15 +1,18 @@
 import "./locationsList.css";
-import listado from "../listado.json";
-
+import React,{useEffect} from "react";
+import { useStateContext } from "../../../contexts/ContextProvider";
 const LocationsList = ({ setLocation, setOpenLocations }) => {
+    
+    const {locationsList } = useStateContext();   
+
   return (
     <>
-      {listado.map((loc, i) => {
+      {locationsList.map((loc, i) => {
         return (
           <div
             className="single-location-container"
             key={i}
-            id={`${loc.location}`}
+            id={`${loc.name}`}
             onClick={(e) => {
               setLocation(e.target.id);
               setOpenLocations(false);
@@ -18,10 +21,10 @@ const LocationsList = ({ setLocation, setOpenLocations }) => {
             <i className="fa-solid fa-location-dot"></i>
             <li type="none">
               <ul>
-                <h3>{loc.location}</h3>
+                <h3>{loc.name}</h3>
               </ul>
               <ul>
-                <p>{loc.location}</p>
+                <p>{loc.name}</p>
               </ul>
             </li>
           </div>

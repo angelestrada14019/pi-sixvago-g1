@@ -14,7 +14,6 @@ const Producto = () => {
       
         <HeaderProducto id={id} />
         <div className="containerProducto">
-            Producto {id}
             <ImageGallerry/>
             <Descripcion/>
             <Caracteristicas/>

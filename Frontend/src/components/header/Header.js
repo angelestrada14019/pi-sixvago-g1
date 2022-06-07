@@ -7,13 +7,14 @@ import Register from "../auth/Register";
 import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
 import { Link } from "react-router-dom";
-
+import { useStateContext } from "../../contexts/ContextProvider";
 const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const {setCardCategory,cardCategory} = useStateContext();
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -39,13 +40,15 @@ const Header = () => {
       setOpenLogin(false);
       setOpenSignUp(true);
       setShowSidebar(false);
+      
     }
     if (e.target.id === "iniciar") {
-      //setToggleNavButton("iniciar");
-      setOpenLogin(true);
-      setOpenSignUp(false);
-      setShowSidebar(false);
+        //setToggleNavButton("iniciar");
+        setOpenLogin(true);
+        setOpenSignUp(false);
+        setShowSidebar(false);
     }
+    setCardCategory("");
   };
 
   const handleLogout = () => {
@@ -54,6 +57,7 @@ const Header = () => {
     setOpenSignUp(false);
     setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", false);
+    setCardCategory("");
   };
 
   return (
@@ -66,6 +70,7 @@ const Header = () => {
               setOpenLogin(false);
               setOpenSignUp(false);
               setToggleNavButton("");
+              setCardCategory("");
             }}
           >
             <img src={logo} alt="logo" />

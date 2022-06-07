@@ -50,28 +50,31 @@ const CalendarAvailableDay = () => {
   }, []);
   return (
     <div className="calendarAvailableDay">
-      <div className="calendarAvailableDay_container">
-        <div className="calendarAvailableDay_container_doubleCalendar">
-          <Calendar
-            multiple
-            value={value}
-            minDate={new Date()}
-            readOnly
-            numberOfMonths={2}
-          />
-        </div>
-        <div className="calendarAvailableDay_container_singleCalendar">
-          <Calendar
-            multiple
-            value={value}
-            minDate={new Date()}
-            readOnly
-            numberOfMonths={1}
-          />
-        </div>
-        <div className="calendarAvailableDay_boxReservation">
-          <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-          <button>Reservar</button>
+      <h2>Fechas Disponibles</h2>
+      <div>
+        <div className="calendarAvailableDay_container">
+          <div className="calendarAvailableDay_container_doubleCalendar">
+            <Calendar
+              multiple
+              value={value}
+              minDate={new Date()}
+              readOnly
+              numberOfMonths={2}
+            />
+          </div>
+          <div className="calendarAvailableDay_container_singleCalendar">
+            <Calendar
+              multiple
+              value={value}
+              minDate={new Date()}
+              readOnly
+              numberOfMonths={1}
+            />
+          </div>
+          <div className="calendarAvailableDay_boxReservation">
+            <p>Agregá tus fechas de viaje para obtener precios exactos</p>
+            <button>Reservar</button>
+          </div>
         </div>
       </div>
     </div>
