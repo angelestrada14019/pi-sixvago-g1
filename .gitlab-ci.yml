@@ -12,6 +12,9 @@ jobs_install:
   script: 
     - cd ./Frontend
     - npm install
+    - cd ./src
+    - pwd
+    - npm test
   artifacts:
     expire_in: 1hr
     paths:
@@ -38,7 +41,7 @@ jobs_desarrollo_tests_front:
   script: 
       - cd ./Frontend/src
       - echo "test_jest"
-      - "npm test"
+      - npm test
   only:
     - desarrollo 
   dependencies:
