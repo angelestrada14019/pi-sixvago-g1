@@ -1,27 +1,19 @@
 stages:
-  - install
   - test
   - build
   - container
   - deploy
 
-image: node:12.20.0
 
-jobs_install:
-  stage: install
+jobs_tests_front:
+  image: node:12.20.0
+  stage: test
   script: 
     - cd ./Frontend
     - npm install
     - cd ./src
     - pwd
     - npm test
-  artifacts:
-    expire_in: 1hr
-    paths:
-      - node_modules/
-  cache:
-    paths:
-      - node_modules/
   only:
     - desarrollo 
 
@@ -35,17 +27,6 @@ jobs_desarrollo_tests_back:
       - mvn clean test
   only:
     - desarrollo 
-
-jobs_desarrollo_tests_front:
-  stage: test
-  script: 
-      - cd ./Frontend/src
-      - echo "test_jest"
-      - npm test
-  only:
-    - desarrollo 
-  dependencies:
-    - jobs_install
 
 jobs_desarrollo_container_back:
   image: docker:latest
