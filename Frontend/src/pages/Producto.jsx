@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import CalendarAvailableDay from "../components/calendarAvailableDay/CalendarAvailableDay";
 import HeaderProducto from "../components/headerProducto/HeaderProducto";
 import ImageGallerry from "../components/imageGallery/ImageGallerry";
+import Descripcion from "../components/product/Descripcion";
+import Caracteristicas from "../components/product/Caracteristicas";
 import './producto.css'
 
 const Producto = () => {
@@ -14,6 +16,8 @@ const Producto = () => {
         <div className="containerProducto">
             Producto {id}
             <ImageGallerry/>
+            <Descripcion/>
+            <Caracteristicas/>
             <CalendarAvailableDay/>
         </div>
       
