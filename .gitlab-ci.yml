@@ -59,7 +59,7 @@ test_job_postman:
     - newman --version
     - npm config set unsafe-perm true
     - npm install -g newman-reporter-html 
-    - newman run proyecto-integrador.postman_collection.json --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+    - newman run proyecto_integrador.postman_collection.json --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
   artifacts:
     when: always
     paths:
