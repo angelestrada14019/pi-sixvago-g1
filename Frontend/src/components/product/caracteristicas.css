@@ -18,7 +18,6 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
 }
 .caracteristica{
     max-width: auto;

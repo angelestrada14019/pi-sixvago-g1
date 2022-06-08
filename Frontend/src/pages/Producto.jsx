@@ -19,7 +19,6 @@ const Producto = () => {
             <Caracteristicas/>
             <CalendarAvailableDay/>
         </div>
-      
     </div>
   );
 };
