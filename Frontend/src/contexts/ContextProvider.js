@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState,useEffect } from "react";
 import listado from "../components/body/listado.json";
-const StateContext = createContext();
+import ApiCall from "../utils/ApiCall";
 
+const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
   const listLocation = [
     {
@@ -41,6 +42,8 @@ export const ContextProvider = ({ children }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
   useEffect(() => {
+    getListaProducto();
+    getListaCiudades();
       setProduct(listado);
     setLocationsList(listLocation);
     if (localStorage.getItem("isLoggedIn") === "false") {
@@ -51,6 +54,14 @@ export const ContextProvider = ({ children }) => {
         }
       
   }, []);
+  const getListaProducto =async () => {
+    const lista = await ApiCall.invokeGET("/productos");
+    //console.log(lista);
+  }
+  const getListaCiudades =async () => {
+    const lista = await ApiCall.invokeGET("/ciudades");
+    //console.log(lista);
+    }
 
   const shuffle=(array)=> {
     let currentIndex = array.length;

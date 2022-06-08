@@ -1,5 +1,5 @@
 module.exports={
     api:{
-        baseURL:"https://back-project-hospital.herokuapp.com"
+        baseURL:"http://localhost:8080"
     }
 }
