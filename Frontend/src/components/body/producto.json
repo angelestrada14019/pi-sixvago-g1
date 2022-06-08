@@ -71,7 +71,7 @@
       "puntuacion": "4.5",
       "politicas": [
         {
-          "Normas de la casa": [
+          "NormasDeLaCasa": [
             {
               "id":1,
               "nombre":"check-in: 10 PM"
@@ -89,7 +89,7 @@
               "nombre":"No matar a tus vecinos"
             }
           ],
-          "Salud y Seguridad": [
+          "SaludYSeguridad": [
             {
               "id":1,
               "nombre":"Alergias"
@@ -103,7 +103,7 @@
               "nombre":"Medicamentos"
             }
           ],
-          "Politicas de cancelacion":[
+          "PoliticasDeCancelacion":[
             {
               "id":1,
               "nombre":"Cancelaciones antes de las 12 PM"
