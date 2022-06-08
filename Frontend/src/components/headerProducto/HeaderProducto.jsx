@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./headerProducto.css";
 
 const HeaderProducto = ({ id }) => {
@@ -10,11 +11,11 @@ const HeaderProducto = ({ id }) => {
             <h4>Hotel</h4>
             <h2>Hermitage Hotel</h2>
           </div>
-          <a href="/">
+          <Link to="/">
             <button className="backButton">
               <i className="fa-solid fa-angle-left"></i>
             </button>
-          </a>
+          </Link>
         </div>
       </section>
 
