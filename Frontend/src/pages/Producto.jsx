@@ -4,6 +4,7 @@ import CalendarAvailableDay from "../components/calendarAvailableDay/CalendarAva
 import HeaderProducto from "../components/headerProducto/HeaderProducto";
 import ImageGallerry from "../components/imageGallery/ImageGallerry";
 import './producto.css'
+import GoogleMap from "../components/product/GoogleMap.js"
 
 const Producto = () => {
   let { id } = useParams();
@@ -15,6 +16,8 @@ const Producto = () => {
             Producto {id}
             <ImageGallerry/>
             <CalendarAvailableDay/>
+            <GoogleMap/>
+            
         </div>
       
     </div>
