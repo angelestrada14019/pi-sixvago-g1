@@ -5,7 +5,7 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import PaginationControll from "../pagination/PaginationControll";
 import ApiCall from "../../utils/ApiCall";
 const Cards = () => {
-    const { cardCategory, list, setList,product,pageNumber,setPageNumber,loadingFnChange,setloadingFnChange} = useStateContext();
+    const { cardCategory, list, setList,product,pageNumber,setPageNumber,loadingFnChange,location} = useStateContext();
     const productsPerPage = 4;
     const pagesVisited = pageNumber * productsPerPage;
     const displayProducts = list.slice(pagesVisited, pagesVisited + productsPerPage).map((product,i) => <Card data={product} key={`cards-${i}`} />);
@@ -13,7 +13,7 @@ const Cards = () => {
             productFiltro(product);
             productosPorCategoria();
         
-    },[cardCategory]);
+    },[cardCategory,location]);
     
 
     const productFiltro=(lista)=>{
