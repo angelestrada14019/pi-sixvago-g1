@@ -54,8 +54,8 @@
 									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"var re = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"id_upd\", re.id);"
+									"var re = JSON.parse(responseBody);\r"
+									
 								],
 								"type": "text/javascript"
 							}
@@ -107,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": {{id_upd}},\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,7 +156,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://107.22.80.135:8080/categorias/{{id_upd}}",
+							"raw": "http://107.22.80.135:8080/categorias/1",
 							"protocol": "http",
 							"host": [
 								"107.22.80.135"
@@ -164,7 +164,7 @@
 							"port": "8080",
 							"path": [
 								"categorias",
-								"107.22.80.135"
+								"1"
 							]
 						}
 					},
