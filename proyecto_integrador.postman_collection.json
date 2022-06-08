@@ -54,8 +54,8 @@
 									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"var re = JSON.parse(responseBody);\r"
-									
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"100\", re.id);"
 								],
 								"type": "text/javascript"
 							}
@@ -66,7 +66,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"no hay\"\r\n}",
+							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"url_imagen\": \"no hay\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
+							"raw": "{\r\n    \"id\": 100,\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,48 +123,6 @@
 							"port": "8080",
 							"path": [
 								"categorias"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "eliminar categoria",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://107.22.80.135:8080/categorias/1",
-							"protocol": "http",
-							"host": [
-								"107.22.80.135"
-							],
-							"port": "8080",
-							"path": [
-								"categorias",
-								"1"
 							]
 						}
 					},
@@ -196,10 +154,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/productos",
+							"raw": "http://107.22.80.135:8080/productos",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -230,10 +188,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/productos/ciudad?nombreCiudad=asdasd",
+							"raw": "http://107.22.80.135:8080/productos/ciudad?nombreCiudad=asdasd",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -271,10 +229,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/productos/categorias?tituloCategoria=asdasd",
+							"raw": "http://107.22.80.135:8080/productos/categorias?tituloCategoria=asdasd",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -303,7 +261,7 @@
 									"});\r",
 									"\r",
 									"var re = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"id_upd\", re.productos_id);"
+									"pm.environment.set(\"100\", re.productos_id);"
 								],
 								"type": "text/javascript"
 							}
@@ -322,10 +280,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/productos",
+							"raw": "http://107.22.80.135:8080/productos",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -355,7 +313,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productos_id\":{{id_upd}},\r\n    \"nombre\":\"hotelSix\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }]\r\n}",
+							"raw": "{\r\n    \"productos_id\":100,\r\n    \"nombre\":\"hotelSix\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -363,56 +321,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/productos",
+							"raw": "http://107.22.80.135:8080/productos",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
 								"productos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "eliminar categoria",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{url}}:8080/productos/{{id_upd}}",
-							"protocol": "http",
-							"host": [
-								"{{url}}"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"{{id_upd}}"
 							]
 						}
 					},
@@ -444,10 +360,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/ciudades",
+							"raw": "http://107.22.80.135:8080/ciudades",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -469,7 +385,7 @@
 									"});\r",
 									"\r",
 									"var re = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"id_upd\", re.ciudades_id);"
+									"pm.environment.set(\"100\", re.ciudades_id);"
 								],
 								"type": "text/javascript"
 							}
@@ -488,10 +404,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/ciudades",
+							"raw": "http://107.22.80.135:8080/ciudades",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -521,7 +437,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"ciudades_id\": {{id_upd}},\r\n        \"nombre\": \"asd\",\r\n        \"pais\": \"asd\"        \r\n}",
+							"raw": "{\r\n        \"ciudades_id\": 100,\r\n        \"nombre\": \"asd\",\r\n        \"pais\": \"asd\"        \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -529,56 +445,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/ciudades",
+							"raw": "http://107.22.80.135:8080/ciudades",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
 								"ciudades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "eliminar categoria",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{url}}:8080/ciudades/{{id_upd}}",
-							"protocol": "http",
-							"host": [
-								"{{url}}"
-							],
-							"port": "8080",
-							"path": [
-								"ciudades",
-								"{{id_upd}}"
 							]
 						}
 					},
@@ -609,10 +483,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/caracteristicas",
+							"raw": "http://107.22.80.135:8080/caracteristicas",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -634,7 +508,7 @@
 									"});\r",
 									"\r",
 									"var re = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"id_upd\", re.caracteristicas_id);"
+									"pm.environment.set(\"100\", re.caracteristicas_id);"
 								],
 								"type": "text/javascript"
 							}
@@ -653,10 +527,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/caracteristicas",
+							"raw": "http://107.22.80.135:8080/caracteristicas",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
@@ -673,7 +547,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"caracteristicas_id\": {{id_upd}},\r\n    \"nombre\": \"cocina\",\r\n    \"icono\": \"fa-solid fa-kitchen-set\"\r\n}",
+							"raw": "{\r\n    \"caracteristicas_id\": 100,\r\n    \"nombre\": \"cocina\",\r\n    \"icono\": \"fa-solid fa-kitchen-set\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -681,47 +555,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/caracteristicas",
+							"raw": "http://107.22.80.135:8080/caracteristicas",
 							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"107.22.80.135"
 							],
 							"port": "8080",
 							"path": [
 								"caracteristicas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar Categoria",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {\r",
-									"  pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://{{url}}:8080/caracteristicas/{{id_upd}}",
-							"protocol": "http",
-							"host": [
-								"{{url}}"
-							],
-							"port": "8080",
-							"path": [
-								"caracteristicas",
-								"{{id_upd}}"
 							]
 						}
 					},
