@@ -18,15 +18,15 @@ jobs_tests_front:
     - desarrollo 
 
 
-# jobs_desarrollo_tests_back:
-#   stage: test
-#   script: 
-#       - cd ./backend
-#       - pwd
-#       - echo "Maven test started"
-#       - mvn clean test
-#   only:
-#     - desarrollo 
+jobs_desarrollo_tests_back:
+  stage: test
+  script: 
+      - cd ./backend
+      - pwd
+      - echo "Maven test started"
+      - mvn clean test
+  only:
+    - desarrollo 
 
 jobs_desarrollo_container_back:
   image: docker:latest
