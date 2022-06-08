@@ -1,6 +1,7 @@
 package com.example.proyectoIntegrador.controller;
 
 import com.example.proyectoIntegrador.dto.CategoriaDTO;
+import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,28 +22,32 @@ public class CategoriaController {
     }
 
     @PostMapping()
-    public ResponseEntity<CategoriaDTO> agregarCategoria(@RequestBody CategoriaDTO categoriaDTO){
-        return ResponseEntity.ok(categoriaService.agregarCategoria(categoriaDTO));
+    public ResponseEntity<CategoriaDTO> agregar(@RequestBody CategoriaDTO categoriaDTO) throws BadRequestException {
+        return ResponseEntity.ok(categoriaService.agregar(categoriaDTO));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
+        return ResponseEntity.ok(categoriaService.buscar(id));
     }
 
     @PutMapping()
-    public ResponseEntity<CategoriaDTO> editarCategoria(@RequestBody CategoriaDTO categoriaDTO){
+    public ResponseEntity<CategoriaDTO> editar(@RequestBody CategoriaDTO categoriaDTO) throws BadRequestException{
         ResponseEntity<CategoriaDTO> response = null;
         if(categoriaDTO.getId() != null)
-            response = ResponseEntity.ok(categoriaService.editarCategoria(categoriaDTO));
+            response = ResponseEntity.ok(categoriaService.editar(categoriaDTO));
         else
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return response;
     }
 
     @GetMapping
-    public ResponseEntity<Set<CategoriaDTO>> listarTodos(){
+    public ResponseEntity ListarTodos(){
         return ResponseEntity.ok(categoriaService.listarTodos());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable Long id){
-        categoriaService.eliminarCategoria(id);
+    public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException{
+        categoriaService.eliminar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se ha eliminado la categoria ingresada");
     }
 

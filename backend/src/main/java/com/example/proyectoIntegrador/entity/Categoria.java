@@ -1,14 +1,18 @@
 package com.example.proyectoIntegrador.entity;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.List;
+@Data
 @Entity
-@Table(name = "categoria")
+@Table(name = "categorias")
 public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_sequence")
-    @SequenceGenerator(name = "categoria_sequence", sequenceName = "paciente_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "categoria_sequence", sequenceName = "booking_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name = "titulo")
@@ -17,10 +21,11 @@ public class Categoria {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "urlImagen")
+    @Column(name = "url_imagen")
     private String urlImagen;
 
-    @JoinColumn(name = "adress_id", referencedColumnName = "id")
+
+  //  @JoinColumn(name = "adress_id", referencedColumnName = "id")
 
     public Long getId() {
         return id;
