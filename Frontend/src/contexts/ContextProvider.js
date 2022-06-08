@@ -60,7 +60,7 @@ export const ContextProvider = ({ children }) => {
   }
   const getListaCiudades =async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
-    //console.log(lista);
+    console.log(lista);
     }
 
   const shuffle=(array)=> {
