@@ -54,6 +54,11 @@ test_job_postman:
   image: 
     name: postman/newman_alpine33    
     entrypoint: [""]
+  variables: 
+    - name: url
+      value: 107.22.80.135
+    - name: id_upd
+      value: 1
 
   script:
     - newman --version
