@@ -8,12 +8,15 @@ import {
 import { prettyDOM } from "@testing-library/dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import Main from "../body/Main";
+import { ContextProvider } from "../../contexts/ContextProvider";
 
 describe("Body", () => {
   beforeEach(() => {
     render(
       <Router>
-        <Main />
+        <ContextProvider>
+          <Main />
+        </ContextProvider>
       </Router>
     );
   });

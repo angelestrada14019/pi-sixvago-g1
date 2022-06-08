@@ -1,19 +1,18 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
+import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.proyectoIntegrador.dto.CategoriaDTO;
 import com.example.proyectoIntegrador.entity.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.proyectoIntegrador.repository.ICategoriaRepository;
-import com.example.proyectoIntegrador.service.ICategoriaService;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
-public class CategoriaService implements ICategoriaService {
+public class CategoriaService implements IGeneralService<CategoriaDTO, Long> {
 
     private ICategoriaRepository repository;
     private ObjectMapper mapper;
@@ -24,28 +23,40 @@ public class CategoriaService implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO agregarCategoria(CategoriaDTO categoriaDTO) {
+    public CategoriaDTO agregar(CategoriaDTO categoriaDTO) throws BadRequestException {
         Categoria categoria = mapper.convertValue(categoriaDTO,Categoria.class);
         return mapper.convertValue(repository.save(categoria), CategoriaDTO.class);
     }
 
     @Override
-    public CategoriaDTO editarCategoria(CategoriaDTO categoriaDTO) {
+    public CategoriaDTO buscar(Long aLong) throws BadRequestException {
+        Optional<Categoria> categoria = repository.findById(aLong);
+        if(categoria.isPresent()){
+            return mapper.convertValue(categoria.get(), CategoriaDTO.class);
+        }
+        throw new BadRequestException("No se encontro la categoria");
+    }
+
+
+    @Override
+    public CategoriaDTO editar(CategoriaDTO categoriaDTO) throws BadRequestException {
         Categoria categoria = mapper.convertValue(categoriaDTO, Categoria.class);
         return mapper.convertValue(repository.save(categoria), CategoriaDTO.class);
     }
 
     @Override
-    public Set<CategoriaDTO> listarTodos() {
-        Set<CategoriaDTO> categoriaDTO = new HashSet<>();
-        for(Categoria categoria : repository.findAll()){
-            categoriaDTO.add(mapper.convertValue(categoria, CategoriaDTO.class));
+    public List<CategoriaDTO> listarTodos() {
+        List<CategoriaDTO> categorias = new ArrayList<>();
+        List<Categoria> listaCategorias = repository.findAll();
+        for(Categoria categoria : listaCategorias){
+            categorias.add(mapper.convertValue(categoria, CategoriaDTO.class));
         }
-        return categoriaDTO;
+        return categorias;
     }
 
+
     @Override
-    public void eliminarCategoria(Long id) {
+    public void eliminar(Long id) throws BadRequestException {
         Optional<Categoria> categoria = repository.findById(id);
         if(categoria.isPresent())
             repository.deleteById(id);

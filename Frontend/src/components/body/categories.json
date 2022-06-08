@@ -1,21 +1,25 @@
 [
-    {
-      "img": "https://s3-alpha-sig.figma.com/img/99c1/43f3/445a390b4a90d2748966caadf153cb1b?Expires=1653868800&Signature=a0TROk3e~CBmy-Yx5mFYCPERtsOn0Gi7CV~GExj8NlJlJeeKfayniLmuP61uqWgLEcFnbYnBIpWzyS7hMRpOjYiX53pWLPyfZ73UWA4U9Wb9~zlDT9ldXyWdv~5z8cIvFQMs71mKNZkV~qGYUa5eE0JFpFeZ07sH53tuibD-P9eZ5H6-raJmJF0oSuINZ-bxcoV741aDOnb4fxH6FK27bQCEyQAEiBnzyqiAX3YFHmVwXCKAF8GXqBq9d5XEemqtLOpJg-u1wE33YoeTfvbzNNIxstyvvKNS8~xp86UdqR-M8W5GkPII4gOUzVkvUO7mOhHq9hSpLRLipx1vATRIIQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-            "name": "Hoteles"
-    },
+  {
+      "id": 1,
+    "img": "https://cdn.pixabay.com/photo/2016/09/16/12/53/hotel-1673952_960_720.jpg",
+    "name": "Hoteles"
+  },
 
-    {
-        "img": "https://s3-alpha-sig.figma.com/img/1e69/29f5/2e25e91222ded5e15a253d10d1d09b74?Expires=1653868800&Signature=WUguraUwORq5PGOeRTSxuFLb06qdAiAetTlBV0-B1FCvwkBSOlBK3mYfdZNkgxbMrRacgA56tYDzxka9HDi7dgGQ~a9PYd7yJUeTma5M8NjvwngD-PSztWHd5pnLdZgzNs-FoQvLvCKqw76VmR1nPStnvPvKk3Ufe9VjSajI2lLFx6~S1dFoIOsXOrXoA3Ad0zOoreHcFYO3G4JiROjkU1~TVfnKAkujyNG2ai3s-AMzPl7swr9LS8j~3jo5qgtDOHpu5j0Xz6y20T16FqXQXGjt3cVR7OI24Kt9X910x~zZisM1DLQ3Ph82-1GoiD1JYXBBJNURa~WnIqthj~phYw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                  "name": "Hostels"
-    },
+  {
+    "id": 2,
+    "img": "https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168__340.jpg",
+    "name": "Hostels"
+  },
 
-    {
-        "img": "https://s3-alpha-sig.figma.com/img/e646/01c2/3102092398711d82a4a591bff1125dab?Expires=1653868800&Signature=OjySogFAn6pP8chYnq0x8M5XLCN4Zh64Hj~Hxlkc9v3w2xRTEljb8FspO3G0TmDmt9MWMP1K5FhL6NncMOASB8t-p9DDwnuJIVaVOyjlY~70AijbKT4-boLFgBSOn9AOHvj-JaOPOeOKW7j5RuG4g0-mLXg6fBliumxmaE8G0S18KwgGa48jGmS8J7gIBOt8EDeV-ancGBTegIUBSHrg3W251ihoggZEFxPwakFGYJvunpyZTvQHECPqITvkDwHBUWKXvbVPo84XFCpCH-Eiwg4tedf2gGXWjtX2n9A4rL7SBB-~FS3E-nFMQqzqUejdhk-ON4q389g5hPav-MYpRQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                 "name": "Departamentos"
-    },
+  {
+    "id": 3,
+    "img": "https://cdn.pixabay.com/photo/2016/11/14/02/28/apartment-1822409__340.jpg",
+    "name": "Departamentos"
+  },
 
-    {
-        "img": "https://s3-alpha-sig.figma.com/img/3430/5424/4e82ddca77548b84a25aafbe0fc89568?Expires=1653868800&Signature=PoPccmnyzppOt2jQ1P2EpiqT9Q2vViPfmRjZKn~F9hJAXnyhmnjvAMb4~WCelLZgV9Tq~m~MS522hkeFl~0cMrJm5VKjGvZ3M68B62ebs0eaPkyLGhIeMxrmTr6sDw~IF78nMoOfbpTut0ds3F-OE~j0NcFMcD-Dkw-S6PKaB-PsM3Bhcyj3LDnSVh3winaLVqf3XgE16zgPZVY7A4evaniBjeaI1omhfVrOoUC6C1IV2JZVAvVdVN31C0zSWcgIrT429wK4KFwMNlWTB5jFrmJNnGtEh6anng2T~UghiCBrBalYf4-FtpZUqZ6iIRd5wPNuaWvvjyqi1bysNWKGEA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                "name": "Bed and Breakfast"
-    }
+  {
+    "id": 4,
+    "img": "https://cdn.pixabay.com/photo/2016/12/11/18/10/apartment-1899964__340.jpg",
+    "name": "Bed and Breakfast"
+  }
 ]

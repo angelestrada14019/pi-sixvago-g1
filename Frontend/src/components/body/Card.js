@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const Card = ({ data }) => {
+    const navigate = useNavigate();
+    const handleVerMas = () => {
+        navigate(`/producto/${data.id}`);
+    }
   return (
     <div className="card">
       <img className="card-img" src={`${data.img}`} alt={data.title} />
@@ -31,6 +35,7 @@ const Card = ({ data }) => {
         <Link to={`/producto/${data.id}`}>
           <button className="card-button">Ver más</button>
         </Link>
+
       </div>
     </div>
   );

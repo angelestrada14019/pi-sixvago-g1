@@ -1,0 +1,33 @@
+
+.caracteristicas{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 5%;
+    
+}
+.caracteristicas-title{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2%;
+    margin-left: 40px;
+    font-family: Roboto;
+}
+.caracteristicas-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.caracteristica{
+    max-width: auto;
+    flex: 1 0 21%;
+    margin: 15px 40px;
+}
+.icono{
+    font-size: 1.5rem;
+}
+.nombre{
+    font-size: 1.5rem;
+    font-family: Roboto;
+}

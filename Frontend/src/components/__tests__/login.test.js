@@ -22,7 +22,7 @@ describe("Login", () => {
     expect(component.container).toBeInTheDocument();
   });
 
-  test("alert if user doesnt exist", async () => {
+  test("should see an alert if user doesnt exist", async () => {
     const email = screen.getByLabelText("Correo electronico");
     const password = component.getByLabelText("Contraseña");
     const submit = component.getByRole("button", { name: "Ingresar" });
