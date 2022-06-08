@@ -67,4 +67,4 @@ test_job_postman:
     reports:
       junit: report.xml
   only:
-    - desarrollo
+    - pre-production
