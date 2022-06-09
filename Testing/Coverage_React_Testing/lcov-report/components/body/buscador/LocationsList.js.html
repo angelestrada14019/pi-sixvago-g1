@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,14 +97,22 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,32 +139,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import "./locationsList.css";
-import listado from "../listado.json";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect } from "react";
+import { useStateContext } from "../../../contexts/ContextProvider";
+import "./locationsList.css";
 &nbsp;
-const LocationsList = ({ setLocation, setOpenLocations }) =&gt; {
-  return (
+const LocationsList = <span class="fstat-no" title="function not covered" >({</span> setLocation, setOpenLocations }) =&gt; {
+&nbsp;
+  const { locationsList } = <span class="cstat-no" title="statement not covered" >useStateContext();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;&gt;
-      {listado.map((loc, i) =&gt; {
-        return (
-          &lt;div
+      {locationsList.map(<span class="fstat-no" title="function not covered" >(l</span>oc, i) =&gt; {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+          &lt;div role="listitem"
             className="single-location-container"
             key={i}
-            id={`${loc.location}`}
+            id={`${loc.nombre}`}
             onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >              setLocation(e.target.id);</span>
 <span class="cstat-no" title="statement not covered" >              setOpenLocations(false);</span>
             }}
           &gt;
             &lt;i className="fa-solid fa-location-dot"&gt;&lt;/i&gt;
-            &lt;li type="none"&gt;
-              &lt;ul&gt;
-                &lt;h3&gt;{loc.location}&lt;/h3&gt;
-              &lt;/ul&gt;
-              &lt;ul&gt;
-                &lt;p&gt;{loc.location}&lt;/p&gt;
-              &lt;/ul&gt;
-            &lt;/li&gt;
+            &lt;ul  type="none"&gt;
+              &lt;li&gt;
+                &lt;h3&gt;{loc.nombre}&lt;/h3&gt;
+              &lt;/li&gt;
+              &lt;li&gt;
+                &lt;p&gt;{loc.pais}&lt;/p&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
           &lt;/div&gt;
         );
       })}
@@ -172,7 +184,7 @@ export default LocationsList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jun 06 2022 16:35:14 GMT-0300 (Argentina Standard Time)
+                at Thu Jun 09 2022 18:32:38 GMT-0300 (Argentina Standard Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/footer/Footer.js</title>
+    <title>Code coverage report for components/product/Descripcion.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/footer</a> Footer.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/product</a> Descripcion.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,52 +82,79 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import "./footer.css";
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import json from '../body/producto.json';
+import "./descripcion.css";
+import ApiCall from "../../utils/ApiCall";
+import { useEffect, useState } from 'react';
+import { useStateContext } from "../../contexts/ContextProvider";
 &nbsp;
-const Footer = () =&gt; {
-  return (
-    &lt;div className="footer"&gt;
-      &lt;div className="footer-copyright"&gt;
-        &lt;h3&gt;©2022 Sixvago&lt;/h3&gt;
-      &lt;/div&gt;
-      &lt;div className="footer-icons"&gt;
-        &lt;i className="fa-brands fa-facebook"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-linkedin-in"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-twitter"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-instagram"&gt;&lt;/i&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};
+const Descripcion = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> id }) =&gt; {</span>
+    const [producto, setProducto] = <span class="cstat-no" title="statement not covered" >useState([])</span>
 &nbsp;
-export default Footer;
-&nbsp;</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      getProducto();     </span>
+    }, []);
+  
+  
+    const getProducto= <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync ()=&gt;{    </span>
+      const productoObtenido = <span class="cstat-no" title="statement not covered" >await ApiCall.invokeGET(`/productos/${id}`);</span>
+<span class="cstat-no" title="statement not covered" >      setProducto(productoObtenido)</span>
+    }
+  
+<span class="cstat-no" title="statement not covered" >    return (</span>
+        &lt;div className="descripcion"&gt;
+            &lt;h2 className='titleDescription'&gt;{producto.nombre}&lt;/h2&gt;
+            &lt;p className='descriptionP'&gt;{producto.descripcion}&lt;/p&gt;
+        &lt;/div&gt;
+    )
+}
+&nbsp;
+export default Descripcion;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 09 2022 18:32:38 GMT-0300 (Argentina Standard Time)
+                at Thu Jun 09 2022 18:30:30 GMT-0300 (Argentina Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
