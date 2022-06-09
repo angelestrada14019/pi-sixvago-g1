@@ -21,11 +21,12 @@
 }
 .caracteristica{
     max-width: auto;
-    flex: 1 0 21%;
+    flex: 1 0 20%;
     margin: 15px 40px;
 }
 .icono{
     font-size: 1.5rem;
+    margin-right: 10px;
 }
 .nombre{
     font-size: 1.5rem;

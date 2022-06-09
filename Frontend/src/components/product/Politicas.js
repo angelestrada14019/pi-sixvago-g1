@@ -1,7 +1,22 @@
 import React from 'react';
 import "./politicas.css";
+import ApiCall from "../../utils/ApiCall";
+import { useEffect, useState } from 'react';
 
-const Politicas = () => {
+const Politicas = ({id}) => {
+    const [producto, setProducto] = useState([])
+
+    useEffect(() => {
+      getProducto();     
+    }, []);
+  
+  
+    const getProducto= async ()=>{    
+    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
+    console.log("headerProducto" + productoObtenido.caracteristicas.map(item => item.nombre))
+    setProducto(productoObtenido)
+  }
+
     return (
         <div className="politicas">
             <h2 className='politicas-title'>Que tenes que saber</h2>
