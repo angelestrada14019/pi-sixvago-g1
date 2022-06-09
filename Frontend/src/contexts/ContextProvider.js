@@ -42,6 +42,7 @@ export const ContextProvider = ({ children }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [loadingFiltro, setLoadingFiltro] = useState(true);
 
   useEffect(() => {
     getListaProducto();
@@ -55,7 +56,9 @@ export const ContextProvider = ({ children }) => {
       let shuffleList = shuffle(lista);
       setList(shuffleList);
     } else {
-      setList(lista);
+        if (loadingFiltro) {
+            setList(lista);            
+        }
     }
     setProduct(lista);
   };
@@ -99,6 +102,8 @@ export const ContextProvider = ({ children }) => {
           setloadingFnChange,
           loading,
           setLoading,
+          loadingFiltro,
+            setLoadingFiltro,
         }}
       >
         {children}

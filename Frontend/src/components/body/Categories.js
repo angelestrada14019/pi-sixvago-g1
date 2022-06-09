@@ -11,7 +11,9 @@ const Categories = () => {
     setPageNumber,
     setloadingFnChange,
     setLoading,
-    loading
+    loading,
+    loadingFiltro,
+    setLoadingFiltro
   } = useStateContext();
   const [listaCategorias, setListaCategorias] = useState([]);
   
@@ -20,6 +22,7 @@ const Categories = () => {
   }, [loading]);
 
   const handleClick = (name, e) => {
+      setLoadingFiltro(false);
     setCardCategory("");
     setPageNumber(0);
     setLocation("");
