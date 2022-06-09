@@ -17,17 +17,17 @@ const UserWelcome = ({ handleLogout }) => {
         </h2>
       </div>
       <div className="user-welcome-container">
-        <li type="none">
-          <ul>
-            <p>Hola, </p>
-          </ul>
-          <ul className="user-welcome-username">
+        <ul type="none">
+          <li>
+            <p aria-label="user-welcome">Hola, </p>
+          </li>
+          <li className="user-welcome-username">
             <p>{`
                     ${JSON.parse(localStorage.getItem("user")).username}
                     ${JSON.parse(localStorage.getItem("user")).lastname}        
                     `}</p>
-          </ul>
-        </li>
+          </li>
+        </ul>
         <div className="user-logout-container" onClick={handleLogout}>
           <i className="fa-solid fa-xmark"></i>
         </div>

@@ -1,7 +1,10 @@
 import ImageGallery from "react-image-gallery";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./imageGallery.css";
 import Modal from "@mui/material/Modal";
+import { useStateContext } from "../../contexts/ContextProvider";
+import ApiCall from "../../utils/ApiCall";
+
 const images = [
   {
     id: 0,
@@ -49,8 +52,22 @@ const styleModal = {
   alignItems: "center",
 };
 
-const ImageGallerry = () => {
+const ImageGallerry = ({ id }) => {
   const [open, setOpen] = useState(false);
+  const { product } = useStateContext();
+  const [imagenes, setImagenes] = useState([]);
+  const [producto, setProducto] = useState([]);
+
+  useEffect(() => {
+    getProducto();
+
+  }, []);
+
+  const getProducto = async () => {
+    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
+    setProducto(productoObtenido);
+  };
+
   return (
     <div className="image_gallery_container">
       <div className="icon_social">
@@ -58,13 +75,9 @@ const ImageGallerry = () => {
         <i className="fa-regular fa-heart"></i>
       </div>
       <div className="gallery">
-        {images.slice(0, 5).map((image) => (
+        {producto?.listadeimagenes?.slice(0, 5).map((image) => (
           <div className="gallery-image" key={image.id}>
-            <img
-              src={image.original}
-              alt={image.original}
-              style={{ width: "100%" }}
-            />
+            <img src={image.urlImagen} alt={image.titulo} style={{ width: "100%" }} />
           </div>
         ))}
         <p className="gallery-button" onClick={() => setOpen(true)}>
