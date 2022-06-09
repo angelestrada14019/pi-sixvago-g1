@@ -46,8 +46,7 @@ jobs_desarrollo_container_back:
     - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG $CI_REGISTRY/${CI_PROJECT_PATH}:latest
     - echo "Docker push latest"
     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
-  only:
-    - manual
+  when: manual
 
 test_job_postman:
   stage: test
@@ -66,5 +65,4 @@ test_job_postman:
       - report.html
     reports:
       junit: report.xml
-  only:
-    - manual
+  when: manual
