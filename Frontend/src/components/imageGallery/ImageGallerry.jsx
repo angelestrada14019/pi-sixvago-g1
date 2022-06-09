@@ -60,7 +60,6 @@ const ImageGallerry = ({ id }) => {
 
   useEffect(() => {
     getProducto();
-
   }, []);
 
   const getProducto = async () => {
@@ -77,7 +76,11 @@ const ImageGallerry = ({ id }) => {
       <div className="gallery">
         {producto?.listadeimagenes?.slice(0, 5).map((image) => (
           <div className="gallery-image" key={image.id}>
-            <img src={image.urlImagen} alt={image.titulo} style={{ width: "100%" }} />
+            <img
+              src={image.urlImagen}
+              alt={image.titulo}
+              style={{ width: "100%" }}
+            />
           </div>
         ))}
         <p className="gallery-button" onClick={() => setOpen(true)}>
