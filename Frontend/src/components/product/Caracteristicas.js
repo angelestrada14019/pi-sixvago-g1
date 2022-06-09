@@ -1,28 +1,39 @@
 import React from 'react';
-import json from '../body/producto.json';
 import "./caracteristicas.css";
+import ApiCall from "../../utils/ApiCall";
+import { useEffect, useState } from 'react';
 
 
-const Caracteristicas = () => {
-    //return (
-      //  <div className="caracteristicas">
-        //    <h3>{json[0].caracteristica[0].nombre}</h3>
-          //  <i className={`${json[0].caracteristica[0].icono}`}></i>
-        //</div>
-        //                )
+
+const Caracteristicas = ({id}) => {
+    const [producto, setProducto] = useState([])
+
+  useEffect(() => {
+    getProducto();     
+  }, []);
+
+
+  const getProducto= async ()=>{    
+    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
+    setProducto(productoObtenido)
+  }
+
         return(
             <div className="caracteristicas">
                 <h2 className='caracteristicas-title'>¿Que ofrece este lugar?</h2>
                 <hr></hr>
                 <div className="caracteristicas-container">
-            {json[0].caracteristica.map((obj, index) => {
-                return(
-                    <div key={index} className="caracteristica">
-                        <i className={`${obj.icono} icono`}></i>
-                        <span className='nombre'>{obj.nombre}</span>
+                    {console.log({producto})}
+                    
+            {producto.caracteristicas !== undefined && producto.caracteristicas.map((caracteristica, index) => {
+               return(
+                   <div key={index} className="caracteristica">
+                        <i className={`${caracteristica.icono} icono`}></i>
+                        <span className='nombre'>{caracteristica.nombre}</span>
                     </div>
                 )
-            })}</div></div>)
+            }
+            )}</div></div>)
         
 }
 export default Caracteristicas;
