@@ -9,27 +9,27 @@ import { prettyDOM } from "@testing-library/dom";
 import Login from "../auth/Login";
 
 
-let component = null;
-
 describe("Login", () => {
   beforeEach(() => {
-    component = render(<Login />);
+    render(<Login />);
   });
 
   afterEach(() => cleanup());
+  
+
 
   test("should render Login", async () => {
-    expect(component.container).toBeInTheDocument();
+    expect(screen.getByRole("form")).toBeInTheDocument();
   });
 
   test("should see an alert if user doesnt exist", async () => {
     const email = screen.getByLabelText("Correo electronico");
-    const password = component.getByLabelText("Contraseña");
-    const submit = component.getByRole("button", { name: "Ingresar" });
+    const password = screen.getByLabelText("Contraseña");
+    const submit = screen.getByRole("button", { name: "Ingresar" });
     act(() => {
       fireEvent.change(email, {
         target: {
-          value: "asdas@asd.com",
+          value: "asd123as@asd.com",
         },
       });
       fireEvent.change(password, {
@@ -45,5 +45,5 @@ describe("Login", () => {
       )
     ).toBeInTheDocument();
   });
-  
+
 });

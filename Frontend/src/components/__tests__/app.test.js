@@ -10,11 +10,15 @@ import { prettyDOM } from "@testing-library/dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "../../layouts/App";
 
-let component = null;
+const resizeWindow = (width, height) => {
+  window.innerWidth = width;
+  window.innerHeight = height;
+  window.dispatchEvent(new Event("resize"));
+};
 
-describe("Header", () => {
+describe("App", () => {
   beforeEach(() => {
-    component = render(
+    render(
       <Router>
         <App />
       </Router>
@@ -49,7 +53,7 @@ describe("Header", () => {
   });
 
   test('click on "Crear cuenta" should hide button', async () => {
-    const signUp = component.container.querySelector("#crear");
+    const signUp = screen.getByRole("navigation").childNodes[1].firstChild;
 
     act(() => {
       fireEvent.click(signUp);
@@ -72,4 +76,16 @@ describe("Header", () => {
   test("footer is rendered", async () => {
     expect(screen.getByText("©2022 Sixvago")).toBeInTheDocument();
   });
+
+  test("click on hamburguer should open the sidebar", () => {
+    resizeWindow(360, 740);
+    const hamburguer = screen.getByAltText("menu");
+    const sidebar = screen.getByText("Menú").parentElement.parentElement;
+    act(() => {
+      fireEvent.click(hamburguer);
+    });
+    expect(sidebar).toBeVisible();
+    expect(sidebar.classList.contains("active")).toBe(true);
+  });
+
 });

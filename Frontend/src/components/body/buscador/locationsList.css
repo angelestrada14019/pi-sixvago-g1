@@ -11,8 +11,18 @@
   bottom: 0;
   height: 1px;
   width: 90%;
-  background: #1dbeb4;
-  color: #1dbeb4;
+  background: linear-gradient(
+    90deg,
+    rgba(203, 178, 106, 1) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgba(190, 158, 68, 1) 110%
+  );
+  color: linear-gradient(
+    90deg,
+    rgba(203, 178, 106, 1) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgba(190, 158, 68, 1) 110%
+  );
 }
 .single-location-container:last-child::after {
   content: none;
@@ -21,7 +31,7 @@
   background-color: #54577649;
 }
 
-.single-location-container li {
+.single-location-container ul {
   width: 100%;
   padding: 0.5em;
   user-select: none;

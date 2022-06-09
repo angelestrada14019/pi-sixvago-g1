@@ -1,39 +1,61 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./buscador.css";
 import CustomCalendar from "./CustomCalendar";
 import LocationsList from "./LocationsList";
 import { useStateContext } from "../../../contexts/ContextProvider";
+import ApiCall from "../../../utils/ApiCall";
+
 const Buscador = () => {
-    const {location ,setLocation,setList,product,setCardCategory,cardCategory,setPageNumber} = useStateContext();
+  const {
+    location,
+    setLocation,
+    setList,
+    product,
+    setCardCategory,
+    cardCategory,
+    setPageNumber,
+    setLoading,
+  } = useStateContext();
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openLocations, setOpenLocations] = useState(false);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-    useEffect(() => {
-       let cI= localStorage.getItem("checkIn") 
-        let cO=localStorage.getItem("checkOut")
-        if (cI!==null && cO!==null){
-            setCheckIn(cI);
-            setCheckOut(cO);
-        }
-        
-    }, []);
+
+  useEffect(() => {
+    let cI = localStorage.getItem("checkIn");
+    let cO = localStorage.getItem("checkOut");
+    if (cI !== null && cO !== null) {
+      setCheckIn(cI);
+      setCheckOut(cO);
+    }
+  }, []);
   const localDateOptions = {
     month: "long",
     day: "numeric",
   };
 
-  const handleBuscar =()=>{
-        setList(filtroBuscar(product))
-        setPageNumber(0);
-  }
-  const filtroBuscar =(array)=>{
-        let filtro = array.filter(item=>{
-            return item.location.toLowerCase().includes(location.toLowerCase());
-        }); // en vez de esto se puede usar un queryParams para hacer la consulta por fetch
-        return filtro;
-  }
+  const handleBuscar = () => {
+    //setList(filtroBuscar(product));
+    productosPorCiudad()
+    setPageNumber(0);
+    setLoading(false);
+  };
+  const filtroBuscar = (array) => {
+    let filtro = array.filter((item) => {
+      return item.location.toLowerCase().includes(location.toLowerCase());
+    }); // en vez de esto se puede usar un queryParams para hacer la consulta por fetch
+    return filtro;
+  };
+  const productosPorCiudad = async () => {
+    const filtroQuery = await ApiCall.invokeGET(`/productos/ciudad`, [
+      `nombreCiudad=${location}`,
+    ]);
 
+    setList(filtroQuery);
+
+    //    const categorias = await ApiCall.invokeGET(`/categorias`);
+    //    console.log(categorias);
+  };
 
   const handleClick = (e) => {
     if (e.target.className === "buscador-date") {
@@ -52,8 +74,14 @@ const Buscador = () => {
     if (date[0]) {
       setCheckIn(date[0].toLocaleDateString(undefined, localDateOptions));
       setCheckOut(date[1].toLocaleDateString(undefined, localDateOptions));
-      localStorage.setItem("checkIn", date[0].toLocaleDateString(undefined, localDateOptions));
-        localStorage.setItem("checkOut", date[1].toLocaleDateString(undefined, localDateOptions));
+      localStorage.setItem(
+        "checkIn",
+        date[0].toLocaleDateString(undefined, localDateOptions)
+      );
+      localStorage.setItem(
+        "checkOut",
+        date[1].toLocaleDateString(undefined, localDateOptions)
+      );
     } else if (checkIn !== "") {
       return;
     } else {
@@ -94,7 +122,9 @@ const Buscador = () => {
               />
             )}
           </div>
-          <button onClick={handleBuscar} className="buscador-button">Buscar</button>
+          <button onClick={handleBuscar} className="buscador-button">
+            Buscar
+          </button>
         </div>
       </div>
     </>

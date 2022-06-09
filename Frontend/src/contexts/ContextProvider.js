@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState,useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import listado from "../components/body/listado.json";
 import ApiCall from "../utils/ApiCall";
 
@@ -41,41 +41,43 @@ export const ContextProvider = ({ children }) => {
   const [location, setLocation] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getListaProducto();
-    console.log(product);   
     getListaCiudades();
-    
-    setLocationsList(listLocation);
-    if (localStorage.getItem("isLoggedIn") === "false") {
-        let shuffleList=shuffle(listado);
-        setList(shuffleList);
-    }else {
-        setList(listado);
-        }
-      
-  }, []);
-  const getListaProducto =async () => {
-    const lista = await ApiCall.invokeGET("/productos");
-    setProduct(lista);
-  }
-  const getListaCiudades =async () => {
-    const lista = await ApiCall.invokeGET("/ciudades");
-    
-    }
+  }, [loading]);
 
-  const shuffle=(array)=> {
+  const getListaProducto = async () => {
+    const lista = await ApiCall.invokeGET("/productos");
+
+    if (localStorage.getItem("isLoggedIn") === "false") {
+      let shuffleList = shuffle(lista);
+      setList(shuffleList);
+    } else {
+      setList(lista);
+    }
+    setProduct(lista);
+  };
+  const getListaCiudades = async () => {
+    const lista = await ApiCall.invokeGET("/ciudades");
+    setLocationsList(lista);
+  };
+
+  const shuffle = (array) => {
     let currentIndex = array.length;
-    let  randomIndex;
+    let randomIndex;
     while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
-  
+
     return array;
-  }
+  };
 
   return (
     <>
@@ -91,10 +93,12 @@ export const ContextProvider = ({ children }) => {
           setLocationsList,
           location,
           setLocation,
-            pageNumber,
-            setPageNumber,
-            loadingFnChange,
-            setloadingFnChange,
+          pageNumber,
+          setPageNumber,
+          loadingFnChange,
+          setloadingFnChange,
+          loading,
+          setLoading,
         }}
       >
         {children}
