@@ -1,14 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./headerProducto.css";
+import { useStateContext } from "../../contexts/ContextProvider";
+import ApiCall from "../../utils/ApiCall";
+import { useState,useEffect } from "react";
 
 const HeaderProducto = ({ id }) => {
+  const [producto, setProducto] = useState([])
+
+  useEffect(() => {
+    getProducto();     
+  }, []);
+
+
+  const getProducto= async ()=>{    
+    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
+    console.log("headerProducto" + productoObtenido.nombre)
+    setProducto(productoObtenido)
+  }
   return (
     <div className="headerProducto">
       <section className="lodging-section">
         <div className="descriptionLodging">
           <div className="section">
-            <h4>Hotel</h4>
+            {producto.categorias_id !== undefined && (
+              <h4>{producto.categorias_id.titulo}</h4>
+            )}
+            
             <h2>Hermitage Hotel</h2>
           </div>
           <Link to="/">
