@@ -1,0 +1,142 @@
+{
+	"id": "dcd63ace-e593-41ba-972e-36d333034770",
+	"name": "Proyecto Integrador",
+	"timestamp": "2022-06-09T21:10:03.376Z",
+	"collection_id": "18027838-3e91fce9-ee2f-4629-800a-4b0e70946d3a",
+	"folder_id": 0,
+	"environment_id": "18027838-2878b7b4-23a2-4f32-8506-e9bd4e735ccd",
+	"totalPass": 4,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "46567cdf-7260-4dbc-b4c2-97836aa2dee4",
+			"name": "Get all caracteristicas",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 193,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				193
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "daf58e74-fb24-4fae-b3f9-f1b3f8d78960",
+			"name": "añadir Caracteristica",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 196,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				196
+			],
+			"allTests": [
+				{
+					"Status code is 201": true
+				}
+			]
+		},
+		{
+			"id": "30e1d4ec-425b-4499-9213-0a11a8af5797",
+			"name": "Editar categoria",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 191,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				191
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "65f3fb01-5049-48b5-b44d-5bf44969f81f",
+			"name": "Eliminar Categoria",
+			"url": "http://107.22.80.135:8080/caracteristicas/20",
+			"time": 205,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 785,
+	"collection": {
+		"requests": [
+			{
+				"id": "46567cdf-7260-4dbc-b4c2-97836aa2dee4",
+				"method": "GET"
+			},
+			{
+				"id": "daf58e74-fb24-4fae-b3f9-f1b3f8d78960",
+				"method": "POST"
+			},
+			{
+				"id": "30e1d4ec-425b-4499-9213-0a11a8af5797",
+				"method": "PUT"
+			},
+			{
+				"id": "65f3fb01-5049-48b5-b44d-5bf44969f81f",
+				"method": "DELETE"
+			}
+		]
+	}
+}

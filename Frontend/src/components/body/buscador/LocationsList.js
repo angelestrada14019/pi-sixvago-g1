@@ -4,7 +4,7 @@ import { useStateContext } from "../../../contexts/ContextProvider";
 const LocationsList = ({ setLocation, setOpenLocations }) => {
     
     const {locationsList } = useStateContext();   
-
+    
   return (
     <>
       {locationsList.map((loc, i) => {
