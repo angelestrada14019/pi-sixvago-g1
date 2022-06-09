@@ -48,3 +48,23 @@ jobs_desarrollo_container_back:
     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
   only:
     - desarrollo
+
+test_job_postman:
+  stage: test
+  image: 
+    name: postman/newman_alpine33    
+    entrypoint: [""]
+
+  script:
+    - newman --version
+    - npm config set unsafe-perm true
+    - npm install -g newman-reporter-html 
+    - newman run proyecto_integrador.postman_collection.json --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+  artifacts:
+    when: always
+    paths:
+      - report.html
+    reports:
+      junit: report.xml
+  only:
+    - desarrollo

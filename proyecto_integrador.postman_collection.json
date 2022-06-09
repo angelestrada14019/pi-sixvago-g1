@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "3e91fce9-ee2f-4629-800a-4b0e70946d3a",
+		"name": "Proyecto Integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17956933"
+	},
+	"item": [
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "categorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/categorias",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "añadir categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"100\", re.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"url_imagen\": \"no hay\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/categorias",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100,\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/categorias",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "producto",
+			"item": [
+				{
+					"name": "Listar todos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/productos",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/productos/ciudad?nombreCiudad=asdasd",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"ciudad"
+							],
+							"query": [
+								{
+									"key": "nombreCiudad",
+									"value": "asdasd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por categorias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/productos/categorias?tituloCategoria=asdasd",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"categorias"
+							],
+							"query": [
+								{
+									"key": "tituloCategoria",
+									"value": "asdasd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "añadir producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"100\", re.productos_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"hotelSix\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/productos",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productos_id\":100,\r\n    \"nombre\":\"hotelSix\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/productos",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ciudad",
+			"item": [
+				{
+					"name": "Listar todas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/ciudades",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"ciudades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "añadir",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"100\", re.ciudades_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"asd\",\r\n        \"pais\": \"asd\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/ciudades",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"ciudades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"ciudades_id\": 100,\r\n        \"nombre\": \"asd\",\r\n        \"pais\": \"asd\"        \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/ciudades",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"ciudades"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caracteristicas",
+			"item": [
+				{
+					"name": "Get all caracteristicas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://107.22.80.135:8080/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "añadir Caracteristica",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"100\", re.caracteristicas_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"cocina\",\r\n    \"icono\": \"fa-solid fa-kitchen-set\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"caracteristicas_id\": 100,\r\n    \"nombre\": \"cocina\",\r\n    \"icono\": \"fa-solid fa-kitchen-set\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://107.22.80.135:8080/caracteristicas",
+							"protocol": "http",
+							"host": [
+								"107.22.80.135"
+							],
+							"port": "8080",
+							"path": [
+								"caracteristicas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

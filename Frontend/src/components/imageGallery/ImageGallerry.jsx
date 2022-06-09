@@ -2,7 +2,6 @@ import ImageGallery from "react-image-gallery";
 import React, { useState } from "react";
 import "./imageGallery.css";
 import Modal from "@mui/material/Modal";
-import { Box } from "@mui/system";
 const images = [
   {
     id: 0,
@@ -74,12 +73,12 @@ const ImageGallerry = () => {
       </div>
       <div className="modal_container">
         <Modal sx={styleModal} open={open} onClose={() => setOpen(false)}>
-          <Box className="image_Container" sx={styleBox}>
+          <div className="image_Container">
             <div
               className="close_gallerry_image-button"
               onClick={() => setOpen(false)}
             >
-              <i class="fa-solid fa-xmark"></i>
+              <i className="fa-solid fa-xmark"></i>
             </div>
             <ImageGallery
               autoPlay={true}
@@ -90,7 +89,7 @@ const ImageGallerry = () => {
               slideInterval={3000}
               showIndex={false}
             />
-          </Box>
+          </div>
         </Modal>
       </div>
       <div className="container-gallery_image">

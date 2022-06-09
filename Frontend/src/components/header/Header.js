@@ -14,7 +14,7 @@ const Header = () => {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const {setCardCategory,cardCategory} = useStateContext();
+  const {setCardCategory,cardCategory,setLocation} = useStateContext();
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -49,6 +49,7 @@ const Header = () => {
         setShowSidebar(false);
     }
     setCardCategory("");
+    setLocation("");
   };
 
   const handleLogout = () => {
@@ -58,6 +59,7 @@ const Header = () => {
     setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", false);
     setCardCategory("");
+    setLocation("");
   };
 
   return (
@@ -71,6 +73,7 @@ const Header = () => {
               setOpenSignUp(false);
               setToggleNavButton("");
               setCardCategory("");
+              setLocation("");
             }}
           >
             <img src={logo} alt="logo" />

@@ -3,6 +3,10 @@
 .image-gallery-thumbnails{
     width: 200%;
 }
+.image_Container{
+    width: 50%;
+    height: 50%;
+}
 
 .image_gallery_container{
     width: 100%;
