@@ -15,7 +15,6 @@ const Caracteristicas = ({id}) => {
 
   const getProducto= async ()=>{    
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
-    console.log("headerProducto" + productoObtenido.caracteristicas.map(item => item.nombre))
     setProducto(productoObtenido)
   }
 
