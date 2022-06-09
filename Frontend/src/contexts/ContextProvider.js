@@ -43,8 +43,9 @@ export const ContextProvider = ({ children }) => {
   const [loadingFnChange, setloadingFnChange] = useState(true);
   useEffect(() => {
     getListaProducto();
+    console.log(product);   
     getListaCiudades();
-      setProduct(listado);
+    
     setLocationsList(listLocation);
     if (localStorage.getItem("isLoggedIn") === "false") {
         let shuffleList=shuffle(listado);
@@ -56,11 +57,11 @@ export const ContextProvider = ({ children }) => {
   }, []);
   const getListaProducto =async () => {
     const lista = await ApiCall.invokeGET("/productos");
-    //console.log(lista);
+    setProduct(lista);
   }
   const getListaCiudades =async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
-    console.log(lista);
+    
     }
 
   const shuffle=(array)=> {

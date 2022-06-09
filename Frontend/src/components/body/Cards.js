@@ -28,14 +28,14 @@ const Cards = () => {
     }
     const productosPorCategoria= async ()=>{
         const filtroQuery = await ApiCall.invokeGET(`/productos/categorias`,[`tituloCategoria=${cardCategory}`]);
-       console.log(filtroQuery);
+      
     //    const categorias = await ApiCall.invokeGET(`/categorias`);
     //    console.log(categorias);
     }
     const pageCount = Math.ceil(list.length / productsPerPage);
     const changePage = ({selected}) => {
         setPageNumber(selected);
-         console.log(selected);
+         
     }
   return (
     <section className="cards-section">
