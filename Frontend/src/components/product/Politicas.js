@@ -25,7 +25,7 @@ const Politicas = ({id}) => {
                 <div className='normasCasa politicasSection'>
                     <h3 className='subsection-title'>{producto.politicas_servicio !== undefined && producto.politicas_servicio.split(",")[0]}</h3>
                     <ul >
-                        {producto.politicas_servicio !== undefined && console.log(producto.politicas_servicio.split(",")[4])}
+                        
                         <li className='lista'>{producto.politicas_servicio !== undefined && producto.politicas_servicio.split(",")[1]}</li>
                         <li className='lista'>{producto.politicas_servicio !== undefined && producto.politicas_servicio.split(",")[2]}</li>
                         <li className='lista'>{producto.politicas_servicio !== undefined && producto.politicas_servicio.split(",")[3]}</li>
