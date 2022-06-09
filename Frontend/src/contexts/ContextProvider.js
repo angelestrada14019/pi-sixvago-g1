@@ -54,7 +54,10 @@ export const ContextProvider = ({ children }) => {
 
     if (localStorage.getItem("isLoggedIn") === "false") {
       let shuffleList = shuffle(lista);
-      setList(shuffleList);
+      if (loadingFiltro) {
+          
+          setList(shuffleList);
+      }
     } else {
         if (loadingFiltro) {
             setList(lista);            
