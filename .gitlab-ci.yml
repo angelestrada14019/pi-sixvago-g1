@@ -47,7 +47,7 @@ jobs_desarrollo_container_back:
     - echo "Docker push latest"
     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
   only:
-    - desarrollo
+    - manual
 
 test_job_postman:
   stage: test
@@ -67,4 +67,4 @@ test_job_postman:
     reports:
       junit: report.xml
   only:
-    - desarrollo
+    - manual
