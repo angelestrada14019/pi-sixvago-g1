@@ -1,41 +1,65 @@
-import React, { useEffect,useState } from "react";
-import listaCategorias from "./categories.json";
+import React, { useEffect, useState } from "react";
+
 import "./categories.css";
 import { useStateContext } from "../../contexts/ContextProvider";
+import ApiCall from "../../utils/ApiCall";
 
 const Categories = () => {
-    const { setCardCategory,setLocation,setPageNumber,setloadingFnChange } = useStateContext();
-    
-    const handleClick = (name,e) => {
-        setPageNumber(0);
-        setCardCategory(""); 
-        setLocation(""); 
-        setloadingFnChange(false);      
-        setTimeout(() => {
-            setloadingFnChange(true);
-            setCardCategory(name);            
-        }, 5);
-    } 
-    return (
-      <section className="categories-section">
-        <h2 className="section-h2">Buscar por tipo de alojamiento</h2>
-        <div className="cardCategory">
-          {listaCategorias.map((item, i) => {
-            return (
-              <div onClick={(e)=>handleClick(item.name,e)}  className="renderCategory" key={item.id}>
-                <img
-                  className="cardCategory-img"
-                  src={`${item.img}`}
-                  alt={item.name}
-                />
-                <h2>{item.name}</h2>
-                <p>807.105 hoteles</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    );
+  const {
+    setCardCategory,
+    setLocation,
+    setPageNumber,
+    setloadingFnChange,
+    setLoading,
+    loading
+  } = useStateContext();
+  const [listaCategorias, setListaCategorias] = useState([]);
   
-}
+  useEffect(() => {
+    getCategoryNames();
+  }, [loading]);
+
+  const handleClick = (name, e) => {
+    setCardCategory("");
+    setPageNumber(0);
+    setLocation("");
+    setloadingFnChange(false);
+    setLoading(true);
+    setTimeout(() => {
+      setCardCategory(name);
+      setloadingFnChange(true);
+      setLoading(false);
+    }, 1000);
+  };
+
+  const getCategoryNames = async () => {
+    const lista = await ApiCall.invokeGET("/categorias");
+    setListaCategorias(lista);
+  }
+  
+  return (
+    <section className="categories-section">
+      <h2 className="section-h2">Buscar por tipo de alojamiento</h2>
+      <div className="cardCategory">
+        {listaCategorias.map((item, i) => {
+          return (
+            <div
+              onClick={(e) => handleClick(item.titulo, e)}
+              className="renderCategory"
+              key={item.id}
+            >
+              <img
+                className="cardCategory-img"
+                src={`${item.urlImagen}`}
+                alt={item.titulo}
+              />
+              <h2>{item.titulo}</h2>
+              <p>807.105 hoteles</p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
 export default Categories;

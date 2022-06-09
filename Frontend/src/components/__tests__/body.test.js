@@ -28,7 +28,28 @@ describe("Body", () => {
       screen.getByText("Buscar por tipo de alojamiento")
     ).toBeInTheDocument();
   });
+  
   test("should render cards", () => {
     expect(screen.getByText("Recomendaciones")).toBeInTheDocument();
+  });
+
+  test("pagination should render new cards", () => {
+    const next = screen.getByLabelText("Next page");
+    const imgs = screen.getAllByRole("img");
+    act(() => {
+      fireEvent.click(next);
+    });
+    expect(screen.getAllByRole("img")).not.toContain(imgs);
+  });
+
+  test("should render new cards when clicking a category", () => {
+    const category = screen
+      .getByText("Buscar por tipo de alojamiento")
+      .nextElementSibling.firstChild
+    const imgs = screen.getAllByRole("img");
+    act(() => {
+      fireEvent.click(category);
+    });
+    expect(screen.getAllByRole("img")).not.toContain(imgs);
   });
 });
