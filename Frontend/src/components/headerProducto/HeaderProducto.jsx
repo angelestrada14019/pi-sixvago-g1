@@ -27,7 +27,9 @@ const HeaderProducto = ({ id }) => {
               <h4>{producto.categorias_id.titulo}</h4>
             )}
             
-            <h2>Hermitage Hotel</h2>
+            {producto.categorias_id !== undefined && (
+            <h2>{producto.nombre}</h2>
+            )}
           </div>
           <Link to="/">
             <button className="backButton">
@@ -40,7 +42,9 @@ const HeaderProducto = ({ id }) => {
       <div className="locationData">
         <i className="fa-solid fa-location-dot"></i>
         <div className="hotelData">
-          Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina
+            {producto.ciudades_id !== undefined &&(
+              <p>{producto.ciudades_id.nombre + " " + producto.ciudades_id.pais}</p>
+            )}
           <p className="mapReport">A 940m del centro</p>
         </div>
         <div className="ratingContainer">
