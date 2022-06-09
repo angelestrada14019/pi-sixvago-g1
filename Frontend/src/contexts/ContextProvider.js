@@ -47,7 +47,7 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     getListaProducto();
     getListaCiudades();
-  }, [loading]);
+  }, [loading,loadingFiltro]);
 
   const getListaProducto = async () => {
     const lista = await ApiCall.invokeGET("/productos");

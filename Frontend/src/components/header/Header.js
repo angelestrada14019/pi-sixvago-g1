@@ -14,7 +14,7 @@ const Header = () => {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const {setCardCategory,cardCategory,setLocation} = useStateContext();
+  const {setCardCategory,cardCategory,setLocation, setLoading,setLoadingFiltro} = useStateContext();
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -74,6 +74,7 @@ const Header = () => {
               setToggleNavButton("");
               setCardCategory("");
               setLocation("");
+              setLoadingFiltro(true);
             }}
           >
             <img src={logo} alt="logo" />
