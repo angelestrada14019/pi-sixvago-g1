@@ -4,7 +4,7 @@ import Categories from "./Categories";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Loader from "../../utils/Loader";
 import { useEffect } from "react";
-
+import {LinearProgress } from '@mui/material';
 const Main = () => {
   const { loading, setLoading } = useStateContext();
 
@@ -14,14 +14,19 @@ const Main = () => {
     }, 500);
   }, []);
 
+  const style ={
+      backgroundColor: '#f5f5f5',
+  }
+ 
+
   return (
     <div className="container">
       <Categories />
       {!loading ? (
-        <Cards />
-      ) : (
-        <div>
-          <h2>Cargando... </h2>
+          <Cards />
+          ) : (
+              <div className="container_cirularProgress">
+            <LinearProgress color="inherit"/>
         </div>
       )}
     </div>
