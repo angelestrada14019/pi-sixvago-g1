@@ -1,39 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import listado from "../components/body/listado.json";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
-  const listLocation = [
-    {
-      id: 1,
-      name: "Buenos Aires",
-    },
-    {
-      id: 2,
-      name: "Bogotá",
-    },
-    {
-      id: 3,
-      name: "Miami",
-    },
-    {
-      id: 4,
-      name: "Colombia",
-    },
-    {
-      id: 5,
-      name: "Montréal, QC, Canada",
-    },
-    {
-      id: 6,
-      name: "Australia",
-    },
-    {
-      id: 7,
-      name: "Switzerland",
-    },
-  ];
+
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
   const [product, setProduct] = useState([]);
@@ -42,20 +12,26 @@ export const ContextProvider = ({ children }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [loadingFiltro, setLoadingFiltro] = useState(true);
 
   useEffect(() => {
     getListaProducto();
     getListaCiudades();
-  }, [loading]);
+  }, [loading,loadingFiltro]);
 
   const getListaProducto = async () => {
     const lista = await ApiCall.invokeGET("/productos");
 
     if (localStorage.getItem("isLoggedIn") === "false") {
       let shuffleList = shuffle(lista);
-      setList(shuffleList);
+      if (loadingFiltro) {
+          
+          setList(shuffleList);
+      }
     } else {
-      setList(lista);
+        if (loadingFiltro) {
+            setList(lista);            
+        }
     }
     setProduct(lista);
   };
@@ -99,6 +75,8 @@ export const ContextProvider = ({ children }) => {
           setloadingFnChange,
           loading,
           setLoading,
+          loadingFiltro,
+            setLoadingFiltro,
         }}
       >
         {children}

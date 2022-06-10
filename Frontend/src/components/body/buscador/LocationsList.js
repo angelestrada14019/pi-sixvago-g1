@@ -10,7 +10,7 @@ const LocationsList = ({ setLocation, setOpenLocations }) => {
     <>
       {locationsList.map((loc, i) => {
         return (
-          <div
+          <div role="listitem"
             className="single-location-container"
             key={i}
             id={`${loc.nombre}`}
@@ -20,7 +20,7 @@ const LocationsList = ({ setLocation, setOpenLocations }) => {
             }}
           >
             <i className="fa-solid fa-location-dot"></i>
-            <ul type="none">
+            <ul  type="none">
               <li>
                 <h3>{loc.nombre}</h3>
               </li>

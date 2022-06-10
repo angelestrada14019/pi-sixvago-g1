@@ -6,7 +6,8 @@ import ApiCall from "../../utils/ApiCall";
 import { useState,useEffect } from "react";
 
 const HeaderProducto = ({ id }) => {
-  const [producto, setProducto] = useState([])
+  const [producto, setProducto] = useState([]);
+    const { setLoading } = useStateContext();
 
   useEffect(() => {
     getProducto();     
@@ -31,7 +32,12 @@ const HeaderProducto = ({ id }) => {
             <h2>{producto.nombre}</h2>
             )}
           </div>
-          <Link to="/">
+          <Link to="/" onClick={()=>{
+            setLoading(true)
+            setTimeout(() => {
+            setLoading(false)
+            }, 1000);
+          }}>
             <button className="backButton">
               <i className="fa-solid fa-angle-left"></i>
             </button>
@@ -45,7 +51,7 @@ const HeaderProducto = ({ id }) => {
             {producto.ciudades_id !== undefined &&(
               <p>{producto.ciudades_id.nombre + " " + producto.ciudades_id.pais}</p>
             )}
-          <p className="mapReport">A 940m del centro</p>
+          <p className="mapReport">{producto.direccion}</p>
         </div>
         <div className="ratingContainer">
           <div className="hotel-rating">

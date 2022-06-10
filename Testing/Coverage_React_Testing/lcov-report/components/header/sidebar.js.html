@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
@@ -134,12 +134,42 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,85 +235,109 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import "./sidebar.css"
-import UserWelcome from './UserWelcome';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import "./sidebar.css";
+import UserWelcome from "./UserWelcome";
 &nbsp;
-const Sidebar = ({ show, handleClick, toggleNavButton, close, isLoggedIn, handleLogout }) =&gt; {
-    return (
-        &lt;div className={show ? <span class="branch-0 cbranch-no" title="branch not covered" >"sidebar active" </span>: "sidebar"}&gt;
-            &lt;div className="exit"&gt;
-                &lt;div&gt;
-                    &lt;i className="fas fa-times" onClick={close}&gt;&lt;/i&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div className="sidebar-header"&gt;
-&nbsp;
-                {!isLoggedIn ? &lt;h3&gt;Menú&lt;/h3&gt; :
-<span class="branch-1 cbranch-no" title="branch not covered" >                    &lt;div className='user-welcome-media'&gt;&lt;UserWelcome /&gt;&lt;/div&gt;}</span>
-            &lt;/div&gt;
-            &lt;div className="sidebar-body"&gt;
-            
-                {toggleNavButton === "crear" ? (
-                    &lt;ul&gt;
-                        &lt;li id='iniciar' onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
-                            &lt;a href="#"&gt;
-                                &lt;span className='boton-iniciar'&gt;Iniciar sesion&lt;/span&gt;
-                            &lt;/a&gt;
-                        &lt;/li&gt;
-                    &lt;/ul&gt;
-                ) : toggleNavButton === "iniciar" ? (
-                    &lt;&gt;
-                        &lt;ul&gt;
-                            &lt;li id='crear' onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
-                                &lt;a href="#"&gt;
-                                    &lt;span className='boton-crear'&gt;Crear cuenta&lt;/span&gt;
-                                &lt;/a&gt;
-                            &lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/&gt;
-                ) : (
-                    &lt;&gt;
-                        &lt;ul&gt;
-                            &lt;li id='crear' onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
-                                &lt;a href="#"&gt;
-                                    &lt;span className='boton-crear'&gt;Crear cuenta&lt;/span&gt;
-                                &lt;/a&gt;
-                            &lt;/li&gt;
-                        &lt;/ul&gt;
-                        &lt;hr /&gt;
-                        &lt;ul&gt;
-                            &lt;li id='iniciar' onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
-                                &lt;a href="#"&gt;
-                                    &lt;span className='boton-iniciar'&gt;Iniciar sesion&lt;/span&gt;
-                                &lt;/a&gt;
-                            &lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/&gt;
-                )}
-            {!isLoggedIn ? null :
-<span class="branch-1 cbranch-no" title="branch not covered" >            &lt;div className='exit-sesion'&gt;</span>
-                &lt;p&gt;¿Deseas &lt;span onClick={handleLogout}&gt;cerrar sesión&lt;/span&gt;?&lt;/p&gt;&lt;/div&gt;}
-            &lt;/div&gt;
-            &lt;hr/&gt;
-                &lt;div className='sidebar-footer'&gt;
-                    &lt;i className="fa-brands fa-facebook"&gt;&lt;/i&gt;
-                    &lt;i className="fa-brands fa-linkedin-in"&gt;&lt;/i&gt;
-                    &lt;i className="fa-brands fa-twitter"&gt;&lt;/i&gt;
-                    &lt;i className="fa-brands fa-instagram"&gt;&lt;/i&gt;
-                &lt;/div&gt;
+const Sidebar = ({
+  show,
+  handleClick,
+  toggleNavButton,
+  close,
+  isLoggedIn,
+  handleLogout,
+}) =&gt; {
+  return (
+    &lt;div className={show ? "sidebar active" : "sidebar"}&gt;
+      &lt;div className="exit"&gt;
+        &lt;div&gt;
+          &lt;i className="fas fa-times" onClick={close}&gt;&lt;/i&gt;
         &lt;/div&gt;
-&nbsp;
-    )
-}
-export default Sidebar;</pre></td></tr></table></pre>
+      &lt;/div&gt;
+      &lt;div className="sidebar-header"&gt;
+        {!isLoggedIn ? (
+          &lt;h3&gt;Menú&lt;/h3&gt;
+        ) : (
+<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;div className="user-welcome-media"&gt;</span>
+            &lt;UserWelcome /&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+      &lt;div className="sidebar-body"&gt;
+          {!isLoggedIn ? (
+        &lt;div&gt;
+          {toggleNavButton === "crear" ? (
+            &lt;ul&gt;
+              &lt;li id="iniciar" onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
+                &lt;a href="#"&gt;
+                  &lt;span className="boton-iniciar"&gt;Iniciar sesion&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          ) : toggleNavButton === "iniciar" ? (
+            &lt;&gt;
+              &lt;ul&gt;
+                &lt;li id="crear" onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
+                  &lt;a href="#"&gt;
+                    &lt;span className="boton-crear"&gt;Crear cuenta&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/&gt;
+          ) : (
+            &lt;&gt;
+              &lt;ul&gt;
+                &lt;li id="crear" onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
+                  &lt;a href="#"&gt;
+                    &lt;span className="boton-crear"&gt;Crear cuenta&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+              &lt;hr /&gt;
+              &lt;ul&gt;
+                &lt;li id="iniciar" onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleClick(e)}</span>&gt;
+                  &lt;a href="#"&gt;
+                    &lt;span className="boton-iniciar"&gt;Iniciar sesion&lt;/span&gt;
+                  &lt;/a&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/&gt;
+          )}
+        &lt;/div&gt;
+        ) : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
+        {!isLoggedIn ? null : (
+<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;div className="exit-sesion"&gt;</span>
+            &lt;p&gt;
+              ¿Deseas &lt;span onClick={handleLogout}&gt;cerrar sesión&lt;/span&gt;?
+            &lt;/p&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+      &lt;hr /&gt;
+      &lt;div className="sidebar-footer"&gt;
+        &lt;i className="fa-brands fa-facebook"&gt;&lt;/i&gt;
+        &lt;i className="fa-brands fa-linkedin-in"&gt;&lt;/i&gt;
+        &lt;i className="fa-brands fa-twitter"&gt;&lt;/i&gt;
+        &lt;i className="fa-brands fa-instagram"&gt;&lt;/i&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+export default Sidebar;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jun 06 2022 16:35:14 GMT-0300 (Argentina Standard Time)
+                at Thu Jun 09 2022 18:32:38 GMT-0300 (Argentina Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

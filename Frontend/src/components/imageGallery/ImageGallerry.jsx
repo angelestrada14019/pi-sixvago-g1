@@ -9,12 +9,10 @@ const images = [
   {
     id: 0,
     original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/250/150/",
   },
   {
     id: 1,
     original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/250/150/",
   },
   {
     id: 2,
@@ -60,22 +58,37 @@ const ImageGallerry = ({ id }) => {
 
   useEffect(() => {
     getProducto();
+    
   }, []);
+  function selectFewerProps(show){
+
+    const {imagenes_id, urlImagen} = show;
+    const newObj ={
+        id: imagenes_id,
+        original: urlImagen,
+        thumbnail: urlImagen,
+    }
+    return newObj;
+  }
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido);
+    const newImage = productoObtenido.listadeimagenes.map(selectFewerProps);
+    setImagenes(newImage);
+    
   };
 
   return (
     <div className="image_gallery_container">
+        {console.log("galeria imagenes",imagenes)}
       <div className="icon_social">
         <i className="fa-solid fa-share-nodes"></i>
         <i className="fa-regular fa-heart"></i>
       </div>
       <div className="gallery">
         {producto?.listadeimagenes?.slice(0, 5).map((image) => (
-          <div className="gallery-image" key={image.id}>
+          <div className="gallery-image" key={image.imagenes_id}>
             <img
               src={image.urlImagen}
               alt={image.titulo}
@@ -98,7 +111,7 @@ const ImageGallerry = ({ id }) => {
             </div>
             <ImageGallery
               autoPlay={true}
-              items={images}
+              items={imagenes}
               showPlayButton={false}
               showFullscreenButton={false}
               slideDuration={450}
@@ -116,7 +129,7 @@ const ImageGallerry = ({ id }) => {
 
         <ImageGallery
           autoPlay={true}
-          items={images}
+          items={imagenes}
           showPlayButton={false}
           showFullscreenButton={false}
           slideDuration={450}

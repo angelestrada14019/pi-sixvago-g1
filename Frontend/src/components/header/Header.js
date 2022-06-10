@@ -14,7 +14,13 @@ const Header = () => {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const {setCardCategory,cardCategory,setLocation} = useStateContext();
+  const {
+    setCardCategory,
+    cardCategory,
+    setLocation,
+    setLoading,
+    setLoadingFiltro,
+  } = useStateContext();
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -40,13 +46,12 @@ const Header = () => {
       setOpenLogin(false);
       setOpenSignUp(true);
       setShowSidebar(false);
-      
     }
     if (e.target.id === "iniciar") {
-        //setToggleNavButton("iniciar");
-        setOpenLogin(true);
-        setOpenSignUp(false);
-        setShowSidebar(false);
+      //setToggleNavButton("iniciar");
+      setOpenLogin(true);
+      setOpenSignUp(false);
+      setShowSidebar(false);
     }
     setCardCategory("");
     setLocation("");
@@ -60,6 +65,10 @@ const Header = () => {
     localStorage.setItem("isLoggedIn", false);
     setCardCategory("");
     setLocation("");
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -74,6 +83,7 @@ const Header = () => {
               setToggleNavButton("");
               setCardCategory("");
               setLocation("");
+              setLoadingFiltro(true);
             }}
           >
             <img src={logo} alt="logo" />
