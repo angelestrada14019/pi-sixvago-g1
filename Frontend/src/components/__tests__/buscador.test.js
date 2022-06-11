@@ -38,6 +38,7 @@ describe("Buscador", () => {
   //   });
   //   expect(screen.getAllByRole("listitem")).not.toHaveLength(0);
   // });
+  
   test("should render calendar when clicking date selector", async () => {
     const calendar = screen.getByRole("button", {
       name: "Check in - Check out",
