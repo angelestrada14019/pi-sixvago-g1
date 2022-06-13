@@ -5,9 +5,11 @@ import Maps from "simple-react-google-maps";
 const GoogleMap = () => {
     return (
       <div>
+        <h2>Mapa</h2>
         <div className="containerMaps">
+            {console.log(process.env.REACT_APP_GOOGLE_API_KEY)}
           <Maps
-            apiKey={"AIzaSyDecQehxvNdL2hLcymFvcHZI1M9FkRhMYQ"}
+            apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
             style={{ height: "400", widht: "300" }}
             zoom={12}
             center={{
