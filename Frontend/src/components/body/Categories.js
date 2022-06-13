@@ -23,7 +23,6 @@ const Categories = () => {
 
   const handleClick = (name, e) => {
       setLoadingFiltro(false);
-    setCardCategory("");
     setPageNumber(0);
     setLocation("");
     setloadingFnChange(false);

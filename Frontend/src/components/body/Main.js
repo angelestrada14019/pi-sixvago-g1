@@ -6,12 +6,13 @@ import Loader from "../../utils/Loader";
 import { useEffect } from "react";
 import {LinearProgress } from '@mui/material';
 const Main = () => {
-  const { loading, setLoading } = useStateContext();
+  const { loading, setLoading,loadingFiltro,setLoadingFiltro } = useStateContext();
 
   useEffect(() => {
     setTimeout(() => {
+        setLoadingFiltro(true);
       setLoading(false);
-    }, 500);
+    }, 1500);
   }, []);
 
   const style ={
@@ -22,7 +23,7 @@ const Main = () => {
   return (
     <div className="container">
       <Categories />
-      {!loading ? (
+      {(!loading) ? (
           <Cards />
           ) : (
               <div className="container_cirularProgress">

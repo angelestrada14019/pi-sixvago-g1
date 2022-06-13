@@ -6,9 +6,10 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 const Header = () => {
+    const navigate = useNavigate();
   const [toggleNavButton, setToggleNavButton] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
@@ -20,6 +21,7 @@ const Header = () => {
     setLocation,
     setLoading,
     setLoadingFiltro,
+    setloadingFnChange
   } = useStateContext();
   useEffect(() => {
     if (openLogin) {
@@ -78,12 +80,19 @@ const Header = () => {
           <Link
             to="/"
             onClick={() => {
+                navigate("/");
               setOpenLogin(false);
               setOpenSignUp(false);
               setToggleNavButton("");
               setCardCategory("");
               setLocation("");
               setLoadingFiltro(true);
+              setLoading(true);
+              setloadingFnChange(false);
+              setTimeout(() => {
+                setloadingFnChange(true);
+                setLoading(false);
+              }, 1100);
             }}
           >
             <img src={logo} alt="logo" />

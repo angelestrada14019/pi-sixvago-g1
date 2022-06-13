@@ -24,7 +24,7 @@ const Cards = () => {
 
   useEffect(() => {
     productosPorCategoria();
-  }, [cardCategory, loading]);
+  }, [ loading]);
 
   // const productFiltro = (lista) => {
   //   if (cardCategory === "") {
