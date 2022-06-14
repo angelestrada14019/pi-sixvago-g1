@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
-
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
   const [product, setProduct] = useState([]);
@@ -15,25 +14,29 @@ export const ContextProvider = ({ children }) => {
   const [loadingFiltro, setLoadingFiltro] = useState(true);
 
   useEffect(() => {
-    getListaProducto();
+    if (loading) {
+      getListaProducto();
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+    }
     getListaCiudades();
-  }, [loading,loadingFiltro]);
+  }, [loading, loadingFiltro]);
 
   const getListaProducto = async () => {
     const lista = await ApiCall.invokeGET("/productos");
 
-    if (localStorage.getItem("isLoggedIn") === "false") {
+    if (localStorage.getItem("isLoggedIn") === "false" && cardCategory === "") {
       let shuffleList = shuffle(lista);
       if (loadingFiltro) {
-          
-          setList(shuffleList);
+        setList(shuffleList);
       }
     } else {
-        if (loadingFiltro) {
-            setList(lista);            
-        }
+      if (loadingFiltro) {
+        setList(lista);
+      }
     }
-    setProduct(lista);
+    //setProduct(lista);
   };
   const getListaCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
@@ -76,7 +79,7 @@ export const ContextProvider = ({ children }) => {
           loading,
           setLoading,
           loadingFiltro,
-            setLoadingFiltro,
+          setLoadingFiltro,
         }}
       >
         {children}

@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import CalendarAvailableDay from "../components/calendarAvailableDay/CalendarAvailableDay";
 import HeaderProducto from "../components/heading/Heading";
@@ -6,8 +5,8 @@ import ImageGallerry from "../components/imageGallery/ImageGallerry";
 import Descripcion from "../components/product/Descripcion";
 import Caracteristicas from "../components/product/Caracteristicas";
 import Politicas from "../components/product/Politicas";
-import "./producto.css";
 import GoogleMap from "../components/product/GoogleMap.js";
+import "./producto.css";
 
 const Producto = () => {
   let { id } = useParams();
