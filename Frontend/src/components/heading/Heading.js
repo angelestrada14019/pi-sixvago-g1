@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import ApiCall from "../../utils/ApiCall";
 import LocationData from "./LocationData";
@@ -10,6 +10,7 @@ const HeaderProducto = ({ id }) => {
   const { setLoading } = useStateContext();
   const location = useLocation();
   const currentLocation = location.pathname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProducto();
@@ -20,6 +21,17 @@ const HeaderProducto = ({ id }) => {
     // console.log("headerProducto" + productoObtenido.nombre);
     setProducto(productoObtenido);
   };
+
+  console.log(currentLocation.indexOf(`/reserva`));
+
+  const handleBack = () => {
+    if (currentLocation.indexOf(`/reserva`) === -1) {
+      navigate(`/`);
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className="headerProducto">
       <section className="lodging-section">
@@ -31,16 +43,9 @@ const HeaderProducto = ({ id }) => {
 
             {producto.categorias_id !== undefined && <h2>{producto.nombre}</h2>}
           </div>
-          <Link
-            to="/"
-            onClick={() => {
-              setLoading(true);
-            }}
-          >
-            <button className="backButton">
-              <i className="fa-solid fa-angle-left"></i>
-            </button>
-          </Link>
+          <button className="backButton" onClick={handleBack}>
+            <i className="fa-solid fa-angle-left"></i>
+          </button>
         </div>
       </section>
 

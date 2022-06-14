@@ -51,15 +51,14 @@ const Cards = () => {
   };
 
   return (
-    <section className="cards-section">
-      <h2 className="section-h2">Recomendaciones</h2>
+    <>
       <div className="cards">{displayProducts}</div>
       <div>
         {!loadingFnChange && (
           <PaginationControll pageCount={pageCount} changePage={changePage} />
         )}
       </div>
-    </section>
+    </>
   );
 };
 

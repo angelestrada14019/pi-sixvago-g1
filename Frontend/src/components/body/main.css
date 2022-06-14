@@ -3,6 +3,18 @@
     margin-top: 86px;
     margin-bottom: 100px;
 }
+.section-h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin-left: 40px;
+  color: #383b58;
+}
+
+.cards-section {
+  padding-top: 15px;
+  background-color: rgba(223, 223, 223, 0.65);
+}
 
 /* ::-webkit-scrollbar the scrollbar.
 ::-webkit-scrollbar-button the buttons on the scrollbar (arrows pointing upwards and downwards).
