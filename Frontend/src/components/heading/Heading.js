@@ -35,9 +35,6 @@ const HeaderProducto = ({ id }) => {
             to="/"
             onClick={() => {
               setLoading(true);
-              setTimeout(() => {
-                setLoading(false);
-              }, 1000);
             }}
           >
             <button className="backButton">
@@ -50,29 +47,6 @@ const HeaderProducto = ({ id }) => {
       {currentLocation.indexOf("/reserva") === -1 && (
         <LocationData producto={producto} />
       )}
-
-      {/* <div className="locationData">
-        <i className="fa-solid fa-location-dot"></i>
-        <div className="hotelData">
-          {producto.ciudades_id !== undefined && (
-            <p>
-              {producto.ciudades_id.nombre + " " + producto.ciudades_id.pais}
-            </p>
-          )}
-          <p className="mapReport">{producto.direccion}</p>
-        </div>
-        <div className="ratingContainer">
-          <div className="hotel-rating">
-            <p>Muy bueno</p>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-          </div>
-          <h2 className="hotel-score">8</h2>
-        </div>
-      </div> */}
     </div>
   );
 };

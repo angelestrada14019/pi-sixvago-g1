@@ -1,7 +1,6 @@
-import React from "react";
-import "./caracteristicas.css";
-import ApiCall from "../../utils/ApiCall";
 import { useEffect, useState } from "react";
+import ApiCall from "../../utils/ApiCall";
+import "./caracteristicas.css";
 
 const Caracteristicas = ({ id }) => {
   const [producto, setProducto] = useState([]);

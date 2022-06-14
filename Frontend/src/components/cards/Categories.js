@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from "react";
-
-import "./categories.css";
+import { useEffect, useState } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import ApiCall from "../../utils/ApiCall";
+import "./categories.css";
 
 const Categories = () => {
-  const {
-    setCardCategory,
-    setLocation,
-    setPageNumber,
-    setloadingFnChange,
-    setLoading,
-    loading,
-    loadingFiltro,
-    setLoadingFiltro,
-  } = useStateContext();
+  const { setCardCategory, setLocation, setPageNumber, setLoading, loading } =
+    useStateContext();
   const [listaCategorias, setListaCategorias] = useState([]);
 
   useEffect(() => {
-    getCategoryNames();
+    if (loading) {
+      getCategoryNames();
+    }
   }, [loading]);
 
   const handleClick = (name, e) => {
-    setLoadingFiltro(false);
+    setCardCategory(name);
     setPageNumber(0);
     setLocation("");
-    setloadingFnChange(false);
     setLoading(true);
-    setTimeout(() => {
-      setCardCategory(name);
-      setloadingFnChange(true);
-      setLoading(false);
-    }, 350);
   };
 
   const getCategoryNames = async () => {

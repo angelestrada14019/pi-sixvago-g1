@@ -1,7 +1,6 @@
-import React from "react";
-import "./politicas.css";
-import ApiCall from "../../utils/ApiCall";
 import { useEffect, useState } from "react";
+import ApiCall from "../../utils/ApiCall";
+import "./politicas.css";
 
 const Politicas = ({ id }) => {
   const [producto, setProducto] = useState([]);

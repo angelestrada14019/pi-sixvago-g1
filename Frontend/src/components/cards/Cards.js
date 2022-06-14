@@ -1,20 +1,18 @@
-import Card from "./Card";
-import "./cards.css";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import PaginationControll from "../pagination/PaginationControll";
 import ApiCall from "../../utils/ApiCall";
+import Card from "./Card";
+import "./cards.css";
 
 const Cards = () => {
   const {
     cardCategory,
     list,
     setList,
-    product,
     pageNumber,
     setPageNumber,
     loadingFnChange,
-    location,
     loading,
   } = useStateContext();
   const productsPerPage = 4;
@@ -24,7 +22,9 @@ const Cards = () => {
     .map((product, i) => <Card data={product} key={`cards-${i}`} />);
 
   useEffect(() => {
-    productosPorCategoria();
+    if (cardCategory !== "" && !loading) {
+      productosPorCategoria();
+    }
   }, [loading]);
 
   // const productFiltro = (lista) => {
@@ -42,7 +42,6 @@ const Cards = () => {
     const filtroQuery = await ApiCall.invokeGET(`/productos/categorias`, [
       `tituloCategoria=${cardCategory}`,
     ]);
-
     setList(filtroQuery);
   };
 
@@ -56,7 +55,7 @@ const Cards = () => {
       <h2 className="section-h2">Recomendaciones</h2>
       <div className="cards">{displayProducts}</div>
       <div>
-        {loadingFnChange && (
+        {!loadingFnChange && (
           <PaginationControll pageCount={pageCount} changePage={changePage} />
         )}
       </div>

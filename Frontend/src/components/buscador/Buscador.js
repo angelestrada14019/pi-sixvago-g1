@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
-import "./buscador.css";
+import { useStateContext } from "../../contexts/ContextProvider";
 import CustomCalendar from "./CustomCalendar";
 import LocationsList from "./LocationsList";
-import { useStateContext } from "../../contexts/ContextProvider";
 import ApiCall from "../../utils/ApiCall";
+import "./buscador.css";
 
 const Buscador = () => {
-  const {
-    location,
-    setLocation,
-    setList,
-    product,
-    setCardCategory,
-    cardCategory,
-    setPageNumber,
-    setLoading,
-  } = useStateContext();
+  const { location, setLocation, setList, setPageNumber, setLoading } = useStateContext();
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openLocations, setOpenLocations] = useState(false);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const localDateOptions = {
+    month: "long",
+    day: "numeric",
+  };
 
   useEffect(() => {
     let cI = localStorage.getItem("checkIn");
@@ -29,32 +24,25 @@ const Buscador = () => {
       setCheckOut(cO);
     }
   }, []);
-  const localDateOptions = {
-    month: "long",
-    day: "numeric",
-  };
-
+  
   const handleBuscar = () => {
     //setList(filtroBuscar(product));
-    productosPorCiudad()
+    productosPorCiudad();
     setPageNumber(0);
-    setLoading(false);
   };
-  const filtroBuscar = (array) => {
-    let filtro = array.filter((item) => {
-      return item.location.toLowerCase().includes(location.toLowerCase());
-    }); // en vez de esto se puede usar un queryParams para hacer la consulta por fetch
-    return filtro;
-  };
+
+  // const filtroBuscar = (array) => {
+  //   let filtro = array.filter((item) => {
+  //     return item.location.toLowerCase().includes(location.toLowerCase());
+  //   }); // en vez de esto se puede usar un queryParams para hacer la consulta por fetch
+  //   return filtro;
+  // };
+
   const productosPorCiudad = async () => {
     const filtroQuery = await ApiCall.invokeGET(`/productos/ciudad`, [
       `nombreCiudad=${location}`,
     ]);
-
     setList(filtroQuery);
-
-    //    const categorias = await ApiCall.invokeGET(`/categorias`);
-    //    console.log(categorias);
   };
 
   const handleClick = (e) => {

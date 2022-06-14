@@ -1,15 +1,16 @@
-import "./header.css";
-import logo from "../../assets/SixVago-dorado.png";
-import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../../contexts/ContextProvider";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
-import { Link, useNavigate } from "react-router-dom";
-import { useStateContext } from "../../contexts/ContextProvider";
+import logo from "../../assets/SixVago-dorado.png";
+import menu from "../../assets/menu.png";
+import "./header.css";
+
 const Header = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [toggleNavButton, setToggleNavButton] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
@@ -17,12 +18,12 @@ const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const {
     setCardCategory,
-    cardCategory,
     setLocation,
     setLoading,
     setLoadingFiltro,
-    setloadingFnChange
+    setloadingFnChange,
   } = useStateContext();
+
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -68,9 +69,6 @@ const Header = () => {
     setCardCategory("");
     setLocation("");
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   return (
@@ -80,7 +78,7 @@ const Header = () => {
           <Link
             to="/"
             onClick={() => {
-                navigate("/");
+              navigate("/");
               setOpenLogin(false);
               setOpenSignUp(false);
               setToggleNavButton("");
@@ -88,11 +86,7 @@ const Header = () => {
               setLocation("");
               setLoadingFiltro(true);
               setLoading(true);
-              setloadingFnChange(false);
-              setTimeout(() => {
-                setloadingFnChange(true);
-                setLoading(false);
-              }, 1100);
+              setloadingFnChange(true);
             }}
           >
             <img src={logo} alt="logo" />

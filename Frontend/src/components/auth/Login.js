@@ -1,13 +1,13 @@
-import { useState,useRef } from "react";
-import "./login.css";
+import { useState } from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import "./login.css";
 
-const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
+const Login = ({ show, setOpenLogin, handleClick }) => {
   const [inputType, setInputType] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user"));
@@ -37,7 +37,6 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
     setInfo(false);
     setAlert(false);
   };
-  
 
   return (
     <div

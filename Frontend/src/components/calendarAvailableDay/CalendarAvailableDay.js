@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Calendar } from "react-multi-date-picker";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./calendarAvailableDay.css";
+
 const CalendarAvailableDay = () => {
   const [value, setValue] = useState(null);
   const dayAvailable = [
@@ -26,6 +27,11 @@ const CalendarAvailableDay = () => {
       last: new Date("2022-07-031"),
     },
   ];
+
+  useEffect(() => {
+    setValue(getDates());
+  }, []);
+
   const getDatesInRange = (startDate, endDate) => {
     const date = new Date(startDate.getTime());
 
@@ -46,9 +52,6 @@ const CalendarAvailableDay = () => {
     return calendaryAvailable2;
   };
 
-  useEffect(() => {
-    setValue(getDates());
-  }, []);
   return (
     <div className="calendarAvailableDay">
       <h2>Fechas Disponibles</h2>

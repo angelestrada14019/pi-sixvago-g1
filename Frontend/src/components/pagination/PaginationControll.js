@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
 import ReactPaginate from 'react-paginate';
 import './paginationControll.css';
+
 const PaginationControll = ({pageCount,changePage}) => {    
     
   return (

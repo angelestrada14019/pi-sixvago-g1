@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import "./locationsList.css";
 
 const LocationsList = ({ setLocation, setOpenLocations }) => {
-
   const { locationsList } = useStateContext();
 
   return (
     <>
       {locationsList.map((loc, i) => {
         return (
-          <div role="listitem"
+          <div
+            role="listitem"
             className="single-location-container"
             key={i}
             id={`${loc.nombre}`}
@@ -20,7 +19,7 @@ const LocationsList = ({ setLocation, setOpenLocations }) => {
             }}
           >
             <i className="fa-solid fa-location-dot"></i>
-            <ul  type="none">
+            <ul type="none">
               <li>
                 <h3>{loc.nombre}</h3>
               </li>

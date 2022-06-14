@@ -1,9 +1,6 @@
-import React from 'react';
-import json from '../body/producto.json';
-import "./descripcion.css";
-import ApiCall from "../../utils/ApiCall";
 import { useEffect, useState } from 'react';
-import { useStateContext } from "../../contexts/ContextProvider";
+import ApiCall from "../../utils/ApiCall";
+import "./descripcion.css";
 
 const Descripcion = ({ id }) => {
     const [producto, setProducto] = useState([])

@@ -1,49 +1,13 @@
 import ImageGallery from "react-image-gallery";
-import React, { useEffect, useState } from "react";
-import "./imageGallery.css";
+import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import { useStateContext } from "../../contexts/ContextProvider";
 import ApiCall from "../../utils/ApiCall";
+import "./imageGallery.css";
 
-const images = [
-  {
-    id: 0,
-    original: "https://picsum.photos/id/1018/1000/600/",
-  },
-  {
-    id: 1,
-    original: "https://picsum.photos/id/1015/1000/600/",
-  },
-  {
-    id: 2,
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-  {
-    id: 3,
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-  {
-    id: 4,
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-  {
-    id: 5,
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-  {
-    id: 6,
-    original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/250/150/",
-  },
-];
-const styleBox = {
-  width: "50%",
-  height: "60%",
-};
+// const styleBox = {
+//   width: "50%",
+//   height: "60%",
+// };
 const styleModal = {
   display: "flex",
   justifyContent: "center",
@@ -52,22 +16,20 @@ const styleModal = {
 
 const ImageGallerry = ({ id }) => {
   const [open, setOpen] = useState(false);
-  const { product } = useStateContext();
   const [imagenes, setImagenes] = useState([]);
   const [producto, setProducto] = useState([]);
 
   useEffect(() => {
     getProducto();
-    
   }, []);
-  function selectFewerProps(show){
 
-    const {imagenes_id, urlImagen} = show;
-    const newObj ={
-        id: imagenes_id,
-        original: urlImagen,
-        thumbnail: urlImagen,
-    }
+  function selectFewerProps(show) {
+    const { imagenes_id, urlImagen } = show;
+    const newObj = {
+      id: imagenes_id,
+      original: urlImagen,
+      thumbnail: urlImagen,
+    };
     return newObj;
   }
 
@@ -76,12 +38,11 @@ const ImageGallerry = ({ id }) => {
     setProducto(productoObtenido);
     const newImage = productoObtenido.listadeimagenes.map(selectFewerProps);
     setImagenes(newImage);
-    
   };
 
   return (
     <div className="image_gallery_container">
-        {/* {console.log("galeria imagenes",imagenes)} */}
+      {/* {console.log("galeria imagenes",imagenes)} */}
       <div className="icon_social">
         <i className="fa-solid fa-share-nodes"></i>
         <i className="fa-regular fa-heart"></i>
