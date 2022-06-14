@@ -7,7 +7,7 @@ const GoogleMap = () => {
       <div>
         <h2>Mapa</h2>
         <div className="containerMaps">
-            {console.log(process.env.REACT_APP_GOOGLE_API_KEY)}
+            {/* {console.log(process.env.REACT_APP_GOOGLE_API_KEY)} */}
           <Maps
             apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
             style={{ height: "400", widht: "300" }}

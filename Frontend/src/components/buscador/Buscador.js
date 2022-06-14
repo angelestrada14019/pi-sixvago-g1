@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./buscador.css";
 import CustomCalendar from "./CustomCalendar";
 import LocationsList from "./LocationsList";
-import { useStateContext } from "../../../contexts/ContextProvider";
-import ApiCall from "../../../utils/ApiCall";
+import { useStateContext } from "../../contexts/ContextProvider";
+import ApiCall from "../../utils/ApiCall";
 
 const Buscador = () => {
   const {

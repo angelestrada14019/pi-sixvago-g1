@@ -81,7 +81,7 @@ const ImageGallerry = ({ id }) => {
 
   return (
     <div className="image_gallery_container">
-        {console.log("galeria imagenes",imagenes)}
+        {/* {console.log("galeria imagenes",imagenes)} */}
       <div className="icon_social">
         <i className="fa-solid fa-share-nodes"></i>
         <i className="fa-regular fa-heart"></i>

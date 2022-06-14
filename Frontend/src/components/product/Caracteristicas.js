@@ -20,7 +20,7 @@ const Caracteristicas = ({ id }) => {
       <h2 className="caracteristicas-title">¿Que ofrece este lugar?</h2>
       <hr></hr>
       <div className="caracteristicas-container">
-        {console.log({ producto })}
+        {/* {console.log({ producto })} */}
 
         {producto.caracteristicas !== undefined &&
           producto.caracteristicas.map((caracteristica, index) => {
