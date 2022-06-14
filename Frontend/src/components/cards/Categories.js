@@ -13,16 +13,16 @@ const Categories = () => {
     setLoading,
     loading,
     loadingFiltro,
-    setLoadingFiltro
+    setLoadingFiltro,
   } = useStateContext();
   const [listaCategorias, setListaCategorias] = useState([]);
-  
+
   useEffect(() => {
     getCategoryNames();
   }, [loading]);
 
   const handleClick = (name, e) => {
-      setLoadingFiltro(false);
+    setLoadingFiltro(false);
     setPageNumber(0);
     setLocation("");
     setloadingFnChange(false);
@@ -31,14 +31,14 @@ const Categories = () => {
       setCardCategory(name);
       setloadingFnChange(true);
       setLoading(false);
-    }, 1000);
+    }, 350);
   };
 
   const getCategoryNames = async () => {
     const lista = await ApiCall.invokeGET("/categorias");
     setListaCategorias(lista);
-  }
-  
+  };
+
   return (
     <section className="categories-section">
       <h2 className="section-h2">Buscar por tipo de alojamiento</h2>

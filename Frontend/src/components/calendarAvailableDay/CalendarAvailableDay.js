@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Calendar } from "react-multi-date-picker";
+import { Link, useParams } from "react-router-dom";
 import "./calendarAvailableDay.css";
 const CalendarAvailableDay = () => {
   const [value, setValue] = useState(null);
@@ -73,7 +74,7 @@ const CalendarAvailableDay = () => {
           </div>
           <div className="calendarAvailableDay_boxReservation">
             <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-            <button>Reservar</button>
+            <Link to={`reserva`}>Reservar</Link>
           </div>
         </div>
       </div>

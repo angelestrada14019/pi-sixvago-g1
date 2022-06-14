@@ -55,9 +55,9 @@
     font-size: 20px;
     font-weight: bold;
 }
-.calendarAvailableDay_boxReservation button{
+.calendarAvailableDay_boxReservation a{
     margin-top: 40px;
-    background-color: wheat;
+    background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
     color: black;
     font-weight: bold;
     border: none;
@@ -65,6 +65,8 @@
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
 }
 .calendarAvailableDay_container_singleCalendar{
     display: none;
