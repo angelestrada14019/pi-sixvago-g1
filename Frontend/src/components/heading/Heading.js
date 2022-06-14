@@ -22,8 +22,6 @@ const HeaderProducto = ({ id }) => {
     setProducto(productoObtenido);
   };
 
-  console.log(currentLocation.indexOf(`/reserva`));
-
   const handleBack = () => {
     if (currentLocation.indexOf(`/reserva`) === -1) {
       navigate(`/`);

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "react-multi-date-picker";
 import { Link } from "react-router-dom";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 import "./calendarAvailableDay.css";
 
 const CalendarAvailableDay = () => {
   const [value, setValue] = useState(null);
+  const { width } = useWindowDimensions();
   const dayAvailable = [
     {
       first: new Date("2022-06-005"),
@@ -57,24 +59,13 @@ const CalendarAvailableDay = () => {
       <h2>Fechas Disponibles</h2>
       <div>
         <div className="calendarAvailableDay_container">
-          <div className="calendarAvailableDay_container_doubleCalendar">
-            <Calendar
-              multiple
-              value={value}
-              minDate={new Date()}
-              readOnly
-              numberOfMonths={2}
-            />
-          </div>
-          <div className="calendarAvailableDay_container_singleCalendar">
-            <Calendar
-              multiple
-              value={value}
-              minDate={new Date()}
-              readOnly
-              numberOfMonths={1}
-            />
-          </div>
+          <Calendar
+            multiple
+            value={value}
+            minDate={new Date()}
+            readOnly
+            numberOfMonths={width >= 600 ? 2 : 1}
+          />
           <div className="calendarAvailableDay_boxReservation">
             <p>Agregá tus fechas de viaje para obtener precios exactos</p>
             <Link to={`reserva`}>Reservar</Link>

@@ -68,9 +68,7 @@
     text-decoration: none;
     text-align: center;
 }
-.calendarAvailableDay_container_singleCalendar{
-    display: none;
-}
+
 @media (max-width: 768px){
     .calendarAvailableDay_container{
         flex-direction: column;
@@ -88,13 +86,5 @@
         margin-top: 0;
         margin-left: 10px;
         width: 100%;
-    }
-}
-@media (max-width: 576px){
-    .calendarAvailableDay_container_doubleCalendar{
-        display: none;
-    }
-    .calendarAvailableDay_container_singleCalendar{
-        display: block;
     }
 }

@@ -105,7 +105,6 @@ const Buscador = () => {
             {openCalendar && (
               <CustomCalendar
                 role="calendar"
-                className="custom-calendar"
                 handleCheckInOut={handleCheckInOut}
               />
             )}
