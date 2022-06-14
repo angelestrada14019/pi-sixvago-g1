@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { prettyDOM } from "@testing-library/dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import Buscador from "../body/buscador/Buscador";
+import Buscador from "../buscador/Buscador";
 import { ContextProvider } from "../../contexts/ContextProvider";
 
 let component = null;
