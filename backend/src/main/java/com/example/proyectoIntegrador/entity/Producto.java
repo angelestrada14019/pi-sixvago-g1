@@ -3,7 +3,9 @@ package com.example.proyectoIntegrador.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Getter
@@ -48,4 +50,7 @@ public class Producto{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "productos_id")
     private List<Imagen> listadeimagenes;
+
+
+
 }
