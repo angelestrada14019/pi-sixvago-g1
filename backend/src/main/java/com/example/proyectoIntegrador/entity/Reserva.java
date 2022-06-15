@@ -1,6 +1,8 @@
 package com.example.proyectoIntegrador.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ import java.time.LocalTime;
 @Builder
 @Entity
 @Table(name = "reservas")
+//@JsonFormat
 public class Reserva {
 
     @Id
@@ -22,12 +25,15 @@ public class Reserva {
     private Long id;
 
     @Column(name = "hora_comienzo_reserva", nullable = false, length = 45)
+//    @DateTimeFormat(pattern = "hh-mm-ss",iso = DateTimeFormat.ISO.TIME)
     private LocalTime horaComienzoReserva;
 
     @Column(name = "fecha_inicial_reserva", nullable = false, length = 45)
+//    @DateTimeFormat(pattern = "yyyy-mm-dd",iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaInicialReserva;
 
     @Column(name = "fecha_final_reserva", nullable = false, length = 45)
+//    @DateTimeFormat(pattern = "yyyy-mm-dd",iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaFinalReserva;
 
     @Column(name = "vacuna_covid")

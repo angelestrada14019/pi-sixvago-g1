@@ -29,4 +29,7 @@ public class ProductoDTO {
 
     private List<Caracteristicas> caracteristicas;
     private List<ImagenDTO> listadeimagenes;
+
+//    @JsonIgnoreProperties(value = {"productos_productos_id","usuarios_id", "datos_para_vendedor", "vacuna_covid"})
+//    private List<ReservaDTO> listadoReservas;
 }

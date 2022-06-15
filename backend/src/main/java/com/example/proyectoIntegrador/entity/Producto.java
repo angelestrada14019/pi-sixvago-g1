@@ -1,5 +1,7 @@
 package com.example.proyectoIntegrador.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +52,10 @@ public class Producto{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "productos_id")
     private List<Imagen> listadeimagenes;
+
+//    @OneToMany(mappedBy = "productosProductos",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<Reserva> listadoReservas;
 
 
 

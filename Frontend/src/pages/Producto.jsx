@@ -5,7 +5,7 @@ import ImageGallerry from "../components/imageGallery/ImageGallerry";
 import Descripcion from "../components/product/Descripcion";
 import Caracteristicas from "../components/product/Caracteristicas";
 import Politicas from "../components/product/Politicas";
-import GoogleMap from "../components/product/GoogleMap.js";
+import GoogleMapC from "../components/product/GoogleMapC";
 import "./producto.css";
 
 const Producto = () => {
@@ -19,7 +19,7 @@ const Producto = () => {
         <Caracteristicas id={id} />
         <Politicas id={id} />
         <CalendarAvailableDay />
-        <GoogleMap />
+        <GoogleMapC />
       </div>
     </div>
   );
