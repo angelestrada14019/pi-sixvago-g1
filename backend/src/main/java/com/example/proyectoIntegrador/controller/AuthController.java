@@ -65,7 +65,10 @@ public class AuthController {
         Usuario usuarioS= mapper.convertValue(usuarioDto,Usuario.class);
         usuarioS.setContrasenia(passwordEncoder.encode(usuarioS.getContrasenia()));
         UsuarioDTO usuarioDTO =usuarioService.agregar(mapper.convertValue(usuarioS,UsuarioDTO.class));
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
+        Authentication authentication=authenticationManager.authenticate(new
+                UsernamePasswordAuthenticationToken(usuarioDto.getEmail(),usuarioDto.getContrasenia()));
+        String token = jwtTokenProvider.generateToken(authentication);
+        LoginResponseUserDto loginResponseUserDto =new LoginResponseUserDto(usuarioDTO,token);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponseUserDto);
     }
 }
