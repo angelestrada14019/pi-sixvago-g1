@@ -1,13 +1,14 @@
 package com.example.proyectoIntegrador.dto;
 
-import com.example.proyectoIntegrador.entity.Caracteristicas;
-import com.example.proyectoIntegrador.entity.Categoria;
-import com.example.proyectoIntegrador.entity.Ciudad;
+import com.example.proyectoIntegrador.entity.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.*;
 
+import javax.persistence.OneToMany;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Getter
