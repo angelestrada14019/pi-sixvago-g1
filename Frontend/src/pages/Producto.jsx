@@ -19,7 +19,7 @@ const Producto = () => {
         <Caracteristicas id={id} />
         <Politicas id={id} />
         <CalendarAvailableDay />
-        <GoogleMapC />
+        <GoogleMapC id ={id}/>
       </div>
     </div>
   );
