@@ -4,8 +4,14 @@ import ApiCall from "../../utils/ApiCall";
 import "./categories.css";
 
 const Categories = () => {
-  const { setCardCategory, setLocation, setPageNumber, setLoading, loading } =
-    useStateContext();
+  const {
+    setCardCategory,
+    setLocation,
+    setPageNumber,
+    setLoading,
+    loading,
+    setloadingFnChange,
+  } = useStateContext();
   const [listaCategorias, setListaCategorias] = useState([]);
 
   useEffect(() => {
@@ -18,6 +24,7 @@ const Categories = () => {
     setCardCategory(name);
     setPageNumber(0);
     setLocation("");
+    setloadingFnChange(true);
     setLoading(true);
   };
 

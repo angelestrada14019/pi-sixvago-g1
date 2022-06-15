@@ -1,9 +1,17 @@
+import { useEffect } from "react";
+import { useStateContext } from "../../contexts/ContextProvider";
 import Cards from "../cards/Cards";
 import Categories from "../cards/Categories";
-import Skeleton from "@mui/material/Skeleton";
 import "./main.css";
 
 const Main = () => {
+  const { setLoading, setLoadingFiltro } = useStateContext();
+
+  useEffect(() => {
+    setLoadingFiltro(true);
+    setLoading(true);
+  }, []);
+
   return (
     <div className="container">
       <Categories />

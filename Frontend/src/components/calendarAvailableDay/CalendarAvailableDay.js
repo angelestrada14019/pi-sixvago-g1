@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Calendar } from "react-multi-date-picker";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useStateContext } from "../../contexts/ContextProvider";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import "./calendarAvailableDay.css";
 
 const CalendarAvailableDay = () => {
   const [value, setValue] = useState(null);
+  const { setOpenLogin, setMustLogin } = useStateContext();
+  const navigate = useNavigate();
   const { width } = useWindowDimensions();
   const dayAvailable = [
     {
@@ -54,6 +57,18 @@ const CalendarAvailableDay = () => {
     return calendaryAvailable2;
   };
 
+  const handleClick = () => {
+    // cambiar isLoggedIn por token
+    if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+      navigate("reserva");
+    } else {
+      setOpenLogin(true);
+      setTimeout(() => {
+        setMustLogin(true);
+      }, 500);
+    }
+  };
+
   return (
     <div className="calendarAvailableDay">
       <h2>Fechas Disponibles</h2>
@@ -68,7 +83,7 @@ const CalendarAvailableDay = () => {
           />
           <div className="calendarAvailableDay_boxReservation">
             <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-            <Link to={`reserva`}>Reservar</Link>
+            <button onClick={handleClick}>Reservar</button>
           </div>
         </div>
       </div>

@@ -20,9 +20,10 @@ const Cards = () => {
   const displayProducts = list
     .slice(pagesVisited, pagesVisited + productsPerPage)
     .map((product, i) => <Card data={product} key={`cards-${i}`} />);
+  
 
   useEffect(() => {
-    if (cardCategory !== "" && !loading) {
+    if (cardCategory !== "") {
       productosPorCategoria();
     }
   }, [loading]);

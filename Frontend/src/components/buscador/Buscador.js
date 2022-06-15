@@ -6,7 +6,15 @@ import ApiCall from "../../utils/ApiCall";
 import "./buscador.css";
 
 const Buscador = () => {
-  const { location, setLocation, setList, setPageNumber, setLoading } = useStateContext();
+  const {
+    location,
+    setLocation,
+    setList,
+    setPageNumber,
+    setLoading,
+    setCardCategory,
+    setloadingFnChange,
+  } = useStateContext();
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openLocations, setOpenLocations] = useState(false);
   const [checkIn, setCheckIn] = useState("");
@@ -24,11 +32,14 @@ const Buscador = () => {
       setCheckOut(cO);
     }
   }, []);
-  
+
   const handleBuscar = () => {
     //setList(filtroBuscar(product));
     productosPorCiudad();
     setPageNumber(0);
+    setCardCategory("");
+    setloadingFnChange(true);
+    setLoading(true);
   };
 
   // const filtroBuscar = (array) => {

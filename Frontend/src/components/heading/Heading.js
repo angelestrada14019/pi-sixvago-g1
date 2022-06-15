@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useStateContext } from "../../contexts/ContextProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 import ApiCall from "../../utils/ApiCall";
 import LocationData from "./LocationData";
 import "./heading.css";
 
 const HeaderProducto = ({ id }) => {
   const [producto, setProducto] = useState([]);
-  const { setLoading } = useStateContext();
   const location = useLocation();
   const currentLocation = location.pathname;
   const navigate = useNavigate();

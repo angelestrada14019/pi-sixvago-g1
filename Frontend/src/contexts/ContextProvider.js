@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
+  const [openLogin, setOpenLogin] = useState(false);
+  const [mustLogin, setMustLogin] = useState(false);
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
   const [product, setProduct] = useState([]);
@@ -12,15 +15,26 @@ export const ContextProvider = ({ children }) => {
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
+  const { pathname: currentLocation } = useLocation();
+
+  useEffect(() => {
+    if (currentLocation === "/login") {
+      setOpenLogin(true);
+    }
+  }, [openLogin]);
 
   useEffect(() => {
     if (loading) {
-      getListaProducto();
-      setLoading(false);
+      if (location === "") {
+        getListaProducto();
+      }
       setloadingFnChange(false);
       setLoadingFiltro(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+      getListaCiudades();
     }
-    getListaCiudades();
   }, [loading, loadingFiltro]);
 
   const getListaProducto = async () => {
@@ -80,6 +94,10 @@ export const ContextProvider = ({ children }) => {
           setLoading,
           loadingFiltro,
           setLoadingFiltro,
+          openLogin,
+          setOpenLogin,
+          mustLogin,
+          setMustLogin,
         }}
       >
         {children}

@@ -12,7 +12,7 @@ import "./header.css";
 const Header = () => {
   const navigate = useNavigate();
   const [toggleNavButton, setToggleNavButton] = useState("");
-  const [openLogin, setOpenLogin] = useState(false);
+  // const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -22,6 +22,8 @@ const Header = () => {
     setLoading,
     setLoadingFiltro,
     setloadingFnChange,
+    openLogin,
+    setOpenLogin,
   } = useStateContext();
 
   useEffect(() => {
