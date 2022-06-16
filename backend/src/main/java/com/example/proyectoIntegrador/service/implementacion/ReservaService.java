@@ -1,20 +1,25 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
 
+import com.example.proyectoIntegrador.dto.ProductoDTO;
 import com.example.proyectoIntegrador.dto.ReservaDTO;
+import com.example.proyectoIntegrador.entity.Producto;
 import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.repository.IReservaRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ReservaService implements IGeneralService<ReservaDTO, Long> {
 
     @Autowired
@@ -71,4 +76,5 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
         return reservaDTOS;
 
     }
+
 }

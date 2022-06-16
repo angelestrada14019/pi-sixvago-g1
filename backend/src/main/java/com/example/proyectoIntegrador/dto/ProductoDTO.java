@@ -1,8 +1,10 @@
 package com.example.proyectoIntegrador.dto;
 
 import com.example.proyectoIntegrador.entity.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.OneToMany;
@@ -29,4 +31,7 @@ public class ProductoDTO {
 
     private List<Caracteristicas> caracteristicas;
     private List<ImagenDTO> listadeimagenes;
+
+    @JsonIgnoreProperties(value = {"productos_productos_id","usuarios_id", "datos_para_vendedor", "vacuna_covid"})
+    private List<ReservaDTO> reservas;
 }

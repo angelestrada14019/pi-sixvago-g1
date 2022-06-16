@@ -1,0 +1,50 @@
+.card-reservaExitosa {
+    display: flex;
+    width: 500px;
+    height: 350px;
+    border-radius: 20px;
+    flex-direction: column;
+    background: white;
+    align-items: center;
+    box-shadow: 0px 0px 28px #d7d7d7;
+    justify-content: center;
+    align-content: center;
+    transition: 2s;
+}
+.card-reservaExitosa .fa-bounce{
+    animation-iteration-count: var(--fa-animation-iteration-count,1);
+    animation-duration: var(--fa-animation-duration,2s);
+}
+.card-reservaExitosa .fa-solid, .fas {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 60px;
+    color: #4bbf35;
+}
+.titulo-exitoso{
+    padding: 10px;
+    color: #4bbf35;
+    font-size: 25px;
+    font-weight: 600;
+}
+.subtitulo-exitoso{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0px 30px 0px;
+}
+.boton-succes{
+    padding: 10px;
+    width:200px;
+    background:linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 576px) {
+    .card-reservaExitosa {
+        width: 350px;
+        height: 300px;
+    }
+}
