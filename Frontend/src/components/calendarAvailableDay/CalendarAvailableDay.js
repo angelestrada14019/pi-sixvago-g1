@@ -49,6 +49,7 @@ const CalendarAvailableDay = () => {
 
     return dates;
   };
+  
   const getDates = () => {
     let calendaryAvailable = dayAvailable.map((day) => {
       return getDatesInRange(day.first, day.last);

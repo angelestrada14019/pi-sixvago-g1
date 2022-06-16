@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
-import CustomCalendar from "./CustomCalendar";
+import CustomCalendar from "../calendar/CustomCalendar";
 import LocationsList from "./LocationsList";
 import ApiCall from "../../utils/ApiCall";
 import "./buscador.css";
