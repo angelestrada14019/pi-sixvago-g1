@@ -2,6 +2,7 @@ package com.example.proyectoIntegrador.service.implementacion;
 
 import com.example.proyectoIntegrador.dto.ProductoDTO;
 import com.example.proyectoIntegrador.entity.Producto;
+import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.repository.IProductoRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
@@ -9,7 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ProductosService implements IGeneralService<ProductoDTO, Long> {
@@ -100,4 +105,27 @@ public class ProductosService implements IGeneralService<ProductoDTO, Long> {
         }
         return productoDTO;
     }
+    public List<ProductoDTO> buscarProductosFechaIF(LocalDate fechaInicial, LocalDate fechaFinal){
+        List<ProductoDTO> productoDTOS = new ArrayList<>();
+        List <Producto> productos = repository.findAll();
+        for (Producto producto: productos){
+            if(producto.getReservas().isEmpty()){
+                productoDTOS.add(mapper.convertValue(producto,ProductoDTO.class));
+            }else {
+                for (Reserva reserva : producto.getReservas()) {
+                    if (!reserva.getFechaInicialReserva().equals(fechaInicial) && !reserva.getFechaFinalReserva().equals(fechaFinal)) {
+                        productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
+                    }
+                }
+            }
+        }
+        return productoDTOS;
+    }
+//    public List<LocalDate> getDatesBetweens(LocalDate startDate, LocalDate endDate) {
+//        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate);
+//        List<LocalDate> listOfDates = Stream.iterate(startDate, date -> date.plusDays(1))
+//                .limit(numOfDays)
+//                .collect(Collectors.toList());
+//        return listOfDates;
+//    }
 }

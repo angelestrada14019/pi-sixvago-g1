@@ -2,6 +2,7 @@ package com.example.proyectoIntegrador.dto;
 
 import com.example.proyectoIntegrador.entity.Producto;
 import com.example.proyectoIntegrador.entity.Usuario;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 

@@ -51,11 +51,6 @@ public class ReservaController {
     public ResponseEntity <List<ReservaDTO>> buscarReservaPorProductoId(@RequestParam Long idproducto) {
         return ResponseEntity.ok(reservaService.buscarReservaPorProductoId(idproducto));
     }
-//    @GetMapping("/fecha")
-//    public ResponseEntity <List<ProductoDTO>> buscarProductosFechaIF(
-//            @RequestParam String fechaInicial,@RequestParam String fechaFinal) {
-//        return ResponseEntity.ok(reservaService.buscarProductosFechaIF(fechaInicial,fechaFinal));
-//    }
 
     @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {

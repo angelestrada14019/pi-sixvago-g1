@@ -1,5 +1,6 @@
 package com.example.proyectoIntegrador.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,6 +45,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "productos_productos_id", nullable = false,referencedColumnName = "productos_id")
+    @JsonBackReference
     private Producto productosProductos;
 
     @ManyToOne

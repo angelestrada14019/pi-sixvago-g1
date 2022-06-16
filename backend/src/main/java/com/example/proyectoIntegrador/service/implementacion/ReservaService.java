@@ -9,6 +9,7 @@ import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.repository.IReservaRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ReservaService implements IGeneralService<ReservaDTO, Long> {
 
     @Autowired
@@ -74,15 +76,5 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
         return reservaDTOS;
 
     }
-//    public List<ProductoDTO> buscarProductosFechaIF(String fechaInicial, String fechaFinal){
-//        LocalDate fechaI=LocalDate.parse(fechaInicial);
-//        LocalDate fechaF = LocalDate.parse(fechaFinal);
-//        List<ProductoDTO> productoDTOS = new ArrayList<>();
-//        List<Producto> productos =iReservaRepository.buscarProductosFechaIF(fechaI,fechaF);
-//        for (Producto producto:productos){
-//            productoDTOS.add(mapper.convertValue(producto,ProductoDTO.class));
-//        }
-//        return productoDTOS;
-//
-//    }
+
 }
