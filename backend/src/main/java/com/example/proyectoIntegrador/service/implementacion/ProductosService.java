@@ -113,19 +113,20 @@ public class ProductosService implements IGeneralService<ProductoDTO, Long> {
                 productoDTOS.add(mapper.convertValue(producto,ProductoDTO.class));
             }else {
                 for (Reserva reserva : producto.getReservas()) {
-                    if (!reserva.getFechaInicialReserva().equals(fechaInicial) && !reserva.getFechaFinalReserva().equals(fechaFinal)) {
+                    if (!(
+                            isBetweenInclusive(reserva.getFechaInicialReserva(),reserva.getFechaFinalReserva(),fechaInicial)
+                            ||  isBetweenInclusive(reserva.getFechaInicialReserva(),reserva.getFechaFinalReserva(),fechaFinal)
+                    )){
                         productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
+                       break;
                     }
                 }
             }
         }
         return productoDTOS;
     }
-//    public List<LocalDate> getDatesBetweens(LocalDate startDate, LocalDate endDate) {
-//        long numOfDays = ChronoUnit.DAYS.between(startDate, endDate);
-//        List<LocalDate> listOfDates = Stream.iterate(startDate, date -> date.plusDays(1))
-//                .limit(numOfDays)
-//                .collect(Collectors.toList());
-//        return listOfDates;
-//    }
+
+boolean isBetweenInclusive(LocalDate start, LocalDate end, LocalDate target) {
+    return !target.isBefore(start) && !target.isAfter(end);
+}
 }
