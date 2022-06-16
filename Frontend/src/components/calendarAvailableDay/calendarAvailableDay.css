@@ -33,17 +33,17 @@
     padding: 30px 5px;
 }
 .calendarAvailableDay h2{
-    font-size: 20px;
+    font-size: 1.7rem;
     font-weight: bold;
     color: #000;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     text-align: center;
 }
 .calendarAvailableDay_container {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;  
+    align-items: flex-start;  
 }
 
 .calendarAvailableDay_boxReservation{
@@ -75,6 +75,7 @@
 @media (max-width: 768px){
     .calendarAvailableDay_container{
         flex-direction: column;
+        align-items: center;
     }
     .calendarAvailableDay_boxReservation{
         background-color: transparent;
