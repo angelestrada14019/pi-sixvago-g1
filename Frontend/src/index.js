@@ -8,6 +8,7 @@ import Producto from "./pages/Producto";
 import App from "./layouts/App";
 import NotFound from "./pages/NotFound";
 import Reserva from "./pages/Reserva";
+import ReservaExitosa from "./pages/ReservaExitosa";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,7 @@ root.render(
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
             <Route path=":id/reserva" element={<Reserva />} />
+            <Route path=":id/reserva/reservaExitosa" element={<ReservaExitosa />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
