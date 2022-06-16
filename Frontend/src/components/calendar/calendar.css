@@ -1,4 +1,7 @@
-.calendar-container.absolute{
+* {
+  box-sizing: border-box;
+}
+.calendar-container.absolute {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -9,24 +12,26 @@
   max-width: 750px;
   z-index: 1;
 }
-.calendar-container.none{
+.calendar-container.none {
   display: flex;
   flex-direction: column;
   user-select: none;
-  width: 120%;
-  min-width: 600px;
+  width: 90%;
   max-width: 750px;
   z-index: 1;
-  margin: 40px 0 100px 0;
 }
-
 
 .calendar-button-aplicar {
   cursor: pointer;
   width: 40%;
   min-height: 40px;
-  background: wheat;
-  color: #ffffff;
+  background: linear-gradient(
+    90deg,
+    rgba(203, 178, 106, 1) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgba(190, 158, 68, 1) 110%
+  );
+  color: #262626;
   border: none;
   border-radius: 5px;
   font-weight: 700;
@@ -39,7 +44,12 @@
   left: 55%;
 }
 .calendar-button-aplicar:hover {
-  background: rgb(61, 57, 47);
+  background: linear-gradient(
+    90deg,
+    rgb(158, 139, 82) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgb(148, 122, 53) 110%
+  );
 }
 
 .react-calendar {
@@ -73,7 +83,6 @@
 }
 .react-calendar button {
   margin: 0;
-  border: 0;
   outline: none;
 }
 .react-calendar button:enabled:hover {
@@ -81,6 +90,7 @@
 }
 .react-calendar__navigation {
   display: flex;
+  margin-top: 10px;
   height: 44px;
 }
 .react-calendar__navigation__label {
@@ -96,11 +106,10 @@
 .react-calendar__navigation button {
   min-width: 44px;
   background: none;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 18px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.872566);
+  color: #262626;
 }
 .react-calendar__navigation__arrow.react-calendar__navigation__prev-button,
 .react-calendar__navigation__arrow.react-calendar__navigation__next-button {
@@ -128,17 +137,16 @@
   gap: 0.5em;
   justify-items: center;
   text-transform: uppercase;
-  font-weight: 700;
   font-size: 16px;
 }
 .react-calendar__month-view__weekdays__weekday {
-  padding: 0.5em;
+  color: #262626;
+}
+abbr[title] {
   text-decoration: none;
   font-weight: 700;
-  font-size: 12px;
-  line-height: 20px;
-  font-feature-settings: "pnum" on, "lnum" on;
-  color: #383b58;
+  font-size: 16px;
+  font-weight: bold;
 }
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
   display: flex;
@@ -150,7 +158,7 @@
   display: grid !important;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
-  gap: 0.5em;
+  gap: 0.3em;
 }
 .react-calendar__month-view__days__day--weekend {
   color: #d10000;
@@ -165,13 +173,13 @@
   padding: 2em 0.5em;
 }
 .react-calendar__tile {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
   background: none;
   font-family: "Roboto";
-  font-weight: 400;
-  font-size: 12px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.32px;
   font-feature-settings: "pnum" on, "lnum" on;
@@ -179,20 +187,20 @@
 }
 
 .react-calendar__tile:disabled {
-  background-color: #9e9e9e;
-  color: #540000;
+  color: #adadad;
+  background: none;
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: wheat;
+  border: 2px solid rgb(250, 218, 36);
 }
 .react-calendar__tile--now {
-  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
-} 
+  color: rgb(250, 218, 38);
+}
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background-color: green;
+  background: rgba(203, 178, 106, 1);
 }
 .react-calendar__tile--hasActive {
   background: #76baff;
@@ -202,15 +210,15 @@
   background: #a9d4ff;
 }
 .react-calendar__tile--active {
-  background: wheat;
-  color: white;
+  background: rgba(203, 178, 106, 1);
+  color: #262626;
 }
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: wheat;
+  background: rgba(203, 178, 106, 0.75);
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #2e882b79;
+  border: 2px solid #cacaca;
 }
 
 @media (min-width: 778px) and (max-width: 1058px) {
@@ -229,8 +237,9 @@
 }
 
 @media (max-width: 576px) {
-  .calendar-container {
+  .calendar-container.absolute {
     right: 0;
+    width: 100%;
     min-width: 100%;
     max-width: 100%;
   }

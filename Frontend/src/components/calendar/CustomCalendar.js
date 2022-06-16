@@ -32,6 +32,7 @@ const CustomCalendar = ({ handleCheckInOut }) => {
       last: new Date("2022-07-031"),
     },
   ];
+
   useEffect(() => {
     setValue(getDates());
   }, []);

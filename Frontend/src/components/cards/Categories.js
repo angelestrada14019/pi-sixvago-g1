@@ -34,9 +34,7 @@ const Categories = () => {
   };
 
   return (
-    <section className="categories-section">
-      <h2 className="section-h2">Buscar por tipo de alojamiento</h2>
-      <div className="cardCategory">
+    <div className="cardCategory">
         {listaCategorias.map((item, i) => {
           return (
             <div
@@ -55,7 +53,6 @@ const Categories = () => {
           );
         })}
       </div>
-    </section>
   );
 };
 export default Categories;

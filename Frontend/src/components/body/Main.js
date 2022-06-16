@@ -14,10 +14,17 @@ const Main = () => {
 
   return (
     <div className="container">
-      <Categories />
+      <section className="categories-section">
+        <div>
+          <h2 className="section-h2">Buscar por tipo de alojamiento</h2>
+          <Categories />
+        </div>
+      </section>
       <section className="cards-section">
-        <h2 className="section-h2">Recomendaciones</h2>
-        <Cards />
+        <div>
+          <h2 className="section-h2">Recomendaciones</h2>
+          <Cards />
+        </div>
       </section>
     </div>
   );

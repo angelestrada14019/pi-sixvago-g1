@@ -1,31 +1,3 @@
-.rmdp-wrapper{
-    z-index: 1 !important;
-}
-.rmdp-day.rmdp-selected span:not(.highlight){
-    background-color: transparent;
-    color: rgb(148, 148, 148);
-}
-.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(200, 200, 200);
-}
-.rmdp-day.rmdp-today span {
-    background-color: #f0f0f0;
-    color: #000;
-}
-.rmdp-week-day{
-    color: #000;
-}
-.rmdp-arrow{
-    border-color: #000;
-}
-.rmdp-arrow-container:hover{
-    background-color: wheat;
-    
-}
-.rmdp-arrow-container:hover .rmdp-arrow{
-    border-color: #000;
-}
 .calendarAvailableDay{
     margin-top: 86px;
     margin-bottom: 100px;
@@ -81,25 +53,14 @@
         background-color: transparent;
         border-radius: none;
         box-shadow: none;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        margin-top: 10px;
-    }
-    .calendarAvailableDay_boxReservation a{
-        margin-top: 0;
-        margin-left: 10px;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .calendarAvailableDay_boxReservation{
         flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        text-align: center;
     }
     .calendarAvailableDay_boxReservation button{
         margin-top: 15px;
-        margin-left: 10px;
+        margin-left: 0;
         width: 100%;
-    }    
+    }
 }

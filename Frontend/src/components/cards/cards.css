@@ -3,8 +3,8 @@
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
-  margin-left: 3%;
-  margin-right: 3%;
+  /* margin-left: 3%;
+  margin-right: 3%; */
 }
 
 .card {
@@ -120,12 +120,19 @@
 }
 
 @media (max-width: 576px) {
+  .cards{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
+  }
+
   .card {
     display: flex;
     flex-direction: column;
-    min-width: 317px;
-    width: 393px;
     height: 491px;
+    width: 100%;
+    margin: 0;
   }
   .card-img {
     width: 100%;

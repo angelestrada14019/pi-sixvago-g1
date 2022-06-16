@@ -1,7 +1,4 @@
-.categories-section {
-  padding-top: 15px;
-  font-family: "Roboto";
-}
+
 
 .cardCategory {
   display: flex;
@@ -73,7 +70,6 @@
     align-items: center;
   }
   .renderCategory {
-    min-width: 317px;
-    width: 90%;
+    min-width: 90%;
   }
 }
