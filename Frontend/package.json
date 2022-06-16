@@ -65,7 +65,6 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^13.3.0",
-    "simple-react-google-maps": "^1.1.2"
+    "@testing-library/react": "^13.3.0"
   }
 }
