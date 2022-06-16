@@ -1,0 +1,140 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.card {
+  display: flex;
+  margin: 7px;
+  background: #ffffff;
+  border: 1px solid #dfe4ea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  min-width: 40%;
+  width: 635px;
+  max-width: 635px;
+  height: 283px;
+}
+
+.card-body {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  padding: 21px 16px 11px 16px;
+}
+.card-body a {
+  text-align: center;
+}
+
+.card-img {
+  object-fit: cover;
+  min-width: 50%;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.card-category {
+  font-family: "Quicksand";
+  color: rgba(56, 59, 88, 0.5);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+.fa-star {
+  margin-left: 2px;
+  font-size: 12px;
+  color: #ffc107;
+}
+.card-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.card-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  right: 5%;
+}
+.card-rating h2 {
+  width: 35px;
+  height: 25px;
+  background: #383b58;
+  border: 1px solid #383b58;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  color: #f3f1ed;
+}
+.card-rating p {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  color: #383b58;
+}
+.card-location {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.card-description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 59px;
+  margin-bottom: 8px;
+}
+.card-description a {
+    text-decoration: none;
+  }
+.card-description span {
+  cursor: pointer;
+  color: rgb(52, 183, 243);
+}
+
+.card-button {
+  cursor: pointer;
+  min-width: 50%;
+  min-height: 40px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
+  color: #262626;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 317px;
+    width: 393px;
+    height: 491px;
+  }
+  .card-img {
+    width: 100%;
+    max-height: 205px;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px 13px 15px;
+  }
+}

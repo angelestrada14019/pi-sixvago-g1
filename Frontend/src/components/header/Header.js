@@ -1,26 +1,31 @@
-import "./header.css";
-import logo from "../../assets/SixVago-dorado.png";
-import menu from "../../assets/menu.png";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../../contexts/ContextProvider";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
-import { Link } from "react-router-dom";
-import { useStateContext } from "../../contexts/ContextProvider";
+import logo from "../../assets/SixVago-dorado.png";
+import menu from "../../assets/menu.png";
+import "./header.css";
+
 const Header = () => {
+  const navigate = useNavigate();
   const [toggleNavButton, setToggleNavButton] = useState("");
-  const [openLogin, setOpenLogin] = useState(false);
+  // const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const {
     setCardCategory,
-    cardCategory,
     setLocation,
     setLoading,
     setLoadingFiltro,
+    setloadingFnChange,
+    openLogin,
+    setOpenLogin,
   } = useStateContext();
+
   useEffect(() => {
     if (openLogin) {
       setToggleNavButton("iniciar");
@@ -66,9 +71,6 @@ const Header = () => {
     setCardCategory("");
     setLocation("");
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   return (
@@ -78,12 +80,15 @@ const Header = () => {
           <Link
             to="/"
             onClick={() => {
+              navigate("/");
               setOpenLogin(false);
               setOpenSignUp(false);
               setToggleNavButton("");
               setCardCategory("");
               setLocation("");
               setLoadingFiltro(true);
+              setLoading(true);
+              setloadingFnChange(true);
             }}
           >
             <img src={logo} alt="logo" />

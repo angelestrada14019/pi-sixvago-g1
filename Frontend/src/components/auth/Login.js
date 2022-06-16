@@ -1,13 +1,15 @@
-import { useState,useRef } from "react";
-import "./login.css";
+import { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import "./login.css";
+import { useStateContext } from "../../contexts/ContextProvider";
 
-const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
+const Login = ({ show, setOpenLogin, handleClick }) => {
   const [inputType, setInputType] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-  
+  const { mustLogin, setMustLogin } = useStateContext();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user"));
@@ -32,18 +34,36 @@ const Login = ({ show, setOpenLogin, handleClick,setToggleNavButton }) => {
     if (reason === "clickaway") {
       setInfo(false);
       setAlert(false);
+      setMustLogin(false);
       return;
     }
     setInfo(false);
     setAlert(false);
+    setMustLogin(false);
   };
-  
 
   return (
     <div
       className={`login-container ${show ? "show" : null}`}
       id="login-container"
     >
+      {!mustLogin ? null : (
+        <Snackbar
+          sx={{ marginBottom: "4rem" }}
+          open={mustLogin}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            severity="warning"
+            variant="filled"
+            sx={{ marginTop: "95px", zIndex: 4 }}
+          >
+            Debes loggearte para realizar una reserva.
+          </Alert>
+        </Snackbar>
+      )}
       {!alert ? null : (
         <Snackbar
           sx={{ marginBottom: "4rem" }}

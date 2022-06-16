@@ -1,6 +1,5 @@
-import React from "react";
-import "./sidebar.css";
 import UserWelcome from "./UserWelcome";
+import "./sidebar.css";
 
 const Sidebar = ({
   show,
@@ -27,36 +26,9 @@ const Sidebar = ({
         )}
       </div>
       <div className="sidebar-body">
-          {!isLoggedIn ? (
-        <div>
-          {toggleNavButton === "crear" ? (
-            <ul>
-              <li id="iniciar" onClick={(e) => handleClick(e)}>
-                <a href="#">
-                  <span className="boton-iniciar">Iniciar sesion</span>
-                </a>
-              </li>
-            </ul>
-          ) : toggleNavButton === "iniciar" ? (
-            <>
-              <ul>
-                <li id="crear" onClick={(e) => handleClick(e)}>
-                  <a href="#">
-                    <span className="boton-crear">Crear cuenta</span>
-                  </a>
-                </li>
-              </ul>
-            </>
-          ) : (
-            <>
-              <ul>
-                <li id="crear" onClick={(e) => handleClick(e)}>
-                  <a href="#">
-                    <span className="boton-crear">Crear cuenta</span>
-                  </a>
-                </li>
-              </ul>
-              <hr />
+        {!isLoggedIn ? (
+          <div>
+            {toggleNavButton === "crear" ? (
               <ul>
                 <li id="iniciar" onClick={(e) => handleClick(e)}>
                   <a href="#">
@@ -64,9 +36,36 @@ const Sidebar = ({
                   </a>
                 </li>
               </ul>
-            </>
-          )}
-        </div>
+            ) : toggleNavButton === "iniciar" ? (
+              <>
+                <ul>
+                  <li id="crear" onClick={(e) => handleClick(e)}>
+                    <a href="#">
+                      <span className="boton-crear">Crear cuenta</span>
+                    </a>
+                  </li>
+                </ul>
+              </>
+            ) : (
+              <>
+                <ul>
+                  <li id="crear" onClick={(e) => handleClick(e)}>
+                    <a href="#">
+                      <span className="boton-crear">Crear cuenta</span>
+                    </a>
+                  </li>
+                </ul>
+                <hr />
+                <ul>
+                  <li id="iniciar" onClick={(e) => handleClick(e)}>
+                    <a href="#">
+                      <span className="boton-iniciar">Iniciar sesion</span>
+                    </a>
+                  </li>
+                </ul>
+              </>
+            )}
+          </div>
         ) : null}
         {!isLoggedIn ? null : (
           <div className="exit-sesion">

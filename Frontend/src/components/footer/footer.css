@@ -8,7 +8,7 @@
   bottom: 0;
   color: #CBB26A;
   background-color: #262626;
-  z-index: 2;
+  z-index: 100;
 }
 
 .footer-copyright {

@@ -1,13 +1,16 @@
 package com.example.proyectoIntegrador.dto;
 
-import com.example.proyectoIntegrador.entity.Caracteristicas;
-import com.example.proyectoIntegrador.entity.Categoria;
-import com.example.proyectoIntegrador.entity.Ciudad;
+import com.example.proyectoIntegrador.entity.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
+import javax.persistence.OneToMany;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Getter
@@ -28,4 +31,7 @@ public class ProductoDTO {
 
     private List<Caracteristicas> caracteristicas;
     private List<ImagenDTO> listadeimagenes;
+
+    @JsonIgnoreProperties(value = {"productos_productos_id","usuarios_id", "datos_para_vendedor", "vacuna_covid"})
+    private List<ReservaDTO> reservas;
 }

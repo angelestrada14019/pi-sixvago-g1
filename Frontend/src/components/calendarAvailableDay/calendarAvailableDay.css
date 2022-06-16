@@ -1,3 +1,6 @@
+.rmdp-wrapper{
+    z-index: 1 !important;
+}
 .rmdp-day.rmdp-selected span:not(.highlight){
     background-color: transparent;
     color: rgb(148, 148, 148);
@@ -40,9 +43,9 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    
+    align-items: center;  
 }
+
 .calendarAvailableDay_boxReservation{
     background-color: white;
     padding: 40px 20px;
@@ -57,7 +60,7 @@
 }
 .calendarAvailableDay_boxReservation button{
     margin-top: 40px;
-    background-color: wheat;
+    background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
     color: black;
     font-weight: bold;
     border: none;
@@ -65,10 +68,10 @@
     border-radius: 5px;
     font-size: 1.2em;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
 }
-.calendarAvailableDay_container_singleCalendar{
-    display: none;
-}
+
 @media (max-width: 768px){
     .calendarAvailableDay_container{
         flex-direction: column;
@@ -82,17 +85,20 @@
         justify-content: space-around;
         margin-top: 10px;
     }
-    .calendarAvailableDay_boxReservation button{
+    .calendarAvailableDay_boxReservation a{
         margin-top: 0;
         margin-left: 10px;
         width: 100%;
     }
 }
-@media (max-width: 576px){
-    .calendarAvailableDay_container_doubleCalendar{
-        display: none;
+
+@media screen and (max-width: 576px) {
+    .calendarAvailableDay_boxReservation{
+        flex-direction: column;
     }
-    .calendarAvailableDay_container_singleCalendar{
-        display: block;
-    }
+    .calendarAvailableDay_boxReservation button{
+        margin-top: 15px;
+        margin-left: 10px;
+        width: 100%;
+    }    
 }

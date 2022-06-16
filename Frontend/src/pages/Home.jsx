@@ -1,4 +1,4 @@
-import Buscador from "../components/body/buscador/Buscador";
+import Buscador from "../components/buscador/Buscador";
 import Main from "../components/body/Main";
 
 function Home() {

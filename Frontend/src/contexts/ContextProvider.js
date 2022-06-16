@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
-
+  const [openLogin, setOpenLogin] = useState(false);
+  const [mustLogin, setMustLogin] = useState(false);
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
   const [product, setProduct] = useState([]);
@@ -13,27 +15,42 @@ export const ContextProvider = ({ children }) => {
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
+  const { pathname: currentLocation } = useLocation();
 
   useEffect(() => {
-    getListaProducto();
-    getListaCiudades();
-  }, [loading,loadingFiltro]);
+    if (currentLocation === "/login") {
+      setOpenLogin(true);
+    }
+  }, [openLogin]);
+
+  useEffect(() => {
+    if (loading) {
+      if (location === "") {
+        getListaProducto();
+      }
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+      getListaCiudades();
+    }
+  }, [loading, loadingFiltro]);
 
   const getListaProducto = async () => {
     const lista = await ApiCall.invokeGET("/productos");
 
-    if (localStorage.getItem("isLoggedIn") === "false") {
+    if (localStorage.getItem("isLoggedIn") === "false" && cardCategory === "") {
       let shuffleList = shuffle(lista);
       if (loadingFiltro) {
-          
-          setList(shuffleList);
+        setList(shuffleList);
       }
     } else {
-        if (loadingFiltro) {
-            setList(lista);            
-        }
+      if (loadingFiltro) {
+        setList(lista);
+      }
     }
-    setProduct(lista);
+    //setProduct(lista);
   };
   const getListaCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
@@ -76,7 +93,11 @@ export const ContextProvider = ({ children }) => {
           loading,
           setLoading,
           loadingFiltro,
-            setLoadingFiltro,
+          setLoadingFiltro,
+          openLogin,
+          setOpenLogin,
+          mustLogin,
+          setMustLogin,
         }}
       >
         {children}

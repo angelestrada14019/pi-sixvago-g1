@@ -5,10 +5,12 @@ import com.example.proyectoIntegrador.entity.Producto;
 import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.service.implementacion.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -36,6 +38,12 @@ public ResponseEntity agregar(@RequestBody ProductoDTO productoDTO) throws BadRe
     @GetMapping("/categorias")
     public ResponseEntity <List<ProductoDTO>> findByTituloCategoria(@RequestParam String tituloCategoria) {
         return ResponseEntity.ok(productoService.findByTituloCategoria(tituloCategoria));
+    }
+    @GetMapping("/fecha")
+    public ResponseEntity <List<ProductoDTO>> buscarProductosFechaIF(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaInicial,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaFinal) {
+        return ResponseEntity.ok(productoService.buscarProductosFechaIF(fechaInicial,fechaFinal));
     }
 
     @GetMapping("/{id}")

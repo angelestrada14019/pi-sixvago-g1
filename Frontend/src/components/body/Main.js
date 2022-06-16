@@ -1,34 +1,24 @@
-import "./main.css";
-import Cards from "./Cards.js";
-import Categories from "./Categories";
-import { useStateContext } from "../../contexts/ContextProvider";
-import Loader from "../../utils/Loader";
 import { useEffect } from "react";
-import {LinearProgress } from '@mui/material';
+import { useStateContext } from "../../contexts/ContextProvider";
+import Cards from "../cards/Cards";
+import Categories from "../cards/Categories";
+import "./main.css";
+
 const Main = () => {
-  const { loading, setLoading } = useStateContext();
+  const { setLoading, setLoadingFiltro } = useStateContext();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    setLoadingFiltro(true);
+    setLoading(true);
   }, []);
-
-  const style ={
-      backgroundColor: '#f5f5f5',
-  }
- 
 
   return (
     <div className="container">
       <Categories />
-      {!loading ? (
-          <Cards />
-          ) : (
-              <div className="container_cirularProgress">
-            <LinearProgress color="inherit"/>
-        </div>
-      )}
+      <section className="cards-section">
+        <h2 className="section-h2">Recomendaciones</h2>
+        <Cards />
+      </section>
     </div>
   );
 };

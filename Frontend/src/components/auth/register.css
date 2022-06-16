@@ -8,13 +8,13 @@
   -webkit-transition: 0.5s;
   position: fixed;
   overflow: hidden;
-  z-index: 2;
+  z-index: 3;
 }
 
 .register-container.show {
   top: initial;
   height: 100%;
-  -webkit-transition: height 1.5s ease-in-out;
+  -webkit-transition: height 1s ease-in-out;
 }
 
 .formulario-signup {

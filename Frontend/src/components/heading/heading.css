@@ -1,0 +1,115 @@
+.headerProducto {
+  position: sticky;
+  top: 86px;
+  min-width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+.lodging-section {
+  padding: 10px 10px 10px 10px;
+  font-family: "Roboto";
+  color: #262626;
+  background: linear-gradient(
+    90deg,
+    rgba(203, 178, 106, 1) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgba(190, 158, 68, 1) 110%
+  );
+}
+.section {
+  margin-left: 40px;
+  color: #262626;
+  font-size: 20px;
+}
+.section h4 {
+  line-height: 1;
+  margin-right: 100px;
+  font-family: "Quicksand";
+}
+
+.section h2 {
+  color: #262626;
+  font-family: "Roboto";
+  font-weight: bold;
+  position: absolute;
+  font-style: normal;
+}
+
+.backButton {
+  background: transparent;
+  border: 0px solid;
+  margin-right: 50px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.locationData {
+  color: #383b58;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+  text-align: start;
+  background-color: white;
+}
+.hotelData {
+  color: #262626;
+  font-size: "Roboto";
+  text-align: start;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.mapReport {
+  position: relative;
+}
+.descriptionData {
+  margin-left: 18px;
+}
+
+.hotel-score {
+  width: 35px;
+  height: 35px;
+  background: #383b58;
+  border: 0px solid #383b58;
+  border-radius: 7px;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #f3f1ed;
+}
+.hotel-rating {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #383b58;
+  margin-right: 5px;
+}
+
+.ratingContainer {
+  display: flex;
+  margin: auto;
+  margin-right: 40px;
+}
+
+.descriptionLodging {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.lodging {
+  display: block;
+}
+.fa-location-dot {
+  margin-left: 50px;
+  margin-right: 10px;
+  padding: 5px 0px 5px 0px;
+}
+
+@media (max-width: 578px) {
+  header {
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.548);
+  }
+}
