@@ -68,7 +68,7 @@ jobs_desarrollo_container_back:
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script: 
     - echo "Docker build started"
-    - docker build -t $APP_NAME .
+    - docker build --build-arg USERNAME=${USERNAME} PASSWORD=${PASSWORD} SECRET_KEY=${SECRET_KEY} -t $APP_NAME .
     - docker tag $APP_NAME:latest 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
     - docker push 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
   only:
