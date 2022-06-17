@@ -58,7 +58,6 @@ jobs_desarrollo_container_back:
   variables: 
     DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
     APP_NAME: gi-sixvago
-    DOCKER_HOST: tcp://docker:2375
   services:
     - docker:dind
   before_script:
