@@ -9,7 +9,7 @@
 }
 .paginationBttns a {
   padding: 6px 8px;
-  margin: 8px 3px;
+  margin: 8px 3px 0px 3px;
   border-radius: 5px;
   border: 1px solid #ccc;
   color: rgb(0, 0, 0);
@@ -19,14 +19,13 @@
   background-color: rgb(198, 174, 129);
   color: rgb(255, 255, 255);
 }
-.previousBttn {
-
+/* .previousBttn {
 }
 .nextBttn {
-}
+} */
 .paginationActive a {
   background-color: rgb(198, 174, 129);
   color: rgb(255, 255, 255);
 }
-.paginationDisabled {
-}
+/* .paginationDisabled {
+} */

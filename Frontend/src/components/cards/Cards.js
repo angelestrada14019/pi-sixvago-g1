@@ -6,21 +6,13 @@ import Card from "./Card";
 import "./cards.css";
 
 const Cards = () => {
-  const {
-    cardCategory,
-    list,
-    setList,
-    pageNumber,
-    setPageNumber,
-    loadingFnChange,
-    loading,
-  } = useStateContext();
+  const { cardCategory, list, setList, pageNumber, loading } =
+    useStateContext();
   const productsPerPage = 4;
   const pagesVisited = pageNumber * productsPerPage;
   const displayProducts = list
     .slice(pagesVisited, pagesVisited + productsPerPage)
     .map((product, i) => <Card data={product} key={`cards-${i}`} />);
-  
 
   useEffect(() => {
     if (cardCategory !== "") {
@@ -46,21 +38,7 @@ const Cards = () => {
     setList(filtroQuery);
   };
 
-  const pageCount = Math.ceil(list.length / productsPerPage);
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
-
-  return (
-    <>
-      <div className="cards">{displayProducts}</div>
-      <div>
-        {!loadingFnChange && (
-          <PaginationControll pageCount={pageCount} changePage={changePage} />
-        )}
-      </div>
-    </>
-  );
+  return <div className="cards">{displayProducts}</div>;
 };
 
 export default Cards;

@@ -6,10 +6,10 @@ import useWindowDimensions from "../../utils/useWindowDimensions";
 const Card = ({ data }) => {
   const { loading } = useStateContext();
   const { width } = useWindowDimensions();
-  let imgHeight = width < 577 ? "205px" : "100%";
-  let imgWidth = width < 577 ? "100%" : "50%";
-  let textHeight = width < 577 ? "90px" : "120px";
-  let textMarginTop = width < 577 ? "7px" : "10px";
+  let imgHeight = width < 600 ? "205px" : "100%";
+  let imgWidth = width < 600 ? "100%" : "50%";
+  let textHeight = width < 600 ? "90px" : "120px";
+  let textMarginTop = width < 600 ? "7px" : "10px";
 
   return (
     <div className="card">

@@ -1,27 +1,28 @@
 .container {
-    width: 100%;
-    margin-top: 86px;
-    margin-bottom: 100px;
+  width: 100%;
+  margin-top: 86px;
+  margin-bottom: 100px;
 }
-.section-h2 {
+.categories-section {
   display: flex;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  margin-left: 1em;
-  padding: 15px 0;
-  color: #262626;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 1em;
+  font-family: "Roboto";
 }
 .cards-section {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   background-color: rgba(223, 223, 223, 0.65);
+  padding-bottom: 1em;
 }
-.categories-section {
-  padding: 1em 0;
-  font-family: "Roboto";
+.section-h2 {
+  font-weight: 700;
+  font-size: 24px;
+  padding: 15px 0;
+  color: #262626;
+  text-align: center;
 }
 /* ::-webkit-scrollbar the scrollbar.
 ::-webkit-scrollbar-button the buttons on the scrollbar (arrows pointing upwards and downwards).
@@ -43,7 +44,12 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
+  background: linear-gradient(
+    90deg,
+    rgba(203, 178, 106, 1) 10%,
+    rgba(255, 245, 218, 1) 50%,
+    rgba(190, 158, 68, 1) 110%
+  );
   border-radius: 5px;
 }
 
