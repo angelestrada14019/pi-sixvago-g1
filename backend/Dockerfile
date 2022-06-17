@@ -3,6 +3,9 @@ FROM maven:3-jdk-8-alpine as builder
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
+ARG USERNAME=${USERNAME}
+ARG PASSWORD=${PASSWORD}
+ARG SECRET_KEY=${SECRET_KEY}
 RUN mvn package
 
 FROM openjdk:8-jre-alpine
