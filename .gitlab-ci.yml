@@ -51,18 +51,27 @@ stages:
 #     - desarrollo
 
 jobs_desarrollo_container_back:
-  image: docker:latest
+  image: 
+    name: amazon/aws-cli:latest
+    entrypoint: [""]
   stage: container
+  variables: 
+    - DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
+    - APP_NAME: gi-sixvago
+    - DOCKER_HOST: tcp://docker:2375
   services:
     - docker:dind
   before_script:
     - cd ./backend
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 145504712931.dkr.ecr.us-east-1.amazonaws.com
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script: 
     - echo "Docker build started"
-    - docker build -t g1-sixvago .
-    - docker tag g1-sixvago:latest 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest
-    - docker push 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest
-  when: manual
+    - docker build -t $APP_NAME .
+    - docker tag $APP_NAME:latest 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
+    - docker push 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
+  # when: manual
   only:
     - desarrollo
