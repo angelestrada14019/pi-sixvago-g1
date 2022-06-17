@@ -57,7 +57,7 @@ jobs_desarrollo_container_back:
     - docker:dind
   before_script:
     - cd ./backend
-    - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin 145504712931.dkr.ecr.us-east-1.amazonaws.com
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 145504712931.dkr.ecr.us-east-1.amazonaws.com
   script: 
     - echo "Docker build started"
     - docker build -t g1-sixvago .
