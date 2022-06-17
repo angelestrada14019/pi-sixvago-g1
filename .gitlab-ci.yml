@@ -5,67 +5,73 @@ stages:
   - deploy
 
 
-jobs_tests_front:
-  image: node:12.20.0
-  stage: test
-  script: 
-    - cd ./Frontend
-    - npm install
-    - cd ./src
-    - pwd
-    - npm test
-  only:
-    - desarrollo 
+# jobs_tests_front:
+#   image: node:12.20.0
+#   stage: test
+#   script: 
+#     - cd ./Frontend
+#     - npm install
+#     - cd ./src
+#     - pwd
+#     - npm test
+#   only:
+#     - desarrollo 
 
 
-jobs_desarrollo_tests_back:
-  stage: test
-  script: 
-      - cd ./backend
-      - pwd
-      - echo "Maven test started"
-      - mvn clean test
-  only:
-    - desarrollo 
+# jobs_desarrollo_tests_back:
+#   stage: test
+#   script: 
+#       - cd ./backend
+#       - pwd
+#       - echo "Maven test started"
+#       - mvn clean test
+#   only:
+#     - desarrollo 
 
 
-test_job_postman:
-  stage: test
+# test_job_postman:
+#   stage: test
+#   image: 
+#     name: postman/newman_alpine33    
+#     entrypoint: [""]
+
+#   script:
+#     - newman --version
+#     - npm config set unsafe-perm true
+#     - npm install -g newman-reporter-html 
+#     - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+#   artifacts:
+#     when: always
+#     paths:
+#       - report.html
+#     reports:
+#       junit: report.xml
+#   when: manual
+#   only:
+#     - desarrollo
+
+jobs_desarrollo_container_back:
   image: 
-    name: postman/newman_alpine33    
+    name: amazon/aws-cli:latest
     entrypoint: [""]
-
-  script:
-    - newman --version
-    - npm config set unsafe-perm true
-    - npm install -g newman-reporter-html 
-    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
-  artifacts:
-    when: always
-    paths:
-      - report.html
-    reports:
-      junit: report.xml
-  when: manual
+  stage: container
+  variables: 
+    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
+    APP_NAME: g1-sixvago
+  services:
+    - docker:dind
+  before_script:
+    - cd ./backend
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+  script: 
+    - echo "Docker build started"
+    - docker build -t $APP_NAME --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} .
+    - docker image ls
+    - docker tag $APP_NAME:latest $DOCKER_REGISTRY/$APP_NAME:latest
+    - docker image ls
+    - docker push $DOCKER_REGISTRY/$APP_NAME:latest
   only:
     - desarrollo
-
-# jobs_desarrollo_container_back:
-#   image: docker:latest
-#   stage: container
-#   services:
-#     - docker:dind
-#   before_script:
-#     - cd ./backend
-#     - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
-#     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-#   script: 
-#     - echo "Docker build started"
-#     - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG .
-#     - echo "Docker push started"
-#     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG
-#     - echo "Docker tag started"
-#     - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG $CI_REGISTRY/${CI_PROJECT_PATH}:latest
-#     - echo "Docker push latest"
-#     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
-#   when: manual
