@@ -69,7 +69,9 @@ jobs_desarrollo_container_back:
   script: 
     - echo "Docker build started"
     - docker build -t $APP_NAME --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} .
+    - docker image ls
     - docker tag $APP_NAME:latest $DOCKER_REGISTRY/$APP_NAME:latest
+    - docker image ls
     - docker push $DOCKER_REGISTRY/$APP_NAME:latest
   only:
     - desarrollo
