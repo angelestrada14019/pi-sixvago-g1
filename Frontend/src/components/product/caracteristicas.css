@@ -18,13 +18,14 @@
 .caracteristicas-container{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     flex-direction: row;
     align-content: center;
     align-items: center;
+    justify-content: space-around;
 }
 .caracteristica{
     max-width: auto;
-    flex: 1 0 20%;
     margin: 0px 10px 0px 10px;
     font-size: 10px;
 }
