@@ -24,6 +24,8 @@ jobs_desarrollo_container_back:
   variables: 
     DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
     APP_NAME: g1-sixvago
+  depends_on:
+    - jobs_desarrollo_tests_back
   services:
     - docker:dind
   before_script:
@@ -47,7 +49,8 @@ test_job_postman:
   image: 
     name: postman/newman_alpine33    
     entrypoint: [""]
-
+  dependencies:
+    - jobs_desarrollo_container_back
   script:
     - newman --version
     - npm config set unsafe-perm true
@@ -77,9 +80,9 @@ test_job_postman:
 
 jobs_build_front:
   image: node:12.20.0 #node:10
-  stage: build
+  stage: build  
   script:
-    - cd ./frontend
+    - cd ./Frontend
     - npm install
     - npm run build
   artifacts:
@@ -94,9 +97,10 @@ jobs_deploy_front_s3:
   image:
     name: amazon/aws-cli:latest
     entrypoint: [""]
+  dependencies:
+    - jobs_build_front
   stage: deploy
   script:
-    - cd ./Frontend
     - aws --version
     - aws s3 rm s3://$S3_BUCKET --recursive
     - aws s3 cp build s3://$S3_BUCKET --recursive
