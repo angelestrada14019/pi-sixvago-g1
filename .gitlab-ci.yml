@@ -77,7 +77,7 @@ test_job_postman:
 #     - desarrollo 
 
 jobs_build_front:
-  image: node:12.20.0 #node:10
+  image: node:16.15.1 #node:10
   stage: build  
   script:
     - cd ./Frontend
