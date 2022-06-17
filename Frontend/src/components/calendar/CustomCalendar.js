@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import "./calendar.css";
 //import 'react-calendar/dist/Calendar.css';
@@ -10,6 +10,7 @@ const CustomCalendar = ({ handleCheckInOut }) => {
   const [value, setValue] = useState(null);
   const { width } = useWindowDimensions();
   const { pathname: currentLocation } = useLocation();
+  const { id } = useParams();
   const dayAvailable = [
     {
       first: new Date("2022-06-005"),
@@ -57,19 +58,22 @@ const CustomCalendar = ({ handleCheckInOut }) => {
     let calendaryAvailable2 = calendaryAvailable.flat();
     return calendaryAvailable2;
   };
-
   return (
     <div
       className={`calendar-container ${
-        currentLocation === "/" ? "absolute" : "none"
-      }`}
+        currentLocation === "/"
+          ? "absolute"
+          : "none" && currentLocation === `/producto/${id}`
+          ? "none product"
+          : "none"
+      } `}
     >
       <Calendar
         showDoubleView={width >= 600}
-        selectRange
+        selectRange={currentLocation !== `/producto/${id}` ? true : false}
         minDetail="month"
         formatShortWeekday={(locale, date) => date.toString().charAt(0)}
-        navigationLabel={({ label }) => label.split(" ")[0]}
+        navigationLabel={({ label }) => label.split(" ")[0].charAt(0).toUpperCase() + label.split(" ")[0].substring(1)}
         minDate={new Date()}
         next2Label={null}
         prev2Label={null}

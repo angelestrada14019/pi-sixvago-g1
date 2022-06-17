@@ -20,6 +20,19 @@
   max-width: 750px;
   z-index: 1;
 }
+.calendar-container.product {
+  pointer-events: none;
+}
+.calendar-container.product .react-calendar__navigation {
+  pointer-events: all;
+}
+.calendar-container.product .react-calendar__tile{
+  background: rgba(190, 158, 68, 1)
+}
+.calendar-container.product .react-calendar__tile:disabled {
+  color: #adadad;
+  background: none;
+}
 
 .calendar-button-aplicar {
   cursor: pointer;
