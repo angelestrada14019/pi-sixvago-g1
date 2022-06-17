@@ -65,7 +65,7 @@ test_job_postman:
     - desarrollo
 
 # jobs_tests_front:
-#   image: node:12.20.0
+#   image: node:16
 #   stage: test
 #   script: 
 #     - cd ./Frontend
@@ -86,7 +86,7 @@ jobs_build_front:
   artifacts:
     when: always
     paths:
-      - build/
+      - ./Frontend/build/
   only:
     - desarrollo
 
