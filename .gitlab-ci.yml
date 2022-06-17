@@ -28,18 +28,19 @@ jobs_desarrollo_container_back:
     - jobs_desarrollo_tests_back
   services:
     - docker:dind
+
   before_script:
     - cd ./backend
+    - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
     - amazon-linux-extras install docker
     - aws --version
     - docker --version
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script: 
     - echo "Docker build started"
-    - docker build -t $APP_NAME --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} .
-    - docker image ls
-    - docker tag $APP_NAME:latest $DOCKER_REGISTRY/$APP_NAME:latest
-    - docker image ls
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$TAG --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} .   
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$TAG
+    - docker tag $DOCKER_REGISTRY/$APP_NAME:$TAG $DOCKER_REGISTRY/$APP_NAME:latest
     - docker push $DOCKER_REGISTRY/$APP_NAME:latest
   only:
     - desarrollo
