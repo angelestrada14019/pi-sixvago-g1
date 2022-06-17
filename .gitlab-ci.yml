@@ -56,9 +56,9 @@ jobs_desarrollo_container_back:
     entrypoint: [""]
   stage: container
   variables: 
-    - DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
-    - APP_NAME: gi-sixvago
-    - DOCKER_HOST: tcp://docker:2375
+    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
+    APP_NAME: gi-sixvago
+    DOCKER_HOST: tcp://docker:2375
   services:
     - docker:dind
   before_script:
@@ -72,6 +72,5 @@ jobs_desarrollo_container_back:
     - docker build -t $APP_NAME .
     - docker tag $APP_NAME:latest 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
     - docker push 145504712931.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
-  # when: manual
   only:
     - desarrollo
