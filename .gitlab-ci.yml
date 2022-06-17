@@ -77,13 +77,14 @@ test_job_postman:
 #     - desarrollo 
 
 jobs_build_front:
-  image: node:16 #node:10
+  image: node:16.15.1 #node:10
   stage: build  
   script:
     - cd ./Frontend
     - npm install
     - npm run build
   artifacts:
+    when: always
     paths:
       - ./Frontend/build/
   only:
