@@ -44,7 +44,7 @@ public class ReservaController {
     }
     @PostMapping()
     public ResponseEntity agregar(@RequestBody ReservaDTO reservaDTO) throws BadRequestException{
-        return ResponseEntity.ok(reservaService.agregar(reservaDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservaService.agregar(reservaDTO));
     }
 
     @GetMapping("/productos")
