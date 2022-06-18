@@ -158,8 +158,8 @@
 abbr[title] {
   text-decoration: none;
   font-weight: 700;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 600;
 }
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
   display: flex;
@@ -170,8 +170,8 @@ abbr[title] {
 .react-calendar__month-view__days {
   display: grid !important;
   grid-template-columns: repeat(7, 1fr);
-  justify-items: center;
   gap: 0.3em;
+  justify-items: center;
 }
 .react-calendar__month-view__days__day--weekend {
   color: #d10000;
@@ -192,7 +192,7 @@ abbr[title] {
   background: none;
   font-family: "Roboto";
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 20px;
   letter-spacing: 0.32px;
   font-feature-settings: "pnum" on, "lnum" on;
@@ -209,11 +209,11 @@ abbr[title] {
   border: 2px solid rgb(250, 218, 36);
 }
 .react-calendar__tile--now {
-  color: rgb(250, 218, 38);
+  color: rgb(241, 207, 9);
 }
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-  background: rgba(203, 178, 106, 1);
+  background: rgb(151, 133, 80);
 }
 .react-calendar__tile--hasActive {
   background: #76baff;

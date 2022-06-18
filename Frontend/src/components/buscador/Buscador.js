@@ -35,11 +35,13 @@ const Buscador = () => {
 
   const handleBuscar = () => {
     //setList(filtroBuscar(product));
-    productosPorCiudad();
-    setPageNumber(0);
-    setCardCategory("");
-    setloadingFnChange(true);
-    setLoading(true);
+    if (location !== "") {
+      productosPorCiudad();
+      setPageNumber(0);
+      setCardCategory("");
+      setloadingFnChange(true);
+      setLoading(true);
+    }
   };
 
   // const filtroBuscar = (array) => {
