@@ -35,24 +35,24 @@ const Categories = () => {
 
   return (
     <div className="cardCategory">
-        {listaCategorias.map((item, i) => {
-          return (
-            <div
-              onClick={(e) => handleClick(item.titulo, e)}
-              className="renderCategory"
-              key={item.id}
-            >
-              <img
-                className="cardCategory-img"
-                src={`${item.urlImagen}`}
-                alt={item.titulo}
-              />
-              <h2>{item.titulo}</h2>
-              <p>807.105 hoteles</p>
-            </div>
-          );
-        })}
-      </div>
+      {listaCategorias.map((item, i) => {
+        return (
+          <div
+            onClick={(e) => handleClick(item.titulo, e)}
+            className="renderCategory"
+            key={item.id}
+          >
+            <img
+              className="cardCategory-img"
+              src={`${item.urlImagen}`}
+              alt={item.titulo}
+            />
+            <h2>{item.titulo}</h2>
+            <p>807.105 hoteles</p>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 export default Categories;
