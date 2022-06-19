@@ -42,6 +42,7 @@ jobs_desarrollo_container_back:
     - docker push $DOCKER_REGISTRY/$APP_NAME:$TAG
     - docker tag $DOCKER_REGISTRY/$APP_NAME:$TAG $DOCKER_REGISTRY/$APP_NAME:latest
     - docker push $DOCKER_REGISTRY/$APP_NAME:latest
+  when: manual
   only:
     - desarrollo
 

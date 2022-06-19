@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -24,10 +25,12 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.buscar(id));
     }
     @PutMapping()
+    @PreAuthorize("hasAnyRole('admin')")
     public ResponseEntity editar(@RequestBody ReservaDTO reservaDTO) throws BadRequestException {
         return ResponseEntity.ok(reservaService.editar(reservaDTO));
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('admin','cliente')")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
         ResponseEntity<String> response = null;
         if (reservaService.buscar(id) != null) {
@@ -43,6 +46,7 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.listarTodos());
     }
     @PostMapping()
+    @PreAuthorize("hasAnyRole('admin','cliente')")
     public ResponseEntity agregar(@RequestBody ReservaDTO reservaDTO) throws BadRequestException{
         return ResponseEntity.status(HttpStatus.CREATED).body(reservaService.agregar(reservaDTO));
     }

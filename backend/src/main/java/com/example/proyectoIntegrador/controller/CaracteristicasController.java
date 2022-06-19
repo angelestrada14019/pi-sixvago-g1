@@ -6,6 +6,7 @@ import com.example.proyectoIntegrador.service.implementacion.CaracteristicasServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,14 +26,17 @@ public class CaracteristicasController {
         return ResponseEntity.ok(caracteristicasService.listarTodos());
     }
     @PostMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity agregar(@RequestBody CaracteristicasDTO caracteristicasDTO) throws BadRequestException {
         return new ResponseEntity<CaracteristicasDTO>(caracteristicasService.agregar(caracteristicasDTO), HttpStatus.CREATED);
     }
     @PutMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity editar(@RequestBody CaracteristicasDTO caracteristicasDTO) throws BadRequestException {
         return ResponseEntity.ok(caracteristicasService.editar(caracteristicasDTO));
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
         ResponseEntity<String> response = null;
         if (caracteristicasService.buscar(id) != null) {

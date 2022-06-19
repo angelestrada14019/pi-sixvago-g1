@@ -5,6 +5,7 @@ import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.proyectoIntegrador.service.implementacion.CategoriaService;
 
@@ -23,6 +24,7 @@ public class CategoriaController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<CategoriaDTO> agregar(@RequestBody CategoriaDTO categoriaDTO) throws BadRequestException {
         return ResponseEntity.ok(categoriaService.agregar(categoriaDTO));
     }
@@ -32,6 +34,7 @@ public class CategoriaController {
     }
 
     @PutMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<CategoriaDTO> editar(@RequestBody CategoriaDTO categoriaDTO) throws BadRequestException{
         ResponseEntity<CategoriaDTO> response = null;
         if(categoriaDTO.getId() != null)
@@ -47,6 +50,7 @@ public class CategoriaController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException{
         categoriaService.eliminar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se ha eliminado la categoria ingresada");

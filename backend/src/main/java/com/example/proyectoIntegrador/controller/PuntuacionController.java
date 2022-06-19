@@ -1,54 +1,47 @@
 package com.example.proyectoIntegrador.controller;
 
-import com.example.proyectoIntegrador.dto.CiudadDTO;
-import com.example.proyectoIntegrador.dto.ProductoDTO;
+import com.example.proyectoIntegrador.dto.PuntuacionDTO;
 import com.example.proyectoIntegrador.exceptions.BadRequestException;
-import com.example.proyectoIntegrador.service.implementacion.CiudadService;
+import com.example.proyectoIntegrador.service.implementacion.PuntuacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/ciudades")
+@RequestMapping("/puntuacion")
 @CrossOrigin(origins = "*")
-public class CiudadController {
+public class PuntuacionController {
 
     @Autowired
-    private CiudadService ciudadService;
+    private PuntuacionService puntuacionService;
 
     @GetMapping("/{id}")
     public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
-        return ResponseEntity.ok(ciudadService.buscar(id));
+        return ResponseEntity.ok(puntuacionService.buscar(id));
     }
     @PutMapping()
-    @PreAuthorize("hasRole('admin')")
-    public ResponseEntity editar(@RequestBody CiudadDTO ciudadDTO) throws BadRequestException {
-        return ResponseEntity.ok(ciudadService.editar(ciudadDTO));
+    public ResponseEntity editar(@RequestBody PuntuacionDTO puntuacionDTO) throws BadRequestException {
+        return ResponseEntity.ok(puntuacionService.editar(puntuacionDTO));
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
         ResponseEntity<String> response = null;
-        if (ciudadService.buscar(id) != null) {
-            ciudadService.eliminar(id);
+        if (puntuacionService.buscar(id) != null) {
+            puntuacionService.eliminar(id);
             response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
-            throw new BadRequestException("no existe ciudad con ese id");
+            throw new BadRequestException("no existe la puntuacion con ese id");
         }
         return response;
     }
     @GetMapping()
     public ResponseEntity listarTodos(){
-        return ResponseEntity.ok(ciudadService.listarTodos());
+        return ResponseEntity.ok(puntuacionService.listarTodos());
     }
     @PostMapping()
-    @PreAuthorize("hasRole('admin')")
-    public ResponseEntity agregar(@RequestBody CiudadDTO ciudadDTO) throws BadRequestException{
-        return ResponseEntity.ok(ciudadService.agregar(ciudadDTO));
+    public ResponseEntity agregar(@RequestBody PuntuacionDTO puntuacionDTO) throws BadRequestException{
+        return ResponseEntity.status(HttpStatus.CREATED).body(puntuacionService.agregar(puntuacionDTO));
     }
     @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {

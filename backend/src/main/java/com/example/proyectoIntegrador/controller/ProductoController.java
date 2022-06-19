@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class ProductoController {
     private ProductosService productoService;
 
     @PostMapping()
+    @PreAuthorize("hasRole('admin')")
 public ResponseEntity agregar(@RequestBody ProductoDTO productoDTO) throws BadRequestException {
         return new ResponseEntity<ProductoDTO>(productoService.agregar(productoDTO), HttpStatus.CREATED);
     }
@@ -51,10 +53,12 @@ public ResponseEntity agregar(@RequestBody ProductoDTO productoDTO) throws BadRe
         return ResponseEntity.ok(productoService.buscar(id));
     }
     @PutMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity editar(@RequestBody ProductoDTO productoDTO) throws BadRequestException {
         return ResponseEntity.ok(productoService.editar(productoDTO));
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
         ResponseEntity<String> response = null;
         if (productoService.buscar(id) != null) {
