@@ -6,7 +6,6 @@ class ApiCall {
         
         queryParams = queryParams || [] //si hay parametros de busqueda, los agrega a la url, si no, no
         const queryString = queryParams.reduce((last, q, i) => last + `${i === 0 ? '?' : "&"}${q}`, '')
-
         const bearer = localStorage.getItem("token");
         
         const data = {

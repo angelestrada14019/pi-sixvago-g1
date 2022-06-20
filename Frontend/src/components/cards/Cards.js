@@ -6,19 +6,18 @@ import Card from "./Card";
 import "./cards.css";
 
 const Cards = () => {
-  const { cardCategory, list, setList, pageNumber, loading } =
+  const { cardCategory, list, setList, pageNumber, loading, setLoading } =
     useStateContext();
   const productsPerPage = 4;
   const pagesVisited = pageNumber * productsPerPage;
-  const displayProducts = list
-    .slice(pagesVisited, pagesVisited + productsPerPage)
+  const displayProducts = list?.slice(pagesVisited, pagesVisited + productsPerPage)
     .map((product, i) => <Card data={product} key={`cards-${i}`} />);
 
   useEffect(() => {
     if (cardCategory !== "") {
-      productosPorCategoria();
+      setLoading(true);
     }
-  }, [loading]);
+  }, [cardCategory]);
 
   // const productFiltro = (lista) => {
   //   if (cardCategory === "") {

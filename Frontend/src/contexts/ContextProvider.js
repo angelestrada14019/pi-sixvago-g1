@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
@@ -16,6 +16,9 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
   const { pathname: currentLocation } = useLocation();
+  let [searchParams, setSearchParams] = useSearchParams();
+  // searchParams.values().next().value devuelve el valor de la query despues del =
+  // searchParams.keys().next().value devuelve el nombre de la query antes del =
 
   useEffect(() => {
     if (currentLocation === "/login") {
@@ -25,32 +28,47 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (loading) {
-      if (location === "") {
-        getListaProducto();
-      }
+      getListaProducto();
       setloadingFnChange(false);
       setLoadingFiltro(false);
+      getListaCiudades();
       setTimeout(() => {
         setLoading(false);
-      }, 1500);
-      getListaCiudades();
+      }, 1000);
     }
   }, [loading, loadingFiltro]);
 
   const getListaProducto = async () => {
-    const lista = await ApiCall.invokeGET("/productos");
-
-    if (localStorage.getItem("isLoggedIn") === "false" && cardCategory === "") {
-      let shuffleList = shuffle(lista);
-      if (loadingFiltro) {
-        setList(shuffleList);
+    if (searchParams.values().next().value) {
+      if (searchParams.keys().next().value !== "tituloCategoria") {
+        setLocation(searchParams.values().next().value);
+        const filtroQuery = await ApiCall.invokeGET(
+          `/productos/ciudad?${searchParams.toString()}`
+        );
+        setList(filtroQuery);
+      } else if (searchParams.keys().next().value === "tituloCategoria") {
+        const filtroQuery = await ApiCall.invokeGET(
+          `/productos/categorias?${searchParams.toString()}`
+        );
+        setList(filtroQuery);
       }
     } else {
-      if (loadingFiltro) {
-        setList(lista);
+      const lista = await ApiCall.invokeGET("/productos");
+      if (
+        localStorage.getItem("isLoggedIn") === "false" &&
+        cardCategory === ""
+      ) {
+        let shuffleList = shuffle(lista);
+        if (loadingFiltro) {
+          setList(shuffleList);
+        }
+      } else {
+        if (loadingFiltro) {
+          setList(lista);
+        }
       }
+      //setProduct(lista);
     }
-    //setProduct(lista);
   };
   const getListaCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");

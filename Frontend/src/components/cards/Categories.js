@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import ApiCall from "../../utils/ApiCall";
 import "./categories.css";
@@ -13,14 +14,19 @@ const Categories = () => {
     setloadingFnChange,
   } = useStateContext();
   const [listaCategorias, setListaCategorias] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) {
-      getCategoryNames();
-    }
-  }, [loading]);
+    getCategoryNames();
+  }, []);
 
   const handleClick = (name, e) => {
+    navigate({
+      pathname: "/buscar",
+      search: `?${createSearchParams({
+        tituloCategoria: name,
+      })}`,
+    });
     setCardCategory(name);
     setPageNumber(0);
     setLocation("");

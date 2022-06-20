@@ -4,6 +4,7 @@ import CustomCalendar from "../calendar/CustomCalendar";
 import LocationsList from "./LocationsList";
 import ApiCall from "../../utils/ApiCall";
 import "./buscador.css";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 const Buscador = () => {
   const {
@@ -23,6 +24,7 @@ const Buscador = () => {
     month: "long",
     day: "numeric",
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     let cI = localStorage.getItem("checkIn");
@@ -34,9 +36,13 @@ const Buscador = () => {
   }, []);
 
   const handleBuscar = () => {
-    //setList(filtroBuscar(product));
     if (location !== "") {
-      productosPorCiudad();
+      navigate({
+        pathname: "/buscar",
+        search: `?${createSearchParams({
+          nombreCiudad: location,
+        })}`,
+      });
       setPageNumber(0);
       setCardCategory("");
       setloadingFnChange(true);
@@ -44,19 +50,17 @@ const Buscador = () => {
     }
   };
 
-  // const filtroBuscar = (array) => {
-  //   let filtro = array.filter((item) => {
-  //     return item.location.toLowerCase().includes(location.toLowerCase());
-  //   }); // en vez de esto se puede usar un queryParams para hacer la consulta por fetch
-  //   return filtro;
+  // const productosPorCiudad = async () => {
+  //   if (searchParams.toString()) {
+  //     const filtroQuery = await ApiCall.invokeGET(
+  //       `/productos/ciudad?${searchParams.toString()}`
+  //     );
+  //     setList(filtroQuery);
+  //   }
+  //   // const filtroQuery = await ApiCall.invokeGET(`/productos/ciudad`, [
+  //   //   `nombreCiudad=${location}`,
+  //   // ]);
   // };
-
-  const productosPorCiudad = async () => {
-    const filtroQuery = await ApiCall.invokeGET(`/productos/ciudad`, [
-      `nombreCiudad=${location}`,
-    ]);
-    setList(filtroQuery);
-  };
 
   const handleClick = (e) => {
     if (e.target.className === "buscador-date") {

@@ -18,7 +18,7 @@ root.render(
         <Route path="/" element={<App />}>
         <Route path="login" />
           <Route index element={<Home />} />
-          <Route path="/buscar/:query" element={<Home />} />
+          <Route path="buscar" element={<Home />} />
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
             <Route path=":id/reserva" element={<Reserva />} />

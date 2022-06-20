@@ -61,7 +61,7 @@ const CustomCalendar = ({ handleCheckInOut }) => {
   return (
     <div
       className={`calendar-container ${
-        currentLocation === "/"
+        currentLocation === "/" || currentLocation.indexOf("buscar") !== -1
           ? "absolute"
           : "none" && currentLocation === `/producto/${id}`
           ? "none product"
@@ -73,7 +73,10 @@ const CustomCalendar = ({ handleCheckInOut }) => {
         selectRange={currentLocation !== `/producto/${id}` ? true : false}
         minDetail="month"
         formatShortWeekday={(locale, date) => date.toString().charAt(0)}
-        navigationLabel={({ label }) => label.split(" ")[0].charAt(0).toUpperCase() + label.split(" ")[0].substring(1)}
+        navigationLabel={({ label }) =>
+          label.split(" ")[0].charAt(0).toUpperCase() +
+          label.split(" ")[0].substring(1)
+        }
         minDate={new Date()}
         next2Label={null}
         prev2Label={null}
