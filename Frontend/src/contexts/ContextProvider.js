@@ -52,7 +52,7 @@ export const ContextProvider = ({ children }) => {
         }
       }
     } else if (
-      localStorage.getItem("isLoggedIn") === "false" &&
+      !localStorage.getItem("isLoggedIn") &&
       cardCategory === ""
     ) {
       try {
