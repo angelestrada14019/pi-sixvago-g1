@@ -31,15 +31,12 @@ const AuthProvider = ({ children }) => {
     let isValid = null;
     const token = localStorage.getItem("token");
     try {
-      console.log("try");
       const decode = jwtDecode(token);
       if (decode.exp < Date.now() / 1000) {
-        console.log("if");
         isValid = false;
         localStorage.removeItem("token");
         navigate("/");
       } else {
-        console.log("else");
         isValid = true;
       }
     } catch (error) {
@@ -49,10 +46,8 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("validando token..");
-    console.log(validateToken());
-    validateToken();
-  }, []);
+    if (currentLocation.indexOf("reserva") !== -1) validateToken();
+  }, [currentLocation]);
 
   const login = async (user) => {
     setError("");
