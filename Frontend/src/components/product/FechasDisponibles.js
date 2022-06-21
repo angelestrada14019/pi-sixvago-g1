@@ -5,11 +5,11 @@ import CustomCalendar from "../calendar/CustomCalendar";
 import "./fechasDisponibles.css";
 
 const FechasDisponibles = () => {
-  const { setMustLogin } = useContext(AuthContext);
+  const { setMustLogin, validateToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (JSON.parse(localStorage.getItem("token"))) {
+    if (validateToken()) {
       navigate("reserva");
     } else {
       navigate({ pathname: "/login", replace: true });
@@ -18,6 +18,7 @@ const FechasDisponibles = () => {
       }, 500);
     }
   };
+
 
   return (
     <div className="calendarAvailableDay">
