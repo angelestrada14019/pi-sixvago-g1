@@ -35,7 +35,6 @@ const AuthProvider = ({ children }) => {
       if (decode.exp < Date.now() / 1000) {
         isValid = false;
         localStorage.removeItem("token");
-        navigate("/");
       } else {
         isValid = true;
       }
@@ -44,10 +43,6 @@ const AuthProvider = ({ children }) => {
     }
     return isValid;
   };
-
-  useEffect(() => {
-    if (currentLocation.indexOf("reserva") !== -1) validateToken();
-  }, [currentLocation]);
 
   const login = async (user) => {
     setError("");
