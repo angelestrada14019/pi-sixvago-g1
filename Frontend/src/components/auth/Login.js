@@ -1,41 +1,34 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import "./login.css";
 import { useStateContext } from "../../contexts/ContextProvider";
+import AuthContext from "../../contexts/AuthContext";
+import CustomAlert from "../../utils/CustomAlert";
 
-const Login = ({ show, setOpenLogin, handleClick }) => {
+const Login = ({ show, handleClick }) => {
   const [inputType, setInputType] = useState(false);
   const [error, setError] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-  const { mustLogin, setMustLogin } = useStateContext();
+  const { login, mustLogin, setMustLogin, setOpenLogin } =
+    useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let user = JSON.parse(localStorage.getItem("user"));
-
     if (e.target.userEmail.value === "" || e.target.userPassword.value === "") {
       // alerta de campos vacios
       setInfo(true);
     } else if (
-      user.email === e.target.userEmail.value &&
-      user.password === e.target.userPassword.value
-    ) {
-      setOpenLogin(false);
-      localStorage.setItem("isLoggedIn", true);
-    } else if (
-      user.email !== e.target.userEmail.value ||
-      user.password !== e.target.userPassword.value
-    ) {
-      // alerta de malas credenciales
-      setAlert(true);
-    } else if (
       e.target.userEmail.value !== "" &&
       e.target.userPassword.value !== ""
     ) {
-      setError(true);
-    } 
+      let usr = {
+        email: e.target.userEmail.value,
+        contrasenia: e.target.userPassword.value,
+      };
+      login(usr);
+    }
   };
 
   const handleClose = (event, reason) => {
@@ -58,27 +51,20 @@ const Login = ({ show, setOpenLogin, handleClick }) => {
       id="login-container"
     >
       {!mustLogin ? null : (
-        <Snackbar
-          sx={{ marginBottom: "4rem" }}
+        <CustomAlert
           open={mustLogin}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert
-            severity="warning"
-            variant="outlined"
-            sx={{
-              marginTop: "95px",
-              background: "#262626",
-              fontWeight: "bold",
-              color: "#d07f08",
-              padding: "10px 20px",
-            }}
-          >
-            Debes loggearte para realizar una reserva.
-          </Alert>
-        </Snackbar>
+          text={"Debes loggearte para realizar una reserva."}
+          anchor={{ vertical: "top", horizontal: "center" }}
+          severity="warning"
+          variant="outlined"
+          alertSx={{
+            marginTop: "95px",
+            background: "#262626",
+            fontWeight: "bold",
+            color: "#d07f08",
+            padding: "10px 20px",
+          }}
+        />
       )}
       {!error ? null : (
         <Snackbar

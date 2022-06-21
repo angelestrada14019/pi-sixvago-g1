@@ -1,40 +1,25 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import ApiCall from "../utils/ApiCall";
 
 const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
-  const [openLogin, setOpenLogin] = useState(false);
-  const [mustLogin, setMustLogin] = useState(false);
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
-  const [product, setProduct] = useState([]);
   const [locationsList, setLocationsList] = useState([]);
   const [location, setLocation] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
-  const { pathname: currentLocation } = useLocation();
   let [searchParams, setSearchParams] = useSearchParams();
   // searchParams.values().next().value devuelve el valor de la query despues del =
   // searchParams.keys().next().value devuelve el nombre de la query antes del =
 
   useEffect(() => {
-    if (currentLocation === "/login") {
-      setOpenLogin(true);
-    }
-  }, [openLogin]);
-
-  useEffect(() => {
     if (loading) {
       getListaProducto();
-      setloadingFnChange(false);
-      setLoadingFiltro(false);
       getListaCiudades();
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
     }
   }, [loading, loadingFiltro]);
 
@@ -42,37 +27,60 @@ export const ContextProvider = ({ children }) => {
     if (searchParams.values().next().value) {
       if (searchParams.keys().next().value !== "tituloCategoria") {
         setLocation(searchParams.values().next().value);
-        const filtroQuery = await ApiCall.invokeGET(
-          `/productos/ciudad?${searchParams.toString()}`
-        );
-        setList(filtroQuery);
+        try {
+          const filtroQuery = await ApiCall.invokeGET(
+            `/productos/ciudad?${searchParams.toString()}`
+          );
+          setList(filtroQuery);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+          setloadingFnChange(false);
+          setLoadingFiltro(false);
+          // console.log("finally");
+        }
       } else if (searchParams.keys().next().value === "tituloCategoria") {
         const filtroQuery = await ApiCall.invokeGET(
           `/productos/categorias?${searchParams.toString()}`
         );
-        setList(filtroQuery);
+        if (filtroQuery?.length > 0) {
+          setLoading(false);
+          setloadingFnChange(false);
+          setLoadingFiltro(false);
+          setList(filtroQuery);
+        }
+      }
+    } else if (
+      localStorage.getItem("isLoggedIn") === "false" &&
+      cardCategory === ""
+    ) {
+      try {
+        const lista = await ApiCall.invokeGET("/productos");
+        let shuffleList = shuffle(lista);
+        setList(shuffleList);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+        setloadingFnChange(false);
+        setLoadingFiltro(false);
       }
     } else {
       const lista = await ApiCall.invokeGET("/productos");
-      if (
-        localStorage.getItem("isLoggedIn") === "false" &&
-        cardCategory === ""
-      ) {
-        let shuffleList = shuffle(lista);
-        if (loadingFiltro) {
-          setList(shuffleList);
-        }
-      } else {
-        if (loadingFiltro) {
-          setList(lista);
-        }
-      }
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+      setList(lista);
+
       //setProduct(lista);
     }
   };
   const getListaCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
-    setLocationsList(lista);
+    if (lista?.length > 0) {
+      setLocationsList(lista);
+    }
   };
 
   const shuffle = (array) => {
@@ -96,8 +104,6 @@ export const ContextProvider = ({ children }) => {
         value={{
           cardCategory,
           setCardCategory,
-          product,
-          setProduct,
           list,
           setList,
           locationsList,
@@ -112,10 +118,6 @@ export const ContextProvider = ({ children }) => {
           setLoading,
           loadingFiltro,
           setLoadingFiltro,
-          openLogin,
-          setOpenLogin,
-          mustLogin,
-          setMustLogin,
         }}
       >
         {children}

@@ -9,6 +9,7 @@ import App from "./layouts/App";
 import NotFound from "./pages/NotFound";
 import Reserva from "./pages/Reserva";
 import ReservaExitosa from "./pages/ReservaExitosa";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,13 +17,20 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-        <Route path="login" />
+          <Route path="login" />
+          <Route path="signUp" />
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
-            <Route path=":id/reserva" element={<Reserva />} />
-            <Route path=":id/reserva/reservaExitosa" element={<ReservaExitosa />} />
+            <Route
+              path=":id/reserva"
+              element={<ProtectedRoute children={<Reserva />} />}
+            />
+            <Route
+              path=":id/reserva/reservaExitosa"
+              element={<ProtectedRoute children={<ReservaExitosa />} />}
+            />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

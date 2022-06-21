@@ -1,4 +1,6 @@
 import UserWelcome from "./UserWelcome";
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 import "./sidebar.css";
 
 const Sidebar = ({
@@ -6,9 +8,10 @@ const Sidebar = ({
   handleClick,
   toggleNavButton,
   close,
-  isLoggedIn,
   handleLogout,
 }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  
   return (
     <div className={show ? "sidebar active" : "sidebar"}>
       <div className="exit">

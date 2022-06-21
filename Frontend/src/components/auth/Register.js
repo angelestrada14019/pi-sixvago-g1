@@ -1,58 +1,48 @@
 import { Alert, Snackbar } from "@mui/material";
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./register.css";
+import AuthContext from "../../contexts/AuthContext";
 
-class Register extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      input: {
-        username: "",
-        lastname: "",
-        email: "",
-        password: "",
-        confirm_password: "",
-      },
-      errors: {},
-      success: false,
-      showPassword: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handlePasswordVisibility = this.handlePasswordVisibility.bind(this);
+const initialInput = {
+  nombre: "",
+  apellido: "",
+  email: "",
+  contrasenia: "",
+  confirm_contrasenia: "",
+};
+
+const Register = ({ show, handleClick, setToggleNavButton }) => {
+  const [input, setInput] = useState(initialInput);
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { register } = useContext(AuthContext);
+
+  function handleChange(event) {
+    setInput({ ...input, [event.target.name]: event.target.value });
   }
 
-  handleChange(event) {
-    let input = this.state.input;
-    input[event.target.name] = event.target.value;
-
-    this.setState({
-      input,
-    });
-  }
-
-  handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    if (this.validate()) {
-      localStorage.setItem("user", JSON.stringify(this.state.input));
-      let input = {};
-      input["username"] = "";
-      input["lastname"] = "";
-      input["email"] = "";
-      input["password"] = "";
-      input["confirm_password"] = "";
-      this.setState({ input: input });
-      this.setState({ success: true });
+    if (validate()) {
+      let user = {
+        nombre: input.nombre,
+        apellido: input.apellido,
+        email: input.email,
+        contrasenia: input.contrasenia,
+        rol: {
+          id: 1,
+        },
+      };
+      setSuccess(true);
+      register(user);
       setTimeout(() => {
-        this.props.setOpenSignUp(false);
-        this.props.setOpenLogin(true);
-      }, 2000);
+        setInput(initialInput);
+      }, 500);
     }
   }
 
-  validate() {
-    let input = this.state.input;
+  function validate() {
     let errors = {};
     let isValid = true;
     const re = /^[a-z ,.'-]+$/i;
@@ -60,23 +50,23 @@ class Register extends React.Component {
       /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
     );
 
-    if (input["username"] === "") {
+    if (input["nombre"] === "") {
       isValid = false;
-      errors["username"] = "Por favor ingresa tu nombre.";
+      errors["nombre"] = "Por favor ingresa tu nombre.";
     } else {
-      if (input["username"].length < 2 || !re.test(input["username"])) {
+      if (input["nombre"].length < 2 || !re.test(input["nombre"])) {
         isValid = false;
-        errors["username"] = "Por favor ingresa un nombre valido.";
+        errors["nombre"] = "Por favor ingresa un nombre valido.";
       }
     }
 
-    if (input["lastname"] === "") {
+    if (input["apellido"] === "") {
       isValid = false;
-      errors["lastname"] = "Por favor ingresa tu apellido.";
+      errors["apellido"] = "Por favor ingresa tu apellido.";
     } else {
-      if (input["lastname"].length < 2 || !re.test(input["lastname"])) {
+      if (input["apellido"].length < 2 || !re.test(input["apellido"])) {
         isValid = false;
-        errors["lastname"] = "Por favor ingresa un apellido valido.";
+        errors["apellido"] = "Por favor ingresa un apellido valido.";
       }
     }
 
@@ -88,167 +78,153 @@ class Register extends React.Component {
       errors["email"] = "Por favor ingresa un email valido.";
     }
 
-    if (input["password"] === "") {
+    if (input["contrasenia"] === "") {
       isValid = false;
-      errors["password"] = "Por favor ingresa tu contraseña.";
+      errors["contrasenia"] = "Por favor ingresa tu contraseña.";
     } else {
-      if (input["password"].length < 6) {
+      if (input["contrasenia"].length < 6) {
         isValid = false;
-        errors["password"] = "La contraseña debe tener al menos 6 caracteres.";
+        errors["contrasenia"] =
+          "La contraseña debe tener al menos 6 caracteres.";
       }
     }
 
-    if (input["confirm_password"] === "") {
+    if (input["confirm_contrasenia"] === "") {
       isValid = false;
-      errors["confirm_password"] = "Por favor confirma tu contraseña.";
+      errors["confirm_contrasenia"] = "Por favor confirma tu contraseña.";
     } else {
-      if (input["password"] !== input["confirm_password"]) {
+      if (input["contrasenia"] !== input["confirm_contrasenia"]) {
         isValid = false;
-        errors["confirm_password"] = "Las contraseñas no coinciden.";
+        errors["confirm_contrasenia"] = "Las contraseñas no coinciden.";
       }
     }
 
-    this.setState({
-      errors: errors,
-    });
+    setErrors(errors);
 
     return isValid;
   }
 
-  handleClose(event, reason) {
+  function handleClose(event, reason) {
     if (reason === "clickaway") {
-      this.setState({ success: false });
+      setSuccess(false);
       return;
     }
-    this.setState({ success: false });
+    setSuccess(false);
   }
 
-  handlePasswordVisibility() {
-    this.setState({
-      showPassword: !this.state.showPassword,
-    });
+  function handlePasswordVisibility() {
+    setShowPassword(!showPassword);
   }
 
-  render() {
-    return (
-      <div
-        className={`register-container ${this.props.show ? "show" : null}`}
-        id="register-container"
-      >
-        {this.state.success === true ? (
-          <Snackbar
-            sx={{ marginBottom: "4rem" }}
-            open={this.state.success}
-            autoHideDuration={6000}
-            onClose={this.handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          >
-            <Alert
-              severity="success"
-              variant="filled"
-              sx={{ marginBottom: "10px" }}
-            >
-              Registro exitoso. Puedes iniciar sesion.
-            </Alert>
-          </Snackbar>
-        ) : null}
-
-        <form
-          role="form"
-          className="formulario-signup"
-          onSubmit={this.handleSubmit}
+  return (
+    <div
+      className={`register-container ${show ? "show" : null}`}
+      id="register-container"
+    >
+      {success === true ? (
+        <Snackbar
+          sx={{ marginBottom: "4rem" }}
+          open={success}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
-          <h1>Crear cuenta</h1>
-          <div className="nombre-apellido">
-            <div>
-              <label htmlFor="username">Nombre</label>
-              <input
-                type="text"
-                name="username"
-                value={this.state.input.username}
-                onChange={this.handleChange}
-                placeholder="Ingrese su nombre"
-                id="username"
-              />
-              <div className="text-danger">{this.state.errors.username}</div>
-            </div>
-            <div>
-              <label htmlFor="lastname">Apellido</label>
-              <input
-                type="text"
-                name="lastname"
-                value={this.state.input.lastname}
-                onChange={this.handleChange}
-                placeholder="ingrese su apellido"
-                id="lastname"
-              />
-              <div className="text-danger">{this.state.errors.lastname}</div>
-            </div>
+          <Alert
+            severity="success"
+            variant="filled"
+            sx={{ marginBottom: "10px" }}
+          >
+            Registro exitoso. Puedes iniciar sesion.
+          </Alert>
+        </Snackbar>
+      ) : null}
+
+      <form role="form" className="formulario-signup" onSubmit={handleSubmit}>
+        <h1>Crear cuenta</h1>
+        <div className="nombre-apellido">
+          <div>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              value={input.nombre}
+              onChange={handleChange}
+              placeholder="Ingrese su nombre"
+              id="nombre"
+            />
+            <div className="text-danger">{errors.nombre}</div>
           </div>
-          <div className="otros-datos">
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                name="email"
-                value={this.state.input.email}
-                onChange={this.handleChange}
-                placeholder="Ingrese su email"
-                id="email"
-              />
-              <div className="text-danger">{this.state.errors.email}</div>
-            </div>
-            <div>
-              <label htmlFor="password">Contraseña</label>
-              <p>
-                <input
-                  type={this.state.showPassword ? "text" : "password"}
-                  name="password"
-                  value={this.state.input.password}
-                  onChange={this.handleChange}
-                  placeholder="Ingrese su contraseña"
-                  id="password"
-                />
-                <i
-                  className="fa-solid fa-eye"
-                  onClick={() => this.handlePasswordVisibility()}
-                ></i>
-              </p>
-              <div className="text-danger">{this.state.errors.password}</div>
-            </div>
-            <div>
-              <label htmlFor="confirm_password">Confirme su contraseña</label>
-              <input
-                type="password"
-                name="confirm_password"
-                value={this.state.input.confirm_password}
-                onChange={this.handleChange}
-                placeholder="Confirme su contraseña"
-                id="confirm_password"
-              />
-              <div className="text-danger">
-                {this.state.errors.confirm_password}
-              </div>
-            </div>
+          <div>
+            <label htmlFor="apellido">Apellido</label>
+            <input
+              type="text"
+              name="apellido"
+              value={input.apellido}
+              onChange={handleChange}
+              placeholder="ingrese su apellido"
+              id="apellido"
+            />
+            <div className="text-danger">{errors.apellido}</div>
           </div>
-          <div className="boton">
-            <button id="boton-signup" type="submit">
-              Crear cuenta
-            </button>
+        </div>
+        <div className="otros-datos">
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              value={input.email}
+              onChange={handleChange}
+              placeholder="Ingrese su email"
+              id="email"
+            />
+            <div className="text-danger">{errors.email}</div>
           </div>
-          <p>
-            Ya tienes una cuenta?{" "}
-            <span
-              id="iniciar"
-              className="redireccionReg"
-              onClick={this.props.handleClick}
-            >
-              Inicia sesion
-            </span>
-          </p>
-        </form>
-      </div>
-    );
-  }
-}
+          <div>
+            <label htmlFor="contrasenia">Contraseña</label>
+            <p>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="contrasenia"
+                value={input.contrasenia}
+                onChange={handleChange}
+                placeholder="Ingrese su contraseña"
+                id="contrasenia"
+              />
+              <i
+                className="fa-solid fa-eye"
+                onClick={() => handlePasswordVisibility()}
+              ></i>
+            </p>
+            <div className="text-danger">{errors.password}</div>
+          </div>
+          <div>
+            <label htmlFor="confirm_contrasenia">Confirme su contraseña</label>
+            <input
+              type="password"
+              name="confirm_contrasenia"
+              value={input.confirm_contrasenia}
+              onChange={handleChange}
+              placeholder="Confirme su contraseña"
+              id="confirm_contrasenia"
+            />
+            <div className="text-danger">{errors.confirm_contrasenia}</div>
+          </div>
+        </div>
+        <div className="boton">
+          <button id="boton-signup" type="submit">
+            Crear cuenta
+          </button>
+        </div>
+        <p>
+          Ya tienes una cuenta?{" "}
+          <span id="iniciar" className="redireccionReg" onClick={handleClick}>
+            Inicia sesion
+          </span>
+        </p>
+      </form>
+    </div>
+  );
+};
+
 export default Register;

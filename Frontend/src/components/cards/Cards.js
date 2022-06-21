@@ -10,8 +10,19 @@ const Cards = () => {
     useStateContext();
   const productsPerPage = 4;
   const pagesVisited = pageNumber * productsPerPage;
-  const displayProducts = list?.slice(pagesVisited, pagesVisited + productsPerPage)
-    .map((product, i) => <Card data={product} key={`cards-${i}`} />);
+  const displayProducts =
+    list?.length === 0 ? (
+      <>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </>
+    ) : (
+      list
+        .slice(pagesVisited, pagesVisited + productsPerPage)
+        .map((product, i) => <Card data={product} key={`cards-${i}`} />)
+    );
 
   useEffect(() => {
     if (cardCategory !== "") {

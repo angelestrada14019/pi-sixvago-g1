@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
@@ -7,14 +7,11 @@ import Sidebar from "./sidebar";
 import UserWelcome from "./UserWelcome";
 import logo from "../../assets/SixVago-dorado.png";
 import menu from "../../assets/menu.png";
+import AuthContext from "../../contexts/AuthContext";
 import "./header.css";
 
 const Header = () => {
-  const navigate = useNavigate();
   const [toggleNavButton, setToggleNavButton] = useState("");
-  // const [openLogin, setOpenLogin] = useState(false);
-  const [openSignUp, setOpenSignUp] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const {
     setCardCategory,
@@ -22,9 +19,10 @@ const Header = () => {
     setLoading,
     setLoadingFiltro,
     setloadingFnChange,
-    openLogin,
-    setOpenLogin,
   } = useStateContext();
+  const { isLoggedIn, openSignUp, openLogin, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { pathname: currentLocation } = useLocation();
 
   useEffect(() => {
     if (openLogin) {
@@ -38,7 +36,6 @@ const Header = () => {
     } else if (!openLogin || !openSignUp) {
       document.body.style.overflow = "auto";
     }
-    setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
   }, [openLogin, openSignUp, isLoggedIn]);
 
   const toggleSidebar = () => {
@@ -47,15 +44,11 @@ const Header = () => {
 
   const handleClick = (e) => {
     if (e.target.id === "crear") {
-      //setToggleNavButton("crear");
-      setOpenLogin(false);
-      setOpenSignUp(true);
+      navigate("/signUp");
       setShowSidebar(false);
     }
     if (e.target.id === "iniciar") {
-      //setToggleNavButton("iniciar");
-      setOpenLogin(true);
-      setOpenSignUp(false);
+      navigate("/login");
       setShowSidebar(false);
     }
     setCardCategory("");
@@ -63,14 +56,10 @@ const Header = () => {
   };
 
   const handleLogout = () => {
+    logout();
     setToggleNavButton("");
-    setOpenLogin(false);
-    setOpenSignUp(false);
-    setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", false);
     setCardCategory("");
     setLocation("");
-    setLoading(true);
   };
 
   return (
@@ -81,8 +70,6 @@ const Header = () => {
             to="/"
             onClick={() => {
               navigate("/");
-              setOpenLogin(false);
-              setOpenSignUp(false);
               setToggleNavButton("");
               setCardCategory("");
               setLocation("");
@@ -156,26 +143,17 @@ const Header = () => {
           </div>
         </nav>
       </header>
-      <Login
-        show={openLogin}
-        setOpenLogin={setOpenLogin}
-        setToggleNavButton={setToggleNavButton}
-        setIsLoggedIn={setIsLoggedIn}
-        handleClick={handleClick}
-      />
+      <Login show={openLogin} handleClick={handleClick} />
       <Register
         show={openSignUp}
         handleClick={handleClick}
         setToggleNavButton={setToggleNavButton}
-        setOpenLogin={setOpenLogin}
-        setOpenSignUp={setOpenSignUp}
       />
       <Sidebar
         show={showSidebar}
         handleClick={handleClick}
         toggleNavButton={toggleNavButton}
         close={toggleSidebar}
-        isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
       />
     </>

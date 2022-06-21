@@ -1,18 +1,18 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStateContext } from "../../contexts/ContextProvider";
+import AuthContext from "../../contexts/AuthContext";
 import CustomCalendar from "../calendar/CustomCalendar";
 import "./fechasDisponibles.css";
 
 const FechasDisponibles = () => {
-  const { setOpenLogin, setMustLogin } = useStateContext();
+  const { setMustLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // cambiar isLoggedIn por token
-    if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+    if (JSON.parse(localStorage.getItem("token"))) {
       navigate("reserva");
     } else {
-      setOpenLogin(true);
+      navigate({ pathname: "/login", replace: true });
       setTimeout(() => {
         setMustLogin(true);
       }, 500);
