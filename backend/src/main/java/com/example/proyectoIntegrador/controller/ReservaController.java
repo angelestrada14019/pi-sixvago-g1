@@ -1,16 +1,14 @@
 package com.example.proyectoIntegrador.controller;
-import com.example.proyectoIntegrador.dto.ProductoDTO;
 import com.example.proyectoIntegrador.dto.ReservaDTO;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.ReservaService;
+import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,43 +19,38 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @GetMapping("/{id}")
-    public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
-        return ResponseEntity.ok(reservaService.buscar(id));
+    public ResponseEntity<WrapperResponse<ReservaDTO>> buscar(@PathVariable Long id) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.buscar(id)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
     @PreAuthorize("hasAnyRole('admin')")
-    public ResponseEntity editar(@RequestBody ReservaDTO reservaDTO) throws BadRequestException {
-        return ResponseEntity.ok(reservaService.editar(reservaDTO));
+    public ResponseEntity<WrapperResponse<ReservaDTO>> editar(@RequestBody ReservaDTO reservaDTO)  {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.editar(reservaDTO)).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('admin','cliente')")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
-        ResponseEntity<String> response = null;
+    public ResponseEntity<WrapperResponse<String>>eliminar(@PathVariable Long id) {
         if (reservaService.buscar(id) != null) {
             reservaService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
-            throw new BadRequestException("no existe la reserva con ese id");
+            throw new NoDataFoundExceptions("no existe la reserva con ese id");
         }
-        return response;
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","eliminado").createResponse(HttpStatus.OK);
     }
     @GetMapping()
-    public ResponseEntity listarTodos(){
-        return ResponseEntity.ok(reservaService.listarTodos());
+    public ResponseEntity<WrapperResponse<List<ReservaDTO>>> listarTodos(){
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.listarTodos()).createResponse(HttpStatus.OK);
     }
     @PostMapping()
     @PreAuthorize("hasAnyRole('admin','cliente')")
-    public ResponseEntity agregar(@RequestBody ReservaDTO reservaDTO) throws BadRequestException{
-        return ResponseEntity.status(HttpStatus.CREATED).body(reservaService.agregar(reservaDTO));
+    public ResponseEntity<WrapperResponse<ReservaDTO>> agregar(@RequestBody ReservaDTO reservaDTO){
+        return  new WrapperResponse<>(true,HttpStatus.CREATED,"Succes",reservaService.agregar(reservaDTO)).createResponse(HttpStatus.CREATED);
     }
 
     @GetMapping("/productos")
-    public ResponseEntity <List<ReservaDTO>> buscarReservaPorProductoId(@RequestParam Long idproducto) {
-        return ResponseEntity.ok(reservaService.buscarReservaPorProductoId(idproducto));
+    public ResponseEntity<WrapperResponse<List<ReservaDTO>>> buscarReservaPorProductoId(@RequestParam Long idproducto) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.buscarReservaPorProductoId(idproducto)).createResponse(HttpStatus.OK);
     }
 
-    @ExceptionHandler({BadRequestException.class})
-    public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-    }
+
 }

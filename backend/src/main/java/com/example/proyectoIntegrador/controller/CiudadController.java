@@ -1,9 +1,9 @@
 package com.example.proyectoIntegrador.controller;
 
 import com.example.proyectoIntegrador.dto.CiudadDTO;
-import com.example.proyectoIntegrador.dto.ProductoDTO;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.CiudadService;
+import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,37 +21,33 @@ public class CiudadController {
     private CiudadService ciudadService;
 
     @GetMapping("/{id}")
-    public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
-        return ResponseEntity.ok(ciudadService.buscar(id));
+    public ResponseEntity<WrapperResponse<CiudadDTO>> buscar(@PathVariable Long id) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",ciudadService.buscar(id)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
     @PreAuthorize("hasRole('admin')")
-    public ResponseEntity editar(@RequestBody CiudadDTO ciudadDTO) throws BadRequestException {
-        return ResponseEntity.ok(ciudadService.editar(ciudadDTO));
+    public ResponseEntity<WrapperResponse<CiudadDTO>>  editar(@RequestBody CiudadDTO ciudadDTO) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",ciudadService.editar(ciudadDTO)).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('admin')")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
-        ResponseEntity<String> response = null;
+    public ResponseEntity<WrapperResponse<String>>  eliminar(@PathVariable Long id) {
         if (ciudadService.buscar(id) != null) {
             ciudadService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
-            throw new BadRequestException("no existe ciudad con ese id");
+            throw new NoDataFoundExceptions("no existe ciudad con ese id");
         }
-        return response;
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","eliminado").createResponse(HttpStatus.OK);
     }
     @GetMapping()
-    public ResponseEntity listarTodos(){
-        return ResponseEntity.ok(ciudadService.listarTodos());
+    public ResponseEntity<WrapperResponse<List<CiudadDTO>>>  listarTodos(){
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",ciudadService.listarTodos()).createResponse(HttpStatus.OK);
+
     }
     @PostMapping()
     @PreAuthorize("hasRole('admin')")
-    public ResponseEntity agregar(@RequestBody CiudadDTO ciudadDTO) throws BadRequestException{
-        return ResponseEntity.ok(ciudadService.agregar(ciudadDTO));
+    public ResponseEntity<WrapperResponse<CiudadDTO>>  agregar(@RequestBody CiudadDTO ciudadDTO){
+        return  new WrapperResponse<>(true,HttpStatus.CREATED,"Succes",ciudadService.agregar(ciudadDTO)).createResponse(HttpStatus.CREATED);
     }
-    @ExceptionHandler({BadRequestException.class})
-    public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-    }
+
 }

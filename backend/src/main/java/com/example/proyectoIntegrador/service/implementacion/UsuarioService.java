@@ -1,10 +1,7 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
-import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.dto.UsuarioDTO;
-import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.entity.Usuario;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
@@ -49,33 +46,53 @@ public class UsuarioService implements IGeneralService<UsuarioDTO,Long> {
         return iUsuarioRepository.existsUsuarioByEmail(email);
     }
 
-    public UsuarioDTO agregar(UsuarioDTO usuarioDTO) throws BadRequestException {
-        Usuario usuario = mapper.convertValue(usuarioDTO,Usuario.class);
-        return mapper.convertValue(iUsuarioRepository.save(usuario),UsuarioDTO.class);
+    public UsuarioDTO agregar(UsuarioDTO usuarioDTO) {
+        try {
+            Usuario usuario = mapper.convertValue(usuarioDTO, Usuario.class);
+            return mapper.convertValue(iUsuarioRepository.save(usuario), UsuarioDTO.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
     }
 
     @Override
-    public UsuarioDTO buscar(Long aLong) throws BadRequestException {
+    public UsuarioDTO buscar(Long aLong) {
         return null;
     }
 
     @Override
-    public UsuarioDTO editar(UsuarioDTO usuarioDTO) throws BadRequestException {
+    public UsuarioDTO editar(UsuarioDTO usuarioDTO)  {
         return null;
     }
 
     @Override
     public List<UsuarioDTO> listarTodos() {
-        List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
-        List <Usuario> usuarios = iUsuarioRepository.findAll();
-        for(Usuario u: usuarios){
-            usuarioDTOS.add(mapper.convertValue(u, UsuarioDTO.class));
+        try {
+
+
+            List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
+            List<Usuario> usuarios = iUsuarioRepository.findAll();
+            for (Usuario u : usuarios) {
+                usuarioDTOS.add(mapper.convertValue(u, UsuarioDTO.class));
+            }
+            return usuarioDTOS;
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
         }
-        return usuarioDTOS;
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
     }
 
     @Override
-    public void eliminar(Long aLong) throws BadRequestException {
+    public void eliminar(Long aLong) {
 
     }
 }

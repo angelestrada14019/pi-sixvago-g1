@@ -2,7 +2,6 @@ package com.example.proyectoIntegrador.security;
 
 import com.example.proyectoIntegrador.entity.Rol;
 import com.example.proyectoIntegrador.entity.Usuario;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.service.implementacion.RolService;
 import com.example.proyectoIntegrador.service.implementacion.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +39,7 @@ public class UsuarioDetailsService implements UserDetailsService {
         Rol rol = null;
         try {
             rol = mapper.convertValue(rolService.buscar(usuario.getRol().getId()), Rol.class);
-        } catch (BadRequestException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return new User(usuario.getEmail(),usuario.getContrasenia(),mapperRoles(rol.getNombre()));

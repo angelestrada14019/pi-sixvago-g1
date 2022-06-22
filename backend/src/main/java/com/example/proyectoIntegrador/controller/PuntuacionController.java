@@ -1,12 +1,15 @@
 package com.example.proyectoIntegrador.controller;
 
 import com.example.proyectoIntegrador.dto.PuntuacionDTO;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.PuntuacionService;
+import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/puntuacion")
@@ -17,34 +20,30 @@ public class PuntuacionController {
     private PuntuacionService puntuacionService;
 
     @GetMapping("/{id}")
-    public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
-        return ResponseEntity.ok(puntuacionService.buscar(id));
+    public ResponseEntity<WrapperResponse<PuntuacionDTO>> buscar(@PathVariable Long id) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.buscar(id)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
-    public ResponseEntity editar(@RequestBody PuntuacionDTO puntuacionDTO) throws BadRequestException {
-        return ResponseEntity.ok(puntuacionService.editar(puntuacionDTO));
+    public ResponseEntity<WrapperResponse<PuntuacionDTO>> editar(@RequestBody PuntuacionDTO puntuacionDTO) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.editar(puntuacionDTO)).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
-        ResponseEntity<String> response = null;
+    public ResponseEntity<WrapperResponse<String>>  eliminar(@PathVariable Long id) {
         if (puntuacionService.buscar(id) != null) {
             puntuacionService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
-            throw new BadRequestException("no existe la puntuacion con ese id");
+            throw new NoDataFoundExceptions("no existe la puntuacion con ese id");
         }
-        return response;
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","eliminado").createResponse(HttpStatus.OK);
     }
     @GetMapping()
-    public ResponseEntity listarTodos(){
-        return ResponseEntity.ok(puntuacionService.listarTodos());
+    public ResponseEntity<WrapperResponse<List<PuntuacionDTO>>> listarTodos(){
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.listarTodos()).createResponse(HttpStatus.OK);
+
     }
     @PostMapping()
-    public ResponseEntity agregar(@RequestBody PuntuacionDTO puntuacionDTO) throws BadRequestException{
-        return ResponseEntity.status(HttpStatus.CREATED).body(puntuacionService.agregar(puntuacionDTO));
+    public ResponseEntity<WrapperResponse<PuntuacionDTO>> agregar(@RequestBody PuntuacionDTO puntuacionDTO){
+        return  new WrapperResponse<>(true,HttpStatus.CREATED,"Succes",puntuacionService.agregar(puntuacionDTO)).createResponse(HttpStatus.CREATED);
     }
-    @ExceptionHandler({BadRequestException.class})
-    public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-    }
+
 }

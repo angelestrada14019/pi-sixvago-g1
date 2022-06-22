@@ -1,8 +1,9 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
-import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.dto.RolDTO;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
+import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
 import com.example.proyectoIntegrador.repository.IRolRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,19 +23,28 @@ public class RolService implements IGeneralService<RolDTO,Long> {
     @Autowired
     private IRolRepository iRolRepository;
     @Override
-    public RolDTO agregar(RolDTO rolDTO) throws BadRequestException {
+    public RolDTO agregar(RolDTO rolDTO) {
         return null;
     }
 
     @Override
-    public RolDTO buscar(Long aLong) throws BadRequestException {
-        return mapper.convertValue(iRolRepository
-                .findById(aLong).orElseThrow(
-                        () -> new BadRequestException("No existe la reserva")), RolDTO.class);
+    public RolDTO buscar(Long aLong)  {
+        try {
+            return mapper.convertValue(iRolRepository
+                    .findById(aLong).orElseThrow(
+                            () -> new NoDataFoundExceptions("No existe la reserva")), RolDTO.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
     }
 
     @Override
-    public RolDTO editar(RolDTO rolDTO) throws BadRequestException {
+    public RolDTO editar(RolDTO rolDTO) {
         return null;
     }
 
@@ -44,7 +54,7 @@ public class RolService implements IGeneralService<RolDTO,Long> {
     }
 
     @Override
-    public void eliminar(Long aLong) throws BadRequestException {
+    public void eliminar(Long aLong)  {
 
     }
 }

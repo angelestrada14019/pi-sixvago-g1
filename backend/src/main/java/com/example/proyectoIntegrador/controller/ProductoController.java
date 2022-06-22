@@ -1,9 +1,9 @@
 package com.example.proyectoIntegrador.controller;
 
 import com.example.proyectoIntegrador.dto.ProductoDTO;
-import com.example.proyectoIntegrador.entity.Producto;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.ProductosService;
+import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -24,49 +24,47 @@ public class ProductoController {
 
     @PostMapping()
     @PreAuthorize("hasRole('admin')")
-public ResponseEntity agregar(@RequestBody ProductoDTO productoDTO) throws BadRequestException {
-        return new ResponseEntity<ProductoDTO>(productoService.agregar(productoDTO), HttpStatus.CREATED);
+    public ResponseEntity<WrapperResponse<ProductoDTO>> agregar(@RequestBody ProductoDTO productoDTO)  {
+        return  new WrapperResponse<>(true,HttpStatus.CREATED,"Succes",productoService.agregar(productoDTO)).createResponse(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity listarTodos(){
-        return ResponseEntity.ok(productoService.listarTodos());
+    public ResponseEntity<WrapperResponse<List<ProductoDTO>>> listarTodos(){
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.listarTodos()).createResponse(HttpStatus.OK);
     }
 
     @GetMapping("/ciudad")
-    public ResponseEntity <List<ProductoDTO>> findByNombreCiudad(@RequestParam String nombreCiudad) {
-        return ResponseEntity.ok(productoService.findByNombreCiudad(nombreCiudad));
+    public ResponseEntity<WrapperResponse<List<ProductoDTO>>> findByNombreCiudad(@RequestParam String nombreCiudad) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.findByNombreCiudad(nombreCiudad)).createResponse(HttpStatus.OK);
     }
     @GetMapping("/categorias")
-    public ResponseEntity <List<ProductoDTO>> findByTituloCategoria(@RequestParam String tituloCategoria) {
-        return ResponseEntity.ok(productoService.findByTituloCategoria(tituloCategoria));
+    public ResponseEntity<WrapperResponse<List<ProductoDTO>>> findByTituloCategoria(@RequestParam String tituloCategoria) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.findByTituloCategoria(tituloCategoria)).createResponse(HttpStatus.OK);
     }
     @GetMapping("/fecha")
-    public ResponseEntity <List<ProductoDTO>> buscarProductosFechaIF(
+    public ResponseEntity<WrapperResponse<List<ProductoDTO>>> buscarProductosFechaIF(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaInicial,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaFinal) {
-        return ResponseEntity.ok(productoService.buscarProductosFechaIF(fechaInicial,fechaFinal));
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.buscarProductosFechaIF(fechaInicial,fechaFinal)).createResponse(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity buscar(@PathVariable Long id) throws BadRequestException {
-        return ResponseEntity.ok(productoService.buscar(id));
+    public ResponseEntity<WrapperResponse<ProductoDTO>> buscar(@PathVariable Long id) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.buscar(id)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
     @PreAuthorize("hasRole('admin')")
-    public ResponseEntity editar(@RequestBody ProductoDTO productoDTO) throws BadRequestException {
-        return ResponseEntity.ok(productoService.editar(productoDTO));
+    public ResponseEntity<WrapperResponse<ProductoDTO>> editar(@RequestBody ProductoDTO productoDTO) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",productoService.editar(productoDTO)).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('admin')")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) throws BadRequestException {
-        ResponseEntity<String> response = null;
+    public ResponseEntity<WrapperResponse<String>>  eliminar(@PathVariable Long id) {
         if (productoService.buscar(id) != null) {
             productoService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
-            throw new BadRequestException("no existe producto con ese id");
+            throw new NoDataFoundExceptions("no existe producto con ese id");
         }
-        return response;
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","eliminado").createResponse(HttpStatus.OK);
     }
 }

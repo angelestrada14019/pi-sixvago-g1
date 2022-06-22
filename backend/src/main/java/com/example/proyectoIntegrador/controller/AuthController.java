@@ -4,9 +4,9 @@ import com.example.proyectoIntegrador.dto.LoginRequestDto;
 import com.example.proyectoIntegrador.dto.LoginResponseUserDto;
 import com.example.proyectoIntegrador.dto.UsuarioDTO;
 import com.example.proyectoIntegrador.entity.Usuario;
-import com.example.proyectoIntegrador.exceptions.BadRequestException;
 import com.example.proyectoIntegrador.security.JwtTokenProvider;
 import com.example.proyectoIntegrador.service.implementacion.UsuarioService;
+import com.example.proyectoIntegrador.utils.WrapperResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class AuthController {
     private ObjectMapper mapper;
 
     @PostMapping("login")
-    public ResponseEntity<LoginResponseUserDto> login(@RequestBody LoginRequestDto loginRequestDto){
+    public ResponseEntity<WrapperResponse<LoginResponseUserDto>> login(@RequestBody LoginRequestDto loginRequestDto){
         Usuario usuario = usuarioService.findUsuarioByEmail(loginRequestDto.getEmail());
         UsuarioDTO usuarioDto =mapper.convertValue(usuario,UsuarioDTO.class);
 
@@ -54,11 +54,11 @@ public class AuthController {
         String token = jwtTokenProvider.generateToken(authentication);
 
         LoginResponseUserDto loginResponseUserDto =new LoginResponseUserDto(usuarioDto,token);
-        return   ResponseEntity.ok(loginResponseUserDto);
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Auth Succes",loginResponseUserDto).createResponse(HttpStatus.OK);
     }
 
     @PostMapping("register")
-    public ResponseEntity<?> signUn(@RequestBody UsuarioDTO usuarioDto) throws BadRequestException {
+    public ResponseEntity<?> signUn(@RequestBody UsuarioDTO usuarioDto)  {
         if(usuarioService.existsUsuarioByEmail(usuarioDto.getEmail())){
             return  new ResponseEntity<>("el usuario ya existe",HttpStatus.BAD_REQUEST);
         }
@@ -69,6 +69,6 @@ public class AuthController {
                 UsernamePasswordAuthenticationToken(usuarioDto.getEmail(),usuarioDto.getContrasenia()));
         String token = jwtTokenProvider.generateToken(authentication);
         LoginResponseUserDto loginResponseUserDto =new LoginResponseUserDto(usuarioDTO,token);
-        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponseUserDto);
+        return  new WrapperResponse<>(true,HttpStatus.CREATED,"Register Succes",loginResponseUserDto).createResponse(HttpStatus.CREATED);
     }
 }
