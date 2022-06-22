@@ -57,10 +57,10 @@ jobs_deploy_back_ec2:
   - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
   script:    
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker kill $(docker ps -q)"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker rm $(docker ps -a -q)"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker rmi $(docker images -q)"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --env USERNAME=${USERNAME} --env PASSWORD=${PASSWORD} --env SECRET_KEY=${SECRET_KEY} 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "docker kill $(docker ps -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "docker rm $(docker ps -a -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "docker rmi $(docker images -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --env USERNAME=${USERNAME} --env PASSWORD=${PASSWORD} --env SECRET_KEY=${SECRET_KEY} 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
   only:
     - desarrollo
 
