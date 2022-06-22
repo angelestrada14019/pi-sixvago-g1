@@ -3,8 +3,12 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import ApiCall from "../../utils/ApiCall";
 const containerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "98%",
+  height: "600px",
+  marginLeft:"10px",
+  marginRight:"20px",
+  marginTop:"10px",
+  marginBottom:"10px"
 };
 
 const centerD = {

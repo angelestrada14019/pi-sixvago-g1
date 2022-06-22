@@ -16,7 +16,7 @@ const Descripcion = ({ id }) => {
     }
   
     return (
-        <div className="descripcion">
+        <div className="descripcion-text">
             <h2 className='titleDescription'>{producto.nombre}</h2>
             <p className='descriptionP'>{producto.descripcion}</p>
         </div>

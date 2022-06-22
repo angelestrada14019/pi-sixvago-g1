@@ -1,3 +1,15 @@
 .containerProducto{
 margin-top: 120px;
 }
+.maps{
+    padding-top: 20px;
+    background-color: #e8e7e7;
+    padding-bottom: 20px;
+}
+.maps h2{
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 50px;
+    text-align: center;
+}
