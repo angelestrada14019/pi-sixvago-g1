@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import ApiCall from "../utils/ApiCall";
 import { useLocation, useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -26,6 +27,23 @@ const AuthProvider = ({ children }) => {
     }
   }, [currentLocation]);
 
+  const validateToken = () => {
+    let isValid = null;
+    const token = localStorage.getItem("token");
+    try {
+      const decode = jwtDecode(token);
+      if (decode.exp < Date.now() / 1000) {
+        isValid = false;
+        localStorage.removeItem("token");
+      } else {
+        isValid = true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    return isValid;
+  };
+
   const login = async (user) => {
     setError("");
     try {
@@ -36,7 +54,6 @@ const AuthProvider = ({ children }) => {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.usuarioDto));
         localStorage.setItem("token", JSON.stringify(response.token));
-        localStorage.setItem("isLoggedIn", true);
       }
     } catch (error) {
       setError(error);
@@ -49,7 +66,6 @@ const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("isLoggedIn");
   };
 
   const register = async (user) => {
@@ -81,6 +97,7 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         register,
+        validateToken,
       }}
     >
       {children}

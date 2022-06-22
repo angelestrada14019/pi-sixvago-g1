@@ -3,17 +3,15 @@ import { Navigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const { setMustLogin } = useContext(AuthContext);
+  const { setMustLogin, validateToken } = useContext(AuthContext);
 
   useEffect(() => {
-    setToken(JSON.parse(localStorage.getItem("token")));
-    if (!token) {
+    if (!validateToken()) {
       setMustLogin(true);
     }
   }, []);
 
-  if (!token) {
+  if (!validateToken()) {
     return <Navigate to="/" replace />;
   }
 

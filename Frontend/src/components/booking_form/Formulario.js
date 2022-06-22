@@ -53,7 +53,7 @@ const user = JSON.parse(localStorage.getItem("user"));
                 id="nombre"
                 name="nombre"
                 placeholder="Ingrese  su nombre"
-                value={user.username}
+                value={user.nombre}
                 onChange={handleChange}
                 onBlur={handleBlur} />
             </div>
@@ -68,7 +68,7 @@ const user = JSON.parse(localStorage.getItem("user"));
                 id="apellido"
                 name="apellido"
                 placeholder="Ingrese  su apellido"
-                value={user.lastname}
+                value={user.apellido}
                 onChange={handleChange}
                 onBlur={handleBlur} />
 

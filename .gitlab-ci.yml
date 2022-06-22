@@ -1,12 +1,14 @@
 stages:
-  - test
-  - build
+  - test_back
   - container
+  - test_front
+  - build
   - deploy
+  - test_postman
 
 
 jobs_desarrollo_tests_back:
-  stage: test
+  stage: test_back
   script: 
       - cd ./backend
       - pwd
@@ -24,8 +26,6 @@ jobs_desarrollo_container_back:
   variables: 
     DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
     APP_NAME: g1-sixvago
-  dependencies:
-    - jobs_desarrollo_tests_back
   services:
     - docker:dind
 
@@ -46,29 +46,9 @@ jobs_desarrollo_container_back:
   only:
     - desarrollo
 
-test_job_postman:
-  stage: test
-  image: 
-    name: postman/newman_alpine33    
-    entrypoint: [""]
-  script:
-    - newman --version
-    - npm config set unsafe-perm true
-    - npm install -g newman-reporter-html 
-    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
-  artifacts:
-    when: always
-    paths:
-      - report.html
-    reports:
-      junit: report.xml
-  when: manual
-  only:
-    - desarrollo
-
 # jobs_tests_front:
 #   image: node:16
-#   stage: test
+#   stage: test_front
 #   script: 
 #     - cd ./Frontend
 #     - npm install
@@ -103,7 +83,28 @@ jobs_deploy_front_s3:
   script:
     - aws --version
     - aws s3 rm s3://$S3_BUCKET --recursive
-    - aws s3 cp build s3://$S3_BUCKET --recursive
+    - aws s3 cp ./Frontend/build/ s3://$S3_BUCKET --recursive
+  when: manual
+  only:
+    - desarrollo
+
+
+test_job_postman:
+  stage: test_postman
+  image: 
+    name: postman/newman_alpine33    
+    entrypoint: [""]
+  script:
+    - newman --version
+    - npm config set unsafe-perm true
+    - npm install -g newman-reporter-html 
+    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+  artifacts:
+    when: always
+    paths:
+      - report.html
+    reports:
+      junit: report.xml
   when: manual
   only:
     - desarrollo

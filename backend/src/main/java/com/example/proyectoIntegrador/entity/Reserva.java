@@ -2,6 +2,8 @@ package com.example.proyectoIntegrador.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +19,9 @@ import java.time.LocalTime;
 @Builder
 @Entity
 @Table(name = "reservas")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 //@JsonFormat
 public class Reserva {
 
@@ -43,9 +48,8 @@ public class Reserva {
     @Column(name = "datos_para_vendedor")
     private String datosParaVendedor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "productos_productos_id", nullable = false,referencedColumnName = "productos_id")
-    @JsonBackReference
     private Producto productosProductos;
 
     @ManyToOne
