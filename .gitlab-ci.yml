@@ -59,7 +59,9 @@ jobs_deploy_back_ec2:
   - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
   script:    
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker kill $(docker ps -q) || sudo docker rm $(docker ps -a -q) || sudo docker rmi $(docker images -q) || aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY || sudo chmod 666 /var/run/docker.sock || sudo docker run -d -p 8080:8080 --env-file ./env.list 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY || sudo chmod 666 /var/run/docker.sock"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo chmod 666 /var/run/docker.sock"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker kill $(docker ps -q) || sudo docker rm $(docker ps -a -q) || sudo docker rmi $(docker images -q) || sudo docker run -d -p 8080:8080 --env-file ./env.list 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
   only:
     - desarrollo
 
