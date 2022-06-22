@@ -33,27 +33,4 @@ describe("Body", () => {
   //   await expect(screen.getByText("Recomendaciones")).toBeInTheDocument();
   // });
 
-  // test("pagination should render new cards", () => {
-  //   const next = screen.getByLabelText("Next page");
-  //   const imgs = screen.getByText("Buscar por tipo de alojamiento").nextSibling;
-  //   act(() => {
-  //     fireEvent.click(next);
-  //   });
-  //   expect(
-  //     screen.getByText("Buscar por tipo de alojamiento").nextSibling
-  //   ).not.toContain(imgs);
-  // });
-
-  test("should render new cards when clicking a category", () => {
-    const category = screen.getByText(
-      "Buscar por tipo de alojamiento"
-    ).nextSibling;
-    const imgs = screen.getByText("Buscar por tipo de alojamiento").nextSibling;
-    act(() => {
-      fireEvent.click(category);
-    });
-    expect(
-      screen.getByText("Buscar por tipo de alojamiento").nextSibling
-    ).not.toContain(imgs);
-  });
 });

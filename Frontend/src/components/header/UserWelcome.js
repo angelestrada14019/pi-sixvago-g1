@@ -7,6 +7,7 @@ const UserWelcome = ({ handleLogout }) => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const { isLoggedIn } = useContext(AuthContext);
+  
 
   useEffect(() => {
     if (isLoggedIn) {
