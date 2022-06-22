@@ -1,6 +1,7 @@
 stages:
   - test_back
   - container
+  - deploy_back
   - test_front
   - build
   - deploy
@@ -28,7 +29,6 @@ jobs_desarrollo_container_back:
     APP_NAME: g1-sixvago
   services:
     - docker:dind
-
   before_script:
     - cd ./backend
     - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
@@ -42,7 +42,25 @@ jobs_desarrollo_container_back:
     - docker push $DOCKER_REGISTRY/$APP_NAME:$TAG
     - docker tag $DOCKER_REGISTRY/$APP_NAME:$TAG $DOCKER_REGISTRY/$APP_NAME:latest
     - docker push $DOCKER_REGISTRY/$APP_NAME:latest
-  when: manual
+  only:
+    - desarrollo
+
+
+jobs_deploy_back_ec2: 
+  stage: deploy_back
+  before_script:
+  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+  script:    
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker kill $(docker ps -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker rm $(docker ps -a -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "docker rmi $(docker images -q)"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --env USERNAME=${USERNAME} --env PASSWORD=${PASSWORD} --env SECRET_KEY=${SECRET_KEY} 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
   only:
     - desarrollo
 
