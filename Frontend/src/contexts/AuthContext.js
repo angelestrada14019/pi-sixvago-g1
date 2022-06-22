@@ -48,12 +48,13 @@ const AuthProvider = ({ children }) => {
     setError("");
     try {
       const response = await ApiCall.invokePOST(`/auth/login`, user);
+      console.log(response);
       if (response.error) {
         setError(response.error);
       } else {
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.body));
-        localStorage.setItem("token", JSON.stringify(response.token));
+        localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
+        localStorage.setItem("token", JSON.stringify(response.body.token));
       }
     } catch (error) {
       setError(error);
