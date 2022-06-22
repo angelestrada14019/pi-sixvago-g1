@@ -31,7 +31,7 @@ export const ContextProvider = ({ children }) => {
           const filtroQuery = await ApiCall.invokeGET(
             `/productos/ciudad?${searchParams.toString()}`
           );
-          setList(filtroQuery);
+          setList(filtroQuery.body);
         } catch (error) {
           console.log(error);
         } finally {
@@ -44,11 +44,11 @@ export const ContextProvider = ({ children }) => {
         const filtroQuery = await ApiCall.invokeGET(
           `/productos/categorias?${searchParams.toString()}`
         );
-        if (filtroQuery?.length > 0) {
+        if (filtroQuery.body?.length > 0) {
           setLoading(false);
           setloadingFnChange(false);
           setLoadingFiltro(false);
-          setList(filtroQuery);
+          setList(filtroQuery.body);
         }
       }
     } else if (
@@ -57,7 +57,7 @@ export const ContextProvider = ({ children }) => {
     ) {
       try {
         const lista = await ApiCall.invokeGET("/productos");
-        let shuffleList = shuffle(lista);
+        let shuffleList = shuffle(lista.body);
         setList(shuffleList);
       } catch (error) {
         console.log(error);
@@ -71,15 +71,15 @@ export const ContextProvider = ({ children }) => {
       setLoading(false);
       setloadingFnChange(false);
       setLoadingFiltro(false);
-      setList(lista);
+      setList(lista.body);
 
       //setProduct(lista);
     }
   };
   const getListaCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
-    if (lista?.length > 0) {
-      setLocationsList(lista);
+    if (lista.body?.length > 0) {
+      setLocationsList(lista.body);
     }
   };
 

@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
         setError(response.error);
       } else {
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.usuarioDto));
+        localStorage.setItem("user", JSON.stringify(response.body));
         localStorage.setItem("token", JSON.stringify(response.token));
       }
     } catch (error) {

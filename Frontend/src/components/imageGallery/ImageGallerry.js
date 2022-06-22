@@ -36,8 +36,8 @@ const ImageGallerry = ({ id }) => {
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido.body);
-    const newImage = productoObtenido.listadeimagenes.map(selectFewerProps);
-    setImagenes(newImage.body);
+    const newImage = productoObtenido.body.listadeimagenes.map(selectFewerProps);
+    setImagenes(newImage);
   };
 
   return (

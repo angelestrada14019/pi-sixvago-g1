@@ -19,7 +19,7 @@ const Cards = () => {
         <Card />
       </>
     ) : (
-      list.body
+      list
         .slice(pagesVisited, pagesVisited + productsPerPage)
         .map((product, i) => <Card data={product} key={`cards-${i}`} />)
     );
@@ -45,7 +45,7 @@ const Cards = () => {
     const filtroQuery = await ApiCall.invokeGET(`/productos/categorias`, [
       `tituloCategoria=${cardCategory}`,
     ]);
-    setList(filtroQuery);
+    setList(filtroQuery.body);
   };
 
   return <div className="cards">{displayProducts}</div>;
