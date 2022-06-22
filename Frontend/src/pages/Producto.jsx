@@ -21,12 +21,11 @@ const Producto = () => {
         <ImageGallerry id={id} />
         <Descripcion id={id} />
         <Caracteristicas id={id} />
+        <FechasDisponibles />
         <div className= "maps"> 
         <h2>¿Donde vas a estar?</h2>
-        <p>{producto.direccion}</p>
         <GoogleMapC />
         </div>
-        <FechasDisponibles />
         <Politicas id={id} />
       </div>
     </>

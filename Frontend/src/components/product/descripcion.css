@@ -1,17 +1,20 @@
-.descripcion{
-    margin-top: 5%;
-    margin-left: 40px;
+.descripcion-text{
+    margin-top: 3%;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
 }
 .titleDescription{
-    font-size: 1.7em;
+    font-size: 1.7rem;
     font-weight: bold;
-    margin-bottom: 1%;
-    font-family: Roboto;
-
+    color: #000;
+    margin-bottom: 50px;
+    text-align: center;
 }
 .descriptionP{
     font-size: 1.2em;
     font-family: Roboto;
-    max-width: 80%;
+    max-width: 100%;
+    text-align: center;
     
 }
