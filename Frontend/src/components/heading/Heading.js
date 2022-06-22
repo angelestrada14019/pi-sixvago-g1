@@ -17,7 +17,7 @@ const HeaderProducto = ({ id }) => {
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     // console.log("headerProducto" + productoObtenido.nombre);
-    setProducto(productoObtenido);
+    setProducto(productoObtenido.body);
   };
 
   const handleBack = () => {

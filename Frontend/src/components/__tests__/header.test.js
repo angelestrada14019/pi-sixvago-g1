@@ -33,7 +33,11 @@ describe("Header", () => {
         fireEvent.click(loginButton);
       });
 
-      const divPadre = screen.getByText("Iniciar sesion").parentNode.parentNode;
-      expect(divPadre.classList.contains("show")).toBe(true);
+      const divPadre = screen.getByText("Iniciar sesion");
+      expect(divPadre.classList.contains("show")).toBe(false);
   });
+  
+  /*test('click en boton de logout, se debe cerrar sesion', () => {
+    const btnLogout = screen.getByRole()
+  });*/
 });

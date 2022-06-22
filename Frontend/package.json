@@ -37,6 +37,7 @@
       "src/*/*/*.{jsx,js}",
       "src/*/*/*/*.{jsx,js}",
       "!src/components/header/UserWelcome.js",
+      "!src/components/auth/ProtectedRoute.js",
       "!src/components/headerProducto/*.{jsx,js}",
       "!src/components/product/*.{jsx,js}",
       "!src/components/heading/*.{jsx,js}",

@@ -11,7 +11,7 @@ const Caracteristicas = ({ id }) => {
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
-    setProducto(productoObtenido);
+    setProducto(productoObtenido.body);
   };
 
   return (

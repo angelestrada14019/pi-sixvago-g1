@@ -15,7 +15,7 @@ const Politicas = ({ id }) => {
     //   "headerProducto" +
     //     productoObtenido.caracteristicas.map((item) => item.nombre)
     // );
-    setProducto(productoObtenido);
+    setProducto(productoObtenido.body);
   };
 
   return (

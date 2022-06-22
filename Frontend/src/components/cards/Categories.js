@@ -36,7 +36,7 @@ const Categories = () => {
 
   const getCategoryNames = async () => {
     const lista = await ApiCall.invokeGET("/categorias");
-    setListaCategorias(lista);
+    setListaCategorias(lista.body);
   };
 
   return (

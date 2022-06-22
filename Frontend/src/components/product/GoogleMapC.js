@@ -40,9 +40,9 @@ const GoogleMapC = ({ id }) => {
     // );
     console.log(productoObtenido);
     setDireccion({
-      direccion: productoObtenido.direccion,
-      ciudad: productoObtenido.ciudades_id.nombre,
-      pais: productoObtenido.ciudades_id.pais,
+      direccion: productoObtenido.body.direccion,
+      ciudad: productoObtenido.body.ciudades_id.nombre,
+      pais: productoObtenido.body.ciudades_id.pais,
     });
   };
 
