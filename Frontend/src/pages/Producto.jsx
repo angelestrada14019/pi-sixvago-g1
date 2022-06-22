@@ -8,7 +8,6 @@ import Politicas from "../components/product/Politicas";
 import GoogleMapC from "../components/product/GoogleMapC";
 import "./producto.css";
 import FechasDisponibles from "../components/product/FechasDisponibles";
-import LocationData from "../components/heading/LocationData";
 
 const Producto = () => {
   let { id } = useParams();
@@ -21,12 +20,12 @@ const Producto = () => {
         <ImageGallerry id={id} />
         <Descripcion id={id} />
         <Caracteristicas id={id} />
-        <Politicas id={id} />
+        <FechasDisponibles />
         <div className= "maps"> 
         <h2>¿Donde vas a estar?</h2>
         <GoogleMapC />
         </div>
-        <FechasDisponibles />
+        <Politicas id={id} />
       </div>
     </>
   );
