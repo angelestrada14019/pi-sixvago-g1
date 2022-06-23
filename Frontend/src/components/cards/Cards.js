@@ -28,6 +28,9 @@ const Cards = () => {
     if (cardCategory !== "") {
       setLoading(true);
     }
+    return () => {
+      setLoading(false);
+    }
   }, [cardCategory]);
 
   // const productFiltro = (lista) => {

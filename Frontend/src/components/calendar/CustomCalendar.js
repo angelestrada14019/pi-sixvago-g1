@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { useLocation, useParams } from "react-router-dom";
+import ApiCall from "../../utils/ApiCall";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import "./calendar.css";
 //import 'react-calendar/dist/Calendar.css';
@@ -11,53 +12,34 @@ const CustomCalendar = ({ handleCheckInOut }) => {
   const { width } = useWindowDimensions();
   const { pathname: currentLocation } = useLocation();
   const { id } = useParams();
-  const dayAvailable = [
-    {
-      first: new Date("2022-06-005"),
-      last: new Date("2022-06-024"),
-    },
-    {
-      first: new Date("2022-06-027"),
-      last: new Date("2022-07-004"),
-    },
-    {
-      first: new Date("2022-08-004"),
-      last: new Date("2022-08-009"),
-    },
-    {
-      first: new Date("2022-07-006"),
-      last: new Date("2022-07-009"),
-    },
-    {
-      first: new Date("2022-07-019"),
-      last: new Date("2022-07-031"),
-    },
-  ];
 
   useEffect(() => {
-    setValue(getDates());
-  }, []);
-
-  const getDatesInRange = (startDate, endDate) => {
-    const date = new Date(startDate.getTime());
-
-    const dates = [];
-
-    while (date <= endDate) {
-      dates.push(new Date(date));
-      date.setDate(date.getDate() + 1);
+    if (id) {
+      getDates();
     }
+  }, [currentLocation]);
 
-    return dates;
-  };
-
-  const getDates = () => {
-    let calendaryAvailable = dayAvailable.map((day) => {
-      return getDatesInRange(day.first, day.last);
+  const getDates = async () => {
+    const unavailableDates = await ApiCall.invokeGET(
+      `/reservas/productos?idproducto=${id}`
+    );
+    let arrayOfDates = unavailableDates.map((day) => {
+      return getDaysArray(day.fechaInicialReserva, day.fechaFinalReserva);
     });
-    let calendaryAvailable2 = calendaryAvailable.flat();
-    return calendaryAvailable2;
+    setValue(Array.from(arrayOfDates.flat()));
   };
+
+  var getDaysArray = function (start, end) {
+    for (
+      var arr = new Array(), dt = new Date(start);
+      dt <= new Date(end);
+      dt.setDate(dt.getDate() + 1)
+    ) {
+      arr.push(new Date(dt));
+    }
+    return arr;
+  };
+
   return (
     <div
       className={`calendar-container ${

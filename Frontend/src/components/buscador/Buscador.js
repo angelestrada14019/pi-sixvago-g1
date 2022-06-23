@@ -15,6 +15,10 @@ const Buscador = () => {
     setLoading,
     setCardCategory,
     setloadingFnChange,
+    reservaIn,
+    setReservaIn,
+    reservaOut,
+    setReservaOut,
   } = useStateContext();
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openLocations, setOpenLocations] = useState(false);
@@ -36,18 +40,37 @@ const Buscador = () => {
   }, []);
 
   const handleBuscar = () => {
-    if (location !== "") {
+    if (location === "" && checkIn === "" && checkOut === "") {
+      return;
+    } else if (location !== "" && reservaIn === "" && reservaOut === "") {
       navigate({
         pathname: "/buscar",
         search: `?${createSearchParams({
           nombreCiudad: location,
         })}`,
       });
-      setPageNumber(0);
-      setCardCategory("");
-      setloadingFnChange(true);
-      setLoading(true);
+    } else if (location === "" && checkIn !== "" && checkOut !== "") {
+      navigate({
+        pathname: "/buscar",
+        search: `?${createSearchParams({
+          fechaInicial: reservaIn,
+          fechaFinal: reservaOut,
+        })}`,
+      });
+    } else {
+      navigate({
+        pathname: "/buscar",
+        search: `?${createSearchParams({
+          nombreCiudad: location,
+          fechaInicial: reservaIn,
+          fechaFinal: reservaOut,
+        })}`,
+      });
     }
+    setPageNumber(0);
+    setCardCategory("");
+    setloadingFnChange(true);
+    setLoading(true);
   };
 
   // const productosPorCiudad = async () => {
@@ -77,15 +100,29 @@ const Buscador = () => {
 
   const handleCheckInOut = (date) => {
     if (date[0]) {
-      setCheckIn(date[0].toLocaleDateString(undefined, localDateOptions));
-      setCheckOut(date[1].toLocaleDateString(undefined, localDateOptions));
+      setReservaIn(
+        date[0].getFullYear() +
+          "-" +
+          ("0" + (date[0].getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + date[0].getDate()).slice(-2)
+      );
+      setReservaOut(
+        date[1].getFullYear() +
+          "-" +
+          ("0" + (date[1].getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + date[1].getDate()).slice(-2)
+      );
+      setCheckIn(date[0].toLocaleString(undefined, localDateOptions));
+      setCheckOut(date[1].toLocaleString(undefined, localDateOptions));
       localStorage.setItem(
         "checkIn",
-        date[0].toLocaleDateString(undefined, localDateOptions)
+        date[0].toLocaleString(undefined, localDateOptions)
       );
       localStorage.setItem(
         "checkOut",
-        date[1].toLocaleDateString(undefined, localDateOptions)
+        date[1].toLocaleString(undefined, localDateOptions)
       );
     } else if (checkIn !== "") {
       return;
