@@ -63,21 +63,23 @@ jobs_deploy_back_ec2:
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo chmod 666 /var/run/docker.sock"
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker stop app && echo 'atop succes' || echo 'not succes'"
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker system prune -f && echo 'remove succes' || echo 'not succes' "
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker rmi 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago && echo 'remove succes' || echo 'not succes' "
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --name app --env-file ./env.list 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
   only:
     - desarrollo
 
-# jobs_tests_front:
-#   image: node:16
-#   stage: test_front
-#   script: 
-#     - cd ./Frontend
-#     - npm install
-#     - cd ./src
-#     - pwd
-#     - npm test
-#   only:
-#     - desarrollo 
+jobs_tests_front:
+  image: node:16
+  stage: test_front
+  script: 
+    - cd ./Frontend
+    - npm install
+    - cd ./src
+    - pwd
+    - npm test
+  only:
+    - desarrollo 
+  when: manual
 
 jobs_build_front:
   image: node:16.15.1 #node:10

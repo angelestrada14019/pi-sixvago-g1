@@ -7,6 +7,13 @@ import ApiCall from '../../utils/ApiCall';
 
 const Formulario = () => {
 const user = JSON.parse(localStorage.getItem("user")); 
+const [usuario, setUsuario] = useState({
+    nombre: '',
+          apellido: '',
+          email: '',
+          ciudad: '',
+          hora: '',
+});
 /* const [user, setUser] = useState('');
 
   useEffect(() => {
@@ -23,14 +30,9 @@ const user = JSON.parse(localStorage.getItem("user"));
     <>
     <h2 className="section-h2">Completá tus datos</h2>
       <Formik
-        initialValues={{
-          nombre: '',
-          apellido: '',
-          email: '',
-          ciudad: '',
-          hora: '',
-        }}
+        initialValues={usuario}
         validate={(valores) => {
+            localStorage.setItem("ciudadReserva",valores.ciudad)
           let errores = {};
           if (!valores.ciudad) {
             console.log('el nombre es obligatorio');
