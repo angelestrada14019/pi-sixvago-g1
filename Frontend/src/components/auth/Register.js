@@ -16,7 +16,7 @@ const Register = ({ show, handleClick, setToggleNavButton }) => {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const { register } = useContext(AuthContext);
+  const { register, error, setError } = useContext(AuthContext);
 
   function handleChange(event) {
     setInput({ ...input, [event.target.name]: event.target.value });
@@ -107,9 +107,11 @@ const Register = ({ show, handleClick, setToggleNavButton }) => {
   function handleClose(event, reason) {
     if (reason === "clickaway") {
       setSuccess(false);
+      setError(false);
       return;
     }
     setSuccess(false);
+    setError(false);
   }
 
   function handlePasswordVisibility() {
@@ -138,7 +140,30 @@ const Register = ({ show, handleClick, setToggleNavButton }) => {
           </Alert>
         </Snackbar>
       ) : null}
-
+      {!error ? null : (
+        <Snackbar
+          sx={{ marginBottom: "4rem" }}
+          open={error}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            severity="warning"
+            variant="outlined"
+            sx={{
+              marginBottom: "10px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#d07f08",
+              padding: "10px 20px",
+            }}
+          >
+            Lamentablemente no ha podido registrarse. Por favor intente más
+            tarde.
+          </Alert>
+        </Snackbar>
+      )}
       <form role="form" className="formulario-signup" onSubmit={handleSubmit}>
         <h1>Crear cuenta</h1>
         <div className="nombre-apellido">

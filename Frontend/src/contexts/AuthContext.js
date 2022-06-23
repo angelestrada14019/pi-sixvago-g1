@@ -10,6 +10,9 @@ const AuthProvider = ({ children }) => {
   const [mustLogin, setMustLogin] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
+  // este error es para las alertas
+  const [error, setError] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [err, setErr] = useState(null);
   const { pathname: currentLocation } = useLocation();
   const navigate = useNavigate();
@@ -49,6 +52,8 @@ const AuthProvider = ({ children }) => {
       const response = await ApiCall.invokePOST(`/auth/login`, user);
       if (!response.ok) {
         setErr(response.status);
+        // activar alerta
+        setAlert(true);
       } else {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
@@ -67,6 +72,8 @@ const AuthProvider = ({ children }) => {
       const response = await ApiCall.invokePOST(`/auth/register`, user);
       if (!response.ok) {
         setErr(response.status);
+        // activar alerta
+        setError(true);
       } else {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
@@ -91,6 +98,10 @@ const AuthProvider = ({ children }) => {
         logout,
         register,
         validateToken,
+        error,
+        setError,
+        alert,
+        setAlert,
       }}
     >
       {children}
