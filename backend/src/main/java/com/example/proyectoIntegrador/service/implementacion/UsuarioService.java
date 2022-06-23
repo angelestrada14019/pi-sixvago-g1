@@ -70,10 +70,11 @@ public class UsuarioService implements IGeneralService<UsuarioDTO,Long> {
     @Override
     public UsuarioDTO editar(UsuarioDTO usuarioDTO)  {
         try {
-            Usuario usuario = mapper.convertValue(usuarioDTO, Usuario.class);
-            Optional<Usuario> entityS = iUsuarioRepository.findById(usuario.getId());
-            entityS.orElseThrow(() -> new NoDataFoundExceptions("error al actualizar el id: " + usuario.getId()));
-            return mapper.convertValue(iUsuarioRepository.save(usuario), UsuarioDTO.class);
+
+            Usuario entityS = iUsuarioRepository.findById(usuarioDTO.getId()).orElseThrow(() ->
+                    new NoDataFoundExceptions("no existe el id: " + usuarioDTO.getId()));
+            entityS.setCiudad(usuarioDTO.getCiudad());
+            return mapper.convertValue(iUsuarioRepository.save(entityS), UsuarioDTO.class);
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);
             throw e;

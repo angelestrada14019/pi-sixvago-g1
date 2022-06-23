@@ -10,6 +10,11 @@ const HorarioLlegada = () => {
                 initialValues={{
                     hora: "Selecciona hora"
                 }}
+                validate={(valores) => {
+                    console.log("valoresh",valores);
+                    localStorage.setItem("horarioReserva",valores.hora)
+                  
+                }}
             >
                 {({ values, errors, handleSubmit, handleChange }) => (
 
