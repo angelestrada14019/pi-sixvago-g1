@@ -67,17 +67,18 @@ jobs_deploy_back_ec2:
   only:
     - desarrollo
 
-# jobs_tests_front:
-#   image: node:16
-#   stage: test_front
-#   script: 
-#     - cd ./Frontend
-#     - npm install
-#     - cd ./src
-#     - pwd
-#     - npm test
-#   only:
-#     - desarrollo 
+jobs_tests_front:
+  image: node:16
+  stage: test_front
+  script: 
+    - cd ./Frontend
+    - npm install
+    - cd ./src
+    - pwd
+    - npm test
+  only:
+    - desarrollo 
+  when: manual
 
 jobs_build_front:
   image: node:16.15.1 #node:10
