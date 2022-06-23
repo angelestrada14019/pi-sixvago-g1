@@ -46,6 +46,11 @@
       "!src/pages/*.{jsx,js}",
       "!src/utils/*.{jsx,js}",
       "!src/index.js",
+      "!src/components/booking_form/*.{jsx,js}",
+      "!src/components/calendar/*.{jsx,js}",
+      "!src/components/buscador/*.{jsx,js}",
+      "!src/components/cards/*.{jsx,js}",
+      "!src/components/body/*.{jsx,js}",
       "!src/reportWebVitals.js",
       "!src/setupTests.js"
     ]

@@ -32,7 +32,7 @@ public class UsuarioController {
         return  new WrapperResponse<>(true, HttpStatus.OK,"Succes",mapper.convertValue(usuarioService.findUsuarioByEmail(email),UsuarioDTO.class)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
-    @PreAuthorize("hasAnyRole('admin,cliente')")
+    @PreAuthorize("hasAnyRole('admin','cliente')")
     public ResponseEntity<WrapperResponse<UsuarioDTO>> editar(@RequestBody UsuarioDTO usuarioDTO)  {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",usuarioService.editar(usuarioDTO)).createResponse(HttpStatus.OK);
     }
