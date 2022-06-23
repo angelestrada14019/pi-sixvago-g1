@@ -6,7 +6,20 @@ import "./FormularioReserva.css"
 
 const FormularioReserva = ({ id }) => {
   const [producto, setProducto] = useState(null);
-
+  const user = JSON.parse(localStorage.getItem("user")); 
+  const [values, setValues] = useState({
+    horaComienzoReserva: "",
+    fechaInicialReserva: "",
+    fechaFinalReserva: "",
+    vacunaCovid: false,
+    datosParaVendedor: "no hay dato en este",
+    productosProductos: {
+        productos_id: id
+    },
+    usuarios: {
+        id: user.id
+    }
+});
   useEffect(() => {
     console.log(producto);
     getProducto();
@@ -17,6 +30,12 @@ const FormularioReserva = ({ id }) => {
     console.log(productoObtenido);
     setProducto(productoObtenido.body);
   }
+  const onChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
 
 
   return (
