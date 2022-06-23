@@ -27,3 +27,15 @@
 .section-h2{
     margin-top: 20px;
 }
+
+@media (max-width: 768px){
+    .contenedor_columnas{
+        flex-direction: column;
+    }
+    .columna_izquierda{
+        width: 100%;
+    }
+    .columna_derecha{
+        width: 100%;
+    }
+}
