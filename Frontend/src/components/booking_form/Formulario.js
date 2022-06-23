@@ -43,8 +43,8 @@ const user = JSON.parse(localStorage.getItem("user"));
         {({ values, errors, handleSubmit, handleChange, handleBlur }) => (
           <form className="formulario" onSubmit={handleSubmit}>
 
-            <div id="form-group"class="clearfix" >
-            <div class="form-row">
+            <div id="form-group" className="clearfix" >
+            <div className="form-row">
             <div className="column-half">
               <label htmlFor="nombre">Nombre</label>
               <input

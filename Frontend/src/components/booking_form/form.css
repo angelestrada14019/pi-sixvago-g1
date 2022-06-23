@@ -1,72 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
+.formulario{
+    background-color: white;
+}
 
-
-.formulario input{
-	font-family: 'Open Sans', sans-serif;
-	width: 100%;
-	border-radius: 5px;
-	border: 2px solid rgb(201, 199, 199);
-	padding: 15px;
+.formulario input {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid rgb(201, 199, 199);
+    padding: 15px;
     margin-bottom: 15px;
     font-size: 16px;
     color: rgb(100, 98, 98);
-   }
+}
 
 
 .formulario button[type="submit"] {
-  width: 206px;
-  height: 40px;
-  background: linear-gradient(90deg, rgba(203,178,106,1) 10%, rgba(255,245,218,1) 50%, rgba(190,158,68,1) 110%);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-  border-radius: 5px;
-  border-color: rgb(158, 139, 82);
-  border-style: inherit;
-  color: #262626;
-  cursor: pointer;
-  transition: 0.3s;
+    width: 206px;
+    height: 40px;
+    background: linear-gradient(90deg, rgba(203, 178, 106, 1) 10%, rgba(255, 245, 218, 1) 50%, rgba(190, 158, 68, 1) 110%);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    border-color: rgb(158, 139, 82);
+    border-style: inherit;
+    color: #262626;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .formulario button[type="submit"]:hover {
-	background: rgb(158, 139, 82);
-	color: #262626
-	
-	
+    background: rgb(158, 139, 82);
+    color: #262626
 }
 
 
-#form-group{
-	max-width:740px /*-- change this to get your desired form width --*/;
-	margin:15px ;
-    width:100%;
+#form-group {
+    /*max-width:740px /*-- change this to get your desired form width --*/
+    width: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
 }
 
-.form-row{
-	width: 100%;}
+.form-row {
+    width: 100%;
+}
 
-    .form-row{
-        width: 100%;
+.column-half,
+.column-full {
+    float: left;
+    position: relative;
+    padding: 0.65rem;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/**---------------- Media query ----------------**/
+@media only screen and (min-width: 48em) {
+    .column-half {
+        width: 50%;
     }
-    .column-half, .column-full{
-        float: left;
-        position: relative;
-        padding: 0.65rem;
-        width:100%;
-        -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box
-    }
-    .clearfix:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-    
- /**---------------- Media query ----------------**/
-@media only screen and (min-width: 48em) { 
-	.column-half{
-		width: 50%;
-	}
-}   
+}
