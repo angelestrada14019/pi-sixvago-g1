@@ -14,9 +14,7 @@ import java.util.*;
 @Builder
 @Entity
 @Table(name = "productos")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "productos_id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Producto.class)
 public class Producto{
 
     @Id
