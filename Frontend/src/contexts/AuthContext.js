@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
   const [mustLogin, setMustLogin] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
-  const [error, setError] = useState(null);
+  const [err, setErr] = useState(null);
   const { pathname: currentLocation } = useLocation();
   const navigate = useNavigate();
 
@@ -46,23 +46,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const login = async (user) => {
-    try {
       const response = await ApiCall.invokePOST(`/auth/login`, user);
-      console.log(response);
-      if (response.error) {
-        setError(response.error);
+      if (!response.ok) {
+        setErr(response.status);
       } else {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
         localStorage.setItem("token", JSON.stringify(response.body.token));
+        navigate(-1)
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      if (!error) {
-        navigate(-1);
-      }
-    }
   };
 
   const logout = () => {
@@ -72,21 +64,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = async (user) => {
-    setError("");
-    try {
       const response = await ApiCall.invokePOST(`/auth/register`, user);
-      if (response.error) {
-        setError(response.error);
+      if (!response.ok) {
+        setErr(response.status);
       } else {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
         localStorage.setItem("token", JSON.stringify(response.body.token));
+        navigate(-1);
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      navigate(-1);
-    }
   };
 
   return (
@@ -99,8 +85,8 @@ const AuthProvider = ({ children }) => {
         setOpenSignUp,
         mustLogin,
         setMustLogin,
-        error,
-        setError,
+        err,
+        setErr,
         login,
         logout,
         register,

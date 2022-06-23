@@ -23,7 +23,7 @@ const Producto = () => {
         <FechasDisponibles />
         <div className= "maps"> 
         <h2>¿Donde vas a estar?</h2>
-        <GoogleMapC />
+        {/* <GoogleMapC /> */}
         </div>
         <Politicas id={id} />
       </div>

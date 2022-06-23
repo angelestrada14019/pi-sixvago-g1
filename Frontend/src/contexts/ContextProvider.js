@@ -128,7 +128,7 @@ export const ContextProvider = ({ children }) => {
   const filtrarProductosPorReserva = async (fechaInicial, fechaFinal) => {
     try {
       const filtroQuery = await ApiCall.invokeGET(
-        `/productos/reserva?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
+        `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
       );
       setList(filtroQuery.body);
     } catch (error) {
@@ -151,9 +151,7 @@ export const ContextProvider = ({ children }) => {
     const porReserva = await ApiCall.invokeGET(
       `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
     );
-    const resultado = porCiudad.body.filter((producto) =>
-      porReserva.body.find((productoReserva) => producto.id === productoReserva.id)
-    );
+    const resultado = porReserva.body.filter((producto) => producto.ciudades_id.nombre === porCiudad.body[0].ciudades_id.nombre);
     setList(resultado);
     setLoading(false);
     setloadingFnChange(false);

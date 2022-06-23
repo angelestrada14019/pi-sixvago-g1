@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import CustomCalendar from "../calendar/CustomCalendar";
 import LocationsList from "./LocationsList";
-import ApiCall from "../../utils/ApiCall";
-import "./buscador.css";
 import { useNavigate, createSearchParams } from "react-router-dom";
+import "./buscador.css";
 
 const Buscador = () => {
   const {
     location,
     setLocation,
-    setList,
     setPageNumber,
     setLoading,
     setCardCategory,
@@ -72,18 +70,6 @@ const Buscador = () => {
     setloadingFnChange(true);
     setLoading(true);
   };
-
-  // const productosPorCiudad = async () => {
-  //   if (searchParams.toString()) {
-  //     const filtroQuery = await ApiCall.invokeGET(
-  //       `/productos/ciudad?${searchParams.toString()}`
-  //     );
-  //     setList(filtroQuery);
-  //   }
-  //   // const filtroQuery = await ApiCall.invokeGET(`/productos/ciudad`, [
-  //   //   `nombreCiudad=${location}`,
-  //   // ]);
-  // };
 
   const handleClick = (e) => {
     if (e.target.className === "buscador-date") {

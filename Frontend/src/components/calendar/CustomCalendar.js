@@ -23,19 +23,18 @@ const CustomCalendar = ({ handleCheckInOut }) => {
     const unavailableDates = await ApiCall.invokeGET(
       `/reservas/productos?idproducto=${id}`
     );
-    let arrayOfDates = unavailableDates.map((day) => {
+    let arrayOfDates = unavailableDates.body.map((day) => {
       return getDaysArray(day.fechaInicialReserva, day.fechaFinalReserva);
     });
     setValue(Array.from(arrayOfDates.flat()));
   };
 
   var getDaysArray = function (start, end) {
-    for (
-      var arr = new Array(), dt = new Date(start);
-      dt <= new Date(end);
-      dt.setDate(dt.getDate() + 1)
-    ) {
+    let arr = new Array()
+    let dt = new Date(start.replace(/-/g, '\/'));
+    while (dt <= new Date(end.replace(/-/g, "/"))) {
       arr.push(new Date(dt));
+      dt.setDate(dt.getDate() + 1);
     }
     return arr;
   };
