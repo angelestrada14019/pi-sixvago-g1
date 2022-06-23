@@ -202,6 +202,12 @@ abbr[title] {
 .react-calendar__tile:disabled {
   color: #adadad;
   background: none;
+  border: none;
+}
+.react-calendar--selectRange .react-calendar__tile:disabled {
+  outline: none;
+  background: none;
+  border: none;
 }
 
 .react-calendar__tile:enabled:hover,

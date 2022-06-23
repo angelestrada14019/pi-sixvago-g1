@@ -10,11 +10,12 @@ const AuthProvider = ({ children }) => {
   const [mustLogin, setMustLogin] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
-  const [error, setError] = useState("");
+  const [err, setErr] = useState(null);
   const { pathname: currentLocation } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoggedIn(validateToken());
     if (currentLocation === "/login") {
       setOpenSignUp(false);
       setOpenLogin(true);
@@ -39,27 +40,21 @@ const AuthProvider = ({ children }) => {
         isValid = true;
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
     return isValid;
   };
 
   const login = async (user) => {
-    setError("");
-    try {
       const response = await ApiCall.invokePOST(`/auth/login`, user);
-      if (response.error) {
-        setError(response.error);
+      if (!response.ok) {
+        setErr(response.status);
       } else {
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.body));
-        localStorage.setItem("token", JSON.stringify(response.token));
+        localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
+        localStorage.setItem("token", JSON.stringify(response.body.token));
+        navigate(-1)
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      navigate(-1);
-    }
   };
 
   const logout = () => {
@@ -69,17 +64,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = async (user) => {
-    setError("");
-    try {
       const response = await ApiCall.invokePOST(`/auth/register`, user);
-      if (response.error) {
-        setError(response.error);
+      if (!response.ok) {
+        setErr(response.status);
+      } else {
+        setIsLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
+        localStorage.setItem("token", JSON.stringify(response.body.token));
+        navigate(-1);
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      navigate(-1);
-    }
   };
 
   return (
@@ -92,8 +85,8 @@ const AuthProvider = ({ children }) => {
         setOpenSignUp,
         mustLogin,
         setMustLogin,
-        error,
-        setError,
+        err,
+        setErr,
         login,
         logout,
         register,

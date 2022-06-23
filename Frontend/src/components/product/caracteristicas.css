@@ -5,7 +5,7 @@
     margin-top: 3%;
     align-items: center;
     background: #e8e7e7;
-    padding: 80px 0px;
+    padding: 25px 0px;
     color: #262626;
 }
 .caracteristicas-title{
@@ -36,4 +36,9 @@
 .nombre{
     font-size: 1.2rem;
     font-family: Roboto;
+}
+@media (max-width: 768px){
+    .caracteristicas-container{
+        flex-direction: column;
+    }
 }

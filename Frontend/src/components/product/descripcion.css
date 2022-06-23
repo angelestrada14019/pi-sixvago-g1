@@ -4,11 +4,15 @@
     margin-right: 20px;
     padding-top: 10px;
 }
+.descripcion{
+    margin-top: 5%;
+    padding-left: 40px;
+}
 .titleDescription{
     font-size: 1.7rem;
     font-weight: bold;
     color: #000;
-    margin-bottom: 50px;
+    margin-bottom: 4%;
     text-align: center;
 }
 .descriptionP{

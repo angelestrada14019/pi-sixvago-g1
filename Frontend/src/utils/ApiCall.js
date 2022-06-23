@@ -16,7 +16,7 @@ class ApiCall {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${bearer}`,
+          Authorization: `Bearer ${bearer}`,
         },
       };
     } else {
@@ -41,7 +41,7 @@ class ApiCall {
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${bearer}`,
+          Authorization: `Bearer ${bearer}`,
         },
       };
     } else {
@@ -67,7 +67,7 @@ class ApiCall {
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${bearer}`,
+          Authorization: `Bearer ${bearer}`,
         },
       };
     } else {
@@ -80,7 +80,7 @@ class ApiCall {
       };
     }
     const url = `${config.api.baseURL}${resource}`;
-    let response = await (await fetch(url, data)).json();
+    const response = await (await fetch(url, data)).json();
     return response;
   }
 
@@ -92,7 +92,7 @@ class ApiCall {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${bearer}`,
+          Authorization: `Bearer ${bearer}`,
         },
       };
     } else {
