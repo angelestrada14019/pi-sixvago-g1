@@ -66,15 +66,14 @@ const FormularioReserva = ({ id }) => {
   const handleClick =(e)=>{           
         console.log("values", values);
         console.log("usuario", usuario);
-        // const okR=postReserva(values);
-        // const okU=postReserva(usuario);
-        // if (okR && okU) {
-        //     navigate(`/reservaExitosa`)
-        // } else {
-        //     console.log("alerta")
-        //  e.preventDefault();
-        // }
-        e.preventDefault();
+        const okR=postReserva(values);
+        const okU=postReserva(usuario);
+        if (okR && okU) {
+            navigate(`reservaExitosa`)
+        } else {
+            console.log("alerta")
+         e.preventDefault();
+        }
    
   }
 

@@ -70,7 +70,7 @@ public class UsuarioService implements IGeneralService<UsuarioDTO,Long> {
     @Override
     public UsuarioDTO editar(UsuarioDTO usuarioDTO)  {
         try {
-
+            log.info("wntre");
             Usuario entityS = iUsuarioRepository.findById(usuarioDTO.getId()).orElseThrow(() ->
                     new NoDataFoundExceptions("no existe el id: " + usuarioDTO.getId()));
             entityS.setCiudad(usuarioDTO.getCiudad());
