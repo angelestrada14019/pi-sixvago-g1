@@ -1,7 +1,6 @@
 .calendarAvailableDay{
-    margin-top: 86px;
     margin-bottom: 100px;
-    padding: 30px 5px;
+    padding: 25px 5px;
 }
 .calendarAvailableDay h2{
     font-size: 1.7rem;
