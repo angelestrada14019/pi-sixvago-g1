@@ -10,12 +10,16 @@ const HorarioLlegada = () => {
                 initialValues={{
                     hora: "Selecciona hora"
                 }}
+                validate={(valores) => {
+                    console.log("valoresh",valores);
+                    localStorage.setItem("horarioReserva",valores.hora)
+                  
+                }}
             >
                 {({ values, errors, handleSubmit, handleChange }) => (
 
                     <form className="formulario" onSubmit={handleSubmit}>
                         <div id="form-group" class="clearfix" >
-                            <h2 className="section-h2">Tu horario de llegada</h2>
                             <div className="descripcion">
                                 <p> Tu habitacion va a estar lista para el check-in entre las 10:00 AM y las 11:00 PM</p>
                                 </div>

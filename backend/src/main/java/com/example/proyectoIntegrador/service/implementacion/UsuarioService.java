@@ -1,6 +1,8 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
+import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.dto.UsuarioDTO;
+import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.entity.Usuario;
 import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
@@ -67,7 +69,20 @@ public class UsuarioService implements IGeneralService<UsuarioDTO,Long> {
 
     @Override
     public UsuarioDTO editar(UsuarioDTO usuarioDTO)  {
-        return null;
+        try {
+
+            Usuario entityS = iUsuarioRepository.findById(usuarioDTO.getId()).orElseThrow(() ->
+                    new NoDataFoundExceptions("no existe el id: " + usuarioDTO.getId()));
+            entityS.setCiudad(usuarioDTO.getCiudad());
+            return mapper.convertValue(iUsuarioRepository.save(entityS), UsuarioDTO.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
     }
 
     @Override
