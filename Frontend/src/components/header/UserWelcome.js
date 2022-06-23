@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
+import { useStateContext } from "../../contexts/ContextProvider";
 import "./userWelcome.css";
 
 const UserWelcome = ({ handleLogout }) => {
   const [avatar, setAvatar] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
-  const { isLoggedIn } = useContext(AuthContext);
-  
+  const { isLoggedIn, validateToken } = useContext(AuthContext);
+  const { loading } = useStateContext();
+  const { pathname: currentLocation } = useLocation();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (validateToken()) {
       setAvatar(
         `${JSON.parse(localStorage.getItem("user")).nombre.slice(
           0,
@@ -20,7 +23,7 @@ const UserWelcome = ({ handleLogout }) => {
       setNombre(JSON.parse(localStorage.getItem("user")).nombre);
       setApellido(JSON.parse(localStorage.getItem("user")).apellido);
     }
-  }, [isLoggedIn]);
+  }, [loading, isLoggedIn]);
 
   return (
     <div className="user-loggedIn-main-container">

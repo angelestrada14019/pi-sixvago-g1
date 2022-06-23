@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import "./login.css";
-import { useStateContext } from "../../contexts/ContextProvider";
 import AuthContext from "../../contexts/AuthContext";
 import CustomAlert from "../../utils/CustomAlert";
 

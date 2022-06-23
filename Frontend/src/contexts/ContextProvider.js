@@ -1,18 +1,23 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ApiCall from "../utils/ApiCall";
+import AuthContext from "./AuthContext";
 
 const StateContext = createContext();
+
 export const ContextProvider = ({ children }) => {
   const [cardCategory, setCardCategory] = useState("");
   const [list, setList] = useState([]);
   const [locationsList, setLocationsList] = useState([]);
   const [location, setLocation] = useState("");
+  const [reservaIn, setReservaIn] = useState("");
+  const [reservaOut, setReservaOut] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   const [loadingFnChange, setloadingFnChange] = useState(true);
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
   let [searchParams, setSearchParams] = useSearchParams();
+  const { validateToken } = useContext(AuthContext);
   // searchParams.values().next().value devuelve el valor de la query despues del =
   // searchParams.keys().next().value devuelve el nombre de la query antes del =
 
@@ -25,54 +30,37 @@ export const ContextProvider = ({ children }) => {
 
   const getListaProducto = async () => {
     if (searchParams.values().next().value) {
-      if (searchParams.keys().next().value !== "tituloCategoria") {
-        setLocation(searchParams.values().next().value);
-        try {
-          const filtroQuery = await ApiCall.invokeGET(
-            `/productos/ciudad?${searchParams.toString()}`
-          );
-          setList(filtroQuery.body);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-          setloadingFnChange(false);
-          setLoadingFiltro(false);
-          // console.log("finally");
-        }
-      } else if (searchParams.keys().next().value === "tituloCategoria") {
-        const filtroQuery = await ApiCall.invokeGET(
-          `/productos/categorias?${searchParams.toString()}`
+      if (
+        searchParams.get("nombreCiudad") &&
+        searchParams.get("fechaInicial")
+      ) {
+        filtrarProductosPorCiudadYReserva(
+          searchParams.get("nombreCiudad"),
+          searchParams.get("fechaInicial"),
+          searchParams.get("fechaFinal")
         );
-        if (filtroQuery.body?.length > 0) {
-          setLoading(false);
-          setloadingFnChange(false);
-          setLoadingFiltro(false);
-          setList(filtroQuery.body);
-        }
+      } else if (
+        !searchParams.get("nombreCiudad") &&
+        searchParams.get("fechaInicial")
+      ) {
+        filtrarProductosPorReserva(
+          searchParams.get("fechaInicial"),
+          searchParams.get("fechaFinal")
+        );
+      } else if (searchParams.keys().next().value === "nombreCiudad") {
+        setLocation(searchParams.values().next().value);
+        filtrarNombreCiudad(searchParams.values().next().value);
+      } else if (searchParams.keys().next().value === "tituloCategoria") {
+        filtrarTituloCategoria(searchParams.get("tituloCategoria"));
       }
-    } else if (
-      !localStorage.getItem("isLoggedIn") &&
-      cardCategory === ""
-    ) {
-      try {
-        const lista = await ApiCall.invokeGET("/productos");
-        let shuffleList = shuffle(lista.body);
-        setList(shuffleList);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-        setloadingFnChange(false);
-        setLoadingFiltro(false);
-      }
+    } else if (!validateToken() && cardCategory === "") {
+      getProductos();
     } else {
       const lista = await ApiCall.invokeGET("/productos");
       setLoading(false);
       setloadingFnChange(false);
       setLoadingFiltro(false);
       setList(lista.body);
-
       //setProduct(lista);
     }
   };
@@ -84,18 +72,90 @@ export const ContextProvider = ({ children }) => {
   };
 
   const shuffle = (array) => {
-    let currentIndex = array.length;
-    let randomIndex;
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-
     return array;
+  };
+
+  const getProductos = async () => {
+    try {
+      if (loading) {
+        const lista = await ApiCall.invokeGET("/productos");
+        let shuffleList = shuffle(lista.body);
+        setList(shuffleList);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+    }
+  }
+
+  const filtrarTituloCategoria = async (tituloCategoria) => {
+    try {
+      const filtroQuery = await ApiCall.invokeGET(
+        `/productos/categorias?tituloCategoria=${tituloCategoria}`
+      );
+      setList(filtroQuery.body);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+    }
+  };
+
+  const filtrarNombreCiudad = async (nombreCiudad) => {
+    try {
+      const filtroQuery = await ApiCall.invokeGET(
+        `/productos/ciudad?nombreCiudad=${nombreCiudad}`
+      );
+      setList(filtroQuery.body);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+    }
+  };
+
+  const filtrarProductosPorReserva = async (fechaInicial, fechaFinal) => {
+    try {
+      const filtroQuery = await ApiCall.invokeGET(
+        `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
+      );
+      setList(filtroQuery.body);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      setloadingFnChange(false);
+      setLoadingFiltro(false);
+    }
+  };
+
+  const filtrarProductosPorCiudadYReserva = async (
+    nombreCiudad,
+    fechaInicial,
+    fechaFinal
+  ) => {
+    const porCiudad = await ApiCall.invokeGET(
+      `/productos/ciudad?nombreCiudad=${nombreCiudad}`
+    );
+    const porReserva = await ApiCall.invokeGET(
+      `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
+    );
+    const resultado = porReserva.body.filter((producto) => producto.ciudades_id.nombre === porCiudad.body[0].ciudades_id.nombre);
+    setList(resultado);
+    setLoading(false);
+    setloadingFnChange(false);
+    setLoadingFiltro(false);
   };
 
   return (
@@ -110,6 +170,10 @@ export const ContextProvider = ({ children }) => {
           setLocationsList,
           location,
           setLocation,
+          reservaIn,
+          setReservaIn,
+          reservaOut,
+          setReservaOut,
           pageNumber,
           setPageNumber,
           loadingFnChange,
