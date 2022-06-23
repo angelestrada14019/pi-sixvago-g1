@@ -1,16 +1,19 @@
-import React, { useEffect, useState, useNavigate, useLocation } from "react";
+import React, { useEffect, useState, useLocation } from "react";
 import CustomCalendar from "../calendar/CustomCalendar";
 import ImagenesProd from "../product/ImagenesProd";
 import ApiCall from "../../utils/ApiCall";
 import "./FormularioReserva.css";
+import { useNavigate } from "react-router-dom";
 
 const FormularioReserva = ({ id }) => {
+    const navigate =useNavigate();
   const [producto, setProducto] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
-  const ciudad = localStorage.getItem("ciudadReserva");
-  const hora = localStorage.getItem("horarioReserva");
+  
+  
+  const [hora,setHora]=useState("");
   const [values, setValues] = useState({
-    horaComienzoReserva: hora,
+    horaComienzoReserva: "",
     fechaInicialReserva: "",
     fechaFinalReserva: "",
     vacunaCovid: false,
@@ -26,21 +29,19 @@ const FormularioReserva = ({ id }) => {
     apellido: user.apellido,
     ciudad: user.ciudad,
     contrasenia: user.contrasenia,
-    email: "angel@gmail.com",
-    id: 2,
-    nombre: "angel",
+    email: user.email,
+    id: user.id,
+    nombre: user.nombre,
     rol: {
-      id: 1,
-      nombre: "cliente",
+      id: user.rol.id,
     },
   });
 
   useEffect(() => {
     console.log(producto);
-    console.log("value", values);
-    console.log("user", user);
+    
     getProducto();
-  }, []);
+  }, [values,usuario]);
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
@@ -48,11 +49,43 @@ const FormularioReserva = ({ id }) => {
     setProducto(productoObtenido.body);
   };
   const onChange = (e) => {
+    const horaP = localStorage.getItem("horarioReserva");
+    const ciudad = localStorage.getItem("ciudadReserva");
     setValues({
       ...values,
+      horaComienzoReserva:horaP,
       [e.target.name]: e.target.value,
     });
+    setUsuario({
+        ...usuario,
+      ciudad:ciudad,
+    })
+    
+    
   };
+  const handleClick =(e)=>{           
+        console.log("values", values);
+        console.log("usuario", usuario);
+        // const okR=postReserva(values);
+        // const okU=postReserva(usuario);
+        // if (okR && okU) {
+        //     navigate(`/reservaExitosa`)
+        // } else {
+        //     console.log("alerta")
+        //  e.preventDefault();
+        // }
+        e.preventDefault();
+   
+  }
+
+  const postReserva= async(body)=>{
+    const response = await ApiCall.invokePOST(`/reservas`,body);
+    return response.ok
+  }
+  const putUsuario = async(body)=>{
+    const response = await ApiCall.invokePUT(`/reservas`,body);
+    return response.ok
+  }
 
   return (
     <div className="Form_Reserva">
@@ -93,7 +126,7 @@ const FormularioReserva = ({ id }) => {
         />
       </div>
       <div className="form_boton">
-        <button type="submit">Reservar</button>
+        <button onClick={handleClick} type="submit">Reservar</button>
       </div>
     </div>
   );
