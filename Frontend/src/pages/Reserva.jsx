@@ -6,16 +6,24 @@ import Formulario from "../components/booking_form/Formulario";
 import HorarioLlegada from "../components/booking_form/HorarioLlegada";
 import product from "../components/product/Politicas"
 import Politicas from "../components/product/Politicas";
+import FormularioReserva from "../components/booking_form/FormularioReserva";
 
 const Reserva = () => {
   let { id } = useParams();
   return (
     <div className="reserva-container">
       <HeaderProducto id={id} />
+    <div className="contenedor_columnas">
+    <div className="columna_izquierda">
       <Formulario/> 
       <CustomCalendar />
       <HorarioLlegada  />
-      <Politicas id={id} />
+    </div>
+    <div className="columna_derecha">
+      <FormularioReserva id={id} />
+    </div>
+    </div>
+          <Politicas id={id} />
     </div>
   );
 };
