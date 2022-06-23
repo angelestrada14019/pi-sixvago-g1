@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
       } else {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.body.usuarioDto));
-        localStorage.setItem("token", JSON.stringify(response.body.token));
+        localStorage.setItem("token", response.body.token);
         navigate(-1)
       }
   };

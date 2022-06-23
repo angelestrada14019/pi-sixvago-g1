@@ -35,6 +35,7 @@ class ApiCall {
   async invokePUT(resource, body) {
     let data = {};
     const bearer = localStorage.getItem("token");
+    console.log("token",bearer);
     if (bearer) {
       data = {
         method: "PUT",

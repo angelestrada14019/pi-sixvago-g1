@@ -26,12 +26,12 @@ const FormularioReserva = ({ id }) => {
     },
   });
   const [usuario, setUsuario] = useState({
+      id: user.id,
+      nombre: user.nombre,
     apellido: user.apellido,
-    ciudad: user.ciudad,
-    contrasenia: user.contrasenia,
     email: user.email,
-    id: user.id,
-    nombre: user.nombre,
+    contrasenia: user.contrasenia,
+    ciudad: user.ciudad,
     rol: {
       id: user.rol.id,
     },
@@ -63,27 +63,37 @@ const FormularioReserva = ({ id }) => {
     
     
   };
-  const handleClick =(e)=>{           
+  const handleClick =async(e)=>{           
         console.log("values", values);
         console.log("usuario", usuario);
-        const okR=postReserva(values);
-        const okU=postReserva(usuario);
+        const okR= await postReserva(values);
+        const okU=await putUsuario(usuario);
         if (okR && okU) {
             navigate(`reservaExitosa`)
         } else {
             console.log("alerta")
+            alert("no se creo la reserva")
          e.preventDefault();
         }
    
   }
 
   const postReserva= async(body)=>{
+    try{
     const response = await ApiCall.invokePOST(`/reservas`,body);
     return response.ok
+    }catch(error){
+        return false
+    }
   }
   const putUsuario = async(body)=>{
-    const response = await ApiCall.invokePUT(`/reservas`,body);
-    return response.ok
+    try {
+        
+        const response = await ApiCall.invokePUT(`/usuarios`,body);
+        return response.ok
+    } catch (error) {
+        return false
+    }
   }
 
   return (

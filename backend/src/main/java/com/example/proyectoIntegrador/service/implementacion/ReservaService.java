@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,17 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     @Override
     public ReservaDTO agregar(ReservaDTO reservaDTO) {
         try {
+            Reserva reserva1 = iReservaRepository.findById(reservaDTO.getId()).orElseThrow(
+                    ()-> new NoDataFoundExceptions("No existe la reserva"));
             Reserva reserva = mapper.convertValue(reservaDTO, Reserva.class);
+            if (reserva1.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) &&
+                    reserva1.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
+            && LocalDate.now().isBefore(reserva.getFechaInicialReserva())
+                    && LocalDate.now().isBefore(reserva.getFechaFinalReserva())
+            && reserva.getFechaInicialReserva().isBefore(reserva.getFechaFinalReserva())){
+
+            throw new ValidateServiceExceptions("fechas se solapan");
+            }
             return mapper.convertValue(iReservaRepository.save(reserva), ReservaDTO.class);
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);
