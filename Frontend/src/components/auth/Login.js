@@ -10,8 +10,7 @@ const Login = ({ show, handleClick }) => {
   const [error, setError] = useState(false);
   const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-  const { login, mustLogin, setMustLogin, setOpenLogin } =
-    useContext();
+  const { login, mustLogin, setMustLogin, setOpenLogin } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
