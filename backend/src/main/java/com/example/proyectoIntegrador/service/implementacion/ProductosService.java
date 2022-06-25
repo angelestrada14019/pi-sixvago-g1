@@ -152,14 +152,17 @@ public class ProductosService implements IGeneralService<ProductoDTO, Long> {
                 if (producto.getReservas().isEmpty()) {
                     productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
                 } else {
+                        List<Boolean> aux =new ArrayList<>();
                     for (Reserva reserva : producto.getReservas()) {
-                        if (!(
+                        aux.add(!(
                                 isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), fechaInicial)
                                         || isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), fechaFinal)
-                        )) {
-                            productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
-                            break;
-                        }
+                        ));
+
+
+                    }
+                    if(!aux.contains(false)){
+                        productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
                     }
                 }
             }
