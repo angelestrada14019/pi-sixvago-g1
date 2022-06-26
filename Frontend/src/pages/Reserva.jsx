@@ -4,7 +4,7 @@ import CustomCalendar from "../components/calendar/CustomCalendar";
 import "./reserva.css";
 import Formulario from "../components/booking_form/Formulario";
 import HorarioLlegada from "../components/booking_form/HorarioLlegada";
-import product from "../components/product/Politicas"
+import product from "../components/product/Politicas";
 import Politicas from "../components/product/Politicas";
 import FormularioReserva from "../components/booking_form/FormularioReserva";
 
@@ -13,18 +13,18 @@ const Reserva = () => {
   return (
     <div className="reserva-container">
       <HeaderProducto id={id} />
-    <div className="contenedor_columnas">
-    <div className="columna_izquierda">
-      <Formulario/> 
-      <CustomCalendar className="calendar-reserva"/>
-      <h2 className="section-h2">Tu horario de llegada</h2>
-      <HorarioLlegada  />
-    </div>
-    <div className="columna_derecha">
-      <FormularioReserva id={id} />
-    </div>
-    </div>
-          <Politicas id={id} />
+      <div className="contenedor_columnas">
+        <div className="columna_izquierda">
+          <Formulario />
+          <CustomCalendar />
+          <h2 className="section-h2">Tu horario de llegada</h2>
+          <HorarioLlegada />
+        </div>
+        <div className="columna_derecha">
+          <FormularioReserva id={id} />
+        </div>
+      </div>
+      <Politicas id={id} />
     </div>
   );
 };

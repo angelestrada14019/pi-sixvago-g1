@@ -13,46 +13,48 @@ const Buscador = () => {
     setLoading,
     setCardCategory,
     setloadingFnChange,
-    reservaIn,
-    setReservaIn,
-    reservaOut,
-    setReservaOut,
+    dateReserva,
+    setDateReserva,
   } = useStateContext();
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openLocations, setOpenLocations] = useState(false);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const localDateOptions = {
-    month: "long",
-    day: "numeric",
-  };
   const navigate = useNavigate();
 
   useEffect(() => {
-    let cI = localStorage.getItem("checkIn");
-    let cO = localStorage.getItem("checkOut");
-    if (cI !== null && cO !== null) {
-      setCheckIn(cI);
-      setCheckOut(cO);
+    let reserva = JSON.parse(localStorage.getItem("reserva"));
+    if (reserva !== null) {
+      setCheckIn(reserva.shortDateIn);
+      setCheckOut(reserva.shortDateOut);
+      setDateReserva(reserva)
     }
   }, []);
 
   const handleBuscar = () => {
     if (location === "" && checkIn === "" && checkOut === "") {
       return;
-    } else if (location !== "" && reservaIn === "" && reservaOut === "") {
+    } else if (
+      location !== "" &&
+      dateReserva.queryInicial === "" &&
+      dateReserva.queryFinal === ""
+    ) {
       navigate({
         pathname: "/buscar",
         search: `?${createSearchParams({
           nombreCiudad: location,
         })}`,
       });
-    } else if (location === "" && checkIn !== "" && checkOut !== "") {
+    } else if (
+      location === "" &&
+      dateReserva.queryInicial !== "" &&
+      dateReserva.queryFinal !== ""
+    ) {
       navigate({
         pathname: "/buscar",
         search: `?${createSearchParams({
-          fechaInicial: reservaIn,
-          fechaFinal: reservaOut,
+          fechaInicial: dateReserva.queryInicial,
+          fechaFinal: dateReserva.queryFinal,
         })}`,
       });
     } else {
@@ -60,8 +62,8 @@ const Buscador = () => {
         pathname: "/buscar",
         search: `?${createSearchParams({
           nombreCiudad: location,
-          fechaInicial: reservaIn,
-          fechaFinal: reservaOut,
+          fechaInicial: dateReserva.queryInicial,
+          fechaFinal: dateReserva.queryFinal,
         })}`,
       });
     }
@@ -86,32 +88,9 @@ const Buscador = () => {
 
   const handleCheckInOut = (date) => {
     if (date[0]) {
-      setReservaIn(
-        date[0].getFullYear() +
-          "-" +
-          ("0" + (date[0].getMonth() + 1)).slice(-2) +
-          "-" +
-          ("0" + date[0].getDate()).slice(-2)
-      );
-      setReservaOut(
-        date[1].getFullYear() +
-          "-" +
-          ("0" + (date[1].getMonth() + 1)).slice(-2) +
-          "-" +
-          ("0" + date[1].getDate()).slice(-2)
-      );
-      setCheckIn(date[0].toLocaleString(undefined, localDateOptions));
-      setCheckOut(date[1].toLocaleString(undefined, localDateOptions));
-      localStorage.setItem(
-        "checkIn",
-        date[0].toLocaleString(undefined, localDateOptions)
-      );
-      localStorage.setItem(
-        "checkOut",
-        date[1].toLocaleString(undefined, localDateOptions)
-      );
-    } else if (checkIn !== "") {
-      return;
+      setCheckIn(dateReserva.shortDateIn);
+      setCheckOut(dateReserva.shortDateOut);
+      localStorage.setItem("reserva", JSON.stringify(dateReserva));
     } else {
       setCheckIn("");
       setCheckOut("");

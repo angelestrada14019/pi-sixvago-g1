@@ -26,12 +26,13 @@
 .calendar-container.product .react-calendar__navigation {
   pointer-events: all;
 }
-.calendar-container.product .react-calendar__tile{
-  background: rgba(190, 158, 68, 1)
-}
+/* .calendar-container.product .react-calendar__tile{
+  border: 2px solid rgb(250, 218, 36);
+} */
 .calendar-container.product .react-calendar__tile:disabled {
   color: #adadad;
   background: none;
+  border: none;
 }
 
 .calendar-button-aplicar {
