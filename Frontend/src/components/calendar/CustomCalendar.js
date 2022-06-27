@@ -91,8 +91,8 @@ const CustomCalendar = ({ handleCheckInOut }) => {
         value={
           dateReserva?.date?.length > 0
             ? [
-                new Date(dateReserva.queryInicial),
-                new Date(dateReserva.queryFinal),
+                new Date(dateReserva.queryInicial.replace(/-/g, "/")),
+                new Date(dateReserva.queryFinal.replace(/-/g, "/")),
               ]
             : null
         }

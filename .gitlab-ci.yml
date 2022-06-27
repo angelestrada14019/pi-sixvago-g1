@@ -4,7 +4,7 @@ stages:
   - deploy_back
   - test_front
   - build
-  - deploy
+  - deploy_front
   - test_postman
 
 
@@ -102,12 +102,11 @@ jobs_deploy_front_s3:
     entrypoint: [""]
   dependencies:
     - jobs_build_front
-  stage: deploy
+  stage: deploy_front
   script:
     - aws --version
     - aws s3 rm s3://$S3_BUCKET --recursive
     - aws s3 cp ./Frontend/build/ s3://$S3_BUCKET --recursive
-  when: manual
   only:
     - desarrollo
 
