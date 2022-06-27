@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import ApiCall from "../../utils/ApiCall";
 import { useNavigate } from "react-router-dom";
 import "./FormularioReserva.css";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 const FormularioReserva = ({ id }) => {
   const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
+  const { setReservaP,reservaP,dateReserva } = useStateContext();
   const [values, setValues] = useState({
     horaComienzoReserva: "",
     fechaInicialReserva: "",
@@ -34,25 +36,28 @@ const FormularioReserva = ({ id }) => {
 
   useEffect(() => {
     getProducto();
-  }, [values, usuario]);
+    setUsuario({
+        ...usuario,
+        ciudad: reservaP.ciudadReserva,
+      });
+      setValues({
+        ...values,
+        horaComienzoReserva: reservaP.horarioReserva,
+        fechaInicialReserva: dateReserva.queryInicial,
+        fechaFinalReserva: dateReserva.queryFinal,
+      });
+  }, [values, usuario,reservaP]);
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido.body);
   };
-  const onChange = (e) => {
-    const horaP = localStorage.getItem("horarioReserva");
-    const ciudad = localStorage.getItem("ciudadReserva");
-    setValues({
-      ...values,
-      horaComienzoReserva: horaP,
-      [e.target.name]: e.target.value,
-    });
-    setUsuario({
-      ...usuario,
-      ciudad: ciudad,
-    });
-  };
+//   const onChange = (e) => {
+//     setValues({
+//       ...values,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
   const handleClick = async (e) => {
     const okR = await postReserva(values);
     const okU = await putUsuario(usuario);
@@ -62,6 +67,8 @@ const FormularioReserva = ({ id }) => {
       alert("no se creo la reserva");
       e.preventDefault();
     }
+    // console.log("value",values);
+    // e.preventDefault();
   };
 
   const postReserva = async (body) => {
@@ -86,6 +93,7 @@ const FormularioReserva = ({ id }) => {
       <img
         className="form-img"
         src={producto?.listadeimagenes[0]?.urlImagen}
+        alt={producto?.nombre}
       ></img>
       <div className="form_nombre">
         <h2>{producto?.nombre}</h2>
@@ -105,18 +113,20 @@ const FormularioReserva = ({ id }) => {
         <label htmlFor="Check-in">Check-in</label>
         <input
           name="fechaInicialReserva"
-          type="date"
+          type="text"
           id="date"
-          onChange={onChange}
+          value={dateReserva.queryInicial}
+          disabled
         />
       </div>
       <div className="form_checkin_out">
         <label htmlFor="Check-out">Check-out</label>
         <input
           name="fechaFinalReserva"
-          type="date"
+          type="text"
           id="date"
-          onChange={onChange}
+          value={dateReserva.queryFinal}
+          disabled
         />
       </div>
       <div className="form_boton">

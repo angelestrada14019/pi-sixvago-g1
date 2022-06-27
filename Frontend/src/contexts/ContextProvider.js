@@ -24,6 +24,10 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loadingFiltro, setLoadingFiltro] = useState(true);
   let [searchParams, setSearchParams] = useSearchParams();
+  const [reservaP,setReservaP]=useState({
+    ciudadReserva:"",
+    horarioReserva:""
+  })
   const { validateToken } = useContext(AuthContext);
   // searchParams.values().next().value devuelve el valor de la query despues del =
   // searchParams.keys().next().value devuelve el nombre de la query antes del =
@@ -180,6 +184,8 @@ export const ContextProvider = ({ children }) => {
           setLoading,
           loadingFiltro,
           setLoadingFiltro,
+          reservaP,
+          setReservaP
         }}
       >
         {children}
