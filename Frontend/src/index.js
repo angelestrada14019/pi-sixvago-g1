@@ -10,11 +10,13 @@ import NotFound from "./pages/NotFound";
 import Reserva from "./pages/Reserva";
 import ReservaExitosa from "./pages/ReservaExitosa";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ScrollToTop from "./utils/ScrollToTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="login" />

@@ -4,7 +4,6 @@ import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AuthProvider } from "../contexts/AuthContext";
-import ScrollToTop from "../utils/ScrollToTop";
 
 function App() {
   return (
@@ -12,7 +11,6 @@ function App() {
       <AuthProvider>
         <ContextProvider>
           <CssBaseline />
-          <ScrollToTop />
           <Header />
           <Outlet />
           <Footer />
