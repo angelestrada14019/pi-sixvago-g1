@@ -59,17 +59,14 @@ const FormularioReserva = ({ id }) => {
 //     });
 //   };
   const handleClick = async (e) => {
-    // const okR = await postReserva(values);
-    // const okU = await putUsuario(usuario);
-    // if (okR && okU) {
-    //   navigate(`reservaExitosa`);
-    // } else {
-    //   alert("no se creo la reserva");
-    //   e.preventDefault();
-    // }
-    console.log("value",values);
-    console.log("usuario",usuario);
-    e.preventDefault();
+    const okR = await postReserva(values);
+    const okU = await putUsuario(usuario);
+    if (okR && okU) {
+      navigate(`reservaExitosa`);
+    } else {
+      alert("no se creo la reserva");
+      e.preventDefault();
+    }
   };
 
   const postReserva = async (body) => {
