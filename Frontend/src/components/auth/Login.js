@@ -3,7 +3,6 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import "./login.css";
 import AuthContext from "../../contexts/AuthContext";
-import CustomAlert from "../../utils/CustomAlert";
 
 const Login = ({ show, handleClick }) => {
   const [inputType, setInputType] = useState(false);
@@ -36,17 +35,17 @@ const Login = ({ show, handleClick }) => {
     }
   };
 
-    const handleClose = (event, reason) => {
-      if (reason === "clickaway") {
-        setMustLogin(false);
-        setInfo(false);
-        setAlert(false);
-        return;
-      }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
       setMustLogin(false);
       setInfo(false);
       setAlert(false);
-    };
+      return;
+    }
+    setMustLogin(false);
+    setInfo(false);
+    setAlert(false);
+  };
 
   return (
     <div
@@ -54,20 +53,26 @@ const Login = ({ show, handleClick }) => {
       id="login-container"
     >
       {!mustLogin ? null : (
-        <CustomAlert
+        <Snackbar
           open={mustLogin}
-          text={"Debes loggearte para realizar una reserva."}
-          anchor={{ vertical: "top", horizontal: "center" }}
-          severity="warning"
-          variant="outlined"
-          alertSx={{
-            marginTop: "95px",
-            background: "#262626",
-            fontWeight: "bold",
-            color: "#d07f08",
-            padding: "10px 20px",
-          }}
-        />
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            severity="warning"
+            variant="outlined"
+            sx={{
+              marginTop: "95px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#d07f08",
+              padding: "10px 20px",
+            }}
+          >
+            Debes loggearte para realizar una reserva.
+          </Alert>
+        </Snackbar>
       )}
       {!alert ? null : (
         <Snackbar

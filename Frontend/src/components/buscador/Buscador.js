@@ -27,7 +27,6 @@ const Buscador = () => {
     if (reserva !== null) {
       setCheckIn(reserva.shortDateIn);
       setCheckOut(reserva.shortDateOut);
-      setDateReserva(reserva)
     }
   }, []);
 

@@ -29,7 +29,6 @@ const CustomCalendar = ({ handleCheckInOut }) => {
     const unavailableDates = await ApiCall.invokeGET(
       `/reservas/productos?idproducto=${id}`
     );
-    console.log("unavailableDates", unavailableDates);
     let arrayOfDates = unavailableDates.body.map((day) => {
       return getDaysArray(day.fechaInicialReserva, day.fechaFinalReserva);
     });
@@ -89,7 +88,14 @@ const CustomCalendar = ({ handleCheckInOut }) => {
           label.split(" ")[0].substring(1)
         }
         minDate={new Date()}
-        value={dateReserva?.date?.length > 0 ? dateReserva.date : null}
+        value={
+          dateReserva?.date?.length > 0
+            ? [
+                new Date(dateReserva.queryInicial),
+                new Date(dateReserva.queryFinal),
+              ]
+            : null
+        }
         next2Label={null}
         prev2Label={null}
         nextLabel={<i className="fa-solid fa-angle-right"></i>}

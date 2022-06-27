@@ -1,18 +1,6 @@
-import { useEffect, useState } from "react";
-import ApiCall from "../../utils/ApiCall";
 import "./caracteristicas.css";
 
-const Caracteristicas = ({ id }) => {
-  const [producto, setProducto] = useState([]);
-
-  useEffect(() => {
-    getProducto();
-  }, []);
-
-  const getProducto = async () => {
-    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
-    setProducto(productoObtenido.body);
-  };
+const Caracteristicas = ({ producto }) => {
 
   return (
     <div className="caracteristicas">

@@ -19,7 +19,6 @@ const FechasDisponibles = () => {
     }
   };
 
-
   return (
     <div className="calendarAvailableDay">
       <h2>Fechas Disponibles</h2>

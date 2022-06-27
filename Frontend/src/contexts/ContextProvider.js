@@ -29,13 +29,25 @@ export const ContextProvider = ({ children }) => {
   // searchParams.keys().next().value devuelve el nombre de la query antes del =
 
   useEffect(() => {
+    let reserva = JSON.parse(localStorage.getItem("reserva"));
+    if (reserva !== null) {
+      setDateReserva({
+        date: reserva.date,
+        longDateIn: reserva.date[0],
+        longDateOut: reserva.date[1],
+        queryInicial: reserva.queryInicial,
+        queryFinal: reserva.queryFinal,
+        shortDateIn: reserva.shortDateIn,
+        shortDateOut: reserva.shortDateOut,
+      });
+    }
     if (loading) {
       getListaProducto();
       getListaCiudades();
     }
   }, [loading, loadingFiltro]);
 
-  const getListaProducto = async () => {
+  const getListaProducto = () => {
     if (searchParams.values().next().value) {
       if (
         searchParams.get("nombreCiudad") &&
@@ -107,7 +119,7 @@ export const ContextProvider = ({ children }) => {
 
   const filtrarNombreCiudad = async (nombreCiudad) => {
     const filtroQuery = await ApiCall.invokeGET(
-        `/productos/ciudad?nombreCiudad=${nombreCiudad}`
+      `/productos/ciudad?nombreCiudad=${nombreCiudad}`
     );
     setList(filtroQuery.body);
     setLoading(false);
@@ -117,7 +129,7 @@ export const ContextProvider = ({ children }) => {
 
   const filtrarProductosPorReserva = async (fechaInicial, fechaFinal) => {
     const filtroQuery = await ApiCall.invokeGET(
-        `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
+      `/productos/fecha?fechaInicial=${fechaInicial}&fechaFinal=${fechaFinal}`
     );
     setList(filtroQuery.body);
     setLoading(false);
