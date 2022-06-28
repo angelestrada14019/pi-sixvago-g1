@@ -32,7 +32,6 @@ const [usuario, setUsuario] = useState({
       <Formik
         initialValues={usuario}
         validate={(valores) => {
-            console.log("valores",valores);
             localStorage.setItem("ciudadReserva",valores.ciudad)
           let errores = {};
           if (!valores.ciudad) {

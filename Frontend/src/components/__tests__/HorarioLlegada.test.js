@@ -1,4 +1,4 @@
-import {
+/* import {
   render,
   screen,
   cleanup,
@@ -31,4 +31,4 @@ describe("HorarioLlegada", () => {
 
     expect(screen.getByText("Selecciona hora")).toBeInTheDocument();
   });
-});
+}); /*

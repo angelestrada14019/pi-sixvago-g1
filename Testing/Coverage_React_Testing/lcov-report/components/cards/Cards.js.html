@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/body/Main.js</title>
+    <title>Code coverage report for components/cards/Cards.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/body</a> Main.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/cards</a> Cards.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
@@ -100,14 +100,7 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,16 +109,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,58 +121,59 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
-import Cards from "../cards/Cards";
-import Categories from "../cards/Categories";
-import PaginationControll from "../pagination/PaginationControll";
-import "./main.css";
+import Card from "./Card";
+import "./cards.css";
 &nbsp;
-const Main = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-  const { list, setLoading, setLoadingFiltro, setPageNumber, loadingFnChange } =
+const Cards = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+  const { cardCategory, list, setList, pageNumber, loading, setLoading } =
 <span class="cstat-no" title="statement not covered" >    useStateContext();</span>
   const productsPerPage = <span class="cstat-no" title="statement not covered" >4;</span>
+  const pagesVisited = <span class="cstat-no" title="statement not covered" >pageNumber * productsPerPage;</span>
+  const displayProducts =
+<span class="cstat-no" title="statement not covered" >    list?.length === 0 ? (</span>
+      &lt;&gt;
+        &lt;Card /&gt;
+        &lt;Card /&gt;
+        &lt;Card /&gt;
+        &lt;Card /&gt;
+      &lt;/&gt;
+    ) : (
+      list
+        .slice(pagesVisited, pagesVisited + productsPerPage)
+        .map(<span class="fstat-no" title="function not covered" >(p</span>roduct, i) =&gt; <span class="cstat-no" title="statement not covered" >&lt;Card data={product} key={`cards-${i}`} /&gt;)</span>
+    );
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setLoadingFiltro(true);</span>
-<span class="cstat-no" title="statement not covered" >    setLoading(true);</span>
-  }, []);
+<span class="cstat-no" title="statement not covered" >    if (cardCategory !== "") {</span>
+<span class="cstat-no" title="statement not covered" >      setLoading(true);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      setLoading(false);</span>
+    }
+  }, [cardCategory]);
 &nbsp;
-  const pageCount = <span class="cstat-no" title="statement not covered" >Math.ceil(list.length / productsPerPage);</span>
-  const changePage = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> selected }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setPageNumber(selected);</span>
-  };
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div className="container"&gt;
-      &lt;section className="categories-section"&gt;
-          &lt;h2 className="section-h2"&gt;Buscar por tipo de alojamiento&lt;/h2&gt;
-          &lt;Categories /&gt;
-      &lt;/section&gt;
-      &lt;section className="cards-section"&gt;
-          &lt;h2 className="section-h2"&gt;Recomendaciones&lt;/h2&gt;
-          &lt;Cards /&gt;
-      &lt;/section&gt;
-      &lt;div&gt;
-        {!loadingFnChange &amp;&amp; (
-          &lt;PaginationControll pageCount={pageCount} changePage={changePage} /&gt;
-        )}
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
+<span class="cstat-no" title="statement not covered" >  return &lt;div className="cards"&gt;{displayProducts}&lt;/div&gt;;</span>
 };
 &nbsp;
-export default Main;
+export default Cards;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -196,7 +181,7 @@ export default Main;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 23 2022 15:39:22 GMT-0300 (hora estándar de Argentina)
+                at Thu Jun 23 2022 15:38:03 GMT-0300 (hora estándar de Argentina)
             </div>
         <script src="../../prettify.js"></script>
         <script>

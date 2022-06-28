@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/footer/Footer.js</title>
+    <title>Code coverage report for components/cards/CardReservaExitosa.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/footer</a> Footer.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/cards</a> CardReservaExitosa.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,8 +84,9 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -100,34 +101,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import "./footer.css";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import "./cardReservaExitosa.css"
+import { Link } from "react-router-dom";
 &nbsp;
-const Footer = () =&gt; {
-  return (
-    &lt;div className="footer"&gt;
-      &lt;div className="footer-copyright"&gt;
-        &lt;h3&gt;©2022 Sixvago&lt;/h3&gt;
-      &lt;/div&gt;
-      &lt;div className="footer-icons"&gt;
-        &lt;i className="fa-brands fa-facebook"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-linkedin-in"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-twitter"&gt;&lt;/i&gt;
-        &lt;i className="fa-brands fa-instagram"&gt;&lt;/i&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};
-&nbsp;
-export default Footer;
-&nbsp;</pre></td></tr></table></pre>
+const CardReservaExitosa = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+        &lt;div className="card-reservaExitosa"&gt;
+            &lt;div className="icon-successful"&gt;
+                &lt;i className="fa-solid fa-building-circle-check fa-bounce"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;h1 className="titulo-exitoso"&gt;¡Muchas Gracias!&lt;/h1&gt;
+            &lt;p className="subtitulo-exitoso"&gt;
+                Su reserva se ha realizado con exito.
+            &lt;/p&gt;
+            &lt;Link  to={"/"}&gt;
+            &lt;button className="boton-succes"&gt; Volver al menu&lt;/button&gt;
+            &lt;/Link&gt;
+        &lt;/div&gt;
+    )
+}
+export default CardReservaExitosa;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 23 2022 15:40:12 GMT-0300 (hora estándar de Argentina)
+                at Thu Jun 23 2022 15:38:03 GMT-0300 (hora estándar de Argentina)
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -19,9 +19,7 @@ import java.time.LocalTime;
 @Builder
 @Entity
 @Table(name = "reservas")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Reserva.class)
 //@JsonFormat
 public class Reserva {
 
