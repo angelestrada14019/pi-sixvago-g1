@@ -4,6 +4,11 @@ import com.example.proyectoIntegrador.entity.Puntuacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IPuntuacionRepository extends JpaRepository<Puntuacion,Long> {
+
+    List<Puntuacion> findByUsuariosId(Long usuariorId);
+
 }
