@@ -29,6 +29,7 @@ const CustomCalendar = ({ handleCheckInOut }) => {
     const unavailableDates = await ApiCall.invokeGET(
       `/reservas/productos?idproducto=${id}`
     );
+    console.log("unavailableDates",unavailableDates);
     let arrayOfDates = unavailableDates.body.map((day) => {
       return getDaysArray(day.fechaInicialReserva, day.fechaFinalReserva);
     });
