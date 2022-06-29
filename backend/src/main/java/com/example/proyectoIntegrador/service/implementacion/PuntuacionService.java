@@ -1,7 +1,9 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
 import com.example.proyectoIntegrador.dto.PuntuacionDTO;
+import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.entity.Puntuacion;
+import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
@@ -47,6 +49,24 @@ public class PuntuacionService implements IGeneralService<PuntuacionDTO,Long> {
             return mapper.convertValue(iPuntuacionRepository
                     .findById(aLong).orElseThrow(
                             () -> new NoDataFoundExceptions("No existe la reserva")), PuntuacionDTO.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
+    }
+
+    public List<PuntuacionDTO> findByUsuarioId(Long aLong) {
+        try {
+            List<PuntuacionDTO> puntuacionDTO = new ArrayList<>();
+            List<Puntuacion> puntuaciones = iPuntuacionRepository.findByUsuariosId(aLong);
+            for (Puntuacion puntuacion : puntuaciones) {
+                puntuacionDTO.add(mapper.convertValue(puntuacion, PuntuacionDTO.class));
+            }
+            return puntuacionDTO;
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);
             throw e;
