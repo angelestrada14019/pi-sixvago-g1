@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import "./Horariollegada.css"
-
+import { useStateContext } from "../../contexts/ContextProvider";
 
 const HorarioLlegada = () => {
+    const { setReservaP,reservaP } = useStateContext();
     return (
         <>
             <Formik
@@ -11,7 +12,11 @@ const HorarioLlegada = () => {
                     hora: "Selecciona hora"
                 }}
                 validate={(valores) => {
-                    localStorage.setItem("horarioReserva",valores.hora)
+                    // localStorage.setItem("horarioReserva",valores.hora)
+                    setReservaP({
+                        ...reservaP,
+                        horarioReserva: valores.hora,
+                   })
                   
                 }}
             >

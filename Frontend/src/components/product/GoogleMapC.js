@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import Geocode from "react-geocode";
-import ApiCall from "../../utils/ApiCall";
 const containerStyle = {
   width: "98%",
   height: "600px",
@@ -16,7 +15,7 @@ const centerD = {
   lng: -38.523,
 };
 
-const GoogleMapC = ({ id }) => {
+const GoogleMapC = ({ producto }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -29,22 +28,12 @@ const GoogleMapC = ({ id }) => {
   });
 
   useEffect(() => {
-    getProducto();
-  }, []);
-
-  const getProducto = async () => {
-    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
-    // console.log(
-    //   "headerProducto" +
-    //     productoObtenido.caracteristicas.map((item) => item.nombre)
-    // );
-    console.log(productoObtenido);
     setDireccion({
-      direccion: productoObtenido.body.direccion,
-      ciudad: productoObtenido.body.ciudades_id.nombre,
-      pais: productoObtenido.body.ciudades_id.pais,
+      direccion: producto.direccion,
+      ciudad: producto.ciudades_id.nombre,
+      pais: producto.ciudades_id.pais,
     });
-  };
+  }, []);
 
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY);
   Geocode.setLanguage("en");

@@ -31,16 +31,18 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     @Override
     public ReservaDTO agregar(ReservaDTO reservaDTO) {
         try {
-            Reserva reserva1 = iReservaRepository.findById(reservaDTO.getId()).orElseThrow(
-                    ()-> new NoDataFoundExceptions("No existe la reserva"));
             Reserva reserva = mapper.convertValue(reservaDTO, Reserva.class);
-            if (reserva1.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) &&
-                    reserva1.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
-            && LocalDate.now().isBefore(reserva.getFechaInicialReserva())
-                    && LocalDate.now().isBefore(reserva.getFechaFinalReserva())
-            && reserva.getFechaInicialReserva().isBefore(reserva.getFechaFinalReserva())){
+            List<Reserva> reserva1 = iReservaRepository.buscarReservaPorProductoId(reservaDTO.getProductosProductos().getProductos_id());
+            for (Reserva reserva2 : reserva1) {
+                if (reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
+                        reserva2.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
+                || LocalDate.now().isAfter(reserva.getFechaInicialReserva())
+                        || LocalDate.now().isAfter(reserva.getFechaFinalReserva())
+                || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva())){
 
-            throw new ValidateServiceExceptions("fechas se solapan");
+
+                throw new ValidateServiceExceptions("escoja fechas validas");
+                }
             }
             return mapper.convertValue(iReservaRepository.save(reserva), ReservaDTO.class);
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){

@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ApiCall from "../../utils/ApiCall";
 import LocationData from "./LocationData";
 import "./heading.css";
 
-const HeaderProducto = ({ id }) => {
-  const [producto, setProducto] = useState([]);
+const HeaderProducto = ({ producto }) => {
   const location = useLocation();
   const currentLocation = location.pathname;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getProducto();
-  }, []);
-
-  const getProducto = async () => {
-    const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
-    // console.log("headerProducto" + productoObtenido.nombre);
-    setProducto(productoObtenido.body);
-  };
 
   const handleBack = () => {
     if (currentLocation.indexOf(`/reserva`) === -1) {

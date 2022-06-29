@@ -3,14 +3,20 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import "./login.css";
 import AuthContext from "../../contexts/AuthContext";
-import CustomAlert from "../../utils/CustomAlert";
 
 const Login = ({ show, handleClick }) => {
   const [inputType, setInputType] = useState(false);
-  const [error, setError] = useState(false);
-  const [alert, setAlert] = useState(false);
   const [info, setInfo] = useState(false);
-  const { login, mustLogin, setMustLogin, setOpenLogin } = useContext(AuthContext);
+  const {
+    login,
+    mustLogin,
+    setMustLogin,
+    setOpenLogin,
+    error,
+    setError,
+    alert,
+    setAlert,
+  } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,16 +37,14 @@ const Login = ({ show, handleClick }) => {
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
-      setError(false);
+      setMustLogin(false);
       setInfo(false);
       setAlert(false);
-      setMustLogin(false);
       return;
     }
-    setError(false);
+    setMustLogin(false);
     setInfo(false);
     setAlert(false);
-    setMustLogin(false);
   };
 
   return (
@@ -49,25 +53,31 @@ const Login = ({ show, handleClick }) => {
       id="login-container"
     >
       {!mustLogin ? null : (
-        <CustomAlert
+        <Snackbar
           open={mustLogin}
-          text={"Debes loggearte para realizar una reserva."}
-          anchor={{ vertical: "top", horizontal: "center" }}
-          severity="warning"
-          variant="outlined"
-          alertSx={{
-            marginTop: "95px",
-            background: "#262626",
-            fontWeight: "bold",
-            color: "#d07f08",
-            padding: "10px 20px",
-          }}
-        />
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            severity="warning"
+            variant="outlined"
+            sx={{
+              marginTop: "95px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#d07f08",
+              padding: "10px 20px",
+            }}
+          >
+            Debes loggearte para realizar una reserva.
+          </Alert>
+        </Snackbar>
       )}
-      {!error ? null : (
+      {!alert ? null : (
         <Snackbar
           sx={{ marginBottom: "4rem" }}
-          open={error}
+          open={alert}
           autoHideDuration={6000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -83,30 +93,8 @@ const Login = ({ show, handleClick }) => {
               padding: "10px 20px",
             }}
           >
-            Ups! Parece que el usuario no existe. Por favor, verifica tus datos.
-          </Alert>
-        </Snackbar>
-      )}
-      {!alert ? null : (
-        <Snackbar
-          sx={{ marginBottom: "4rem" }}
-          open={alert}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
-            severity="warning"
-            variant="outlined"
-            sx={{
-              marginBottom: "10px",
-              background: "#262626",
-              fontWeight: "bold",
-              color: "#d07f08",
-              padding: "10px 20px",
-            }}
-          >
-            Por favor vuelva a intentarlo, sus credenciales son inválidas.
+            Lamentablemente no ha podido iniciar sesión. Por favor intente más
+            tarde.
           </Alert>
         </Snackbar>
       )}
