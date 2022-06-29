@@ -1,8 +1,10 @@
 package com.example.proyectoIntegrador.controller;
 
 import com.example.proyectoIntegrador.dto.ProductoDTO;
+import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.ProductosService;
+import com.example.proyectoIntegrador.service.implementacion.ReservaService;
 import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,6 +23,7 @@ public class ProductoController {
 
     @Autowired
     private ProductosService productoService;
+
 
     @PostMapping()
     @PreAuthorize("hasRole('admin')")
@@ -67,4 +70,5 @@ public class ProductoController {
         }
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","eliminado").createResponse(HttpStatus.OK);
     }
+
 }

@@ -142,4 +142,21 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
 
     }
 
+    public List<ReservaDTO> reservasPorIdUsuario(Long id){
+        try{
+            List<ReservaDTO> reservaDTOS = new ArrayList<>();
+            List<Reserva> reservas = iReservaRepository.reservasPorIdUsuario(id);
+            for (Reserva reserva : reservas){
+                reservaDTOS.add(mapper.convertValue(reserva, ReservaDTO.class));
+            }
+            return reservaDTOS;
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(), e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
+    }
 }

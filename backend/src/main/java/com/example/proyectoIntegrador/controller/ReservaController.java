@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Wrapper;
 import java.util.List;
 
 @RestController
@@ -52,5 +53,9 @@ public class ReservaController {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.buscarReservaPorProductoId(idproducto)).createResponse(HttpStatus.OK);
     }
 
+    @GetMapping("/usuario")
+    public ResponseEntity<WrapperResponse<List<ReservaDTO>>> reservasPorIdUsuario(@RequestParam Long id){
+        return new WrapperResponse<>(true, HttpStatus.OK, "Succes", reservaService.reservasPorIdUsuario(id)).createResponse(HttpStatus.OK);
+    }
 
 }
