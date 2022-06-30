@@ -19,7 +19,6 @@ const Card = ({ data, allScores, getAllScores }) => {
   const [star3, setStar3] = useState(false);
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
-  const [contador, setContador] = useState(0);
   const [avScore, setAvScore] = useState(0);
   const [avValue, setAvValue] = useState("");
   const { validateToken } = useContext(AuthContext);
@@ -37,7 +36,6 @@ const Card = ({ data, allScores, getAllScores }) => {
 
   const handleStarClick = async (e) => {
     if (validateToken()) {
-      setContador(contador + 1);
       sendScore(e.target.id);
     }
   };
@@ -115,7 +113,6 @@ const Card = ({ data, allScores, getAllScores }) => {
           console.log(error);
         } finally {
           productStars();
-          setContador(contador + 1);
         }
       } else {
         const scoreId = cardScore.find(
@@ -136,7 +133,6 @@ const Card = ({ data, allScores, getAllScores }) => {
           console.log(error);
         } finally {
           productStars();
-          setContador(contador + 1);
         }
       }
     }
@@ -177,7 +173,7 @@ const Card = ({ data, allScores, getAllScores }) => {
     );
     const body = response.body;
     let sum = 0;
-    if (body.length > 0) {
+    if (body.length >= 0) {
       body.forEach((score) => {
         sum += score.puntuacion;
         setAvScore(Math.round(sum / body.length));
