@@ -47,6 +47,11 @@
   margin-left: 2px;
   font-size: 12px;
   color: #ffc107;
+  cursor: pointer;
+}
+.fa-star.disabled {
+  color: #dfe4ea;
+  cursor: pointer;
 }
 .card-title {
   font-weight: 700;
