@@ -20,10 +20,13 @@ const Card = ({ data, allScores, getAllScores }) => {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
   const [contador, setContador] = useState(0);
+  const [avScore, setAvScore] = useState(0);
+  const [avValue, setAvValue] = useState("");
   const { validateToken } = useContext(AuthContext);
 
   useEffect(() => {
     if (data) {
+      productAvarageScore();
       if (validateToken()) {
         getAllScores();
         userAlreadyScoredCard();
@@ -168,6 +171,36 @@ const Card = ({ data, allScores, getAllScores }) => {
     return scored;
   };
 
+  const productAvarageScore = async () => {
+    const response = await ApiCall.invokeGET(
+      `/puntuacion/producto/${data.productos_id}`
+    );
+    const body = response.body;
+    let sum = 0;
+    if (body.length > 0) {
+      body.forEach((score) => {
+        sum += score.puntuacion;
+        setAvScore(Math.round(sum / body.length));
+        if (Math.round(sum / body.length) === 1) {
+          setAvValue("Malo");
+        } else if (Math.round(sum / body.length) === 2) {
+          setAvValue("Regular");
+        } else if (Math.round(sum / body.length) === 3) {
+          setAvValue("Bueno");
+        } else if (Math.round(sum / body.length) === 4) {
+          setAvValue("Muy bueno");
+        } else if (Math.round(sum / body.length) === 5) {
+          setAvValue("Excelente");
+        } else {
+          setAvValue("Sin Calificar");
+        }
+      });
+    } else {
+      setAvScore(0);
+      setAvValue("Sin Calificar");
+    }
+  };
+
   return (
     <div className="card">
       {loading ? (
@@ -200,34 +233,45 @@ const Card = ({ data, allScores, getAllScores }) => {
           <p className="card-category">
             {data.categorias_id !== undefined &&
               `${data.categorias_id.titulo.toUpperCase()}`}
-              {!validateToken() ? null : <>
-              <i
-              className={`fa-solid fa-star ${star1 ? "enabled" : "disabled"}`}
-              id="1"
-              onClick={handleStarClick}
-              ></i>
-            <i
-              className={`fa-solid fa-star ${star2 ? "enabled" : "disabled"}`}
-              id="2"
-              onClick={handleStarClick}
-              ></i>
-            <i
-              className={`fa-solid fa-star ${star3 ? "enabled" : "disabled"}`}
-              id="3"
-              onClick={handleStarClick}
-              ></i>
-            <i
-              className={`fa-solid fa-star ${star4 ? "enabled" : "disabled"}`}
-              id="4"
-              onClick={handleStarClick}
-              ></i>
-            <i
-              className={`fa-solid fa-star ${star5 ? "enabled" : "disabled"}`}
-              id="5"
-              onClick={handleStarClick}
+            {!validateToken() ? null : (
+              <>
+                <i
+                  className={`fa-solid fa-star ${
+                    star1 ? "enabled" : "disabled"
+                  }`}
+                  id="1"
+                  onClick={handleStarClick}
+                ></i>
+                <i
+                  className={`fa-solid fa-star ${
+                    star2 ? "enabled" : "disabled"
+                  }`}
+                  id="2"
+                  onClick={handleStarClick}
+                ></i>
+                <i
+                  className={`fa-solid fa-star ${
+                    star3 ? "enabled" : "disabled"
+                  }`}
+                  id="3"
+                  onClick={handleStarClick}
+                ></i>
+                <i
+                  className={`fa-solid fa-star ${
+                    star4 ? "enabled" : "disabled"
+                  }`}
+                  id="4"
+                  onClick={handleStarClick}
+                ></i>
+                <i
+                  className={`fa-solid fa-star ${
+                    star5 ? "enabled" : "disabled"
+                  }`}
+                  id="5"
+                  onClick={handleStarClick}
                 ></i>
               </>
-              }
+            )}
           </p>
         )}
         <div className="card-rating">
@@ -239,9 +283,9 @@ const Card = ({ data, allScores, getAllScores }) => {
               sx={{ borderRadius: "10px" }}
             />
           ) : (
-            <h2>8</h2>
+            <h2>{avScore}</h2>
           )}
-          {loading ? <Skeleton variant="text" width={60} /> : <p>Muy bueno</p>}
+          {loading ? <Skeleton variant="text" width={60} /> : <p>{avValue}</p>}
         </div>
 
         {loading ? (
