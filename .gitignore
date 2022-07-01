@@ -1,1 +1,6 @@
 /.vscode
+terraform.tfstate
+terraform.tfstate.backup
+clave-prueba-ansible-ajea14019.pem
+.terraform.lock.hcl
+.terraform/
