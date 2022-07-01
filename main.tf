@@ -9,12 +9,20 @@ module "ig_module" {
     vpc_id=module.vpc_module.id
     tags=var.tags_ig
 }
-module "subnet_module_zone_a"{ //0 para subnet publico y 1 para subnet privado
+module "subnet_module_zone_a"{ 
     source = "./modules/subnet"
     vpc_id=module.vpc_module.id
     cidr_block=var.subnets_cidr_zone_a
     tags=var.subnets_tags_zone_a 
     availability_zone=var.subnets_availability_zone_a
+
+}
+module "subnet_module_zone_b"{ 
+    source = "./modules/subnet"
+    vpc_id=module.vpc_module.id
+    cidr_block=var.subnets_cidr_zone_b
+    tags=var.subnets_tags_zone_b
+    availability_zone=var.subnets_availability_zone_b
 
 }
 module "route_table_module_public" {
@@ -26,55 +34,91 @@ module "route_table_module_public" {
     tags=var.tags_route_table_public
 }
 
-module "public_rt_association" {
+module "public_rt_association_zone_a" {
     source = "./modules/rot_table_asso_subnet"
     subnet_id=module.subnet_module_zone_a.id  
     route_table_id=module.route_table_module_public.id
 }
-
-module "sg_module" {
-    source = "./modules/security_groups"
-    count=length(var.name_sg)
-    sg_name=var.name_sg[count.index]
-    ingres_rules=var.ingres_rules[count.index]
-    egress_rules=var.egress_rules[count.index]
-    vpc_id=module.vpc_module.id
+module "public_rt_association_zone_b" {
+    source = "./modules/rot_table_asso_subnet"
+    subnet_id=module.subnet_module_zone_b.id  
+    route_table_id=module.route_table_module_public.id
 }
 
+module "sg_module_zone_a" {
+    source = "./modules/security_groups"
+    sg_name=var.name_sg_zone_a
+    ingres_rules=var.ingres_rules_zone_a
+    egress_rules=var.egress_rules_zone_a
+    vpc_id=module.vpc_module.id
+} 
+module "sg_module_zone_b" {
+    source = "./modules/security_groups"
+    sg_name=var.name_sg_zone_b
+    ingres_rules=var.ingres_rules_zone_b
+    egress_rules=var.egress_rules_zone_b
+    vpc_id=module.vpc_module.id
+}  
 
-
-
-locals {
-  virtual_machines = [
-      #si se coloca la variable associate_public_address en true, no es necesario luego asociar o crear una ip elastica
-    {
-        id=0
-            subnet_id=module.subnet_module_zone_a.id
-            instance_tags=var.instance_tags[0]
-            security_groups=module.sg_module[0].id
-            user_data=var.user_data[0]
-            associate_public_ip_address=true
-
-        }
-  ]
-}    
-
-module "instance_module" {
+module "instance_module_zone_a" {
     source = "./modules/instance"
-  for_each   = {
-    for  vm in local.virtual_machines:
-    vm.id => vm }   
+    subnet_id=module.subnet_module_zone_a.id
+    instance_tags=var.instance_tags_zone_a
+    security_groups=module.sg_module_zone_a.id
+    user_data=var.user_data_zone_a
+    associate_public_ip_address=true
+    ami_id=var.ami_id    
+    instance_type=var.instance_type
+    key_name=var.key_name
 
-    subnet_id=each.value.subnet_id
-    instance_tags=each.value.instance_tags
-    security_groups=each.value.security_groups
-    user_data=each.value.user_data
-    associate_public_ip_address=each.value.associate_public_ip_address
+}
+module "instance_module_zone_b" {
+    source = "./modules/instance"
+    subnet_id=module.subnet_module_zone_b.id
+    instance_tags=var.instance_tags_zone_b
+    security_groups=module.sg_module_zone_b.id
+    user_data=var.user_data_zone_b
+    associate_public_ip_address=true
     ami_id=var.ami_id    
     instance_type=var.instance_type
     key_name=var.key_name
 
 }
 
+module "db_subnet_group" {
+    source = "./modules/db_rds_group_subnet"
+    name_db_group_subnet=var.name_db_group_subnet
+    subnet_ids=[module.subnet_module_zone_a.id,module.subnet_module_zone_b.id]
+    tags_db_group_subnet=var.tags_db_group_subnet
+}
+
+module "rds_instance" {
+    source="./modules/rds_instance"
+    allocated_storage=var.allocated_storage
+    storage_type=var.storage_type
+    engine = var.engine
+    engine_version= var.engine_version
+    instance_class= var.instance_class
+    name_db=var.name_db
+    username = var.username
+    password = var.password
+    availability_zone=var.availability_zone
+    parameter_group_name = var.parameter_group_name  
+    db_subnet_group_name = module.db_subnet_group.name
+}
+
+module "static_web" {
+    source = "./modules/s3_bucket_web"
+    s3_bucket_web_name=var.s3_bucket_web_name    
+}
+module "public_bucket" {
+    source = "./modules/s3_bucket_public"
+    s3_bucket_name=var.s3_bucket_name    
+}
+
+module "ecr_repo" {
+    source = "./modules/ecr"
+    ecr_name=var.ecr_name    
+}
 
 

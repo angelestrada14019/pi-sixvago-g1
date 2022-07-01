@@ -25,7 +25,7 @@ terraform {
 provider "aws" {
   region = var.region
 }
-terraform {
-  backend "http" {
-  }
-}
+# terraform {
+#   backend "http" {
+#   }
+# }
