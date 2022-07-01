@@ -56,16 +56,18 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
                     new NoDataFoundExceptions("No existe el id"));
             List<Reserva> reserva1 = iReservaRepository.buscarReservaPorProductoId(reservaDTO.getProductosProductos().getProductos_id());
             for (Reserva reserva2 : reserva1) {
-                if ((reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
+                if(usuario.getEnable()==null || !usuario.getEnable()){
+                    throw new ValidateServiceExceptions("verifique la cuenta");
+                }
+                if (reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
                         reserva2.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
                 || LocalDate.now().isAfter(reserva.getFechaInicialReserva())
                         || LocalDate.now().isAfter(reserva.getFechaFinalReserva())
-                || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva()))
-                && (usuario.getEnable()==null || !usuario.getEnable())
+                || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva())
                 ){
 
 
-                throw new ValidateServiceExceptions("escoja fechas validas o verifique la cuenta");
+                throw new ValidateServiceExceptions("escoja fechas validas");
                 }
             }
             sendVerificationEmail(reserva);

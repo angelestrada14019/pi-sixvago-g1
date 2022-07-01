@@ -42,6 +42,9 @@ public class UsuarioService{
     @Value("${app.HOST_WEB}")
     private String hostWeb;
 
+    @Value("${spring.mail.username}")
+    private String email;
+
     @Transactional
     public Usuario findUsuarioByEmail(String email){
         try {
@@ -92,7 +95,7 @@ public class UsuarioService{
         mailContent += "<p> Gracias de parte de SixVago team</p>";
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom("angelestrada14019@gmail.com",senderName);
+        helper.setFrom(email,senderName);
         helper.setTo(usuarioDTO1.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent,true);
