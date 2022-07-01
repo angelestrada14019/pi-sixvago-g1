@@ -3,6 +3,7 @@ package com.example.proyectoIntegrador.service.implementacion;
 
 import com.example.proyectoIntegrador.dto.ReservaDTO;
 import com.example.proyectoIntegrador.entity.Reserva;
+import com.example.proyectoIntegrador.entity.Usuario;
 import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
@@ -11,8 +12,14 @@ import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,15 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
 
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Value("${app.HOST_WEB}")
+    private String hostWeb;
+
+    @Value("${spring.mail.username}")
+    private String email;
 
     @Override
     public ReservaDTO agregar(ReservaDTO reservaDTO) {
@@ -44,6 +60,7 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
                 throw new ValidateServiceExceptions("escoja fechas validas");
                 }
             }
+            sendVerificationEmail(reserva);
             return mapper.convertValue(iReservaRepository.save(reserva), ReservaDTO.class);
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);
@@ -53,6 +70,30 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
             log.error(e.getMessage(),e);
             throw new GeneralServicesExceptions(e.getMessage(),e);
         }
+    }
+    private void sendVerificationEmail(Reserva reserva) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Reserva Exitosa";
+        String senderName = "SixVago Team";
+        String mailContent = "<p>Para "+ reserva.getUsuarios().getApellido()+", "+reserva.getUsuarios().getNombre()+",</p>";
+        mailContent += "<p> Se ha creado la reserva correctamente </p>";
+        mailContent += "<p>"+"hora Llegada:"+ reserva.getHoraComienzoReserva()+"</p>";
+        mailContent += "<p>"+"fecha Inicial:"+ reserva.getFechaInicialReserva()+"</p>";
+        mailContent += "<p>"+"Fecha Final:"+ reserva.getFechaFinalReserva()+"</p>";
+        mailContent += "<p>"+"Vacuna contra el COVID:"+ reserva.getVacunaCovid()+"</p>";
+        mailContent += "<p>"+"Datos para el vendedor:"+ reserva.getDatosParaVendedor()+"</p>";
+        mailContent += "<p>"+"Nombre Producto Reservado:"+ reserva.getProductosProductos().getNombre()+"</p>";
+        mailContent += "<p>"+"ID Producto Reservado:"+ reserva.getProductosProductos().getProductos_id()+"</p>";
+        mailContent += "<p> Para visitar el producto seleccionado click aqui: </p>";
+        String verifyURL="http://"+ hostWeb + "/producto/"+reserva.getProductosProductos().getProductos_id();
+        mailContent += "<h3><a href=\""+verifyURL+"\">Visitar producto</a><h3>";
+        mailContent += "<p> Gracias de parte de SixVago team</p>";
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom(email,senderName);
+        helper.setTo(reserva.getUsuarios().getEmail());
+        helper.setSubject(subject);
+        helper.setText(mailContent,true);
+        mailSender.send(message);
     }
 
     @Override
