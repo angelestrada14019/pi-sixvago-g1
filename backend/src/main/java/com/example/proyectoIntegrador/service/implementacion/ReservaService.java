@@ -8,6 +8,7 @@ import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
 import com.example.proyectoIntegrador.repository.IReservaRepository;
+import com.example.proyectoIntegrador.repository.IUsuarioRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,9 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
+
     @Value("${app.HOST_WEB}")
     private String hostWeb;
 
@@ -48,16 +52,20 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     public ReservaDTO agregar(ReservaDTO reservaDTO) {
         try {
             Reserva reserva = mapper.convertValue(reservaDTO, Reserva.class);
+            Usuario usuario =usuarioRepository.findById(reserva.getUsuarios().getId()).orElseThrow(()->
+                    new NoDataFoundExceptions("No existe el id"));
             List<Reserva> reserva1 = iReservaRepository.buscarReservaPorProductoId(reservaDTO.getProductosProductos().getProductos_id());
             for (Reserva reserva2 : reserva1) {
-                if (reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
+                if ((reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
                         reserva2.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
                 || LocalDate.now().isAfter(reserva.getFechaInicialReserva())
                         || LocalDate.now().isAfter(reserva.getFechaFinalReserva())
-                || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva())){
+                || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva()))
+                && (usuario.getEnable()==null || !usuario.getEnable())
+                ){
 
 
-                throw new ValidateServiceExceptions("escoja fechas validas");
+                throw new ValidateServiceExceptions("escoja fechas validas o verifique la cuenta");
                 }
             }
             sendVerificationEmail(reserva);
@@ -72,16 +80,17 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
         }
     }
     private void sendVerificationEmail(Reserva reserva) throws MessagingException, UnsupportedEncodingException {
+        Usuario usuario =usuarioRepository.findById(reserva.getUsuarios().getId()).orElseThrow(()->
+                new NoDataFoundExceptions("No existe el id"));
         String subject = "Reserva Exitosa";
         String senderName = "SixVago Team";
-        String mailContent = "<p>Para "+ reserva.getUsuarios().getApellido()+", "+reserva.getUsuarios().getNombre()+",</p>";
+        String mailContent = "<p>Para "+ usuario.getApellido()+", "+usuario.getNombre()+",</p>";
         mailContent += "<p> Se ha creado la reserva correctamente </p>";
         mailContent += "<p>"+"hora Llegada:"+ reserva.getHoraComienzoReserva()+"</p>";
         mailContent += "<p>"+"fecha Inicial:"+ reserva.getFechaInicialReserva()+"</p>";
         mailContent += "<p>"+"Fecha Final:"+ reserva.getFechaFinalReserva()+"</p>";
-        mailContent += "<p>"+"Vacuna contra el COVID:"+ reserva.getVacunaCovid()+"</p>";
-        mailContent += "<p>"+"Datos para el vendedor:"+ reserva.getDatosParaVendedor()+"</p>";
-        mailContent += "<p>"+"Nombre Producto Reservado:"+ reserva.getProductosProductos().getNombre()+"</p>";
+        mailContent += "<p>"+"Vacuna contra el COVID: "+ (reserva.getVacunaCovid()?"vacunado":"no vacunado")+"</p>";
+        mailContent += "<p>"+"Datos para el vendedor: "+ reserva.getDatosParaVendedor()+"</p>";
         mailContent += "<p>"+"ID Producto Reservado:"+ reserva.getProductosProductos().getProductos_id()+"</p>";
         mailContent += "<p> Para visitar el producto seleccionado click aqui: </p>";
         String verifyURL="http://"+ hostWeb + "/producto/"+reserva.getProductosProductos().getProductos_id();
@@ -90,7 +99,7 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(email,senderName);
-        helper.setTo(reserva.getUsuarios().getEmail());
+        helper.setTo(usuario.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent,true);
         mailSender.send(message);
