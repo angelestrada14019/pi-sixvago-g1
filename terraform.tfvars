@@ -109,8 +109,8 @@ password= "sixvagog1"
 availability_zone=  "us-east-1a"
 parameter_group_name= "default.mysql8.0"
 #-----------s3 bucket web-----------------------------
-s3_bucket_web_name="s3_bucket_web_sixvago"
+s3_bucket_web_name="s3-bucket-web-sixvago"
 #-----------s3 bucket public -------------------------
-s3_bucket_name="s3_bucket_public_sixvago"
+s3_bucket_name="s3-bucket-public-sixvago"
 #----------ecr-------------------------------------
-ecr_name="ecr_sixvago"
+ecr_name="ecr-sixvago"
