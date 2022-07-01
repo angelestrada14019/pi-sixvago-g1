@@ -23,7 +23,7 @@ public class Usuario {
     @Column(name = "apellido", length = 45)
     private String apellido;
 
-    @Column(name = "email", length = 45)
+    @Column(name = "email", length = 45,unique = true)
     private String email;
 
     @Column(name = "contrasenia")
@@ -35,6 +35,11 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "roles_id", nullable = false, referencedColumnName = "id")
     private Rol rol;
+
+    @Column(name = "enable")
+    private Boolean enable;
+    @Column(name = "verification_code",updatable = false)
+    private String verification_code;
 
 
 

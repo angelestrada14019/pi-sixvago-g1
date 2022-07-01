@@ -12,6 +12,7 @@ import ReservaExitosa from "./pages/ReservaExitosa";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollToTop from "./utils/ScrollToTop";
 import Administracion from "./pages/Administracion";
+import Verify from "./pages/Verify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -36,6 +37,7 @@ root.render(
               element={<ProtectedRoute children={<ReservaExitosa />} />}
             />
           </Route>
+          <Route path="verify" element={<Verify />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

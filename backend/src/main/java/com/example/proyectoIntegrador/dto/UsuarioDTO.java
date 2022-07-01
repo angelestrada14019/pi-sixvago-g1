@@ -25,4 +25,6 @@ public class UsuarioDTO {
     private String contrasenia;
     private String ciudad;
     private Rol rol;
+    private Boolean enable;
+    private String verification_code;
 }
