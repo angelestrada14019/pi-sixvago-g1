@@ -11,6 +11,7 @@ import Reserva from "./pages/Reserva";
 import ReservaExitosa from "./pages/ReservaExitosa";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollToTop from "./utils/ScrollToTop";
+import Administracion from "./pages/Administracion";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,6 +24,7 @@ root.render(
           <Route path="signUp" />
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
+          <Route path="administracion" element={<Administracion/>}/>
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
             <Route
