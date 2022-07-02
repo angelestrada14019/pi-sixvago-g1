@@ -19,7 +19,7 @@ const HeadingAdm = () => {
             <section className="lodging-section">
                 <div className="descriptionLodging">
                     <div className="section">
-                        <h2>Administración</h2>
+                        <h5>Administración</h5>
                     </div>
                     <button className="backButton" onClick={handleBack}>
                         <i className="fa-solid fa-angle-left"></i>

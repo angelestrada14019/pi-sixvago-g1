@@ -11,6 +11,12 @@
     padding-top: 10px;
 
 }
+.creacion-producto input{
+    padding-left: 10px;
+}
+.creacion-producto textarea{
+    padding-left: 10px;
+}
 
 .datos-container {
     display: flex;

@@ -9,18 +9,20 @@ const CreateProduct = () => {
     const [iconos, setIconos] = useState([])
     const [nuevoIcono, setNuevoIcono] = useState({});
     const [inputs, setInputs] = useState([])
+    const [disable, setDisable] = useState(false);
 
     useEffect(() => {
         setInputs([...inputs, "x"])
     }, [atributos]);
     const handleAtributo = (event) => {
         setNuevoAtributo({ ...nuevoAtributo, [event.target.name]: event.target.value });
-        //console.log(event.target.value); //borrar
+        //console.log(event.target); //borrar
     }
     const handleIcono = (e) => {
         setNuevoIcono({ ...nuevoIcono, [e.target.name]: e.target.value })
     }
     const handleClick = (event) => {
+        setDisable(true)
         setIconos([...iconos, nuevoIcono]);
         setAtributos([...atributos, nuevoAtributo]);
     }
@@ -32,8 +34,8 @@ const CreateProduct = () => {
     console.log(nuevoIcono);
     console.log(atributos);
     console.log(iconos);*/
-    console.log(atributos);
-    console.log(iconos);
+    //console.log(atributos);
+    //console.log(iconos);
     return (
         <div className="creacion-producto">
             <div className="datos-container">
@@ -42,7 +44,7 @@ const CreateProduct = () => {
                     <input
                         type="text"
                         name="nombre de propiedad"
-                        placeholder="  Ingrese nombre de la propiedad"
+                        placeholder="Ingrese nombre de la propiedad"
                         id="propiedad-nombre"
                         className="propiedad" />
                 </div>
@@ -50,7 +52,7 @@ const CreateProduct = () => {
                     <label>Categoría</label>
                     <select
                         name="categoria"
-                        placeholder="  Ingrese categoria de la propiedad"
+                        placeholder="Ingrese categoria de la propiedad"
                         id="propiedad-categoria"
                         className="propiedad" />
                 </div>
@@ -59,7 +61,7 @@ const CreateProduct = () => {
                     <input
                         type="text"
                         name="direccion de propiedad"
-                        placeholder="  Ingrese direccion de la propiedad"
+                        placeholder="Ingrese direccion de la propiedad"
                         id="propiedad-direccion"
                         className="propiedad" />
                 </div>
@@ -67,7 +69,7 @@ const CreateProduct = () => {
                     <label>Ciudad</label>
                     <select
                         name="ciudad de propiedad"
-                        placeholder="  Ingrese ciudad de la propiedad"
+                        placeholder="Ingrese ciudad de la propiedad"
                         id="propiedad-ciudad"
                         className="propiedad"
                     />
@@ -87,11 +89,12 @@ const CreateProduct = () => {
                         <input
                             type="text"
                             name="nombreAtributo"
-                            placeholder="  Ejemplo: Wifi"
+                            placeholder="Ejemplo: Wifi"
                             id="atributo-nombre"
                             className="propiedad"
                             onChange={handleAtributo}
                             value={nuevoAtributo.nombreAtributo}
+                            disabled={disable}
                         />
                     </div>
                     <div className="datos-atributos">
@@ -99,11 +102,12 @@ const CreateProduct = () => {
                         <input
                             type="text"
                             name="iconoAtributo"
-                            placeholder="  Ejemplo: fa-wifi"
+                            placeholder="Ejemplo: fa-wifi"
                             id="atributo-icono"
                             className="propiedad"
                             onChange={handleIcono}
                             value={nuevoIcono.iconoAtributo}
+                            disabled={disable}
                         />
                     </div>
                     <div className="botonAgregarAtributo">
@@ -122,17 +126,17 @@ const CreateProduct = () => {
                     <div>
                         <h3>Normas de la casas</h3>
                         <label>Descripción</label>
-                        <textarea cols="30" rows="6" placeholder="  Escriba aqui" id="text-normas" className="text-politicas" />
+                        <textarea cols="30" rows="6" placeholder="Escriba aqui" id="text-normas" className="text-politicas" />
                     </div>
                     <div>
                         <h3>Salud y seguridad</h3>
                         <label>Descripción</label>
-                        <textarea cols="30" rows="6" placeholder="  Escriba aqui" id="text-saludYSeguridad" className="text-politicas" />
+                        <textarea cols="30" rows="6" placeholder="Escriba aqui" id="text-saludYSeguridad" className="text-politicas" />
                     </div>
                     <div>
                         <h3>Politicas de cancelación</h3>
                         <label>Descripción</label>
-                        <textarea cols="30" rows="6" placeholder="  Escriba aqui" id="text-cancelacion" className="text-politicas" />
+                        <textarea cols="30" rows="6" placeholder="Escriba aqui" id="text-cancelacion" className="text-politicas" />
                     </div>
                 </div>
             </div>
@@ -145,13 +149,13 @@ const CreateProduct = () => {
                         <input
                             type="text"
                             name="carga de imagen"
-                            placeholder="  Insertar https://"
+                            placeholder="Insertar https://"
                             id="cargaImagen"
                             className="propiedad"
                         />
                     </div>
                     <div>
-                        <button onClick={handleClick}><i className="fa fa-regular fa-square-plus fa-3x "></i></button>
+                        <button ><i className="fa fa-regular fa-square-plus fa-3x "></i></button>
                     </div>
                 </div>
             </div>
