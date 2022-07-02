@@ -16,7 +16,7 @@ subnets_tags_zone_a = {
     Name = "subnet-public-terraform_module-sixvago_zone_a"
 }
 #--------subnet zone b-----------------------------
-subnets_cidr_zone_b = "10.0.0.20/28"
+subnets_cidr_zone_b = "10.0.0.16/28"
 subnets_availability_zone_b = "us-east-1b"
 subnets_tags_zone_b = {
     Name = "subnet-public-terraform_module-sixvago_zone_b"
