@@ -9,11 +9,11 @@ const CreateProduct = () => {
     const [iconos, setIconos] = useState([])
     const [nuevoIcono, setNuevoIcono] = useState({});
     const [inputs, setInputs] = useState([])
-    const [disable, setDisable] = useState(false);
+    const [disable, setDisable] = useState([false]);
 
     useEffect(() => {
         setInputs([...inputs, "x"])
-    }, [atributos]);
+    }, [disable,atributos]);
     const handleAtributo = (event) => {
         setNuevoAtributo({ ...nuevoAtributo, [event.target.name]: event.target.value });
         //console.log(event.target); //borrar
@@ -21,10 +21,30 @@ const CreateProduct = () => {
     const handleIcono = (e) => {
         setNuevoIcono({ ...nuevoIcono, [e.target.name]: e.target.value })
     }
+    const handleClickDelete = (event) => {
+        
+        let aux = disable
+        aux.splice(event.target.id,1)
+        setDisable(aux)
+        console.log(disable);
+        let auxIconos = iconos;
+        auxIconos.splice(event.target.id,1);
+        setIconos(auxIconos);
+        console.log(iconos);
+        let auxAtributos = atributos;
+        auxAtributos.splice(event.target.id,1);
+        setAtributos(auxAtributos);
+        console.log(atributos);
+    }
     const handleClick = (event) => {
-        setDisable(true)
+        let aux = disable
+        aux.push(false)
+        for (let i = 0; i < aux.length -1; i++){
+            aux[i]= true;
+        }
+        setDisable(aux)
         setIconos([...iconos, nuevoIcono]);
-        setAtributos([...atributos, nuevoAtributo]);
+        setAtributos([...atributos, nuevoAtributo])
     }
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -84,37 +104,8 @@ const CreateProduct = () => {
             </div>
             <div className="atributos-container">
                 <div className="input-atributos">
-                    <div className="datos-atributos">
-                        <label>Nombre</label>
-                        <input
-                            type="text"
-                            name="nombreAtributo"
-                            placeholder="Ejemplo: Wifi"
-                            id="atributo-nombre"
-                            className="propiedad"
-                            onChange={handleAtributo}
-                            value={nuevoAtributo.nombreAtributo}
-                            disabled={disable}
-                        />
-                    </div>
-                    <div className="datos-atributos">
-                        <label>Icono</label>
-                        <input
-                            type="text"
-                            name="iconoAtributo"
-                            placeholder="Ejemplo: fa-wifi"
-                            id="atributo-icono"
-                            className="propiedad"
-                            onChange={handleIcono}
-                            value={nuevoIcono.iconoAtributo}
-                            disabled={disable}
-                        />
-                    </div>
-                    <div className="botonAgregarAtributo">
-                        <button onClick={handleClick}><i className="fa fa-regular fa-square-plus fa-3x "></i></button>
-                    </div>
                     {
-                        atributos.length > 0? atributos.map((input, i) => <InputAtributos handleAtributo={handleAtributo} handleIcono={handleIcono} handleClick={handleClick} nuevoAtributo={nuevoAtributo} nuevoIcono={nuevoIcono} i={i}/>):null
+                        disable.length > 0? disable.map((input, i) =>  <InputAtributos key={`atributos${i}`} handleAtributo={handleAtributo} handleIcono={handleIcono} handleClick={handleClick} nuevoAtributo={nuevoAtributo} nuevoIcono={nuevoIcono} i={i} disable={input} handleClickDelete={(e)=>handleClickDelete(e)}/>) :null
                     }
                 </div>
             </div>
