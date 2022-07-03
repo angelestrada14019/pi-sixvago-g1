@@ -1,23 +1,30 @@
 import ImageGallery from "react-image-gallery";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import ApiCall from "../../utils/ApiCall";
 import "./imageGallery.css";
-
-// const styleBox = {
-//   width: "50%",
-//   height: "60%",
-// };
+import { SimpleShareButtons } from "react-simple-share";
 const styleModal = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+};
+const styleSocial = {
+  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+  borderRadius: 3,
+  border: 0,
+  color: "white",
+  padding: "0 30px",
+  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
 };
 
 const ImageGallerry = ({ id }) => {
   const [open, setOpen] = useState(false);
   const [imagenes, setImagenes] = useState([]);
   const [producto, setProducto] = useState([]);
+  const location = useLocation();
+  const [desable, setDesable] = useState(true);
 
   useEffect(() => {
     getProducto();
@@ -36,16 +43,31 @@ const ImageGallerry = ({ id }) => {
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido.body);
-    const newImage = productoObtenido.body.listadeimagenes.map(selectFewerProps);
+    const newImage =
+      productoObtenido.body.listadeimagenes.map(selectFewerProps);
     setImagenes(newImage);
+  };
+  const handleSocialClick = () => {
+    setDesable(desable?false:true);
   };
 
   return (
     <div className="image_gallery_container">
       {/* {console.log("galeria imagenes",imagenes)} */}
       <div className="icon_social">
-        <i className="fa-solid fa-share-nodes"></i>
-        <i className="fa-regular fa-heart"></i>
+        <i
+          onClick={handleSocialClick}
+          className="fa-solid fa-share-nodes social fa-2x"
+        ></i>
+        <i className="fa-regular fa-heart fa-2x"></i>
+        <div>
+          {!desable && (
+            <SimpleShareButtons
+              url={window.location.href}
+              whitelist={["Facebook", "Twitter", "LinkedIn"]}
+            />
+          )}
+        </div>
       </div>
       <div className="gallery">
         {producto?.listadeimagenes?.slice(0, 5).map((image) => (
@@ -84,8 +106,19 @@ const ImageGallerry = ({ id }) => {
       </div>
       <div className="container-gallery_image">
         <div className="icon_social">
-          <i className="fa-solid fa-share-nodes"></i>
-          <i className="fa-regular fa-heart"></i>
+          <i
+            onClick={handleSocialClick}
+            className="fa-solid fa-share-nodes social fa-2x"
+          ></i>
+          <i className="fa-regular fa-heart fa-2x"></i>
+          <div>
+          {!desable && (
+            <SimpleShareButtons
+              url={window.location.href}
+              whitelist={["Facebook", "Twitter", "LinkedIn"]}
+            />
+          )}
+        </div>
         </div>
 
         <ImageGallery
