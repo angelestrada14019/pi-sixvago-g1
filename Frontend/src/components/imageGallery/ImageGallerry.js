@@ -57,6 +57,7 @@ const ImageGallerry = ({ id }) => {
       <div className="icon_social">
         <i
           onClick={handleSocialClick}
+          style={{cursor: 'pointer'}}
           className="fa-solid fa-share-nodes social fa-2x"
         ></i>
         <i className="fa-regular fa-heart fa-2x"></i>
@@ -108,6 +109,7 @@ const ImageGallerry = ({ id }) => {
         <div className="icon_social">
           <i
             onClick={handleSocialClick}
+            style={{cursor: 'pointer'}}
             className="fa-solid fa-share-nodes social fa-2x"
           ></i>
           <i className="fa-regular fa-heart fa-2x"></i>
