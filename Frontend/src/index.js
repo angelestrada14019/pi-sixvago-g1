@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollToTop from "./utils/ScrollToTop";
 import Administracion from "./pages/Administracion";
 import Verify from "./pages/Verify";
+import CreacionProductoExitoso from "./pages/CreacionProductoExitoso";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,6 +27,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
           <Route path="administracion" element={<Administracion/>}/>
+          <Route path="administracion/productoExitoso" element={<CreacionProductoExitoso/>}/>
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
             <Route

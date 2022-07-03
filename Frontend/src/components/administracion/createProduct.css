@@ -83,6 +83,10 @@
     flex-wrap: wrap;
     border-radius: 10px;
 }
+/* .botonAgregarAtributo i{
+    pointer-events: none;
+    cursor: pointer;
+} */
 
 .titulo-dato {
     margin: 0px 20px;
@@ -104,10 +108,15 @@
 .fa-square-plus {
     color: #262626;
     cursor: pointer;
-    padding-top: 20px;
+    padding-top: 23px;
     margin-right: 15px;
 }
-
+.fa-rectangle-xmark{
+    color: #ddc15b;
+    margin-top: 23px;
+    cursor: pointer;
+    font-size: 50px 1px;
+}
 .politicas-producto {
     display: flex;
     justify-content: center;

@@ -46,9 +46,9 @@ const InputAtributos = ({handleAtributo,handleIcono,handleClick,nuevoAtributo,nu
                 />
             </div>
             { disable?<div  className="botonAgregarAtributo">
-                <button id={i} onClick={handleClickDelete}><i class="fa-regular fa-rectangle-xmark fa-3x"></i></button>
+                <i id={nuevoIcono[`iconos${i}`]} onClick={handleClickDelete}  class="fa-regular fa-rectangle-xmark fa-3x"></i>
             </div> : <div className="botonAgregarAtributo">
-                <button id={`add${i}`} onClick={handleClick}><i className="fa fa-regular fa-square-plus fa-3x "></i></button>
+                <i id={`add${i}`} onClick={handleClick} className="fa fa-regular fa-square-plus fa-3x "></i>
             </div>}
             </>
     )

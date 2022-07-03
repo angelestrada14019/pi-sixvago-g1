@@ -88,6 +88,13 @@
 .image-gallery-content .image-gallery-slide .image-gallery-image {
 }
 
+.image-gallery-swipe{
+  max-height: 500px !important;
+}
+.image-gallery-slides{
+  max-height: 400px !important;
+}
+
 @media (max-width: 768px) {
   .modal_container {
     display: none;

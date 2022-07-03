@@ -10,10 +10,13 @@ const CreateProduct = () => {
     const [nuevoIcono, setNuevoIcono] = useState({});
     const [inputs, setInputs] = useState([])
     const [disable, setDisable] = useState([false]);
+    const [disableClone, setDisableClone] = useState([false]);
 
     useEffect(() => {
-        setInputs([...inputs, "x"])
-    }, [disable,atributos]);
+        setDisableClone(disable)
+    }, [disable]);
+
+
     const handleAtributo = (event) => {
         setNuevoAtributo({ ...nuevoAtributo, [event.target.name]: event.target.value });
         //console.log(event.target); //borrar
@@ -22,19 +25,33 @@ const CreateProduct = () => {
         setNuevoIcono({ ...nuevoIcono, [e.target.name]: e.target.value })
     }
     const handleClickDelete = (event) => {
-        
+        let auxIconos = iconos;
+        let id = auxIconos.filter(icono => {
+            //let auxiliar = []
+            for (const key in icono) {
+                if ( icono[key] !== event.target.id ){
+                    return icono
+                    //auxiliar.push(icono)
+                }
+            }
+            //return auxiliar
+        } )
+        console.log(id);
         let aux = disable
+        console.log("id",event.target);
         aux.splice(event.target.id,1)
-        setDisable(aux)
+        setDisable(aux)/*
         console.log(disable);
         let auxIconos = iconos;
         auxIconos.splice(event.target.id,1);
+        console.log("auxIconos",auxIconos);
         setIconos(auxIconos);
         console.log(iconos);
         let auxAtributos = atributos;
         auxAtributos.splice(event.target.id,1);
         setAtributos(auxAtributos);
-        console.log(atributos);
+        console.log(atributos); */
+
     }
     const handleClick = (event) => {
         let aux = disable
@@ -45,6 +62,8 @@ const CreateProduct = () => {
         setDisable(aux)
         setIconos([...iconos, nuevoIcono]);
         setAtributos([...atributos, nuevoAtributo])
+        setNuevoAtributo({})
+        setNuevoIcono({})
     }
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -105,7 +124,7 @@ const CreateProduct = () => {
             <div className="atributos-container">
                 <div className="input-atributos">
                     {
-                        disable.length > 0? disable.map((input, i) =>  <InputAtributos key={`atributos${i}`} handleAtributo={handleAtributo} handleIcono={handleIcono} handleClick={handleClick} nuevoAtributo={nuevoAtributo} nuevoIcono={nuevoIcono} i={i} disable={input} handleClickDelete={(e)=>handleClickDelete(e)}/>) :null
+                        disableClone.length > 0? disableClone.map((input, i) =>  <InputAtributos key={`atributos${i}`} handleAtributo={handleAtributo} handleIcono={handleIcono} handleClick={handleClick} nuevoAtributo={nuevoAtributo} nuevoIcono={nuevoIcono} i={i} disable={input} handleClickDelete={handleClickDelete}/>) :null
                     }
                 </div>
             </div>

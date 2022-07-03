@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { useSearchParams } from "react-router-dom";
 import ApiCall from '../utils/ApiCall';
+import { Link } from "react-router-dom";
 
 const Verify = () => {
     const [verify, setVerify] = useState(false);
@@ -26,22 +27,35 @@ const Verify = () => {
   return (
     <div>
         {verify?
+        <div className='verifiacion'>
+          <div className="card-reservaExitosa">
+            <div className="icon-successful">
+                <i className="fa-solid fa-building-circle-check fa-bounce"></i>
+            </div>
+            <h1 className="titulo-exitoso">¡Excelente!</h1>
+            <p className="subtitulo-exitoso">
+                Su cuenta se ha verificado con exito.
+            </p>
+            <Link to={"/"}>
+                <button className="boton-succes"> Volver al menu</button>
+            </Link>
+        </div>
+        </div>:
         <>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-            <p>Se verifico correctamente</p>
-        </>:
-        <>
-        
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-            <p>No se logro verificar</p>
+        <div className='verifiacion'>
+        <div className="card-reservaExitosa">
+            <div className="icon-successful">
+                <i className="fa-solid fa-circle-exclamation fa-bounce"></i>
+            </div>
+            <h1 className="titulo-exitoso">Que pena 😥</h1>
+            <p className="subtitulo-exitoso">
+                Su cuenta no se ha verificado correctamente.
+            </p>
+            <Link to={"/"}>
+                <button className="boton-succes"> Volver al menu</button>
+            </Link>
+            </div>
+            </div>
         </>
     }
     </div>
