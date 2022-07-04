@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/usuarios/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/reservas/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/politicas/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest()
                 .authenticated();
