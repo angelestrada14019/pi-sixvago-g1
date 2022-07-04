@@ -94,7 +94,6 @@
 .image-gallery-slides{
   max-height: 400px !important;
 }
-
 @media (max-width: 768px) {
   .modal_container {
     display: none;
