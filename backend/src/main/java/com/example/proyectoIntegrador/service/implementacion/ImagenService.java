@@ -1,14 +1,24 @@
 package com.example.proyectoIntegrador.service.implementacion;
 
+import com.example.proyectoIntegrador.dto.ImagenDTO;
+import com.example.proyectoIntegrador.dto.PoliticaDTO;
 import com.example.proyectoIntegrador.entity.Imagen;
+import com.example.proyectoIntegrador.entity.Politica;
+import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
+import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
+import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
 import com.example.proyectoIntegrador.repository.ImagenRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class ImagenService implements IGeneralService<Imagen, Long> {
+@Slf4j
+@Service
+public class ImagenService implements IGeneralService<ImagenDTO, Long> {
 
 
     @Autowired
@@ -17,22 +27,32 @@ public class ImagenService implements IGeneralService<Imagen, Long> {
     private ObjectMapper mapper;
 
     @Override
-    public Imagen agregar(Imagen imagen)  {
+    public ImagenDTO agregar(ImagenDTO imagenDTO)  {
+        try {
+            Imagen imagen = mapper.convertValue(imagenDTO, Imagen.class);
+            return mapper.convertValue(imagenRepository.save(imagen), ImagenDTO.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
+    }
+
+    @Override
+    public ImagenDTO buscar(Long aLong) {
         return null;
     }
 
     @Override
-    public Imagen buscar(Long aLong) {
+    public ImagenDTO editar(ImagenDTO imagen) {
         return null;
     }
 
     @Override
-    public Imagen editar(Imagen imagen) {
-        return null;
-    }
-
-    @Override
-    public List<Imagen> listarTodos() {
+    public List<ImagenDTO> listarTodos() {
         return null;
     }
 

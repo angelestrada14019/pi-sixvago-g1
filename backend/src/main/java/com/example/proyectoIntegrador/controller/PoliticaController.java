@@ -40,7 +40,6 @@ public class PoliticaController {
 
 
     @GetMapping
-    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<WrapperResponse<List<PoliticaDTO>>> ListarTodos(){
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",politicaService.listarTodos()).createResponse(HttpStatus.OK);
     }
