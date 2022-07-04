@@ -15,7 +15,6 @@ const useAvgScore = ({ data, id }) => {
 
   const productAvarageScore = async () => {
     let getId = data ? data.productos_id : id;
-    console.log(getId);
     const response = await ApiCall.invokeGET(`/puntuacion/producto/${getId}`);
     const body = response.body;
     let sum = 0;

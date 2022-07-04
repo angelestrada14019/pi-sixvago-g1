@@ -4,7 +4,6 @@ import { useState } from "react";
 import InputAtributos from "./InputAtributos";
 
 const CreateProduct = () => {
-
   //-------------------------------------------------------------------------------------
   const [caracteristicas, setCaracterisitcas] = useState([
     {
@@ -14,8 +13,6 @@ const CreateProduct = () => {
   ]);
 
   //----------------------------------------------------------------------------------------
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
