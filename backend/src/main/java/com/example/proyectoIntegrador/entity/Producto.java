@@ -40,6 +40,7 @@ public class Producto{
     @Column(name = "latitud")
     private Integer latitud;
 
+
     @ManyToOne
     @JoinColumn(name = "categorias_id",referencedColumnName = "id")
     private Categoria categorias_id; //NO TOCAR

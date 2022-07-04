@@ -153,15 +153,28 @@ public class ProductosService implements IGeneralService<ProductoDTO, Long> {
                     productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
                 } else {
                         List<Boolean> aux =new ArrayList<>();
+                        Integer auxCount =0;
+                    log.info("producto "+ producto.getProductos_id());
                     for (Reserva reserva : producto.getReservas()) {
-                        aux.add(!(
-                                isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), fechaInicial)
-                                        || isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), fechaFinal)
-                        ));
+                        if (reserva.getFechaInicialReserva().isAfter(LocalDate.now())) {
+                            if (isBetweenInclusive(fechaInicial, fechaFinal, reserva.getFechaInicialReserva())
+                                    || isBetweenInclusive(fechaInicial, fechaFinal, reserva.getFechaFinalReserva())){
+                            auxCount++;
 
-
+                            }
+//                            aux.add((
+//                                    isBetweenInclusive(fechaInicial, fechaFinal, reserva.getFechaInicialReserva())
+//                                            || isBetweenInclusive(fechaInicial, fechaFinal, reserva.getFechaFinalReserva())
+//
+//                            ));
+                        }
+                        log.info("reserva "+ reserva.getId());
                     }
-                    if(!aux.contains(false)){
+                    log.info("auxCount "+auxCount);
+
+
+
+                    if(producto.getHabitaciones() > auxCount){
                         productoDTOS.add(mapper.convertValue(producto, ProductoDTO.class));
                     }
                 }
@@ -178,6 +191,6 @@ public class ProductosService implements IGeneralService<ProductoDTO, Long> {
     }
 
 boolean isBetweenInclusive(LocalDate start, LocalDate end, LocalDate target) {
-    return !target.isBefore(start) && !target.isAfter(end);
+    return !(target.isBefore(start) || target.isAfter(end));
 }
 }

@@ -2,11 +2,13 @@ package com.example.proyectoIntegrador.service.implementacion;
 
 
 import com.example.proyectoIntegrador.dto.ReservaDTO;
+import com.example.proyectoIntegrador.entity.Producto;
 import com.example.proyectoIntegrador.entity.Reserva;
 import com.example.proyectoIntegrador.entity.Usuario;
 import com.example.proyectoIntegrador.exceptions.GeneralServicesExceptions;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.exceptions.ValidateServiceExceptions;
+import com.example.proyectoIntegrador.repository.IProductoRepository;
 import com.example.proyectoIntegrador.repository.IReservaRepository;
 import com.example.proyectoIntegrador.repository.IUsuarioRepository;
 import com.example.proyectoIntegrador.service.IGeneralService;
@@ -25,6 +27,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -42,6 +45,9 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
+    @Autowired
+    private IProductoRepository iProductoRepository;
+
     @Value("${app.HOST_WEB}")
     private String hostWeb;
 
@@ -52,23 +58,31 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
     public ReservaDTO agregar(ReservaDTO reservaDTO) {
         try {
             Reserva reserva = mapper.convertValue(reservaDTO, Reserva.class);
+            Producto producto = iProductoRepository.findById(reserva.getProductosProductos().getProductos_id()).orElseThrow(()->
+                    new NoDataFoundExceptions("No existe el id del producto"));
             Usuario usuario =usuarioRepository.findById(reserva.getUsuarios().getId()).orElseThrow(()->
                     new NoDataFoundExceptions("No existe el id"));
             List<Reserva> reserva1 = iReservaRepository.buscarReservaPorProductoId(reservaDTO.getProductosProductos().getProductos_id());
+            Integer auxCount =0;
             for (Reserva reserva2 : reserva1) {
                 if(usuario.getEnable()==null || !usuario.getEnable()){
                     throw new ValidateServiceExceptions("verifique la cuenta");
                 }
-                if (reserva2.getFechaInicialReserva().equals(reserva.getFechaInicialReserva()) ||
-                        reserva2.getFechaFinalReserva().equals(reserva.getFechaFinalReserva())
-                || LocalDate.now().isAfter(reserva.getFechaInicialReserva())
+                if (LocalDate.now().isAfter(reserva.getFechaInicialReserva())
                         || LocalDate.now().isAfter(reserva.getFechaFinalReserva())
                 || reserva.getFechaInicialReserva().isAfter(reserva.getFechaFinalReserva())
                 ){
-
-
                 throw new ValidateServiceExceptions("escoja fechas validas");
                 }
+                if (
+                isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), reserva2.getFechaInicialReserva())
+                        || isBetweenInclusive(reserva.getFechaInicialReserva(), reserva.getFechaFinalReserva(), reserva2.getFechaFinalReserva())
+                ){
+                    auxCount++;
+                }
+            }
+            if (producto.getHabitaciones()<=auxCount){
+                throw new ValidateServiceExceptions("No hay habitaciones para este producto");
             }
             sendVerificationEmail(reserva);
             return mapper.convertValue(iReservaRepository.save(reserva), ReservaDTO.class);
@@ -80,6 +94,9 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
             log.error(e.getMessage(),e);
             throw new GeneralServicesExceptions(e.getMessage(),e);
         }
+    }
+    boolean isBetweenInclusive(LocalDate start, LocalDate end, LocalDate target) {
+        return !(target.isBefore(start) || target.isAfter(end));
     }
     private void sendVerificationEmail(Reserva reserva) throws MessagingException, UnsupportedEncodingException {
         Usuario usuario =usuarioRepository.findById(reserva.getUsuarios().getId()).orElseThrow(()->
