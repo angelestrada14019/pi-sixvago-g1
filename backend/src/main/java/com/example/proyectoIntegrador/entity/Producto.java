@@ -31,8 +31,14 @@ public class Producto{
     @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "politicas_servicios")
-    private String politicas_servicio;
+    @Column(name = "habitaciones")
+    private Integer habitaciones;
+
+    @Column(name = "longitud")
+    private Integer longitud;
+
+    @Column(name = "latitud")
+    private Integer latitud;
 
     @ManyToOne
     @JoinColumn(name = "categorias_id",referencedColumnName = "id")
@@ -46,6 +52,11 @@ public class Producto{
     @JoinTable(name ="productos_caracteristicas", joinColumns = @JoinColumn(name = "productos_id"),
             inverseJoinColumns = @JoinColumn(name ="caracteristicas_id"))
     private List<Caracteristicas> caracteristicas;
+
+    @ManyToMany
+    @JoinTable(name = "productos_politicas", joinColumns = @JoinColumn(name = "productos_id"),
+                inverseJoinColumns = @JoinColumn(name="politicas_id"))
+    private List<Politica> politicas;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "productos_id")
