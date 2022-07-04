@@ -4,13 +4,7 @@ import { useState } from "react";
 import InputAtributos from "./InputAtributos";
 
 const CreateProduct = () => {
-  const [atributos, setAtributos] = useState([]);
-  const [nuevoAtributo, setNuevoAtributo] = useState({});
-  const [iconos, setIconos] = useState([]);
-  const [nuevoIcono, setNuevoIcono] = useState({});
-  const [position, setPosition] = useState(0);
-  const [disable, setDisable] = useState([false]);
-  const [disableClone, setDisableClone] = useState([false]);
+
   //-------------------------------------------------------------------------------------
   const [caracteristicas, setCaracterisitcas] = useState([
     {
@@ -21,13 +15,10 @@ const CreateProduct = () => {
 
   //----------------------------------------------------------------------------------------
 
-  useEffect(() => {
-    setDisableClone(disable);
-  }, [disable]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(atributos);
   };
   //------------------------------------------------------------------------------------------------
   const handleClickAdd = (e) => {
