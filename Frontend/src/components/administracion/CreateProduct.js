@@ -118,7 +118,7 @@ const CreateProduct = () => {
                   className="propiedad"
                   onChange={(e) => handleClickChange(e, i)}
                   value={caracteristica.atributo}
-                  // disabled={disable}
+                   disabled={i!==(caracteristicas.length-1)?true:false}
                 />
               </div>
               <div className="datos-atributos">
@@ -131,7 +131,7 @@ const CreateProduct = () => {
                   className="propiedad"
                   onChange={(e) => handleClickChange(e, i)}
                   value={caracteristica.icono}
-                  // disabled={disable}
+                  disabled={i!==(caracteristicas.length-1)?true:false}
                 />
               </div>
               <div>
