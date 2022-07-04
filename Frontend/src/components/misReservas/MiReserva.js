@@ -11,7 +11,6 @@ const MiReserva = () => {
             <div className='titulo-miReserva'><h2>Mis reservas</h2></div>
             <div className='card-miReserva'>
                 <div className='img-miReserva'>
-                    <img src="../../"</img>
                 </div>
                 <div className='datos-miReserva'>
                     <div className='nombre-miReserva'> <h2>Nombre:  </h2> </div>
