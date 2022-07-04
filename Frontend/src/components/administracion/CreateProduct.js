@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./createProduct.css";
 import { useState } from "react";
+import InputAtributos from "./InputAtributos";
 
 const CreateProduct = () => {
   const [atributos, setAtributos] = useState([]);
@@ -38,11 +39,11 @@ const CreateProduct = () => {
       },
     ]);
   };
-  const handleClickRemove = (i)=>{
-    const list =[...caracteristicas];
-    list.splice(i,1);
-    setCaracterisitcas(list)
-  }
+  const handleClickRemove = (i) => {
+    const list = [...caracteristicas];
+    list.splice(i, 1);
+    setCaracterisitcas(list);
+  };
   const handleClickChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...caracteristicas];
@@ -107,51 +108,14 @@ const CreateProduct = () => {
       <div className="atributos-container">
         <div className="input-atributos">
           {caracteristicas.map((caracteristica, i) => (
-            <>
-              <div className="datos-atributos">
-                <label>Nombre</label>
-                <input
-                  type="text"
-                  name="atributo"
-                  placeholder="Ejemplo: Wifi"
-                  id="atributo-nombre"
-                  className="propiedad"
-                  onChange={(e) => handleClickChange(e, i)}
-                  value={caracteristica.atributo}
-                   disabled={i!==(caracteristicas.length-1)?true:false}
-                />
-              </div>
-              <div className="datos-atributos">
-                <label>Icono</label>
-                <input
-                  type="text"
-                  name="icono"
-                  placeholder="Ejemplo: fa-wifi"
-                  id="atributo-icono"
-                  className="propiedad"
-                  onChange={(e) => handleClickChange(e, i)}
-                  value={caracteristica.icono}
-                  disabled={i!==(caracteristicas.length-1)?true:false}
-                />
-              </div>
-              <div>
-              {(caracteristicas.length !==1 && i!==(caracteristicas.length-1)) &&(
-                <div className="botonAgregarAtributo">
-                  <i 
-                  onClick={()=>handleClickRemove(i)}
-                  class="fa-regular fa-rectangle-xmark fa-3x"></i>
-                </div>)
-                }
-                {(caracteristicas.length-1) ===i &&(
-                <div className="botonAgregarAtributo">
-                  <i
-                    onClick={handleClickAdd}
-                    className="fa fa-regular fa-square-plus fa-3x "
-                  ></i>
-                </div>)
-                }
-              </div>
-            </>
+            <InputAtributos
+              caracteristica={caracteristica}
+              handleClickChange={handleClickChange}
+              i={i}
+              caracteristicas={caracteristicas}
+              handleClickRemove={handleClickRemove}
+              handleClickAdd={handleClickAdd}
+            />
           ))}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const InputAtributos = ({handleAtributo,handleIcono,handleClick,nuevoAtributo,nuevoIcono, i, disable, handleClickDelete}) => {
+const InputAtributos = ({caracteristica,handleClickChange, i, caracteristicas,handleClickRemove,handleClickAdd}) => {
     /*const handleAtributo = (event) => {
     const [disableRender, setDisableRender] = useState(false)
     const [atributos, setAtributos] = useState([])
@@ -18,39 +18,50 @@ const InputAtributos = ({handleAtributo,handleIcono,handleClick,nuevoAtributo,nu
 }*/
 
     return (<>
-            <div className="datos-atributos">
-                <label>Nombre</label>
-                <input
-                    type="text"
-                    name={`atributo${i}`}
-                    placeholder="Ejemplo: Wifi"
-                    id="atributo-nombre"
-                    className="propiedad"
-                    onChange={handleAtributo}
-                    value={nuevoAtributo[`atributo${i}`]}
-                    disabled={disable}
-                    
-                />
-            </div>
-            <div className="datos-atributos">
-                <label>Icono</label>
-                <input
-                    type="text"
-                    name={`iconos${i}`}
-                    placeholder="Ejemplo: fa-wifi"
-                    id="atributo-icono"
-                    className="propiedad"
-                    onChange={handleIcono}
-                    value={nuevoIcono[`iconos${i}`]}
-                    disabled={disable}
-                />
-            </div>
-            { disable?<div  className="botonAgregarAtributo">
-                <i id={`iconos${i}`} onClick={handleClickDelete}  class="fa-regular fa-rectangle-xmark fa-3x"></i>
-            </div> : <div className="botonAgregarAtributo">
-                <i id={`iconos${i}`} onClick={handleClick} className="fa fa-regular fa-square-plus fa-3x "></i>
-            </div>}
-            </>
+        <div className="datos-atributos">
+          <label>Nombre</label>
+          <input
+            type="text"
+            name="atributo"
+            placeholder="Ejemplo: Wifi"
+            id="atributo-nombre"
+            className="propiedad"
+            onChange={(e) => handleClickChange(e, i)}
+            value={caracteristica.atributo}
+             disabled={i!==(caracteristicas.length-1)?true:false}
+          />
+        </div>
+        <div className="datos-atributos">
+          <label>Icono</label>
+          <input
+            type="text"
+            name="icono"
+            placeholder="Ejemplo: fa-wifi"
+            id="atributo-icono"
+            className="propiedad"
+            onChange={(e) => handleClickChange(e, i)}
+            value={caracteristica.icono}
+            disabled={i!==(caracteristicas.length-1)?true:false}
+          />
+        </div>
+        <div>
+        {(caracteristicas.length !==1 && i!==(caracteristicas.length-1)) &&(
+          <div className="botonAgregarAtributo">
+            <i 
+            onClick={()=>handleClickRemove(i)}
+            class="fa-regular fa-rectangle-xmark fa-3x"></i>
+          </div>)
+          }
+          {(caracteristicas.length-1) ===i &&(
+          <div className="botonAgregarAtributo">
+            <i
+              onClick={handleClickAdd}
+              className="fa fa-regular fa-square-plus fa-3x "
+            ></i>
+          </div>)
+          }
+        </div>
+      </>
     )
 }
 export default InputAtributos
