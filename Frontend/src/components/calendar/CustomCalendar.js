@@ -14,10 +14,10 @@ const CustomCalendar = ({ handleCheckInOut }) => {
   const { width } = useWindowDimensions();
   const { pathname: currentLocation } = useLocation();
   const { id } = useParams();
-   const localDateOptions = {
-     month: "long",
-     day: "numeric",
-   };
+  const localDateOptions = {
+    month: "long",
+    day: "numeric",
+  };
 
   useEffect(() => {
     if (id) {
@@ -29,7 +29,6 @@ const CustomCalendar = ({ handleCheckInOut }) => {
     const unavailableDates = await ApiCall.invokeGET(
       `/reservas/productos?idproducto=${id}`
     );
-    console.log("unavailableDates",unavailableDates);
     let arrayOfDates = unavailableDates.body.map((day) => {
       return getDaysArray(day.fechaInicialReserva, day.fechaFinalReserva);
     });

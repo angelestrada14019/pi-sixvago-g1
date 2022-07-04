@@ -1,16 +1,16 @@
 
 .descripcion{
-    width: 100%;
+    width: 97%;
     border-radius: 5px;
     font-weight: 600;
 }
 
 .form-group{
-    width: 100%;
     border-radius: 5px;
     margin: 28px;
 }
 .formulario{
-    width: 100%;
+    width: 90%;
     margin: 20px 0px;
+    border-radius: 10px;
 }

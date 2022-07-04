@@ -1,0 +1,225 @@
+.administracion-container {
+    margin-top: 20px;
+}
+
+.creacion-producto {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 95%;
+    border-radius: 10px;
+    padding-top: 10px;
+
+}
+.creacion-producto input{
+    padding-left: 10px;
+}
+.creacion-producto textarea{
+    padding-left: 10px;
+}
+
+.datos-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.datos-propiedad {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px;
+    min-width: 270px;
+}
+
+.datos-propiedad label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.propiedad {
+    width: 100%;
+    height: 40px;
+    box-shadow: 0px 0px 10px #26262631;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+
+.textArea {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.textArea label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#text {
+    width: 100%;
+    box-shadow: 0px 0px 10px #26262631;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.datos-atributos {
+    display: flex;
+    flex-direction: column;
+    width: 46%;
+    padding: 20px;
+}
+
+.input-atributos {
+    width: 97%;
+    display: flex;
+    /*tablet none*/
+    align-items: center;
+    margin-bottom: 50px;
+    background-color: #f1f1f1;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+/* .botonAgregarAtributo i{
+    pointer-events: none;
+    cursor: pointer;
+} */
+
+.titulo-dato {
+    margin: 0px 20px;
+    font-size: 33px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.atributos-container {
+    display: flex;
+    justify-content: center;
+}
+.botonAgregarAtributo{
+    width: 4%;
+}
+.botonAgregarAtributo button{
+    background: transparent;
+}
+.fa-square-plus {
+    color: #262626;
+    cursor: pointer;
+    padding-top: 23px;
+    margin-right: 15px;
+}
+.fa-rectangle-xmark{
+    color: #ddc15b;
+    margin-top: 23px;
+    cursor: pointer;
+    font-size: 50px 1px;
+}
+.politicas-producto {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.politicas-contenedor {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 0px 10px #26262631;
+    border-radius: 5px;
+    width: 97%;
+    flex-wrap: wrap
+}
+
+.politicas-contenedor div {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+
+}
+
+.politicas-contenedor div label {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 20px 0px;
+}
+
+.politicas-contenedor div h3 {
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 20px;
+}
+
+.titulo-politicas {
+    margin: 0px 20px;
+    font-size: 33px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.text-politicas {
+    width: 100%;
+    box-shadow: 0px 0px 10px #26262631;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    resize: none;
+}
+
+.titulo-cargaimagenes {
+    margin: 50px 20px 20px 20px;
+    font-size: 33px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.cargaImagenes-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input-cargaimagenes {
+    display: flex;
+    background-color: #f1f1f1;
+    height: 90px;
+    width: 97%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around
+}
+
+.input-cargaimagenes .fa-square-plus {
+    padding-top: 0px;
+}
+
+.datos-imagenes {
+    width: 93%;
+    margin-left: 10px;
+}
+.boton-crearProducto{
+    display: flex;
+    justify-content: center
+}
+
+#boton-crear {
+    width: 306px;
+    height: 60px;
+    background: linear-gradient(90deg, rgba(203, 178, 106, 1) 10%, rgba(255, 245, 218, 1) 50%, rgba(190, 158, 68, 1) 110%);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    border-color: wheat;
+    border-style: inherit;
+    color: #262626;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 100px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#boton-crear:hover {
+    background: linear-gradient(90deg, rgb(158, 139, 82) 10%, rgba(255, 245, 218, 1) 50%, rgb(148, 122, 53) 110%);
+    color: #262626;
+}

@@ -22,9 +22,14 @@ public class PuntuacionController {
     @GetMapping("/{id}")
     public ResponseEntity<WrapperResponse<PuntuacionDTO>> buscar(@PathVariable Long id) {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.buscar(id)).createResponse(HttpStatus.OK);
-    }@GetMapping("/usuario/{id}")
+    }
+    @GetMapping("/usuario/{id}")
     public ResponseEntity<WrapperResponse<List<PuntuacionDTO>>> buscarPorUsuarioId(@PathVariable Long id) {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.findByUsuarioId(id)).createResponse(HttpStatus.OK);
+    }
+    @GetMapping("/producto/{id}")
+    public ResponseEntity<WrapperResponse<List<PuntuacionDTO>>> buscarPorProductoId(@PathVariable Long id) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",puntuacionService.findByProductoId(id)).createResponse(HttpStatus.OK);
     }
     @PutMapping()
     public ResponseEntity<WrapperResponse<PuntuacionDTO>> editar(@RequestBody PuntuacionDTO puntuacionDTO) {

@@ -1,0 +1,13 @@
+.page-adm{
+    background-color: rgb(224, 224, 224);}
+.administracion-container{
+    display: flex;
+    justify-content: center;
+}
+.titulo-producto{
+    margin: 0px 40px;
+    margin-top: 100px;
+    font-size: 33px;
+    font-weight: 600;
+    color: #262626;
+}

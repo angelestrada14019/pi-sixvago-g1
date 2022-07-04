@@ -19,6 +19,8 @@ public class PuntuacionDTO {
 
     private Long id;
     private Integer puntuacion;
+    @JsonIgnoreProperties(value = {"nombre","apellido", "email", "contrasenia","ciudad"})
     private Usuario usuarios;
+    @JsonIgnoreProperties(value = {"nombre","descripcion", "direccion", "politicas_servicio","categorias_id","ciudades_id","caracteristicas","listadeimagenes","reservas"})
     private Producto productosProductos;
 }

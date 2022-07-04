@@ -5,10 +5,10 @@ import ImageGallerry from "../components/imageGallery/ImageGallerry";
 import Descripcion from "../components/product/Descripcion";
 import Caracteristicas from "../components/product/Caracteristicas";
 import Politicas from "../components/product/Politicas";
-import GoogleMapC from "../components/product/GoogleMapC";
 import "./producto.css";
 import FechasDisponibles from "../components/product/FechasDisponibles";
 import ApiCall from "../utils/ApiCall";
+import MapReact from "../components/product/MapReact";
 
 const Producto = () => {
   let { id } = useParams();
@@ -33,7 +33,7 @@ const Producto = () => {
         <FechasDisponibles />
         <div className="maps">
           <h2>¿Donde vas a estar?</h2>
-          {/* <GoogleMapC producto={producto}/> */}
+          <MapReact producto={producto}/>
         </div>
         <Politicas producto={producto} />
       </div>

@@ -6,6 +6,7 @@ import com.example.proyectoIntegrador.dto.UsuarioDTO;
 import com.example.proyectoIntegrador.entity.Usuario;
 import com.example.proyectoIntegrador.security.JwtTokenProvider;
 import com.example.proyectoIntegrador.service.implementacion.UsuarioService;
+import com.example.proyectoIntegrador.utils.Utility;
 import com.example.proyectoIntegrador.utils.WrapperResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/auth")

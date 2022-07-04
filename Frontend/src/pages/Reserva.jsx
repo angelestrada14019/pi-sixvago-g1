@@ -15,13 +15,13 @@ const Reserva = () => {
 
   useEffect(() => {
     getProducto();
-    console.log(producto);
   }, []);
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido.body);
   };
+  
   return (
     <div className="reserva-container">
       <HeaderProducto producto={producto} />

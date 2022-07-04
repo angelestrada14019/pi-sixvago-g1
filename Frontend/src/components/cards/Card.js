@@ -2,6 +2,8 @@ import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../../contexts/ContextProvider";
 import useWindowDimensions from "../../utils/useWindowDimensions";
+import Stars from "../stars/Stars";
+import useAvgScore from "../stars/useAvgScore";
 
 const Card = ({ data }) => {
   const { loading } = useStateContext();
@@ -10,6 +12,7 @@ const Card = ({ data }) => {
   let imgWidth = width < 600 ? "100%" : "50%";
   let textHeight = width < 600 ? "90px" : "120px";
   let textMarginTop = width < 600 ? "7px" : "10px";
+  const { avScore, avValue } = useAvgScore({ data, id: data?.productos_id });
 
   return (
     <div className="card">
@@ -43,11 +46,7 @@ const Card = ({ data }) => {
           <p className="card-category">
             {data.categorias_id !== undefined &&
               `${data.categorias_id.titulo.toUpperCase()}`}
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
+            <Stars data={data} />
           </p>
         )}
         <div className="card-rating">
@@ -59,9 +58,9 @@ const Card = ({ data }) => {
               sx={{ borderRadius: "10px" }}
             />
           ) : (
-            <h2>8</h2>
+            <h2>{avScore}</h2>
           )}
-          {loading ? <Skeleton variant="text" width={60} /> : <p>Muy bueno</p>}
+          {loading ? <Skeleton variant="text" width={60} /> : <p>{avValue}</p>}
         </div>
 
         {loading ? (

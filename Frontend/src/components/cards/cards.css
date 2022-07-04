@@ -3,8 +3,6 @@
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
-  /* margin-left: 3%;
-  margin-right: 3%; */
 }
 
 .card {
@@ -46,7 +44,22 @@
 .fa-star {
   margin-left: 2px;
   font-size: 12px;
-  color: #ffc107;
+  padding: 0.2px;
+  color: #f1b90f;
+  cursor: pointer;
+}
+.fa-star:hover {
+  color: #ffbf00;
+  font-size: 14px;
+  transition: all 0.1s ease-in-out;
+}
+.fa-star.disabled {
+  color: #dfe4ea;
+  cursor: pointer;
+}
+.fa-star.disabled:hover {
+  color: #ffbf00;
+  font-size: 14px;
 }
 .card-title {
   font-weight: 700;
@@ -60,6 +73,7 @@
   align-items: flex-end;
   position: absolute;
   right: 5%;
+  pointer-events: none;
 }
 .card-rating h2 {
   width: 35px;

@@ -36,4 +36,14 @@ public class UsuarioController {
     public ResponseEntity<WrapperResponse<UsuarioDTO>> editar(@RequestBody UsuarioDTO usuarioDTO)  {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",usuarioService.editar(usuarioDTO)).createResponse(HttpStatus.OK);
     }
+    @PutMapping("/")
+    public ResponseEntity<WrapperResponse<String>> changeEnable(@RequestBody UsuarioDTO usuarioDTO)  {
+        usuarioService.changeEnable(usuarioDTO);
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Succes","editado").createResponse(HttpStatus.OK);
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<WrapperResponse<Boolean>> buscarReservaPorProductoId(@RequestParam String code) {
+        return  new WrapperResponse<>(true,HttpStatus.OK,"Verification Succes",usuarioService.verify(code)).createResponse(HttpStatus.OK);
+    }
 }
