@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { useSearchParams } from "react-router-dom";
 import ApiCall from '../utils/ApiCall';
 import { Link } from "react-router-dom";
+import "./verify.css"
 
 const Verify = () => {
     const [verify, setVerify] = useState(false);
@@ -25,9 +26,9 @@ const Verify = () => {
         verificate();
     }, [verify]);
   return (
-    <div>
+    <div className='verificacion-container'>
         {verify?
-        <div className='verifiacion'>
+        <div className='verificacion'>
           <div className="card-reservaExitosa">
             <div className="icon-successful">
                 <i className="fa-solid fa-building-circle-check fa-bounce"></i>

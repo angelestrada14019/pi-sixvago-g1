@@ -26,6 +26,10 @@ public class ProductoDTO {
     private String direccion;
     private String politicas_servicio;
     private Integer habitaciones;
+    private Integer longitud;
+    private Integer latitud;
+
+
     private Categoria categorias_id;
     private Ciudad ciudades_id;
 
