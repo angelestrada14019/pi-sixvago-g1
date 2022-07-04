@@ -34,6 +34,9 @@ public class Producto{
     @Column(name = "politicas_servicios")
     private String politicas_servicio;
 
+    @Column(name = "habitaciones")
+    private Integer habitaciones;
+
     @ManyToOne
     @JoinColumn(name = "categorias_id",referencedColumnName = "id")
     private Categoria categorias_id; //NO TOCAR
