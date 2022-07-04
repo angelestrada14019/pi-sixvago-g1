@@ -40,8 +40,6 @@ public class Producto{
     @Column(name = "latitud")
     private Integer latitud;
 
-    @Column(name = "habitaciones")
-    private Integer habitaciones;
 
     @ManyToOne
     @JoinColumn(name = "categorias_id",referencedColumnName = "id")
