@@ -21,7 +21,7 @@ const HorarioLlegada = () => {
       >
         {({ values, errors, handleSubmit, handleChange }) => (
           <form className="formulario" onSubmit={handleSubmit}>
-            <div id="form-group" class="clearfix">
+            <div id="form-group" className="clearfix">
               <div className="descripcion">
                 <p>
                   {" "}

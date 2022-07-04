@@ -1,6 +1,11 @@
-import React from 'react'
+import Stars from "../stars/Stars";
+import useAvgScore from "../stars/useAvgScore";
 
-const LocationData = ({producto}) => {
+const LocationData = ({ producto }) => {
+  const { avScore, avValue } = useAvgScore({
+    producto,
+    id: producto?.productos_id,
+  });
   return (
     <div className="locationData">
       <i className="fa-solid fa-location-dot"></i>
@@ -12,17 +17,13 @@ const LocationData = ({producto}) => {
       </div>
       <div className="ratingContainer">
         <div className="hotel-rating">
-          <p>Muy bueno</p>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
+          <p>{avValue}</p>
+          <Stars data={producto} />
         </div>
-        <h2 className="hotel-score">8</h2>
+        <h2 className="hotel-score">{avScore}</h2>
       </div>
     </div>
   );
-}
+};
 
-export default LocationData
+export default LocationData;

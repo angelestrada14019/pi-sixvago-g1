@@ -3,12 +3,13 @@ import ApiCall from "../../utils/ApiCall";
 import { useNavigate } from "react-router-dom";
 import "./FormularioReserva.css";
 import { useStateContext } from "../../contexts/ContextProvider";
+import Stars from "../stars/Stars";
 
 const FormularioReserva = ({ id }) => {
   const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
-  const { setReservaP,reservaP,dateReserva } = useStateContext();
+  const { setReservaP, reservaP, dateReserva } = useStateContext();
   const [values, setValues] = useState({
     horaComienzoReserva: "",
     fechaInicialReserva: "",
@@ -37,27 +38,27 @@ const FormularioReserva = ({ id }) => {
   useEffect(() => {
     getProducto();
     setUsuario({
-        ...usuario,
-        ciudad: reservaP.ciudadReserva,
-      });
-      setValues({
-        ...values,
-        horaComienzoReserva: reservaP.horarioReserva,
-        fechaInicialReserva: dateReserva.queryInicial,
-        fechaFinalReserva: dateReserva.queryFinal,
-      });
+      ...usuario,
+      ciudad: reservaP.ciudadReserva,
+    });
+    setValues({
+      ...values,
+      horaComienzoReserva: reservaP.horarioReserva,
+      fechaInicialReserva: dateReserva.queryInicial,
+      fechaFinalReserva: dateReserva.queryFinal,
+    });
   }, [reservaP]);
 
   const getProducto = async () => {
     const productoObtenido = await ApiCall.invokeGET(`/productos/${id}`);
     setProducto(productoObtenido.body);
   };
-//   const onChange = (e) => {
-//     setValues({
-//       ...values,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
+  //   const onChange = (e) => {
+  //     setValues({
+  //       ...values,
+  //       [e.target.name]: e.target.value,
+  //     });
+  //   };
   const handleClick = async (e) => {
     const okR = await postReserva(values);
     const okU = await putUsuario(usuario);
@@ -96,11 +97,7 @@ const FormularioReserva = ({ id }) => {
       <div className="form_nombre">
         <h2>{producto?.nombre}</h2>
         <p className="puntuacion_Reserva">
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
+          <Stars data={producto} />
         </p>
       </div>
 

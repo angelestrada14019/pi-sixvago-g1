@@ -12,18 +12,18 @@ const Formulario = () => {
     ciudad: "",
     hora: "",
   });
-  const { setReservaP,reservaP } = useStateContext();
+  const { setReservaP, reservaP } = useStateContext();
   return (
     <>
       <h2 className="section-h2">Completá tus datos</h2>
       <Formik
         initialValues={usuario}
         validate={(valores) => {
-        //   localStorage.setItem("ciudadReserva", valores.ciudad);
+          //   localStorage.setItem("ciudadReserva", valores.ciudad);
           setReservaP({
-               ...reservaP,
-               ciudadReserva: valores.ciudad,
-          })
+            ...reservaP,
+            ciudadReserva: valores.ciudad,
+          });
           let errores = {};
           if (!valores.ciudad) {
             console.log("el nombre es obligatorio");
