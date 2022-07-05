@@ -30,10 +30,10 @@ const Card = ({ data }) => {
           className="card-img"
           src={
             data.categorias_id !== undefined &&
-            `${data.listadeimagenes[0].urlImagen}`
+            `${data.listadeimagenes[0]?.urlImagen}`
           }
           alt={
-            data.categorias_id !== undefined && data.listadeimagenes[0].titulo
+            data.categorias_id !== undefined && data.listadeimagenes[0]?.titulo
           }
         />
       )}

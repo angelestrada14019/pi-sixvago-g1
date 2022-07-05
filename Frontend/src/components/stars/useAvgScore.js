@@ -14,7 +14,8 @@ const useAvgScore = ({ data, id }) => {
   }, [data, cardCategory, list]);
 
   const productAvarageScore = async () => {
-    let getId = data.productos_id || id;
+    let getId = id || data.productos_id;
+   
     const response = await ApiCall.invokeGET(`/puntuacion/producto/${getId}`);
     const body = response.body;
     let sum = 0;

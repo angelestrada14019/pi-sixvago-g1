@@ -1,72 +1,43 @@
 import "./politicas.css";
 
 const Politicas = ({ producto }) => {
+  console.log("producto", producto);
   return (
     <div className="politicas">
       <h2 className="politicas-title">Que tenes que saber</h2>
       <hr></hr>
-      <div className="politicas-container">
-        <div className="normasCasa politicasSection">
-          <h3 className="subsection-title">
-            {producto.politicas_servicio !== undefined &&
-              producto.politicas_servicio.split(",")[0]}
-          </h3>
-          <ul>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[1]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[2]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[3]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[4]}
-            </li>
-          </ul>
+      {producto.politicas?.length > 0 ? (
+        <div className="politicas-container">
+          <div className="politicasSection">
+            <h3 className="subsection-title">Normas</h3>
+            <ul>
+              {producto.politicas.tipoDePolitica === 1 && (
+                <li className="lista">{}</li>
+              )}
+            </ul>
+          </div>
+          <div className="politicasSection">
+            <h3 className="subsection-title">Seguridad</h3>
+            <ul>
+              <li className="lista">
+                {producto.politicas_servicio !== undefined &&
+                  producto.politicas_servicio.split(",")[6]}
+              </li>
+            </ul>
+          </div>
+          <div className="politicasSection">
+            <h3 className="subsection-title">Cancelacion</h3>
+            <ul>
+              <li className="lista">
+                {producto.politicas_servicio !== undefined &&
+                  producto.politicas_servicio.split(",")[11]}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="saludYSeguridad politicasSection">
-          <h3 className="subsection-title">
-            {producto.politicas_servicio !== undefined &&
-              producto.politicas_servicio.split(",")[5]}
-          </h3>
-          <ul>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[6]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[7]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[8]}
-            </li>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[9]}
-            </li>
-          </ul>
-        </div>
-        <div className="cancelacion politicasSection">
-          <h3 className="subsection-title">
-            {producto.politicas_servicio !== undefined &&
-              producto.politicas_servicio.split(",")[10]}
-          </h3>
-          <ul>
-            <li className="lista">
-              {producto.politicas_servicio !== undefined &&
-                producto.politicas_servicio.split(",")[11]}
-            </li>
-          </ul>
-        </div>
-      </div>
+      ) : (
+        <p>No hay politicas</p>
+      )}
     </div>
   );
 };
