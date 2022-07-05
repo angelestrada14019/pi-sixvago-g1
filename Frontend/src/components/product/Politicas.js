@@ -1,21 +1,44 @@
 import "./politicas.css";
-
+import React, { useEffect, useState } from "react";
+import ApiCall from "../../utils/ApiCall";
 const Politicas = ({ producto }) => {
-  console.log("producto", producto);
+  const [tiposPolitica, setTiposPolitica] = useState([]);
+  useEffect(() => {
+    getTiposDePoliticas();
+  }, []);
+  const getTiposDePoliticas = () => {
+    const response = ApiCall.invokeGET(`/tipoDePoliticas`);
+    try {
+      if (response.ok) {
+        setTiposPolitica(response.body);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="politicas">
       <h2 className="politicas-title">Que tenes que saber</h2>
       <hr></hr>
       {producto.politicas?.length > 0 ? (
         <div className="politicas-container">
-          <div className="politicasSection">
-            <h3 className="subsection-title">Normas</h3>
-            <ul>
-              {producto.politicas.tipoDePolitica === 1 && (
-                <li className="lista">{}</li>
-              )}
-            </ul>
-          </div>
+          {tiposPolitica?.map((tipoPolitica, i) => (
+            <div className="politicasSection">
+              <h3 className="subsection-title">{tipoPolitica.nombre}</h3>
+              <ul>
+                {producto.politicas?.map(
+                  (politica, i) =>
+                    politica.tipoDePolitica.id === tipoPolitica.id && (
+                      <li className="lista">{}</li>
+                    )
+                )}
+                {producto.politicas.tipoDePolitica === 1 && (
+                  <li className="lista">{}</li>
+                )}
+              </ul>
+            </div>
+          ))}
+
           <div className="politicasSection">
             <h3 className="subsection-title">Seguridad</h3>
             <ul>

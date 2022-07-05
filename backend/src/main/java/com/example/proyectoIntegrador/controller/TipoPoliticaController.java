@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/politicas")
+@RequestMapping("/tipoDePoliticas")
 @CrossOrigin(origins = "*")
 public class TipoPoliticaController {
 
