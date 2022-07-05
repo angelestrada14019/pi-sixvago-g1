@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "politicas")
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Politica.class)
 public class Politica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
