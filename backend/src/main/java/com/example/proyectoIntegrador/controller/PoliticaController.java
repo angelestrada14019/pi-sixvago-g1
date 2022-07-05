@@ -1,12 +1,8 @@
 package com.example.proyectoIntegrador.controller;
 
-import com.example.proyectoIntegrador.dto.CategoriaDTO;
 import com.example.proyectoIntegrador.dto.PoliticaDTO;
-import com.example.proyectoIntegrador.dto.ProductoDTO;
-import com.example.proyectoIntegrador.dto.TipoDePoliticaDTO;
 import com.example.proyectoIntegrador.exceptions.NoDataFoundExceptions;
 import com.example.proyectoIntegrador.service.implementacion.PoliticaService;
-import com.example.proyectoIntegrador.service.implementacion.ProductosService;
 import com.example.proyectoIntegrador.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +40,10 @@ public class PoliticaController {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",politicaService.listarTodos()).createResponse(HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<WrapperResponse<List<PoliticaDTO>>> findByTipoDePoliticaId(@PathVariable Long id) {
+        return new WrapperResponse<>(true, HttpStatus.OK, "Succes", politicaService.findByTipoDePoliticaId(id)).createResponse(HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('admin')")

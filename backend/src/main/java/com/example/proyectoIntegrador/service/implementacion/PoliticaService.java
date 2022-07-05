@@ -64,6 +64,23 @@ public class PoliticaService implements IGeneralService<PoliticaDTO, Long> {
         }
     }
 
+    public List<PoliticaDTO> findByTipoDePoliticaId(Long id) {
+        try {
+            List<Politica> politica = repository.findByTipoDePoliticaId(id);
+            if (politica.isEmpty()) {
+                throw new NoDataFoundExceptions("No se encontro el producto");
+            }
+            return mapper.convertValue(politica, List.class);
+        }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
+            log.info(e.getMessage(),e);
+            throw e;
+        }
+        catch (Exception e){
+            log.error(e.getMessage(),e);
+            throw new GeneralServicesExceptions(e.getMessage(),e);
+        }
+    }
+
     @Override
     public PoliticaDTO editar(PoliticaDTO politicaDTO) {
         try {

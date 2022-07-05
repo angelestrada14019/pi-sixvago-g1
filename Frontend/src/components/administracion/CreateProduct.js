@@ -2,36 +2,94 @@ import React, { useEffect } from "react";
 import "./createProduct.css";
 import { useState } from "react";
 import InputAtributos from "./InputAtributos";
+import ApiCall from "../../utils/ApiCall";
+import Select from "react-select";
+import InputNormas from "./InputNormas";
+import InputSaludSeguridad from "./InputSaludSeguridad";
+import InputPoliticasCancelacion from "./InputPoliticasCancelacion";
 
 const CreateProduct = () => {
-  //-------------------------------------------------------------------------------------
+  const [product, setProduct] = useState({
+    nombre: "",
+    descripcion: "",
+    direccion: "",
+    politicas: "",
+    categorias_id: {
+      id: 0,
+    },
+    ciudades_id: {
+      ciudades_id: 0,
+    },
+    caracteristicas: [
+      {
+        caracteristicas_id: 0,
+      },
+    ],
+  });
   const [caracteristicas, setCaracterisitcas] = useState([
     {
-      atributo: "",
+      nombre: "",
       icono: "",
     },
   ]);
+  const [caracteristicasConId, setCaracterisitcasConId] = useState([
+    {
+      id: 0,
+      nombre: "",
+      icono: "",
+    },
+  ]);
+  const [checkBoxCaract, setCheckBoxCaract] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [ciudades, setCiudades] = useState([]);
+  const [normasProducto, setNormasProducto] = useState([]);
+  const [seguridadProducto, setSeguridadProducto] = useState([]);
+  const [cancelacionProducto, setCancelacionProducto] = useState([]);
+
+  useEffect(() => {
+    getCategoryNames();
+    getCiudades();
+    getCaracteristicas();
+  }, []);
+
+  const getCategoryNames = async () => {
+    const lista = await ApiCall.invokeGET("/categorias");
+    setCategorias(lista.body);
+  };
+
+  const getCiudades = async () => {
+    const lista = await ApiCall.invokeGET("/ciudades");
+    setCiudades(lista.body);
+  };
+
+  const getCaracteristicas = async () => {
+    const lista = await ApiCall.invokeGET("/caracteristicas");
+    setCheckBoxCaract(lista.body);
+  };
 
   //----------------------------------------------------------------------------------------
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   //------------------------------------------------------------------------------------------------
+  const handleInputChange = (e) => {};
   const handleClickAdd = (e) => {
     setCaracterisitcas([
       ...caracteristicas,
       {
-        atributo: "",
+        nombre: "",
         icono: "",
       },
     ]);
   };
+
   const handleClickRemove = (i) => {
     const list = [...caracteristicas];
     list.splice(i, 1);
     setCaracterisitcas(list);
   };
+
   const handleClickChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...caracteristicas];
@@ -39,6 +97,29 @@ const CreateProduct = () => {
     setCaracterisitcas(list);
   };
 
+  const handleCheckBoxChange = (e, i) => {
+    if (e.target.checked) {
+      if (caracteristicasConId[0]?.nombre === "") {
+        setCaracterisitcasConId([
+          { nombre: e.target.value, icono: e.target.name, id: e.target.id },
+        ]);
+      } else {
+        setCaracterisitcasConId([
+          ...caracteristicasConId,
+          { nombre: e.target.value, icono: e.target.name, id: e.target.id },
+        ]);
+      }
+    } else {
+      setCaracterisitcasConId(
+        caracteristicasConId.filter(
+          (caracteristica) => caracteristicasConId.nombre !== e.target.value
+        )
+      );
+    }
+  };
+  //------------------------------------------------------------------------------------------------
+
+  //------------------------------------------------------------------------------------------------
   return (
     <div className="creacion-producto">
       <div className="datos-container">
@@ -46,20 +127,31 @@ const CreateProduct = () => {
           <label>Nombre de la propiedad</label>
           <input
             type="text"
-            name="nombre de propiedad"
+            name="product-name"
             placeholder="Ingrese nombre de la propiedad"
             id="propiedad-nombre"
             className="propiedad"
+            onChange={handleInputChange}
           />
         </div>
         <div className="datos-propiedad">
           <label>Categoría</label>
+
           <select
             name="categoria"
             placeholder="Ingrese categoria de la propiedad"
             id="propiedad-categoria"
             className="propiedad"
-          />
+          >
+            {categorias.map((categoria) => (
+              <option
+                key={`${categoria.titulo}${categoria.id}`}
+                value={categoria.titulo}
+              >
+                {categoria.titulo}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="datos-propiedad">
           <label>Dirección</label>
@@ -78,7 +170,16 @@ const CreateProduct = () => {
             placeholder="Ingrese ciudad de la propiedad"
             id="propiedad-ciudad"
             className="propiedad"
-          />
+          >
+            {ciudades.map((ciudad) => (
+              <option
+                key={`${ciudad.nombre}${ciudad.ciudades_id}`}
+                value={ciudad.nombre}
+              >
+                {ciudad.nombre}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div className="textArea">
@@ -94,17 +195,38 @@ const CreateProduct = () => {
         <h2>Agregar atributos</h2>
       </div>
       <div className="atributos-container">
-        <div className="input-atributos">
-          {caracteristicas.map((caracteristica, i) => (
-            <InputAtributos
-              caracteristica={caracteristica}
-              handleClickChange={handleClickChange}
-              i={i}
-              caracteristicas={caracteristicas}
-              handleClickRemove={handleClickRemove}
-              handleClickAdd={handleClickAdd}
-            />
-          ))}
+        <div className="atributos-container-column">
+          <div className="checkBoxCaracteristicas">
+            {checkBoxCaract.map((caracteristica, index) => (
+              <>
+                <div className="checkbox">
+                  <input
+                    type="checkbox"
+                    onChange={handleCheckBoxChange}
+                    value={caracteristica.nombre}
+                    id={caracteristica.caracteristicas_id}
+                    name={caracteristica.icono}
+                    key={`${caracteristica.nombre}${index}`}
+                  />
+                  <i className={`${caracteristica.icono}`}></i>
+                  <label>{caracteristica.nombre}</label>
+                </div>
+              </>
+            ))}
+          </div>
+          <div className="input-atributos">
+            {caracteristicas.map((caracteristica, i) => (
+              <InputAtributos
+                caracteristica={caracteristica}
+                handleClickChange={handleClickChange}
+                key={i}
+                i={i}
+                caracteristicas={caracteristicas}
+                handleClickRemove={handleClickRemove}
+                handleClickAdd={handleClickAdd}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <div className="titulo-politicas">
@@ -112,37 +234,18 @@ const CreateProduct = () => {
       </div>
       <div className="politicas-producto">
         <div className="politicas-contenedor">
-          <div>
-            <h3>Normas de la casas</h3>
-            <label>Descripción</label>
-            <textarea
-              cols="30"
-              rows="6"
-              placeholder="Escriba aqui"
-              id="text-normas"
-              className="text-politicas"
-            />
+          <div className="normas">
+            <h3>Normas de la casa</h3>
+            <InputNormas setNormasProducto={setNormasProducto} />
           </div>
-          <div>
+          <div className="salud-seguridad">
             <h3>Salud y seguridad</h3>
-            <label>Descripción</label>
-            <textarea
-              cols="30"
-              rows="6"
-              placeholder="Escriba aqui"
-              id="text-saludYSeguridad"
-              className="text-politicas"
-            />
+            <InputSaludSeguridad setSeguridadProducto={setSeguridadProducto} />
           </div>
-          <div>
+          <div className="cancelacion">
             <h3>Politicas de cancelación</h3>
-            <label>Descripción</label>
-            <textarea
-              cols="30"
-              rows="6"
-              placeholder="Escriba aqui"
-              id="text-cancelacion"
-              className="text-politicas"
+            <InputPoliticasCancelacion
+              setCancelacionProducto={setCancelacionProducto}
             />
           </div>
         </div>
