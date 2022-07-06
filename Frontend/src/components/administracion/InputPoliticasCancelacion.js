@@ -4,7 +4,9 @@ import ApiCall from "../../utils/ApiCall";
 
 const InputPoliticasCancelacion = ({ setCancelacionProducto }) => {
   const [cancelacion, setCancelacion] = useState([
-    { descripcion: "", tipoDePolitica: 0 },
+    { descripcion: "", tipoDePolitica: {
+        id:0
+      } },
   ]);
   const [options, setOptions] = useState([{ id: 0, descripcion: "" }]);
   const [agregar, setAgregar] = useState("");
@@ -40,12 +42,16 @@ const InputPoliticasCancelacion = ({ setCancelacionProducto }) => {
     if (e.target.checked) {
       if (cancelacion[0]?.descripcion === "") {
         setCancelacion([
-          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:3
+          } },
         ]);
       } else {
         setCancelacion([
           ...cancelacion,
-          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:3
+          } },
         ]);
       }
     } else {

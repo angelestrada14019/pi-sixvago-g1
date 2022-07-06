@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import ApiCall from "../../utils/ApiCall";
 import "./imageGallery.css";
 import { SimpleShareButtons } from "react-simple-share";
+import Favorito from "../favorito/Favorito";
 const styleModal = {
   display: "flex",
   justifyContent: "center",
@@ -60,7 +61,7 @@ const ImageGallerry = ({ id }) => {
           style={{cursor: 'pointer'}}
           className="fa-solid fa-share-nodes social fa-2x"
         ></i>
-        <i className="fa-regular fa-heart fa-2x"></i>
+        <Favorito producto={producto}/>
         <div>
           {!desable && (
             <SimpleShareButtons
@@ -112,7 +113,7 @@ const ImageGallerry = ({ id }) => {
             style={{cursor: 'pointer'}}
             className="fa-solid fa-share-nodes social fa-2x"
           ></i>
-          <i className="fa-regular fa-heart fa-2x"></i>
+          <Favorito/>
           <div>
           {!desable && (
             <SimpleShareButtons
