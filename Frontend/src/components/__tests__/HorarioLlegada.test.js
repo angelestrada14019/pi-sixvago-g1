@@ -1,4 +1,5 @@
-/* import {
+
+ import {
   render,
   screen,
   cleanup,
@@ -10,25 +11,25 @@ import { HorarioLlegada } from "../../components/booking_form/HorarioLlegada.js"
 
 describe("HorarioLlegada", () => {
   beforeEach(() => {
-    render(
-      <Router>
-        <ContextProvider></ContextProvider>
-        <HorarioLlegada />
-      </Router>
-    );
+    // render(
+    //   <Router>
+    //     <ContextProvider></ContextProvider>
+    //     <HorarioLlegada />
+    //   </Router>
+    // );
   });
 
   afterEach(() => cleanup());
 
-  test("should render form-group", () => {
-    expect(
-      screen.getByText("Indica tu horario de llegada")
-    ).toBeInTheDocument();
+//   test("should render form-group", () => {
+//     expect(
+//       screen.getByText("Indica tu horario de llegada")
+//     ).toBeInTheDocument();
 
-    expect(
-      screen.getByText("Indica tu posible fecha de llegada")
-    ).toBeInTheDocument();
+//     expect(
+//       screen.getByText("Indica tu posible fecha de llegada")
+//     ).toBeInTheDocument();
 
-    expect(screen.getByText("Selecciona hora")).toBeInTheDocument();
-  });
-}); /*
+//     expect(screen.getByText("Selecciona hora")).toBeInTheDocument();
+//   });
+}); 
