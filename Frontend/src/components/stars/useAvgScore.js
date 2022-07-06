@@ -11,7 +11,7 @@ const useAvgScore = ({ data, id }) => {
     if (data || id) {
       productAvarageScore();
     }
-  }, [data, cardCategory, list]);
+  }, [data, cardCategory, list, pageNumber]);
 
   const productAvarageScore = async () => {
     let getId = id || data.productos_id;
