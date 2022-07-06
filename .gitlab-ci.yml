@@ -3,9 +3,9 @@ stages:
   - container
   - deploy_back
   - test_front
+  - test_postman
   - build
   - deploy_front
-  - test_postman
 
 
 jobs_desarrollo_tests_back:
@@ -81,6 +81,26 @@ jobs_tests_front:
     - desarrollo 
   when: manual
 
+test_job_postman:
+  stage: test_postman
+  image: 
+    name: postman/newman_alpine33    
+    entrypoint: [""]
+  script:
+    - newman --version
+    - npm config set unsafe-perm true
+    - npm install -g newman-reporter-html 
+    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+  artifacts:
+    when: always
+    paths:
+      - report.html
+    reports:
+      junit: report.xml
+  when: manual
+  only:
+    - desarrollo
+
 jobs_build_front:
   image: node:16.15.1 #node:10
   stage: build  
@@ -110,24 +130,4 @@ jobs_deploy_front_s3:
   only:
     - desarrollo
 
-
-test_job_postman:
-  stage: test_postman
-  image: 
-    name: postman/newman_alpine33    
-    entrypoint: [""]
-  script:
-    - newman --version
-    - npm config set unsafe-perm true
-    - npm install -g newman-reporter-html 
-    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
-  artifacts:
-    when: always
-    paths:
-      - report.html
-    reports:
-      junit: report.xml
-  when: manual
-  only:
-    - desarrollo
     
