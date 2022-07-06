@@ -36,11 +36,13 @@ const InputSaludSeguridad = ({ setSeguridadProducto }) => {
   const handleCheckBoxChange = (e) => {
     if (e.target.checked) {
       if (salud[0]?.descripcion === "") {
-        setSalud([{ descripcion: e.target.value, tipoDePolitica: 3 }]);
+        setSalud([
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
+        ]);
       } else {
         setSalud([
           ...salud,
-          { descripcion: e.target.value, tipoDePolitica: 3 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
         ]);
       }
     } else {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import ApiCall from "../../utils/ApiCall";
 
 const InputNormas = ({ setNormasProducto }) => {
@@ -39,11 +38,13 @@ const InputNormas = ({ setNormasProducto }) => {
   const handleCheckBoxChange = (e) => {
     if (e.target.checked) {
       if (normas[0]?.descripcion === "") {
-        setNormas([{ descripcion: e.target.value, tipoDePolitica: 1 }]);
+        setNormas([
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 1 },
+        ]);
       } else {
         setNormas([
           ...normas,
-          { descripcion: e.target.value, tipoDePolitica: 1 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 1 },
         ]);
       }
     } else {

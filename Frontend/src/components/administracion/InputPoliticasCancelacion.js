@@ -39,11 +39,13 @@ const InputPoliticasCancelacion = ({ setCancelacionProducto }) => {
   const handleCheckBoxChange = (e) => {
     if (e.target.checked) {
       if (cancelacion[0]?.descripcion === "") {
-        setCancelacion([{ descripcion: e.target.value, tipoDePolitica: 3 }]);
+        setCancelacion([
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
+        ]);
       } else {
         setCancelacion([
           ...cancelacion,
-          { descripcion: e.target.value, tipoDePolitica: 3 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 3 },
         ]);
       }
     } else {

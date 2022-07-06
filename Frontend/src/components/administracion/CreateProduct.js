@@ -7,26 +7,27 @@ import Select from "react-select";
 import InputNormas from "./InputNormas";
 import InputSaludSeguridad from "./InputSaludSeguridad";
 import InputPoliticasCancelacion from "./InputPoliticasCancelacion";
+import InputImagenes from "./InputImagenes";
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
     nombre: "",
     descripcion: "",
     direccion: "",
-    politicas: "",
     categorias_id: {
       id: 0,
     },
     ciudades_id: {
       ciudades_id: 0,
     },
-    caracteristicas: [
+    politicas: [
       {
-        caracteristicas_id: 0,
+        id: 0,
       },
     ],
+    caracteristicas: [{}],
   });
-  const [caracteristicas, setCaracterisitcas] = useState([
+  const [caracteristicasNuevas, setCaracterisitcasNuevas] = useState([
     {
       nombre: "",
       icono: "",
@@ -39,9 +40,10 @@ const CreateProduct = () => {
       icono: "",
     },
   ]);
-  const [checkBoxCaract, setCheckBoxCaract] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [ciudades, setCiudades] = useState([]);
+  const [checkBoxCaract, setCheckBoxCaract] = useState([]);
+  const [imagenesProducto, setImagenesProducto] = useState([]);
   const [normasProducto, setNormasProducto] = useState([]);
   const [seguridadProducto, setSeguridadProducto] = useState([]);
   const [cancelacionProducto, setCancelacionProducto] = useState([]);
@@ -70,13 +72,140 @@ const CreateProduct = () => {
   //----------------------------------------------------------------------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
+    // validar los campos
+    // if (validar los campos) {
+    postNewProduct();
+    // }
   };
 
+  const postNewProduct = async () => {
+    let auxCaract = [];
+    let auxPoliticas = [];
+    let auxImg = [];
+
+    try {
+      if (caracteristicasNuevas[0].nombre !== "") {
+        for (let i = 0; i < caracteristicasNuevas.length; i++) {
+          const caract = caracteristicasNuevas[i];
+          if (caract.nombre !== "") {
+            console.log("POST /caracteristicas");
+            const response = await ApiCall.invokePOST(
+              "/caracteristicas",
+              caract
+            );
+            let id = response.body.caracteristicas_id;
+            let newC = { caracteristicas_id: id };
+            auxCaract.push(newC);
+          }
+        }
+      }
+      if (caracteristicasConId[0].nombre !== "") {
+        for (let i = 0; i < caracteristicasConId.length; i++) {
+          const caract = caracteristicasConId[i];
+          let newC = { caracteristicas_id: caract.id };
+          auxCaract.push(newC);
+        }
+      }
+      if (normasProducto[0].descripcion !== "") {
+        for (let i = 0; i < normasProducto.length; i++) {
+          const norma = normasProducto[i];
+          if (norma.id !== "") {
+            let newN = { id: norma.id };
+            auxPoliticas.push(newN);
+          } else {
+            console.log("POST de normas");
+            const response = await ApiCall.invokePOST("/politicas", norma);
+            let id = response.body.id;
+            let newN = { id: id };
+            auxPoliticas.push(newN);
+          }
+        }
+      }
+      if (seguridadProducto[0].descripcion !== "") {
+        for (let i = 0; i < seguridadProducto.length; i++) {
+          const norma = seguridadProducto[i];
+          if (norma.id !== "") {
+            let newN = { id: norma.id };
+            auxPoliticas.push(newN);
+          } else {
+            console.log("POST de securty");
+            const response = await ApiCall.invokePOST("/politicas", norma);
+            let id = response.body.id;
+            let newN = { id: id };
+            auxPoliticas.push(newN);
+          }
+        }
+      }
+      if (cancelacionProducto[0].descripcion !== "") {
+        for (let i = 0; i < cancelacionProducto.length; i++) {
+          const norma = cancelacionProducto[i];
+          if (norma.id !== "") {
+            let newN = { id: norma.id };
+            auxPoliticas.push(newN);
+          } else {
+            console.log("POST de cancel");
+            const response = await ApiCall.invokePOST("/politicas", norma);
+            let id = response.body.id;
+            let newN = { id: id };
+            auxPoliticas.push(newN);
+          }
+        }
+      }
+      setProduct({
+        ...product,
+        caracteristicas: auxCaract,
+        politicas: auxPoliticas,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // validar que no haya campos vacios
+      console.log("POST PRODUCTO");
+      const postProducto = await ApiCall.invokePOST("/productos", product);
+      console.log(postProducto.body);
+      const id = postProducto.body.productos_id;
+
+      imagenesProducto.forEach((img) => {
+        if (img.urlImagen !== "") {
+          img.productos_id = id;
+          auxImg.push(img);
+        }
+      });
+      for (let i = 0; i < auxImg.length; i++) {
+        const img = auxImg[i];
+        console.log("POST IMAGENES");
+        const postImg = await ApiCall.invokePOST("/imagenes", img);
+        console.log(postImg);
+      }
+    }
+  };
   //------------------------------------------------------------------------------------------------
-  const handleInputChange = (e) => {};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "product-name") {
+      setProduct({ ...product, nombre: value });
+    }
+    if (name === "categoria") {
+      let options = e.target.options;
+      let id = options[options.selectedIndex].id;
+      setProduct({ ...product, categorias_id: { id: id } });
+    }
+    if (name === "direccion") {
+      setProduct({ ...product, direccion: value });
+    }
+    if (name === "ciudad") {
+      let options = e.target.options;
+      let id = options[options.selectedIndex].id;
+      setProduct({ ...product, ciudades_id: { ciudades_id: id } });
+    }
+    if (name === "descripcion") {
+      setProduct({ ...product, descripcion: value });
+    }
+  };
+
   const handleClickAdd = (e) => {
-    setCaracterisitcas([
-      ...caracteristicas,
+    setCaracterisitcasNuevas([
+      ...caracteristicasNuevas,
       {
         nombre: "",
         icono: "",
@@ -85,16 +214,16 @@ const CreateProduct = () => {
   };
 
   const handleClickRemove = (i) => {
-    const list = [...caracteristicas];
+    const list = [...caracteristicasNuevas];
     list.splice(i, 1);
-    setCaracterisitcas(list);
+    setCaracterisitcasNuevas(list);
   };
 
   const handleClickChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...caracteristicas];
+    const list = [...caracteristicasNuevas];
     list[index][name] = value;
-    setCaracterisitcas(list);
+    setCaracterisitcasNuevas(list);
   };
 
   const handleCheckBoxChange = (e, i) => {
@@ -117,7 +246,6 @@ const CreateProduct = () => {
       );
     }
   };
-  //------------------------------------------------------------------------------------------------
 
   //------------------------------------------------------------------------------------------------
   return (
@@ -136,16 +264,16 @@ const CreateProduct = () => {
         </div>
         <div className="datos-propiedad">
           <label>Categoría</label>
-
           <select
             name="categoria"
             placeholder="Ingrese categoria de la propiedad"
-            id="propiedad-categoria"
             className="propiedad"
+            onChange={handleInputChange}
           >
             {categorias.map((categoria) => (
               <option
                 key={`${categoria.titulo}${categoria.id}`}
+                id={categoria.id}
                 value={categoria.titulo}
               >
                 {categoria.titulo}
@@ -157,23 +285,26 @@ const CreateProduct = () => {
           <label>Dirección</label>
           <input
             type="text"
-            name="direccion de propiedad"
+            name="direccion"
             placeholder="Ingrese direccion de la propiedad"
             id="propiedad-direccion"
             className="propiedad"
+            onChange={handleInputChange}
           />
         </div>
         <div className="datos-propiedad">
           <label>Ciudad</label>
           <select
-            name="ciudad de propiedad"
+            name="ciudad"
             placeholder="Ingrese ciudad de la propiedad"
             id="propiedad-ciudad"
             className="propiedad"
+            onChange={handleInputChange}
           >
             {ciudades.map((ciudad) => (
               <option
                 key={`${ciudad.nombre}${ciudad.ciudades_id}`}
+                id={ciudad.ciudades_id}
                 value={ciudad.nombre}
               >
                 {ciudad.nombre}
@@ -189,10 +320,12 @@ const CreateProduct = () => {
           rows="6"
           placeholder="  Escriba aqui"
           id="text"
+          name="descripcion"
+          onChange={handleInputChange}
         ></textarea>
       </div>
       <div className="titulo-dato">
-        <h2>Agregar atributos</h2>
+        <h2>Caracteristicas</h2>
       </div>
       <div className="atributos-container">
         <div className="atributos-container-column">
@@ -215,13 +348,13 @@ const CreateProduct = () => {
             ))}
           </div>
           <div className="input-atributos">
-            {caracteristicas.map((caracteristica, i) => (
+            {caracteristicasNuevas.map((caracteristica, i) => (
               <InputAtributos
                 caracteristica={caracteristica}
                 handleClickChange={handleClickChange}
                 key={i}
                 i={i}
-                caracteristicas={caracteristicas}
+                caracteristicas={caracteristicasNuevas}
                 handleClickRemove={handleClickRemove}
                 handleClickAdd={handleClickAdd}
               />
@@ -230,7 +363,7 @@ const CreateProduct = () => {
         </div>
       </div>
       <div className="titulo-politicas">
-        <h2>Politicas Producto</h2>
+        <h2>Politicas</h2>
       </div>
       <div className="politicas-producto">
         <div className="politicas-contenedor">
@@ -254,22 +387,7 @@ const CreateProduct = () => {
         <h2>Cargar imagenes</h2>
       </div>
       <div className="cargaImagenes-container">
-        <div className="input-cargaimagenes">
-          <div className="datos-imagenes">
-            <input
-              type="text"
-              name="carga de imagen"
-              placeholder="Insertar https://"
-              id="cargaImagen"
-              className="propiedad"
-            />
-          </div>
-          <div>
-            <button>
-              <i className="fa fa-regular fa-square-plus fa-3x "></i>
-            </button>
-          </div>
-        </div>
+        <InputImagenes setImagenesProducto={setImagenesProducto} />
       </div>
       <div className="boton-crearProducto">
         <button id="boton-crear" type="submit" onClick={handleSubmit}>
