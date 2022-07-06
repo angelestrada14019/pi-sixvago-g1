@@ -1,7 +1,8 @@
 import UserWelcome from "./UserWelcome";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import "./sidebar.css";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = ({
   show,
@@ -11,7 +12,13 @@ const Sidebar = ({
   handleLogout,
 }) => {
   const { isLoggedIn } = useContext(AuthContext);
-  
+  const { pathname: currentLocation } = useLocation();
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    user = JSON.parse(localStorage.getItem("user"));
+  }, []);
+
   return (
     <div className={show ? "sidebar active" : "sidebar"}>
       <div className="exit">
@@ -68,6 +75,25 @@ const Sidebar = ({
                 </ul>
               </>
             )}
+          </div>
+        ) : null}
+        {!isLoggedIn ? null : isLoggedIn &&
+          user.rol.id === 2 &&
+          !currentLocation.includes("administracion") ? (
+          <div className="sidebar-administracion">
+            <h2 onClick={handleClick} id="administracion">
+              Administracion
+            </h2>
+          </div>
+        ) : null}
+        {isLoggedIn && !currentLocation.includes("mireserva") ? (
+          <div className="sidebar-mis-reservas">
+            <p
+              id="reservas"
+              onClick={handleClick}
+            >
+              Mis reservas
+            </p>
           </div>
         ) : null}
         {!isLoggedIn ? null : (

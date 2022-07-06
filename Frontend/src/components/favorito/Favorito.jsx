@@ -61,7 +61,7 @@ const Favorito = ({ producto, enableFav }) => {
       <div onClick={handleClick} className="btn_favorito">
         {enableFav &&
           (favoritoLo.id === producto?.productos_id && favoritoLo.fv ? (
-            <i className="fa-solid fa-heart fa-2x"></i>
+            <i className="fa-solid fa-heart fa-2x  btn_favorito-icon"></i>
           ) : (
             <i className="fa-regular fa-heart fa-2x btn_favorito-icon"></i>
           ))}
