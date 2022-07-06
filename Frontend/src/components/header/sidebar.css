@@ -98,6 +98,24 @@
     cursor: pointer;
     font-weight: 600;
 }
+.sidebar-mis-reservas {
+    padding-top: 20px;
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  color: #c9b26d;
+}
+.sidebar-administracion {
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  color: #c9b26d;
+}
+.sidebar-administracion:hover {
+  text-shadow: #c9b26db2 0px 0px 10px;
+}
 @media (max-width: 578px){
     .sidebar{
         position: fixed;
