@@ -1,11 +1,111 @@
 {
 	"info": {
-		"_postman_id": "05892ddb-c6cc-4a30-a4b0-5c227153b76e",
-		"name": "Proyecto Integrador 2",
+		"_postman_id": "43974471-d92f-47cc-b68b-e20c318e7274",
+		"name": "Proyecto Integrador 3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17956933"
 	},
 	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var re = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", re.body.token);\r",
+									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"angelj.estradaa@ecci.edu.co\",\r\n    \"contrasenia\":\"jesus\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{url}}:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"jesus\",\r\n    \"apellido\":\"anaya\",\r\n    \"email\":\"ya@yopmail.com\",\r\n    \"contrasenia\":\"jesus\",\r\n    \"rol\": {\r\n        \"id\":2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{url}}:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "categorias",
 			"item": [
@@ -23,7 +123,6 @@
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -55,7 +154,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
+									"  pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"var re = JSON.parse(responseBody);\r",
@@ -189,10 +288,10 @@
 			]
 		},
 		{
-			"name": "auth",
+			"name": "puntuacion",
 			"item": [
 				{
-					"name": "login",
+					"name": "listar",
 					"event": [
 						{
 							"listen": "test",
@@ -202,8 +301,45 @@
 									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{url}}:8080/puntuacion",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"puntuacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "añadir",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
 									"var re = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"token\", re.body.token);\r",
+									"pm.environment.set(\"id_upd\", re.caracteristicas_id);\r",
 									"\r",
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
@@ -218,7 +354,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"temetesconmigotesacolagillette@gmail.com\",\r\n    \"contrasenia\":\"comiendochorizo\"\r\n\r\n}",
+							"raw": "{\r\n    \"puntuacion\": 3,\r\n    \"usuarios\": {\r\n        \"id\": 1\r\n    },\r\n    \"productosProductos\": {\r\n                \"productos_id\": 1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,29 +362,28 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/auth/login",
+							"raw": "http://{{url}}:8080/puntuacion",
 							"protocol": "http",
 							"host": [
 								"{{url}}"
 							],
 							"port": "8080",
 							"path": [
-								"auth",
-								"login"
+								"puntuacion"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "register",
+					"name": "actualizar",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"  pm.response.to.have.status(201);\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
@@ -260,11 +395,11 @@
 						}
 					],
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"yasuri\",\r\n    \"apellido\":\"colibritany\",\r\n    \"email\":\"flormasbelladecocoyoc@gmail.com\",\r\n    \"contrasenia\":\"comiendochorizo\",\r\n    \"ciudad\":\"Barranquilla\",\r\n    \"rol\": {\r\n        \"id\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"puntuacion\": 5,\r\n    \"usuarios\": {\r\n        \"id\": 1\r\n    },\r\n    \"productosProductos\": {\r\n                \"productos_id\": 1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -272,15 +407,60 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{url}}:8080/auth/register",
+							"raw": "http://{{url}}:8080/puntuacion",
 							"protocol": "http",
 							"host": [
 								"{{url}}"
 							],
 							"port": "8080",
 							"path": [
-								"auth",
-								"register"
+								"puntuacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Mansion embrujada\",\r\n    \"descripcion\": \"es una mansion que esta embrujada\",\r\n    \"urlImagen\": \"ahora hay, esta actualizado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{url}}:8080/puntuacion/{{id_upd}}",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"puntuacion",
+								"{{id_upd}}"
 							]
 						}
 					},
@@ -305,7 +485,6 @@
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -356,7 +535,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"horaComienzoReserva\": \"15:00:00\",\r\n        \"fechaInicialReserva\": \"2022-07-20\",\r\n        \"fechaFinalReserva\": \"2022-07-30\",\r\n        \"vacunaCovid\": false,\r\n        \"datosParaVendedor\": \"no hay dato en este\",\r\n        \"productosProductos\": {\r\n            \"productos_id\": 2\r\n        },\r\n        \"usuarios\": {\r\n            \"id\": 1\r\n        }\r\n    }",
+							"raw": "{\r\n        \"horaComienzoReserva\": \"15:00:00\",\r\n        \"fechaInicialReserva\": \"2022-11-20\",\r\n        \"fechaFinalReserva\": \"2022-11-30\",\r\n        \"vacunaCovid\": false,\r\n        \"datosParaVendedor\": \"no hay dato en este\",\r\n        \"productosProductos\": {\r\n            \"productos_id\": 2\r\n        },\r\n        \"usuarios\": {\r\n            \"id\": 40\r\n        }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -401,7 +580,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\":{{id_upd}},\r\n        \"horaComienzoReserva\": \"20:00:00\",\r\n        \"fechaInicialReserva\": \"2022-07-20\",\r\n        \"fechaFinalReserva\": \"2022-07-30\",\r\n        \"vacunaCovid\": false,\r\n        \"datosParaVendedor\": \"no hay dato en este\",\r\n        \"productosProductos\": {\r\n            \"productos_id\": 2\r\n        },\r\n        \"usuarios\": {\r\n            \"id\": 1\r\n        }\r\n    }",
+							"raw": "{\r\n        \"id\":{{id_upd}},\r\n        \"horaComienzoReserva\": \"20:00:00\",\r\n        \"fechaInicialReserva\": \"2022-12-20\",\r\n        \"fechaFinalReserva\": \"2022-12-30\",\r\n        \"vacunaCovid\": false,\r\n        \"datosParaVendedor\": \"no hay dato en este\",\r\n        \"productosProductos\": {\r\n            \"productos_id\": 2\r\n        },\r\n        \"usuarios\": {\r\n            \"id\": 1\r\n        }\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -468,6 +647,26 @@
 					"response": []
 				},
 				{
+					"name": "buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{url}}:8080/reservas/1",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"reservas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "eliminar",
 					"event": [
 						{
@@ -490,7 +689,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/reservas/{{id_upd}}",
+							"raw": "http://{{url}}:8080/reservas/3",
 							"protocol": "http",
 							"host": [
 								"{{url}}"
@@ -498,14 +697,19 @@
 							"port": "8080",
 							"path": [
 								"reservas",
-								"{{id_upd}}"
+								"3"
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "producto",
+			"item": [
 				{
-					"name": "categorias Copy",
+					"name": "productoPorFechaReserva",
 					"event": [
 						{
 							"listen": "test",
@@ -518,7 +722,6 @@
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -529,24 +732,30 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{url}}:8080/categorias",
+							"raw": "http://{{url}}:8080/productos/fecha?fechaInicial=2022-06-20&fechaFinal=2022-06-29",
 							"protocol": "http",
 							"host": [
 								"{{url}}"
 							],
 							"port": "8080",
 							"path": [
-								"categorias"
+								"productos",
+								"fecha"
+							],
+							"query": [
+								{
+									"key": "fechaInicial",
+									"value": "2022-06-20"
+								},
+								{
+									"key": "fechaFinal",
+									"value": "2022-06-29"
+								}
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "producto",
-			"item": [
+				},
 				{
 					"name": "Listar todos",
 					"event": [
@@ -702,7 +911,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"hotelSix\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }]\r\n}\r\n",
+							"raw": "{\r\n    \"nombre\":\"hotelPrueba2\",\r\n    \"descripcion\":\"hotel 5 estrellas\",\r\n    \"direccion\":\"Pelegrini 520\",\r\n    \"politicas_servicio\":\"ninguna\",\r\n    \"categorias_id\":{\r\n        \"id\": 1\r\n    },\r\n    \"ciudades_id\":{\r\n        \"ciudades_id\": 1\r\n    },\r\n    \"caracteristicas\":[{\r\n        \"caracteristicas_id\":1\r\n    }],\r\n    \"politicas\":[\r\n        {\r\n        \"id\":1\r\n        },\r\n        {\r\n        \"id\":2\r\n        },\r\n        {\r\n        \"id\":2\r\n        }\r\n    ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -813,54 +1022,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Productos por rango de fechas",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Test response is less than 1000ms\", function(){\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://{{url}}:8080/productos/fecha?fechaInicial=2022-07-25&fechaFinal=2022-07-25",
-							"protocol": "http",
-							"host": [
-								"{{url}}"
-							],
-							"port": "8080",
-							"path": [
-								"productos",
-								"fecha"
-							],
-							"query": [
-								{
-									"key": "fechaInicial",
-									"value": "2022-07-25"
-								},
-								{
-									"key": "fechaFinal",
-									"value": "2022-07-25"
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -881,7 +1042,6 @@
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -1061,8 +1221,7 @@
 									"\r",
 									"pm.test(\"Test response is less than 1000ms\", function(){\r",
 									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
-									"});\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -1240,9 +1399,21 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://{{url}}:8080/usuarios",
 							"protocol": "http",
@@ -1252,6 +1423,94 @@
 							"port": "8080",
 							"path": [
 								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"id\": 2,\r\n            \"nombre\": \"angel\",\r\n            \"apellido\": \"estrada\",\r\n            \"email\": \"rangel1998.rt@gmail.com\",\r\n            \"contrasenia\": \"12345678\",\r\n            \"ciudad\": \"Santa\",\r\n            \"rol\": {\r\n                \"id\": 1\r\n            }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{url}}:8080/usuarios",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "politicas",
+			"item": [
+				{
+					"name": "listar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test response is less than 1000ms\", function(){\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(parseInt(pm.environment.get(\"time_response\")))\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{url}}:8080/politicas",
+							"protocol": "http",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"politicas"
 							]
 						}
 					},
