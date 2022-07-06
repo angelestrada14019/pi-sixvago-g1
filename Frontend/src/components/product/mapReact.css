@@ -4,3 +4,12 @@
     margin: 10px 20px 10px 10px; 
     z-index: 1;
 }
+@media (max-width: 576px) { 
+    .leaflet-container {
+        width: 90%;
+        height: 350px;
+        margin: 10px 20px 10px 20px;
+        z-index: 1;
+    }
+    
+}
