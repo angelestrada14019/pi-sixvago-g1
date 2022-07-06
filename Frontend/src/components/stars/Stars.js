@@ -5,11 +5,16 @@ import ApiCall from "../../utils/ApiCall";
 
 const Stars = ({ data }) => {
   const { cardCategory, list, pageNumber } = useStateContext();
-  const [star1, setStar1] = useState(false);
-  const [star2, setStar2] = useState(false);
-  const [star3, setStar3] = useState(false);
-  const [star4, setStar4] = useState(false);
-  const [star5, setStar5] = useState(false);
+  const [stars, setStars] = useState([
+    {
+      id: null,
+      star1: false,
+      star2: false,
+      star3: false,
+      star4: false,
+      star5: false,
+    },
+  ]);
   const [allScores, setAllScores] = useState([]);
   const { validateToken } = useContext(AuthContext);
 
@@ -39,6 +44,8 @@ const Stars = ({ data }) => {
     const cardScore = response.body;
     for (let i = 0; i < cardScore.length; i++) {
       const scoredCard = cardScore[i];
+      console.log("scoreCard", scoredCard);
+      console.log("id producto", data.productos_id);
       console.log(
         scoredCard.usuarios.id === user.id &&
           scoredCard.productosProductos.productos_id === data.productos_id
@@ -47,44 +54,73 @@ const Stars = ({ data }) => {
         scoredCard.usuarios.id === user.id &&
         scoredCard.productosProductos.productos_id === data.productos_id
       ) {
-        if (scoredCard.puntuacion === 1) {
-          setStar1(true);
-          setStar2(false);
-          setStar3(false);
-          setStar4(false);
-          setStar5(false);
-        } else if (scoredCard.puntuacion === 2) {
-          setStar1(true);
-          setStar2(true);
-          setStar3(false);
-          setStar4(false);
-          setStar5(false);
-        } else if (scoredCard.puntuacion === 3) {
-          setStar1(true);
-          setStar2(true);
-          setStar3(true);
-          setStar4(false);
-          setStar5(false);
-        } else if (scoredCard.puntuacion === 4) {
-          setStar1(true);
-          setStar2(true);
-          setStar3(true);
-          setStar4(true);
-          setStar5(false);
-        } else {
-          setStar1(true);
-          setStar2(true);
-          setStar3(true);
-          setStar4(true);
-          setStar5(true);
+        console.log("el usuario entro");
+        switch (scoredCard.puntuacion) {
+          case 1:
+            setStars({
+                id: scoredCard.productosProductos.productos_id ,
+                star1: true,
+                star2: false,
+                star3: false,
+                star4: false,
+                star5: false,
+              });
+            break;
+          case 2:
+            setStars({
+                id: scoredCard.productosProductos.productos_id ,
+                star1: true,
+                star2: true,
+                star3: false,
+                star4: false,
+                star5: false,
+              });
+            break;
+            
+          case 3:
+            setStars({
+                id: scoredCard.productosProductos.productos_id ,
+                star1: true,
+                star2: true,
+                star3: true,
+                star4: false,
+                star5: false,
+              });
+            break;
+          case 4:
+            console.log("entro");
+            setStars({
+              id: scoredCard.productosProductos.productos_id ,
+              star1: true,
+              star2: true,
+              star3: true,
+              star4: true,
+              star5: false,
+            });
+            break;
+          case 5:
+            setStars({
+                id: scoredCard.productosProductos.productos_id ,
+                star1: true,
+                star2: true,
+                star3: true,
+                star4: true,
+                star5: true,
+              });
+            break;
+
+          default:
+            setStars({
+                id: scoredCard.productosProductos.productos_id ,
+                star1: false,
+                star2: false,
+                star3: false,
+                star4: false,
+                star5: false,
+              });
+            break;
         }
-      } else {
-        setStar1(false);
-        setStar2(false);
-        setStar3(false);
-        setStar4(false);
-        setStar5(false);
-      }
+    }
     }
   };
 
@@ -160,27 +196,27 @@ const Stars = ({ data }) => {
       {!validateToken() ? null : (
         <>
           <i
-            className={`fa-solid fa-star ${star1 ? "enabled" : "disabled"}`}
+            className={`fa-solid fa-star ${( data?.productos_id===stars.id && stars.star1) ? "enabled" : "disabled"}`}
             id="1"
             onClick={handleStarClick}
           ></i>
           <i
-            className={`fa-solid fa-star ${star2 ? "enabled" : "disabled"}`}
+            className={`fa-solid fa-star ${( data?.productos_id===stars.id && stars.star2) ? "enabled" : "disabled"}`}
             id="2"
             onClick={handleStarClick}
           ></i>
           <i
-            className={`fa-solid fa-star ${star3 ? "enabled" : "disabled"}`}
+            className={`fa-solid fa-star ${( data?.productos_id===stars.id && stars.star3) ? "enabled" : "disabled"}`}
             id="3"
             onClick={handleStarClick}
           ></i>
           <i
-            className={`fa-solid fa-star ${star4 ? "enabled" : "disabled"}`}
+            className={`fa-solid fa-star ${( data?.productos_id===stars.id && stars.star4) ? "enabled" : "disabled"}`}
             id="4"
             onClick={handleStarClick}
           ></i>
           <i
-            className={`fa-solid fa-star ${star5 ? "enabled" : "disabled"}`}
+            className={`fa-solid fa-star ${( data?.productos_id===stars.id && stars.star5) ? "enabled" : "disabled"}`}
             id="5"
             onClick={handleStarClick}
           ></i>
