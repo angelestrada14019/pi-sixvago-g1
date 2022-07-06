@@ -13,12 +13,12 @@ const Favorito = ({producto}) => {
         })
     }
     useEffect(()=>{
-        //  getFavoritos();
+          getFavoritos();
     },[])
     useEffect(() => {
         console.log("render");
         
-        //addFavoritos();
+        addFavoritos();
         
     }, [favoritoLo]);
 
@@ -55,8 +55,8 @@ const Favorito = ({producto}) => {
   return (
     <>
     <div onClick={handleClick} className='btn_favorito'>
-        {console.log("favoritoLo",favoritoLo)}
-        {favoritoLo.fv?
+        {console.log("productoL",producto)}
+        {(favoritoLo.id===producto?.productos_id) && favoritoLo.fv?
         <i className="fa-solid fa-heart fa-2x"></i>
         :    
         <i  className="fa-regular fa-heart fa-2x btn_favorito-icon"></i>
