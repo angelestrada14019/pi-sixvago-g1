@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
   const [list, setList] = useState([]);
   const [locationsList, setLocationsList] = useState([]);
   const [location, setLocation] = useState("");
+  const [favoritos, setFavoritos] = useState([]);
   const [dateReserva, setDateReserva] = useState({
     date: [],
     longDateIn: "",
@@ -31,9 +32,15 @@ export const ContextProvider = ({ children }) => {
   const { validateToken } = useContext(AuthContext);
   // searchParams.values().next().value devuelve el valor de la query despues del =
   // searchParams.keys().next().value devuelve el nombre de la query antes del =
-
+  useEffect(() => {
+    let favoritosL=localStorage.getItem("favoritos")?JSON.parse(localStorage.getItem("favoritos")):[]; 
+    if (favoritosL.length>0) {
+        setFavoritos(favoritosL)
+    }
+  }, []);
   useEffect(() => {
     let reserva = JSON.parse(localStorage.getItem("reserva"));
+    
     if (reserva !== null) {
       setDateReserva({
         date: reserva.date,
@@ -185,7 +192,9 @@ export const ContextProvider = ({ children }) => {
           loadingFiltro,
           setLoadingFiltro,
           reservaP,
-          setReservaP
+          setReservaP,
+          favoritos, 
+          setFavoritos
         }}
       >
         {children}

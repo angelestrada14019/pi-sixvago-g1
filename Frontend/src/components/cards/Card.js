@@ -5,7 +5,7 @@ import useWindowDimensions from "../../utils/useWindowDimensions";
 import Stars from "../stars/Stars";
 import useAvgScore from "../stars/useAvgScore";
 import Favorito from "../favorito/Favorito";
-const Card = ({ data }) => {
+const Card = ({ data,enableFav }) => {
   const { loading } = useStateContext();
   const { width } = useWindowDimensions();
   let imgHeight = width < 600 ? "205px" : "100%";
@@ -38,7 +38,7 @@ const Card = ({ data }) => {
           }
         />
         <div className="favorito">
-        <Favorito producto={data}/>
+        <Favorito producto={data} enableFav={enableFav}/>
         </div>
         </>
       )}

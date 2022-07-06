@@ -23,6 +23,19 @@
   color: #262626;
   text-align: left;
 }
+.fav{
+    background-color: rgba(255, 255, 200, 0.453);
+}
+.fav_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(177, 177, 152, 0.453);
+    margin-bottom: 10px;
+}
+.fav_container i{
+    cursor: pointer;
+}
 /* ::-webkit-scrollbar the scrollbar.
 ::-webkit-scrollbar-button the buttons on the scrollbar (arrows pointing upwards and downwards).
 ::-webkit-scrollbar-thumb the draggable scrolling handle.
