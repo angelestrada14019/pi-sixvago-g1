@@ -9,6 +9,7 @@ import logo from "../../assets/SixVago-dorado.png";
 import menu from "../../assets/menu.png";
 import AuthContext from "../../contexts/AuthContext";
 import "./header.css";
+import Adminisracion from "../../pages/Administracion";
 
 const Header = () => {
   const [toggleNavButton, setToggleNavButton] = useState("");
@@ -23,8 +24,10 @@ const Header = () => {
   const { isLoggedIn, openSignUp, openLogin, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const { pathname: currentLocation } = useLocation();
+  let user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    user = JSON.parse(localStorage.getItem("user"));
     if (openLogin) {
       setToggleNavButton("iniciar");
     }
@@ -43,12 +46,21 @@ const Header = () => {
   };
 
   const handleClick = (e) => {
-    if (e.target.id === "crear") {
+    const { id } = e.target;
+    if (id === "crear") {
       navigate("/signUp");
       setShowSidebar(false);
     }
-    if (e.target.id === "iniciar") {
+    if (id === "iniciar") {
       navigate("/login");
+      setShowSidebar(false);
+    }
+    if (id === "reservas") {
+      navigate(`user/${user.id}/mireserva`);
+      setShowSidebar(false);
+    }
+    if (id === "administracion") {
+      navigate("/administracion");
       setShowSidebar(false);
     }
     setCardCategory("");
@@ -82,6 +94,27 @@ const Header = () => {
           </Link>
         </div>
         <nav>
+          {!isLoggedIn ? null : isLoggedIn &&
+            user.rol.id === 2 &&
+            !currentLocation.includes("administracion") ? (
+            <div className="administracion">
+              <h2 onClick={handleClick} id="administracion">
+                Administracion
+              </h2>
+            </div>
+          ) : null}
+          {isLoggedIn && !currentLocation.includes("mireserva") ? (
+            <div className="mis-reservas">
+              <p
+                role="button"
+                className="boton-nav"
+                id="reservas"
+                onClick={handleClick}
+              >
+                Mis reservas
+              </p>
+            </div>
+          ) : null}
           {toggleNavButton === "crear" && !isLoggedIn ? (
             <div>
               <p
@@ -127,7 +160,7 @@ const Header = () => {
                 </p>
               </div>
             </>
-          ) : !isLoggedIn ? null : (
+          ) : (
             <div className="user-welcome-normal">
               <UserWelcome handleLogout={handleLogout} />
             </div>
