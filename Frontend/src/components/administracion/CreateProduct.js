@@ -82,6 +82,7 @@ const CreateProduct = () => {
     let auxCaract = [];
     let auxPoliticas = [];
     let auxImg = [];
+    let auxProducto=product;
 
     try {
       if (caracteristicasNuevas[0].nombre !== "") {
@@ -109,11 +110,13 @@ const CreateProduct = () => {
       if (normasProducto[0].descripcion !== "") {
         for (let i = 0; i < normasProducto.length; i++) {
           const norma = normasProducto[i];
+          console.log("normas",norma);
           if (norma.id !== "") {
-            let newN = { id: norma.id };
-            auxPoliticas.push(newN);
+              let newN = { id: norma.id };
+              auxPoliticas.push(newN);
+              console.log("normas",norma);
           } else {
-            console.log("POST de normas");
+            console.log("POST de normas");            
             const response = await ApiCall.invokePOST("/politicas", norma);
             let id = response.body.id;
             let newN = { id: id };
@@ -151,17 +154,14 @@ const CreateProduct = () => {
           }
         }
       }
-      setProduct({
-        ...product,
-        caracteristicas: auxCaract,
-        politicas: auxPoliticas,
-      });
+      auxProducto.caracteristicas=auxCaract;
+      auxProducto.politicas=auxPoliticas;
     } catch (error) {
       console.log(error);
     } finally {
       // validar que no haya campos vacios
-      console.log("POST PRODUCTO");
-      const postProducto = await ApiCall.invokePOST("/productos", product);
+      console.log("POST PRODUCTO",auxProducto);
+      const postProducto = await ApiCall.invokePOST("/productos", auxProducto);
       console.log(postProducto.body);
       const id = postProducto.body.productos_id;
 

@@ -27,8 +27,7 @@ const Cards = () => {
           <Card />
         </>
       ) : (
-        list
-          .slice(pagesVisited, pagesVisited + productsPerPage)
+        list?.slice(pagesVisited, pagesVisited + productsPerPage)
           .map((product, i) => <Card data={product} key={`cards-${i}`} />)
       )}
     </div>

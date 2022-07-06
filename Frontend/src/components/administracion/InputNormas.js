@@ -3,7 +3,10 @@ import ApiCall from "../../utils/ApiCall";
 
 const InputNormas = ({ setNormasProducto }) => {
   const [normas, setNormas] = useState([
-    { descripcion: "", tipoDePolitica: 0 },
+    { descripcion: "", tipoDePolitica: {
+        id:0
+    }, 
+},
   ]);
   const [options, setOptions] = useState([{ id: 0, descripcion: "" }]);
   const [agregar, setAgregar] = useState("");
@@ -39,12 +42,16 @@ const InputNormas = ({ setNormasProducto }) => {
     if (e.target.checked) {
       if (normas[0]?.descripcion === "") {
         setNormas([
-          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 1 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:1
+          } },
         ]);
       } else {
         setNormas([
           ...normas,
-          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: 1 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:1
+          } },
         ]);
       }
     } else {

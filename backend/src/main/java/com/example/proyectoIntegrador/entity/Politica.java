@@ -25,7 +25,7 @@ public class Politica {
     private String descripcion;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "tipodepolitica_id",referencedColumnName = "id")
     private TipoDePolitica tipoDePolitica;
 

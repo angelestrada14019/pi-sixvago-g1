@@ -15,7 +15,7 @@ const Main = () => {
     setLoading(true);
   }, []);
 
-  const pageCount = Math.ceil(list.length / productsPerPage);
+  const pageCount = Math.ceil(list?.length / productsPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
