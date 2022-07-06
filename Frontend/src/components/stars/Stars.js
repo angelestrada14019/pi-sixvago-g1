@@ -44,17 +44,10 @@ const Stars = ({ data }) => {
     const cardScore = response.body;
     for (let i = 0; i < cardScore.length; i++) {
       const scoredCard = cardScore[i];
-      console.log("scoreCard", scoredCard);
-      console.log("id producto", data.productos_id);
-      console.log(
-        scoredCard.usuarios.id === user.id &&
-          scoredCard.productosProductos.productos_id === data.productos_id
-      );
       if (
         scoredCard.usuarios.id === user.id &&
         scoredCard.productosProductos.productos_id === data.productos_id
       ) {
-        console.log("el usuario entro");
         switch (scoredCard.puntuacion) {
           case 1:
             setStars({
@@ -88,7 +81,6 @@ const Stars = ({ data }) => {
               });
             break;
           case 4:
-            console.log("entro");
             setStars({
               id: scoredCard.productosProductos.productos_id ,
               star1: true,

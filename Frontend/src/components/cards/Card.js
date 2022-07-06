@@ -82,8 +82,8 @@ const Card = ({ data,enableFav }) => {
           <h2 className="card-title">
             {data.categorias_id !== undefined &&
             (
-                data.nombre.length<=18 ?
-            `${data.nombre}`:`${data.nombre.slice(0,18)}`
+                data.nombre.length<=16 ?
+            `${data.nombre}`:`${data.nombre.slice(0,16)}...`
                )         
             }
           </h2>
