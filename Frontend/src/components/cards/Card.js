@@ -15,7 +15,7 @@ const Card = ({ data }) => {
   const { avScore, avValue } = useAvgScore({ data, id: data?.productos_id });
 
   return (
-    <div className="card">
+    <div className="card" id={data?.productos_id}>
       {loading ? (
         <Skeleton
           variant="rectangular"

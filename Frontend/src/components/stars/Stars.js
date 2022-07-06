@@ -15,12 +15,10 @@ const Stars = ({ data }) => {
 
   useEffect(() => {
     getAllScores();
-    if (data) {
-      if (validateToken()) {
-        getAllScores();
-        userAlreadyScoredCard();
-        productStars();
-      }
+    if (validateToken()) {
+      getAllScores();
+      userAlreadyScoredCard();
+      productStars();
     }
   }, [data, cardCategory, list, pageNumber]);
 
@@ -35,10 +33,16 @@ const Stars = ({ data }) => {
     }
   };
 
-  const productStars = async (id) => {
+  const productStars = async () => {
     const user = JSON.parse(localStorage.getItem("user")) || null;
-    const cardScore = await getStarsByUser();
-    cardScore.forEach((scoredCard) => {
+    const response = await ApiCall.invokeGET(`/puntuacion/usuario/${user.id}`);
+    const cardScore = response.body;
+    for (let i = 0; i < cardScore.length; i++) {
+      const scoredCard = cardScore[i];
+      console.log(
+        scoredCard.usuarios.id === user.id &&
+          scoredCard.productosProductos.productos_id === data.productos_id
+      );
       if (
         scoredCard.usuarios.id === user.id &&
         scoredCard.productosProductos.productos_id === data.productos_id
@@ -67,21 +71,21 @@ const Stars = ({ data }) => {
           setStar3(true);
           setStar4(true);
           setStar5(false);
-        } else if (scoredCard.puntuacion === 5) {
+        } else {
           setStar1(true);
           setStar2(true);
           setStar3(true);
           setStar4(true);
           setStar5(true);
-        } else {
-          setStar1(false);
-          setStar2(false);
-          setStar3(false);
-          setStar4(false);
-          setStar5(false);
         }
+      } else {
+        setStar1(false);
+        setStar2(false);
+        setStar3(false);
+        setStar4(false);
+        setStar5(false);
       }
-    });
+    }
   };
 
   const sendScore = async (score) => {
@@ -133,21 +137,10 @@ const Stars = ({ data }) => {
     }
   };
 
-  const getStarsByUser = async () => {
-    const user = JSON.parse(localStorage.getItem("user")) || null;
-    let body = null;
-    if (user) {
-      const response = await ApiCall.invokeGET(
-        `/puntuacion/usuario/${user.id}`
-      );
-      body = response.body;
-    }
-    return body;
-  };
-
   const userAlreadyScoredCard = async () => {
     const user = JSON.parse(localStorage.getItem("user")) || null;
-    const cardScore = await getStarsByUser();
+    const response = await ApiCall.invokeGET(`/puntuacion/usuario/${user.id}`);
+    const cardScore = response.body;
     let scored = false;
     if (cardScore) {
       cardScore.forEach((scoredCard) => {
