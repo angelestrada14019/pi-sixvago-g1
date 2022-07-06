@@ -1,82 +1,82 @@
 {
-	"id": "47ee67c8-becd-481c-9e3e-3f475ebecd94",
-	"name": "Proyecto Integrador 2",
-	"timestamp": "2022-06-22T15:04:41.464Z",
-	"collection_id": "17956933-05892ddb-c6cc-4a30-a4b0-5c227153b76e",
+	"id": "a9b6b301-d095-4eaa-a42f-694abf6a9054",
+	"name": "Proyecto Integrador 3",
+	"timestamp": "2022-07-05T15:21:19.297Z",
+	"collection_id": "17956933-43974471-d92f-47cc-b68b-e20c318e7274",
 	"folder_id": 0,
 	"environment_id": "18027838-2878b7b4-23a2-4f32-8506-e9bd4e735ccd",
-	"totalPass": 56,
-	"totalFail": 0,
+	"totalPass": 55,
+	"totalFail": 11,
 	"results": [
 		{
-			"id": "ca7d6e38-85a1-48df-a545-9f108b58b8bb",
+			"id": "4afb3341-0c26-40c7-9674-a50f28614854",
+			"name": "login",
+			"url": "http://107.22.80.135:8080/auth/login",
+			"time": 334,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				334
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "fcd93d9a-f185-4a38-9553-5b8d2120ec9f",
+			"name": "register",
+			"url": "http://107.22.80.135:8080/auth/register",
+			"time": 1017,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1017
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "e0aca9da-d758-47fa-9367-bdea16a2c75f",
 			"name": "categorias",
-			"url": "http://107.22.80.135:8080/categorias",
-			"time": 222,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				222
-			],
-			"allTests": [
-				{
-					"Status code is 200": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "5a8c0311-b23a-467e-a8cf-83fcefe8c7c2",
-			"name": "añadir categoria",
-			"url": "http://107.22.80.135:8080/categorias",
-			"time": 224,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				224
-			],
-			"allTests": [
-				{
-					"Status code is 200": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "3a9175ac-2d99-4856-a5f0-ef8f303b2755",
-			"name": "actualizar categoria",
 			"url": "http://107.22.80.135:8080/categorias",
 			"time": 223,
 			"responseCode": {
@@ -108,20 +108,20 @@
 			]
 		},
 		{
-			"id": "75a752a9-8fa6-4a3f-83c0-f594a6359f2b",
-			"name": "eliminar categoria",
-			"url": "http://107.22.80.135:8080/categorias/26",
-			"time": 215,
+			"id": "9eb80f16-263a-4ebf-b082-56e3f3925a72",
+			"name": "añadir categoria",
+			"url": "http://107.22.80.135:8080/categorias",
+			"time": 237,
 			"responseCode": {
-				"code": 204,
-				"name": "No Content"
+				"code": 201,
+				"name": "Created"
 			},
 			"tests": {
-				"Status code is 204": true,
+				"Status code is 200": true,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
-				"Status code is 204": {
+				"Status code is 200": {
 					"pass": 1,
 					"fail": 0
 				},
@@ -131,20 +131,86 @@
 				}
 			},
 			"times": [
-				215
+				237
 			],
 			"allTests": [
 				{
-					"Status code is 204": true,
+					"Status code is 200": true,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "2691ff99-020c-4661-9445-366180db32dd",
-			"name": "login",
-			"url": "http://107.22.80.135:8080/auth/login",
-			"time": 323,
+			"id": "eb39d6b8-d80e-42d1-85d0-4d59f811fc8c",
+			"name": "actualizar categoria",
+			"url": "http://107.22.80.135:8080/categorias",
+			"time": 214,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				214
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "21bc5ca6-85e5-4e86-88e7-3b23e4e86ebe",
+			"name": "eliminar categoria",
+			"url": "http://107.22.80.135:8080/categorias/null",
+			"time": 212,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 204": false,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				212
+			],
+			"allTests": [
+				{
+					"Status code is 204": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "426a4fb3-a8a3-4ebf-9ad1-4f0112517760",
+			"name": "listar",
+			"url": "http://107.22.80.135:8080/puntuacion",
+			"time": 685,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -164,7 +230,7 @@
 				}
 			},
 			"times": [
-				323
+				685
 			],
 			"allTests": [
 				{
@@ -174,10 +240,10 @@
 			]
 		},
 		{
-			"id": "1245229a-2d86-4d3f-abf6-f0340855ff0f",
-			"name": "register",
-			"url": "http://107.22.80.135:8080/auth/register",
-			"time": 437,
+			"id": "a5401957-8e36-4661-84d7-3f88efaee26e",
+			"name": "añadir",
+			"url": "http://107.22.80.135:8080/puntuacion",
+			"time": 221,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -197,7 +263,7 @@
 				}
 			},
 			"times": [
-				437
+				221
 			],
 			"allTests": [
 				{
@@ -207,10 +273,76 @@
 			]
 		},
 		{
-			"id": "bf76762e-5f07-411d-b5b5-15ec38ba362b",
+			"id": "215cbbdd-f2b7-426e-8681-39dc0945addc",
+			"name": "actualizar",
+			"url": "http://107.22.80.135:8080/puntuacion",
+			"time": 211,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				211
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "521529e2-68e9-43d0-9de4-d9906907bcd5",
+			"name": "eliminar",
+			"url": "http://107.22.80.135:8080/puntuacion/null",
+			"time": 216,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 204": false,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				216
+			],
+			"allTests": [
+				{
+					"Status code is 204": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "2dd253bc-f171-4c7a-8ea5-2830dcd53415",
 			"name": "listar",
 			"url": "http://107.22.80.135:8080/reservas",
-			"time": 260,
+			"time": 681,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -230,7 +362,7 @@
 				}
 			},
 			"times": [
-				260
+				681
 			],
 			"allTests": [
 				{
@@ -240,10 +372,10 @@
 			]
 		},
 		{
-			"id": "76a013e1-0052-438f-9ae6-742d22aeac43",
+			"id": "5c6af03b-fc96-4ac3-85cf-a4d29776000d",
 			"name": "añadir",
 			"url": "http://107.22.80.135:8080/reservas",
-			"time": 215,
+			"time": 790,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -263,7 +395,7 @@
 				}
 			},
 			"times": [
-				215
+				790
 			],
 			"allTests": [
 				{
@@ -273,22 +405,22 @@
 			]
 		},
 		{
-			"id": "8b731a8d-48f1-494b-a23a-c1c350159c2b",
+			"id": "02cea796-1d9a-497b-886e-dfee74a861ba",
 			"name": "actualizar",
 			"url": "http://107.22.80.135:8080/reservas",
-			"time": 242,
+			"time": 272,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 500,
+				"name": "Internal Server Error"
 			},
 			"tests": {
-				"Status code is 200": true,
+				"Status code is 200": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				},
 				"Test response is less than 1000ms": {
 					"pass": 1,
@@ -296,20 +428,20 @@
 				}
 			},
 			"times": [
-				242
+				272
 			],
 			"allTests": [
 				{
-					"Status code is 200": true,
+					"Status code is 200": false,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "b14a3fa0-fd81-4d3f-a809-f8eefa34d350",
+			"id": "79ecedfc-47cf-4c85-8deb-823d65c3c368",
 			"name": "buscarReservaPorProductoId",
 			"url": "http://107.22.80.135:8080/reservas/productos?idproducto=1",
-			"time": 218,
+			"time": 618,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -329,7 +461,7 @@
 				}
 			},
 			"times": [
-				218
+				618
 			],
 			"allTests": [
 				{
@@ -339,22 +471,40 @@
 			]
 		},
 		{
-			"id": "c2050557-b02b-4a0a-bc07-cf5f6767e4f3",
-			"name": "eliminar",
-			"url": "http://107.22.80.135:8080/reservas/12",
-			"time": 274,
+			"id": "e2c08634-c973-429a-959d-c173080e02bb",
+			"name": "buscar",
+			"url": "http://107.22.80.135:8080/reservas/1",
+			"time": 234,
 			"responseCode": {
-				"code": 204,
-				"name": "No Content"
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				234
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9c6bf2a2-0c83-496c-9778-ca409ef238b4",
+			"name": "eliminar",
+			"url": "http://107.22.80.135:8080/reservas/3",
+			"time": 228,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
 			},
 			"tests": {
-				"Status code is 204": true,
+				"Status code is 204": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				},
 				"Test response is less than 1000ms": {
 					"pass": 1,
@@ -362,20 +512,20 @@
 				}
 			},
 			"times": [
-				274
+				228
 			],
 			"allTests": [
 				{
-					"Status code is 204": true,
+					"Status code is 204": false,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "634f10ab-41c6-4e58-801e-f309a039d26f",
-			"name": "categorias Copy",
-			"url": "http://107.22.80.135:8080/categorias",
-			"time": 222,
+			"id": "cb3b3205-f220-46df-aa5b-93e3abf95a42",
+			"name": "productoPorFechaReserva",
+			"url": "http://107.22.80.135:8080/productos/fecha?fechaInicial=2022-06-20&fechaFinal=2022-06-29",
+			"time": 519,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -395,7 +545,7 @@
 				}
 			},
 			"times": [
-				222
+				519
 			],
 			"allTests": [
 				{
@@ -405,10 +555,10 @@
 			]
 		},
 		{
-			"id": "e01899bd-599d-4906-bc87-bb1c5b30a75b",
+			"id": "866af0a8-5d9f-4860-9c95-febc307feee1",
 			"name": "Listar todos",
 			"url": "http://107.22.80.135:8080/productos",
-			"time": 665,
+			"time": 489,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -428,7 +578,7 @@
 				}
 			},
 			"times": [
-				665
+				489
 			],
 			"allTests": [
 				{
@@ -438,10 +588,10 @@
 			]
 		},
 		{
-			"id": "453a31aa-97d1-4832-8c51-1dc5b357e1f9",
+			"id": "cd779d03-a139-43a9-9852-59575f98b531",
 			"name": "Listar por ciudad",
 			"url": "http://107.22.80.135:8080/productos/ciudad?nombreCiudad=asdasd",
-			"time": 210,
+			"time": 215,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -461,7 +611,7 @@
 				}
 			},
 			"times": [
-				210
+				215
 			],
 			"allTests": [
 				{
@@ -471,10 +621,10 @@
 			]
 		},
 		{
-			"id": "20c7ec0a-b51c-4188-9734-5c626927ca3f",
+			"id": "a5e7bb96-d7ab-47d4-bc93-b2e715f770a0",
 			"name": "Listar por categorias",
 			"url": "http://107.22.80.135:8080/productos/categorias?tituloCategoria=asdasd",
-			"time": 249,
+			"time": 214,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -494,7 +644,7 @@
 				}
 			},
 			"times": [
-				249
+				214
 			],
 			"allTests": [
 				{
@@ -504,10 +654,10 @@
 			]
 		},
 		{
-			"id": "8925cbc1-2bb5-4ec9-9718-09073f53b46c",
+			"id": "fb1b3e78-c8a7-40fe-8339-5249609e06a6",
 			"name": "añadir producto",
 			"url": "http://107.22.80.135:8080/productos",
-			"time": 255,
+			"time": 243,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -527,7 +677,7 @@
 				}
 			},
 			"times": [
-				255
+				243
 			],
 			"allTests": [
 				{
@@ -537,10 +687,10 @@
 			]
 		},
 		{
-			"id": "5c94c524-318a-4fe7-be0f-246b4c125fe5",
+			"id": "dfecce1e-0a1c-4c7e-bab3-1f29fa7a7a27",
 			"name": "actualizar",
 			"url": "http://107.22.80.135:8080/productos",
-			"time": 320,
+			"time": 214,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -560,7 +710,7 @@
 				}
 			},
 			"times": [
-				320
+				214
 			],
 			"allTests": [
 				{
@@ -570,22 +720,22 @@
 			]
 		},
 		{
-			"id": "fa0bb4b4-548b-47df-b973-0e3fd00f8088",
+			"id": "b1fa4f5c-8c92-4750-8834-a03f338f38da",
 			"name": "eliminar categoria",
-			"url": "http://107.22.80.135:8080/productos/46",
-			"time": 357,
+			"url": "http://107.22.80.135:8080/productos/null",
+			"time": 206,
 			"responseCode": {
-				"code": 204,
-				"name": "No Content"
+				"code": 400,
+				"name": "Bad Request"
 			},
 			"tests": {
-				"Status code is 204": true,
+				"Status code is 204": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				},
 				"Test response is less than 1000ms": {
 					"pass": 1,
@@ -593,53 +743,20 @@
 				}
 			},
 			"times": [
-				357
+				206
 			],
 			"allTests": [
 				{
-					"Status code is 204": true,
+					"Status code is 204": false,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "89d43c9e-dc56-4f55-99b1-9446c1e43df6",
-			"name": "Productos por rango de fechas",
-			"url": "http://107.22.80.135:8080/productos/fecha?fechaInicial=2022-07-25&fechaFinal=2022-07-25",
-			"time": 497,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				497
-			],
-			"allTests": [
-				{
-					"Status code is 200": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "da0fbd71-398d-4cf0-bc6d-0af8633e035f",
+			"id": "d2179cbc-c544-498f-93f6-dc3d3f701334",
 			"name": "Listar todas",
 			"url": "http://107.22.80.135:8080/ciudades",
-			"time": 209,
+			"time": 433,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -659,7 +776,7 @@
 				}
 			},
 			"times": [
-				209
+				433
 			],
 			"allTests": [
 				{
@@ -669,22 +786,22 @@
 			]
 		},
 		{
-			"id": "1fd09017-fa84-419b-984e-dd40c49c97e9",
+			"id": "dd4a8802-34cb-4e09-949d-889b2a88cec8",
 			"name": "añadir",
 			"url": "http://107.22.80.135:8080/ciudades",
-			"time": 239,
+			"time": 212,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 404,
+				"name": "Not Found"
 			},
 			"tests": {
-				"Status code is 200": true,
+				"Status code is 200": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				},
 				"Test response is less than 1000ms": {
 					"pass": 1,
@@ -692,32 +809,32 @@
 				}
 			},
 			"times": [
-				239
+				212
 			],
 			"allTests": [
 				{
-					"Status code is 200": true,
+					"Status code is 200": false,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "139f3e15-89c8-468a-b6fb-dcbf7307a9f0",
+			"id": "78127d67-7a43-474d-bbe9-df6842b383da",
 			"name": "actualizar",
 			"url": "http://107.22.80.135:8080/ciudades",
-			"time": 207,
+			"time": 221,
 			"responseCode": {
-				"code": 200,
-				"name": "OK"
+				"code": 404,
+				"name": "Not Found"
 			},
 			"tests": {
-				"Status code is 200": true,
+				"Status code is 200": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				},
 				"Test response is less than 1000ms": {
 					"pass": 1,
@@ -725,30 +842,261 @@
 				}
 			},
 			"times": [
-				207
+				221
 			],
 			"allTests": [
 				{
-					"Status code is 200": true,
+					"Status code is 200": false,
 					"Test response is less than 1000ms": true
 				}
 			]
 		},
 		{
-			"id": "9f03f8e9-bb58-4b6a-8cbc-1a3af6b148b5",
+			"id": "8953cbea-b35c-4f0f-a1cb-131f8a5f2ea1",
 			"name": "eliminar categoria",
-			"url": "http://107.22.80.135:8080/ciudades/31",
-			"time": 224,
+			"url": "http://107.22.80.135:8080/ciudades/null",
+			"time": 212,
 			"responseCode": {
-				"code": 204,
-				"name": "No Content"
+				"code": 400,
+				"name": "Bad Request"
 			},
 			"tests": {
-				"Status code is 204": true,
+				"Status code is 204": false,
 				"Test response is less than 1000ms": true
 			},
 			"testPassFailCounts": {
 				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				212
+			],
+			"allTests": [
+				{
+					"Status code is 204": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "3839ba26-bc50-41e2-9576-39d966892dd3",
+			"name": "Get all caracteristicas",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 476,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				476
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "22e65c06-f6bf-4fb5-89c9-e43088f16265",
+			"name": "añadir Caracteristica",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 240,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				240
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "75ffa952-4b0e-4f16-b378-9e0c53cce3ba",
+			"name": "Editar categoria",
+			"url": "http://107.22.80.135:8080/caracteristicas",
+			"time": 266,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				266
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "c5deb498-785a-4175-a485-b371962d181c",
+			"name": "Eliminar Categoria",
+			"url": "http://107.22.80.135:8080/caracteristicas/null",
+			"time": 426,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 204": false,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				426
+			],
+			"allTests": [
+				{
+					"Status code is 204": false,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "97b065a9-2b7b-4ad9-b881-ecbcb1079b2e",
+			"name": "listar",
+			"url": "http://107.22.80.135:8080/usuarios",
+			"time": 449,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				449
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "555cc904-3c36-4259-af26-8a891931a4e3",
+			"name": "update",
+			"url": "http://107.22.80.135:8080/usuarios",
+			"time": 217,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test response is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				217
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test response is less than 1000ms": true
+				}
+			]
+		},
+		{
+			"id": "8805a0b3-f78f-4638-8bf5-b0ad46fcfefd",
+			"name": "listar",
+			"url": "http://107.22.80.135:8080/politicas",
+			"time": 224,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test response is less than 1000ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
 					"pass": 1,
 					"fail": 0
 				},
@@ -762,171 +1110,6 @@
 			],
 			"allTests": [
 				{
-					"Status code is 204": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "651f9d02-f12d-4a82-a3c2-a875dba4c078",
-			"name": "Get all caracteristicas",
-			"url": "http://107.22.80.135:8080/caracteristicas",
-			"time": 276,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				276
-			],
-			"allTests": [
-				{
-					"Status code is 200": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "dc8232a0-6d85-4435-bb6d-0999c0f42cb6",
-			"name": "añadir Caracteristica",
-			"url": "http://107.22.80.135:8080/caracteristicas",
-			"time": 265,
-			"responseCode": {
-				"code": 201,
-				"name": "Created"
-			},
-			"tests": {
-				"Status code is 201": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 201": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				265
-			],
-			"allTests": [
-				{
-					"Status code is 201": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "c4769c71-f77f-4fba-9041-d02ea0df9d2c",
-			"name": "Editar categoria",
-			"url": "http://107.22.80.135:8080/caracteristicas",
-			"time": 229,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				229
-			],
-			"allTests": [
-				{
-					"Status code is 200": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "5d107368-303d-495a-a7c1-8140fa9a10f9",
-			"name": "Eliminar Categoria",
-			"url": "http://107.22.80.135:8080/caracteristicas/24",
-			"time": 246,
-			"responseCode": {
-				"code": 204,
-				"name": "No Content"
-			},
-			"tests": {
-				"Status code is 204": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 204": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				246
-			],
-			"allTests": [
-				{
-					"Status code is 204": true,
-					"Test response is less than 1000ms": true
-				}
-			]
-		},
-		{
-			"id": "3021f8a8-98c4-425a-9641-a12867f5db46",
-			"name": "listar",
-			"url": "http://107.22.80.135:8080/usuarios",
-			"time": 222,
-			"responseCode": {
-				"code": 200,
-				"name": "OK"
-			},
-			"tests": {
-				"Status code is 200": true,
-				"Test response is less than 1000ms": true
-			},
-			"testPassFailCounts": {
-				"Status code is 200": {
-					"pass": 1,
-					"fail": 0
-				},
-				"Test response is less than 1000ms": {
-					"pass": 1,
-					"fail": 0
-				}
-			},
-			"times": [
-				222
-			],
-			"allTests": [
-				{
 					"Status code is 200": true,
 					"Test response is less than 1000ms": true
 				}
@@ -934,119 +1117,143 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 7745,
+	"totalTime": 11869,
 	"collection": {
 		"requests": [
 			{
-				"id": "ca7d6e38-85a1-48df-a545-9f108b58b8bb",
-				"method": "GET"
-			},
-			{
-				"id": "5a8c0311-b23a-467e-a8cf-83fcefe8c7c2",
+				"id": "4afb3341-0c26-40c7-9674-a50f28614854",
 				"method": "POST"
 			},
 			{
-				"id": "3a9175ac-2d99-4856-a5f0-ef8f303b2755",
+				"id": "fcd93d9a-f185-4a38-9553-5b8d2120ec9f",
+				"method": "POST"
+			},
+			{
+				"id": "e0aca9da-d758-47fa-9367-bdea16a2c75f",
+				"method": "GET"
+			},
+			{
+				"id": "9eb80f16-263a-4ebf-b082-56e3f3925a72",
+				"method": "POST"
+			},
+			{
+				"id": "eb39d6b8-d80e-42d1-85d0-4d59f811fc8c",
 				"method": "PUT"
 			},
 			{
-				"id": "75a752a9-8fa6-4a3f-83c0-f594a6359f2b",
+				"id": "21bc5ca6-85e5-4e86-88e7-3b23e4e86ebe",
 				"method": "DELETE"
 			},
 			{
-				"id": "2691ff99-020c-4661-9445-366180db32dd",
-				"method": "POST"
-			},
-			{
-				"id": "1245229a-2d86-4d3f-abf6-f0340855ff0f",
-				"method": "POST"
-			},
-			{
-				"id": "bf76762e-5f07-411d-b5b5-15ec38ba362b",
+				"id": "426a4fb3-a8a3-4ebf-9ad1-4f0112517760",
 				"method": "GET"
 			},
 			{
-				"id": "76a013e1-0052-438f-9ae6-742d22aeac43",
+				"id": "a5401957-8e36-4661-84d7-3f88efaee26e",
 				"method": "POST"
 			},
 			{
-				"id": "8b731a8d-48f1-494b-a23a-c1c350159c2b",
+				"id": "215cbbdd-f2b7-426e-8681-39dc0945addc",
 				"method": "PUT"
 			},
 			{
-				"id": "b14a3fa0-fd81-4d3f-a809-f8eefa34d350",
-				"method": "GET"
-			},
-			{
-				"id": "c2050557-b02b-4a0a-bc07-cf5f6767e4f3",
+				"id": "521529e2-68e9-43d0-9de4-d9906907bcd5",
 				"method": "DELETE"
 			},
 			{
-				"id": "634f10ab-41c6-4e58-801e-f309a039d26f",
+				"id": "2dd253bc-f171-4c7a-8ea5-2830dcd53415",
 				"method": "GET"
 			},
 			{
-				"id": "e01899bd-599d-4906-bc87-bb1c5b30a75b",
-				"method": "GET"
-			},
-			{
-				"id": "453a31aa-97d1-4832-8c51-1dc5b357e1f9",
-				"method": "GET"
-			},
-			{
-				"id": "20c7ec0a-b51c-4188-9734-5c626927ca3f",
-				"method": "GET"
-			},
-			{
-				"id": "8925cbc1-2bb5-4ec9-9718-09073f53b46c",
+				"id": "5c6af03b-fc96-4ac3-85cf-a4d29776000d",
 				"method": "POST"
 			},
 			{
-				"id": "5c94c524-318a-4fe7-be0f-246b4c125fe5",
+				"id": "02cea796-1d9a-497b-886e-dfee74a861ba",
 				"method": "PUT"
 			},
 			{
-				"id": "fa0bb4b4-548b-47df-b973-0e3fd00f8088",
+				"id": "79ecedfc-47cf-4c85-8deb-823d65c3c368",
+				"method": "GET"
+			},
+			{
+				"id": "e2c08634-c973-429a-959d-c173080e02bb",
+				"method": "GET"
+			},
+			{
+				"id": "9c6bf2a2-0c83-496c-9778-ca409ef238b4",
 				"method": "DELETE"
 			},
 			{
-				"id": "89d43c9e-dc56-4f55-99b1-9446c1e43df6",
+				"id": "cb3b3205-f220-46df-aa5b-93e3abf95a42",
 				"method": "GET"
 			},
 			{
-				"id": "da0fbd71-398d-4cf0-bc6d-0af8633e035f",
+				"id": "866af0a8-5d9f-4860-9c95-febc307feee1",
 				"method": "GET"
 			},
 			{
-				"id": "1fd09017-fa84-419b-984e-dd40c49c97e9",
+				"id": "cd779d03-a139-43a9-9852-59575f98b531",
+				"method": "GET"
+			},
+			{
+				"id": "a5e7bb96-d7ab-47d4-bc93-b2e715f770a0",
+				"method": "GET"
+			},
+			{
+				"id": "fb1b3e78-c8a7-40fe-8339-5249609e06a6",
 				"method": "POST"
 			},
 			{
-				"id": "139f3e15-89c8-468a-b6fb-dcbf7307a9f0",
+				"id": "dfecce1e-0a1c-4c7e-bab3-1f29fa7a7a27",
 				"method": "PUT"
 			},
 			{
-				"id": "9f03f8e9-bb58-4b6a-8cbc-1a3af6b148b5",
+				"id": "b1fa4f5c-8c92-4750-8834-a03f338f38da",
 				"method": "DELETE"
 			},
 			{
-				"id": "651f9d02-f12d-4a82-a3c2-a875dba4c078",
+				"id": "d2179cbc-c544-498f-93f6-dc3d3f701334",
 				"method": "GET"
 			},
 			{
-				"id": "dc8232a0-6d85-4435-bb6d-0999c0f42cb6",
+				"id": "dd4a8802-34cb-4e09-949d-889b2a88cec8",
 				"method": "POST"
 			},
 			{
-				"id": "c4769c71-f77f-4fba-9041-d02ea0df9d2c",
+				"id": "78127d67-7a43-474d-bbe9-df6842b383da",
 				"method": "PUT"
 			},
 			{
-				"id": "5d107368-303d-495a-a7c1-8140fa9a10f9",
+				"id": "8953cbea-b35c-4f0f-a1cb-131f8a5f2ea1",
 				"method": "DELETE"
 			},
 			{
-				"id": "3021f8a8-98c4-425a-9641-a12867f5db46",
+				"id": "3839ba26-bc50-41e2-9576-39d966892dd3",
+				"method": "GET"
+			},
+			{
+				"id": "22e65c06-f6bf-4fb5-89c9-e43088f16265",
+				"method": "POST"
+			},
+			{
+				"id": "75ffa952-4b0e-4f16-b378-9e0c53cce3ba",
+				"method": "PUT"
+			},
+			{
+				"id": "c5deb498-785a-4175-a485-b371962d181c",
+				"method": "DELETE"
+			},
+			{
+				"id": "97b065a9-2b7b-4ad9-b881-ecbcb1079b2e",
+				"method": "GET"
+			},
+			{
+				"id": "555cc904-3c36-4259-af26-8a891931a4e3",
+				"method": "PUT"
+			},
+			{
+				"id": "8805a0b3-f78f-4638-8bf5-b0ad46fcfefd",
 				"method": "GET"
 			}
 		]

@@ -113,7 +113,7 @@ const Card = ({ data }) => {
           />
         ) : (
           <Link to={`/producto/${data.productos_id}`}>
-            <button className="card-button">Ver más</button>
+            <button className="card-button" id="ver-mas">Ver más</button>
           </Link>
         )}
       </div>
