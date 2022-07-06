@@ -28,7 +28,7 @@ public class ReservaDTO {
     private LocalDate fechaFinalReserva;
     private Boolean vacunaCovid;
     private String datosParaVendedor;
-    @JsonIgnoreProperties(value = {"nombre","descripcion", "direccion", "politicas_servicio","categorias_id","ciudades_id","caracteristicas","listadeimagenes"})
+    @JsonIgnoreProperties(value = {"descripcion", "direccion", "politicas_servicio","ciudades_id","caracteristicas","listadeimagenes"})
     private Producto productosProductos;
     @JsonIgnoreProperties(value = {"nombre","apellido", "email", "contrasenia","ciudad"})
     private Usuario usuarios;
