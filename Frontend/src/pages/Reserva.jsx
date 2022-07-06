@@ -29,6 +29,7 @@ const Reserva = () => {
         <div className="columna_izquierda">
           <Formulario />
           <CustomCalendar />
+          
           <h2 className="section-h2">Tu horario de llegada</h2>
           <HorarioLlegada />
         </div>
