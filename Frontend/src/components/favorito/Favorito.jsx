@@ -28,9 +28,7 @@ const Favorito = ({ producto, enableFav }) => {
         (fav) => fav.productos_id === producto?.productos_id
       );
       if (!filterFav) {
-        console.log("antes", favoritosL);
         favoritosL.push(producto);
-        console.log("despues", favoritosL);
         let auxF = favoritosL;
         localStorage.setItem("favoritos", JSON.stringify(auxF));
         setFavoritos(auxF);
@@ -47,12 +45,9 @@ const Favorito = ({ producto, enableFav }) => {
     }
   };
   const getFavoritos = () => {
-    console.log("entro Get");
     if (favoritos.length > 0) {
       favoritos.forEach((element) => {
-        console.log("producto", producto);
         if (element.productos_id === producto?.productos_id) {
-          console.log("entro Get if");
           setFavoritoLo({
             id: element.productos_id,
             fv: true,
@@ -66,7 +61,7 @@ const Favorito = ({ producto, enableFav }) => {
       <div onClick={handleClick} className="btn_favorito">
         {enableFav &&
           (favoritoLo.id === producto?.productos_id && favoritoLo.fv ? (
-            <i className="fa-solid fa-heart fa-2x"></i>
+            <i className="fa-solid fa-heart fa-2x  btn_favorito-icon"></i>
           ) : (
             <i className="fa-regular fa-heart fa-2x btn_favorito-icon"></i>
           ))}

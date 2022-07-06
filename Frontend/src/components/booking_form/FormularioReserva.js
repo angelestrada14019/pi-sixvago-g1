@@ -124,6 +124,15 @@ const FormularioReserva = ({ id }) => {
           disabled
         />
       </div>
+      <div className="checkbox-covid">
+        <label htmlFor="cbox1">
+        <input type="checkbox" name="covid" id="cbox1" value="" >
+        </input>¿Tiene colocada al menos dos vacunas?</label>
+      </div>
+      <div className="textarea-reserva">
+      <label className="title-textarea" htmlFor="textarea-vendedor">Informacion para vendedor</label>
+      <textarea id="textarea-vendedor" name="info para vendedor"></textarea>
+      </div>
       <div className="form_boton">
         <button onClick={handleClick} type="submit">
           Reservar

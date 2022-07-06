@@ -82,8 +82,8 @@ const Card = ({ data,enableFav }) => {
           <h2 className="card-title">
             {data.categorias_id !== undefined &&
             (
-                data.nombre.length<=18 ?
-            `${data.nombre}`:`${data.nombre.slice(0,18)}`
+                data.nombre.length<=13 ?
+            `${data.nombre}`:`${data.nombre.slice(0,13)}...`
                )         
             }
           </h2>
@@ -123,7 +123,7 @@ const Card = ({ data,enableFav }) => {
           />
         ) : (
           <Link to={`/producto/${data.productos_id}`}>
-            <button className="card-button">Ver más</button>
+            <button className="card-button" id="ver-mas">Ver más</button>
           </Link>
         )}
       </div>

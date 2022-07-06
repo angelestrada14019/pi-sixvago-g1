@@ -69,16 +69,15 @@
   display: flex;
   flex-direction: column;
   width: 46%;
-  padding: 20px;
+  padding: 10px;
 }
 
 .input-atributos {
   width: 97%;
   display: flex;
-  /*tablet none*/
   align-items: center;
   background-color: #f1f1f1;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   border-radius: 10px;
 }
 /* .botonAgregarAtributo i{
@@ -240,19 +239,16 @@ justify-content: center;
 .normas {
   display: flex;
   flex-direction: column;
-  padding: 0 80px;
   align-items: center;
 }
 .salud-seguridad {
   display: flex;
   flex-direction: column;
-  padding: 0 100px;
   align-items: center;
 }
 .cancelacion {
   display: flex;
   flex-direction: column;
-  padding: 0 100px;
   align-items: center;
 }
 
@@ -285,27 +281,27 @@ justify-content: center;
 .input-cargaimagenes {
   display: flex;
   background-color: #f1f1f1;
-  /* height: 90px; */
+  height: 90px;
   min-width: 97%;
   margin-bottom: 30px;
   border-radius: 10px;
   align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: row;
 }
-
+.input-cargaimagenes input{
+}
 .input-cargaimagenes .fa-square-plus {
   padding-top: 0px;
 }
 
 .datos-imagenes {
-  width: 80%;
+  width: 90%;
   display: flex;
   margin-left: 10px;
 }
 .botonAgregarAtributo{
-  height: 100px;
     margin-left: 10px;
 }
 .botonAgregarAtributo2{
