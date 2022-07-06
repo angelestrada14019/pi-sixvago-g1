@@ -82,7 +82,7 @@ const CreateProduct = () => {
     let auxCaract = [];
     let auxPoliticas = [];
     let auxImg = [];
-    let auxProducto=product;
+    let auxProducto = product;
 
     try {
       if (caracteristicasNuevas[0].nombre !== "") {
@@ -110,13 +110,13 @@ const CreateProduct = () => {
       if (normasProducto[0].descripcion !== "") {
         for (let i = 0; i < normasProducto.length; i++) {
           const norma = normasProducto[i];
-          console.log("normas",norma);
+          console.log("normas", norma);
           if (norma.id !== "") {
-              let newN = { id: norma.id };
-              auxPoliticas.push(newN);
-              console.log("normas",norma);
+            let newN = { id: norma.id };
+            auxPoliticas.push(newN);
+            console.log("normas", norma);
           } else {
-            console.log("POST de normas");            
+            console.log("POST de normas");
             const response = await ApiCall.invokePOST("/politicas", norma);
             let id = response.body.id;
             let newN = { id: id };
@@ -154,13 +154,13 @@ const CreateProduct = () => {
           }
         }
       }
-      auxProducto.caracteristicas=auxCaract;
-      auxProducto.politicas=auxPoliticas;
+      auxProducto.caracteristicas = auxCaract;
+      auxProducto.politicas = auxPoliticas;
     } catch (error) {
       console.log(error);
     } finally {
       // validar que no haya campos vacios
-      console.log("POST PRODUCTO",auxProducto);
+      console.log("POST PRODUCTO", auxProducto);
       const postProducto = await ApiCall.invokePOST("/productos", auxProducto);
       console.log(postProducto.body);
       const id = postProducto.body.productos_id;
@@ -200,6 +200,15 @@ const CreateProduct = () => {
     }
     if (name === "descripcion") {
       setProduct({ ...product, descripcion: value });
+    }
+    if (name === "habitaciones") {
+      setProduct({ ...product, habitaciones: value });
+    }
+    if (name === "latitud") {
+      setProduct({ ...product, latitud: value });
+    }
+    if (name === "longitud") {
+      setProduct({ ...product, longitud: value });
     }
   };
 
@@ -254,6 +263,7 @@ const CreateProduct = () => {
         <div className="datos-propiedad">
           <label>Nombre de la propiedad</label>
           <input
+            required
             type="text"
             name="product-name"
             placeholder="Ingrese nombre de la propiedad"
@@ -282,17 +292,6 @@ const CreateProduct = () => {
           </select>
         </div>
         <div className="datos-propiedad">
-          <label>Dirección</label>
-          <input
-            type="text"
-            name="direccion"
-            placeholder="Ingrese direccion de la propiedad"
-            id="propiedad-direccion"
-            className="propiedad"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="datos-propiedad">
           <label>Ciudad</label>
           <select
             name="ciudad"
@@ -311,6 +310,54 @@ const CreateProduct = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div className="datos-propiedad">
+          <label>Habitaciones</label>
+          <input
+            required
+            type="text"
+            name="habitaciones"
+            placeholder="Ingrese habitaciones de la propiedad"
+            id="propiedad-habitaciones"
+            className="propiedad"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="datos-propiedad">
+          <label>Dirección</label>
+          <input
+            required
+            type="text"
+            name="direccion"
+            placeholder="Ingrese direccion de la propiedad"
+            id="propiedad-direccion"
+            className="propiedad"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="datos-propiedad">
+          <label>Latitud</label>
+          <input
+            required
+            type="text"
+            name="latitud"
+            placeholder="Ingrese latitud de la propiedad"
+            id="propiedad-latitud"
+            className="propiedad"
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="datos-propiedad">
+          <label>Longitud</label>
+          <input
+            required
+            type="text"
+            name="longitud"
+            placeholder="Ingrese longitud de la propiedad"
+            id="propiedad-longitud"
+            className="propiedad"
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <div className="textArea">
