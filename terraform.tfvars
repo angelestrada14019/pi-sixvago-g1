@@ -93,9 +93,9 @@ instance_tags_zone_b =  {
 user_data_zone_b = "scrip.sh"
 
 #--------------db subnet group
-name_db_group_subnet=  "db_subnet_group-sixvago"
+name_db_group_subnet=  "db_subnet_group-sixvago_zone"
 tags_db_group_subnet=  {
-    Name = "db_subnet_group-sixvago"
+    Name = "db_subnet_group-sixvago_zone"
 }
 #-------------rds instance-----------------------
 allocated_storage= 10
