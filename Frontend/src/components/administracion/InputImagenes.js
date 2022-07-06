@@ -57,7 +57,7 @@ const InputImagenes = ({ setImagenesProducto }) => {
               </div>
             )}
             {imagenes.length - 1 === i && (
-              <div className="botonAgregarAtributo">
+              <div className="botonAgregarAtributo2">
                 <i
                   onClick={handleClickAdd}
                   className="fa fa-regular fa-square-plus fa-3x "
