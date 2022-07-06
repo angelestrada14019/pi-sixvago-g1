@@ -16,13 +16,15 @@ async function TC_001(){
     await driver.findElement(By.id("userEmail")).sendKeys("guido@yopmail.com");
     await driver.findElement(By.id("userPassword")).sendKeys('123456');
     await driver.findElement(By.xpath("//button[@type='submit']")).click();
-    await driver.sleep(3000);
+    await driver.sleep(7000);
+    await driver.findElement(By.linkText("Ver más")).click();
+    await driver.sleep(5000);
+    await driver.findElement(By.id("boton-reserva")).click();
 }
-async function TC_002(){
-    chromeCapabilities.set('chromeOptions', {args: ['--headless']});
-    let driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
 
-    await driver.findElement(By.id("ver-mas")).click();
-}
+
+
+
+
 
 TC_001();
