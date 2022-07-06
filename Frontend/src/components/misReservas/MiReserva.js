@@ -21,26 +21,33 @@ const MiReserva = () => {
       {misReservas.length > 0 ? (
         misReservas.map((reserva, i) => (
           <div key={i} className="card-miReserva">
-            <div className="img-miReserva"></div>
+            <div className="img-miReserva">
+              <img src="" alt="" />
+            </div>
             <div className="datos-miReserva">
               <div className="nombre-miReserva">
                 {" "}
-                <h2>Nombre: </h2>{" "}
+                <h2>Nombre: {`${user.nombre} ${user.apellido}`}</h2>{" "}
               </div>
               <hr />
               <div className="informacion-miReserva">
-                <p>Categoria: </p>
-                <p>Nombre lugar: </p>
-                <p>N° Habitaciones reservadas: </p>
+                <p>
+                  Categoria: {reserva.productosProductos.categorias_id.titulo}
+                </p>
+                <p>Nombre lugar: {reserva.productosProductos.nombre}</p>
+                <p>
+                  N° Habitaciones reservadas:{" "}
+                  {reserva.productosProductos.habitaciones}
+                </p>
               </div>
               <hr />
               <div className="check-miReserva">
-                <h3>Check in: </h3>
-                <h3>Check out: </h3>
+                <h3>Check in: {reserva.fechaInicialReserva}</h3>
+                <h3>Check out: {reserva.fechaFinalReserva}</h3>
               </div>
               <hr />
               <div className="covid-miReserva">
-                <p>Hora de reserva: </p>
+                <p>Hora de reserva: {reserva.horaComienzoReserva}</p>
               </div>
             </div>
           </div>
