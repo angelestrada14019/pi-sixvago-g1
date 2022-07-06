@@ -27,7 +27,7 @@ const FechasDisponibles = () => {
           <CustomCalendar />
           <div className="calendarAvailableDay_boxReservation">
             <p>Agregá tus fechas de viaje para obtener precios exactos</p>
-            <button onClick={handleClick}>Reservar</button>
+            <button onClick={handleClick} id="boton-reserva">Reservar</button>
           </div>
         </div>
       </div>
