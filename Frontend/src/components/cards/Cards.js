@@ -7,6 +7,7 @@ const Cards = () => {
   const { cardCategory, list, pageNumber, setLoading } = useStateContext();
   const productsPerPage = 4;
   const pagesVisited = pageNumber * productsPerPage;
+  const [enableFav,setEnableFav]=useState(true);
 
   useEffect(() => {
     if (cardCategory !== "") {
@@ -27,9 +28,8 @@ const Cards = () => {
           <Card />
         </>
       ) : (
-        list
-          .slice(pagesVisited, pagesVisited + productsPerPage)
-          .map((product, i) => <Card data={product} key={`cards-${i}`} />)
+        list?.slice(pagesVisited, pagesVisited + productsPerPage)
+          .map((product, i) => <Card data={product} enableFav={enableFav} key={`cards-${i}`} />)
       )}
     </div>
   );

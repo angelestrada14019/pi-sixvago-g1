@@ -27,7 +27,7 @@ root.render(
           <Route path="signUp" />
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
-          <Route path="user/:id" element={<MisReservas/>}/>
+          <Route path="user/:id/mireserva" element={<MisReservas/>}/>
           <Route path="administracion" element={<Administracion/>}/>
           <Route path="administracion/productoExitoso" element={<CreacionProductoExitoso/>}/>
           <Route path="producto">

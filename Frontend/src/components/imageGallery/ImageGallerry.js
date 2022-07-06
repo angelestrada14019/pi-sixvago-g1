@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import ApiCall from "../../utils/ApiCall";
 import "./imageGallery.css";
 import { SimpleShareButtons } from "react-simple-share";
+import Favorito from "../favorito/Favorito";
 const styleModal = {
   display: "flex",
   justifyContent: "center",
@@ -25,6 +26,7 @@ const ImageGallerry = ({ id }) => {
   const [producto, setProducto] = useState([]);
   const location = useLocation();
   const [desable, setDesable] = useState(true);
+  const [enableFav,setEnableFav]=useState(true);
 
   useEffect(() => {
     getProducto();
@@ -60,7 +62,7 @@ const ImageGallerry = ({ id }) => {
           style={{cursor: 'pointer'}}
           className="fa-solid fa-share-nodes social fa-2x"
         ></i>
-        <i className="fa-regular fa-heart fa-2x"></i>
+        <Favorito producto={producto} enableFav={enableFav}/>
         <div>
           {!desable && (
             <SimpleShareButtons
@@ -112,7 +114,7 @@ const ImageGallerry = ({ id }) => {
             style={{cursor: 'pointer'}}
             className="fa-solid fa-share-nodes social fa-2x"
           ></i>
-          <i className="fa-regular fa-heart fa-2x"></i>
+          <Favorito/>
           <div>
           {!desable && (
             <SimpleShareButtons

@@ -4,8 +4,8 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import Stars from "../stars/Stars";
 import useAvgScore from "../stars/useAvgScore";
-
-const Card = ({ data }) => {
+import Favorito from "../favorito/Favorito";
+const Card = ({ data,enableFav }) => {
   const { loading } = useStateContext();
   const { width } = useWindowDimensions();
   let imgHeight = width < 600 ? "205px" : "100%";
@@ -15,7 +15,7 @@ const Card = ({ data }) => {
   const { avScore, avValue } = useAvgScore({ data, id: data?.productos_id });
 
   return (
-    <div className="card">
+    <div className="card" id={data?.productos_id}>
       {loading ? (
         <Skeleton
           variant="rectangular"
@@ -26,16 +26,21 @@ const Card = ({ data }) => {
           }}
         />
       ) : (
+        <>
         <img
           className="card-img"
           src={
             data.categorias_id !== undefined &&
-            `${data.listadeimagenes[0].urlImagen}`
+            `${data.listadeimagenes[0]?.urlImagen}`
           }
           alt={
-            data.categorias_id !== undefined && data.listadeimagenes[0].titulo
+            data.categorias_id !== undefined && data.listadeimagenes[0]?.titulo
           }
         />
+        <div className="favorito">
+        <Favorito producto={data} enableFav={enableFav}/>
+        </div>
+        </>
       )}
       <div className="card-body">
         {/* categoría del producto, el nombre, ubicación, la descripción. Y un botón */}
@@ -75,7 +80,12 @@ const Card = ({ data }) => {
           />
         ) : (
           <h2 className="card-title">
-            {data.categorias_id !== undefined && `${data.nombre}`}
+            {data.categorias_id !== undefined &&
+            (
+                data.nombre.length<=18 ?
+            `${data.nombre}`:`${data.nombre.slice(0,18)}`
+               )         
+            }
           </h2>
         )}
         {loading ? (

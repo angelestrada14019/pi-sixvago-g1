@@ -11,10 +11,11 @@ const useAvgScore = ({ data, id }) => {
     if (data || id) {
       productAvarageScore();
     }
-  }, [data, cardCategory, list]);
+  }, [data, cardCategory, list, pageNumber]);
 
   const productAvarageScore = async () => {
-    let getId = data.productos_id || id;
+    let getId = id || data.productos_id;
+   
     const response = await ApiCall.invokeGET(`/puntuacion/producto/${getId}`);
     const body = response.body;
     let sum = 0;

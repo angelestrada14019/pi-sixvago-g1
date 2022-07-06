@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import ApiCall from "../../utils/ApiCall";
 
 const InputSaludSeguridad = ({ setSeguridadProducto }) => {
-  const [salud, setSalud] = useState([{ descripcion: "", tipoDePolitica: 0 }]);
+  const [salud, setSalud] = useState([{ descripcion: "", tipoDePolitica: {
+    id:0
+  } }]);
   const [options, setOptions] = useState([{ id: 0, descripcion: "" }]);
   const [agregar, setAgregar] = useState("");
 
@@ -36,11 +38,18 @@ const InputSaludSeguridad = ({ setSeguridadProducto }) => {
   const handleCheckBoxChange = (e) => {
     if (e.target.checked) {
       if (salud[0]?.descripcion === "") {
-        setSalud([{ descripcion: e.target.value, tipoDePolitica: 3 }]);
+        setSalud([
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:2
+          } },
+        ]);
       } else {
         setSalud([
           ...salud,
-          { descripcion: e.target.value, tipoDePolitica: 3 },
+          { id: e.target.id, descripcion: e.target.value, tipoDePolitica: {
+            id:2
+          }        
+        },
         ]);
       }
     } else {

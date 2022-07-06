@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "politicas")
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Politica.class)
 public class Politica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +25,7 @@ public class Politica {
     private String descripcion;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "tipodepolitica_id",referencedColumnName = "id")
     private TipoDePolitica tipoDePolitica;
 

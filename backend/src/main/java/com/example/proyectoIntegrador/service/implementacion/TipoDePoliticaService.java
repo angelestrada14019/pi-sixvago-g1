@@ -22,7 +22,6 @@ import java.util.List;
 
 @Service
 @Slf4j
-
 public class TipoDePoliticaService implements IGeneralService<TipoDePoliticaDTO, Long> {
     @Autowired
     private ITipoDePoliticaRepository repository;
