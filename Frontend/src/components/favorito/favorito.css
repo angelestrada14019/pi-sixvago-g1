@@ -2,5 +2,5 @@
 display: inline;
 }
 .btn_favorito .btn_favorito-icon{
-
+    cursor: pointer;
 }
