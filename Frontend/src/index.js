@@ -20,16 +20,22 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="login" />
           <Route path="signUp" />
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
-          <Route path="user/:id/mireserva" element={<MisReservas/>}/>
-          <Route path="administracion" element={<Administracion/>}/>
-          <Route path="administracion/productoExitoso" element={<CreacionProductoExitoso/>}/>
+          <Route path="user/:id/mireserva" element={<ProtectedRoute children={<MisReservas />} />} />
+          <Route
+            path="administracion"
+            element={<ProtectedRoute children={<Administracion />} />}
+          />
+          <Route
+            path="administracion/productoExitoso"
+            element={<CreacionProductoExitoso />}
+          />
           <Route path="producto">
             <Route path=":id" element={<Producto />} />
             <Route

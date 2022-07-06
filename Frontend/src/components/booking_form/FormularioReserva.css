@@ -44,7 +44,7 @@
     object-fit: cover;
     width: 100%;
     border-radius: 8px 8px 8px 8px;
-   
+
 
 }
 
@@ -70,13 +70,44 @@
     border: 1px solid;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
-   }
-   .form_checkin_out input{
+}
+
+.form_checkin_out input {
     width: 100%;
     background: none;
-   }
+}
 
 
+#textarea-vendedor {
+    margin-top: 20px;
+    width: 100%;
+    resize: none;
+    height: 200px;
+    border: solid 0.3px #262626;
+    box-shadow: 0px 0px 8px #1f1f1f9a;
+    border-radius: 15px;
+}
+
+.checkbox-covid input[type=checkbox] {
+    /* Doble-tamaño Checkboxes */
+    -ms-transform: scale(1.8);
+    /* IE */
+    -moz-transform: scale(1.8);
+    /* FF */
+    -webkit-transform: scale(1.8);
+    /* Safari y Chrome */
+    -o-transform: scale(1.8);
+    /* Opera */
+    padding: 10px;
+}
+
+.checkbox-covid input {
+    margin-right: 20px;
+    margin-left: 10px;
+}
+.checkbox-covid{
+    margin-bottom: 30px;
+}
 
 .Form_Reserva label {
     display: block;
@@ -86,6 +117,6 @@
     color: #1f1f1f;
 }
 
-.nombreHotel{
-    font-size:20px;
+.nombreHotel {
+    font-size: 20px;
 }
