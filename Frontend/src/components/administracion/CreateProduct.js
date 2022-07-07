@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
-import "./createProduct.css";
+import { useEffect } from "react";
 import { useState } from "react";
 import InputAtributos from "./InputAtributos";
 import ApiCall from "../../utils/ApiCall";
-import Select from "react-select";
 import InputNormas from "./InputNormas";
 import InputSaludSeguridad from "./InputSaludSeguridad";
 import InputPoliticasCancelacion from "./InputPoliticasCancelacion";
 import InputImagenes from "./InputImagenes";
 import { useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
+import CreatableSelect from "react-select/creatable";
+import "./createProduct.css";
+import Select from "react-select";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
@@ -50,12 +51,55 @@ const CreateProduct = () => {
   ]);
   const [categorias, setCategorias] = useState([]);
   const [ciudades, setCiudades] = useState([]);
+  const [nuevaCiudad, setNuevaCiudad] = useState({
+    nombre: "",
+    pais: "",
+  });
+  const [nuevaCiudadValue, setNuevaCiudadValue] = useState("");
   const [checkBoxCaract, setCheckBoxCaract] = useState([]);
   const [imagenesProducto, setImagenesProducto] = useState([]);
   const [normasProducto, setNormasProducto] = useState([]);
   const [seguridadProducto, setSeguridadProducto] = useState([]);
   const [cancelacionProducto, setCancelacionProducto] = useState([]);
+  //----------------------------------------------------------------------------------------
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      padding: 6,
+      background: state.isFocused
+        ? `linear-gradient(-40deg,
+      rgba(203, 178, 106, 0.7) 10%,
+      rgba(255, 245, 218, 0.7) 50%,
+      rgba(190, 158, 68, 0.7) 110%
+    )`
+        : state.isSelected
+        ? `linear-gradient(40deg,
+      rgba(203, 178, 106, 1) 10%,
+      rgba(255, 245, 218, 1) 50%,
+      rgba(190, 158, 68, 1) 110%
+    )`
+        : "none",
+      color: "#black",
+      fontFamily: "Roboto",
+    }),
+    control: (provided, state) => ({
+      // none of react-select's styles are passed to <Control />
+      ...provided,
+      width: "100%",
+      height: "40px",
+      border: "none",
+      boxShadow: "0px 0px 10px #26262631",
+      borderRadius: "5px",
+      margin: "10px 0px",
+    }),
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = "opacity 300ms";
 
+      return { ...provided, opacity, transition };
+    },
+  };
+  //----------------------------------------------------------------------------------------
   useEffect(() => {
     getCategoryNames();
     getCiudades();
@@ -70,6 +114,7 @@ const CreateProduct = () => {
   const getCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
     setCiudades(lista.body);
+    console.log(lista.body);
   };
 
   const getCaracteristicas = async () => {
@@ -81,12 +126,17 @@ const CreateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // validar los campos
+    let ciudadAux1 =
+      product.ciudades_id.ciudades_id === 0 && nuevaCiudad.nombre === "";
+    let ciudadAux2 =
+      product.ciudades_id.ciudades_id !== 0 || nuevaCiudad.nombre !== "";
     if (
+      ciudadAux1 ||
+      !ciudadAux2 ||
       product.nombre === "" ||
       product.descripcion === "" ||
       product.direccion === "" ||
       product.categorias_id.id === 0 ||
-      product.ciudades_id.ciudades_id === 0 ||
       product.habitaciones === "" ||
       product.latitud === "" ||
       product.longitud === "" ||
@@ -104,17 +154,24 @@ const CreateProduct = () => {
   };
 
   const postNewProduct = async () => {
+    let auxCiudadId = 0;
     let auxCaract = [];
     let auxPoliticas = [];
     let auxImg = [];
     let auxProducto = product;
 
     try {
+      if (product.ciudades_id.ciudades_id === 0) {
+        const ciudad = await ApiCall.invokePOST("/ciudades", nuevaCiudad);
+        // console.log(ciudad.body.ciudades_id);
+        auxCiudadId = ciudad.body.ciudades_id;
+        auxProducto.ciudades_id.ciudades_id = auxCiudadId;
+      }
       if (caracteristicasNuevas[0].nombre !== "") {
         for (let i = 0; i < caracteristicasNuevas.length; i++) {
           const caract = caracteristicasNuevas[i];
           if (caract.nombre !== "") {
-            console.log("POST /caracteristicas");
+            // console.log("POST /caracteristicas");
             const response = await ApiCall.invokePOST(
               "/caracteristicas",
               caract
@@ -135,13 +192,13 @@ const CreateProduct = () => {
       if (normasProducto[0].descripcion !== "") {
         for (let i = 0; i < normasProducto.length; i++) {
           const norma = normasProducto[i];
-          console.log("normas", norma);
+          // console.log("normas", norma);
           if (norma.id !== "") {
             let newN = { id: norma.id };
             auxPoliticas.push(newN);
-            console.log("normas", norma);
+            // console.log("normas", norma);
           } else {
-            console.log("POST de normas");
+            // console.log("POST de normas");
             const response = await ApiCall.invokePOST("/politicas", norma);
             let id = response.body.id;
             let newN = { id: id };
@@ -156,7 +213,7 @@ const CreateProduct = () => {
             let newN = { id: norma.id };
             auxPoliticas.push(newN);
           } else {
-            console.log("POST de securty");
+            // console.log("POST de securty");
             const response = await ApiCall.invokePOST("/politicas", norma);
             let id = response.body.id;
             let newN = { id: id };
@@ -171,7 +228,7 @@ const CreateProduct = () => {
             let newN = { id: norma.id };
             auxPoliticas.push(newN);
           } else {
-            console.log("POST de cancel");
+            // console.log("POST de cancel");
             const response = await ApiCall.invokePOST("/politicas", norma);
             let id = response.body.id;
             let newN = { id: id };
@@ -181,9 +238,9 @@ const CreateProduct = () => {
       }
       auxProducto.caracteristicas = auxCaract;
       auxProducto.politicas = auxPoliticas;
-      console.log("POST PRODUCTO", auxProducto);
+      // console.log("POST PRODUCTO", auxProducto);
       const postProducto = await ApiCall.invokePOST("/productos", auxProducto);
-      console.log(postProducto.body);
+      // console.log(postProducto.body);
       const id = postProducto.body.productos_id;
 
       imagenesProducto.forEach((img) => {
@@ -194,9 +251,9 @@ const CreateProduct = () => {
       });
       for (let i = 0; i < auxImg.length; i++) {
         const img = auxImg[i];
-        console.log("POST IMAGENES");
+        // console.log("POST IMAGENES");
         const postImg = await ApiCall.invokePOST("/imagenes", img);
-        console.log(postImg);
+        // console.log(postImg);
       }
     } catch (error) {
       console.log(error);
@@ -211,11 +268,11 @@ const CreateProduct = () => {
     if (name === "product-name") {
       setProduct({ ...product, nombre: value });
     }
-    if (name === "categoria") {
-      let options = e.target.options;
-      let id = options[options.selectedIndex].id;
-      setProduct({ ...product, categorias_id: { id: id } });
-    }
+    // if (name === "categoria") {
+    //   let options = e.target.options;
+    //   let id = options[options.selectedIndex].id;
+    //   setProduct({ ...product, categorias_id: { id: id } });
+    // }
     if (name === "direccion") {
       setProduct({ ...product, direccion: value });
     }
@@ -280,6 +337,39 @@ const CreateProduct = () => {
         )
       );
     }
+  };
+
+  // este es cuando uno escribe en el input
+  const handleCiudadInputChange = (inputValue) => {
+    // console.log("InputChange");
+    // console.log(inputValue);
+    setNuevaCiudadValue(inputValue);
+  };
+  // este es cuando uno selecciona una ciudad o le da enter a la que quiere crear
+  const handleCiudadChange = (newValue, actionMeta) => {
+    // console.log("ValueChange");
+    // console.log(newValue);
+    // console.log(actionMeta.action);
+    if (actionMeta.action === "clear") {
+      setProduct({ ...product, ciudades_id: { ciudades_id: 0 } });
+    }
+    if (actionMeta.action === "select-option") {
+      if (newValue.id) {
+        // console.log("Selecciono una ciudad");
+        setProduct({ ...product, ciudades_id: { ciudades_id: newValue.id } });
+      } else {
+        // console.log("Creo una ciudad");
+        let arr = nuevaCiudadValue.split(",");
+        let nombre = arr[0].trim();
+        let pais = arr[1].trim();
+        setNuevaCiudad({ nombre: nombre, pais: pais });
+      }
+    }
+  };
+  const handleInputCategoria = (inputValue) => {
+    let options = inputValue;
+    let id = options.id;
+    setProduct({ ...product, categorias_id: { id: id } });
   };
   //------------------------------------------------------------------------------------------------
   const handleClose = (event, reason) => {
@@ -347,50 +437,11 @@ const CreateProduct = () => {
             required
             type="text"
             name="product-name"
-            placeholder="Ingrese nombre de la propiedad"
+            placeholder="Nombre..."
             id="propiedad-nombre"
             className="propiedad"
             onChange={handleInputChange}
           />
-        </div>
-        <div className="datos-propiedad">
-          <label>Categoría</label>
-          <select
-            name="categoria"
-            placeholder="Ingrese categoria de la propiedad"
-            className="propiedad"
-            onChange={handleInputChange}
-          >
-            {categorias.map((categoria) => (
-              <option
-                key={`${categoria.titulo}${categoria.id}`}
-                id={categoria.id}
-                value={categoria.titulo}
-              >
-                {categoria.titulo}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="datos-propiedad">
-          <label>Ciudad</label>
-          <select
-            name="ciudad"
-            placeholder="Ingrese ciudad de la propiedad"
-            id="propiedad-ciudad"
-            className="propiedad"
-            onChange={handleInputChange}
-          >
-            {ciudades.map((ciudad) => (
-              <option
-                key={`${ciudad.nombre}${ciudad.ciudades_id}`}
-                id={ciudad.ciudades_id}
-                value={ciudad.nombre}
-              >
-                {ciudad.nombre}
-              </option>
-            ))}
-          </select>
         </div>
         <div className="datos-propiedad">
           <label>Habitaciones</label>
@@ -398,10 +449,39 @@ const CreateProduct = () => {
             required
             type="text"
             name="habitaciones"
-            placeholder="Ingrese habitaciones de la propiedad"
+            placeholder="Ej: 2"
             id="propiedad-habitaciones"
-            className="propiedad"
+            className="propiedad habitaciones"
             onChange={handleInputChange}
+          />
+        </div>
+        <div className="datos-propiedad">
+          <label>Categoría</label>
+          <Select
+            name="categoria"
+            styles={customStyles}
+            placeholder="Seleccione una..."
+            onChange={handleInputCategoria}
+            options={categorias.map((categoria) => ({
+              value: categoria.titulo,
+              label: categoria.titulo,
+              id: categoria.id,
+            }))}
+          />
+        </div>
+        <div className="datos-propiedad">
+          <label className="label-ciudad">Ciudad</label>
+          <CreatableSelect
+            styles={customStyles}
+            isClearable
+            placeholder="Ciudad, Pais"
+            onChange={handleCiudadChange}
+            onInputChange={handleCiudadInputChange}
+            options={ciudades.map((ciudad) => ({
+              value: `${ciudad.nombre}, ${ciudad.pais}`,
+              label: `${ciudad.nombre}, ${ciudad.pais}`,
+              id: ciudad.ciudades_id,
+            }))}
           />
         </div>
         <div className="datos-propiedad">
@@ -410,35 +490,37 @@ const CreateProduct = () => {
             required
             type="text"
             name="direccion"
-            placeholder="Ingrese direccion de la propiedad"
+            placeholder="Direccion..."
             id="propiedad-direccion"
             className="propiedad"
             onChange={handleInputChange}
           />
         </div>
-        <div className="datos-propiedad">
-          <label>Latitud</label>
-          <input
-            required
-            type="text"
-            name="latitud"
-            placeholder="Ingrese latitud de la propiedad"
-            id="propiedad-latitud"
-            className="propiedad"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="datos-propiedad">
-          <label>Longitud</label>
-          <input
-            required
-            type="text"
-            name="longitud"
-            placeholder="Ingrese longitud de la propiedad"
-            id="propiedad-longitud"
-            className="propiedad"
-            onChange={handleInputChange}
-          />
+        <div className="datos-propiedad latitud-longitud">
+          <div className="datos-propiedad">
+            <label>Latitud</label>
+            <input
+              required
+              type="text"
+              name="latitud"
+              placeholder="Ej: -34.6"
+              id="propiedad-latitud"
+              className="propiedad"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="datos-propiedad">
+            <label>Longitud</label>
+            <input
+              required
+              type="text"
+              name="longitud"
+              placeholder="Ej: 58.5"
+              id="propiedad-longitud"
+              className="propiedad"
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
       </div>
       <div className="textArea">

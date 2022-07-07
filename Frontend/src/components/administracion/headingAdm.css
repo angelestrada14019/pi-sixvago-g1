@@ -1,51 +1,56 @@
 .headerProducto {
-    position: sticky;
-    top: 86px;
-    min-width: 100%;
-    text-align: center;
-    z-index: 2;
+  position: sticky;
+  top: 86px;
+  min-width: 100%;
+  text-align: center;
+  z-index: 2;
 }
 .section {
-    margin-left: 40px;
-    color: #262626;
-    font-size: 20px;
+  color: #262626;
+  font-size: 20px;
 }
 
 .section h5 {
-    color: #262626;
-    font-family: "Roboto";
-    font-weight: 500;
-    position: absolute;
-    font-style: normal;
-    font-size: 38px;
+  color: #262626;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 38px;
 }
 
 .backButton {
-    background: transparent;
-    border: 0px solid;
-    margin-right: 50px;
-    font-size: 35px;
-    cursor: pointer;
+  background: transparent;
+  border: 0px solid;
+  margin-right: 50px;
+  font-size: 30px;
+  cursor: pointer;
 }
 .mapReport {
-    position: relative;
+  position: relative;
 }
 
 .descriptionData {
-    margin-left: 18px;
+  margin-left: 18px;
 }
 
 .fa-location-dot {
-    margin-left: 50px;
-    margin-right: 10px;
-    padding: 5px 0px 5px 0px;
+  margin-left: 50px;
+  margin-right: 10px;
+  padding: 5px 0px 5px 0px;
 }
 @media (max-width: 578px) {
-    header {
-        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.548);
-    }
-    .section h5 {
-        margin-top: 10px;
-        font-size: 25px;
-    }
+  header {
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.548);
+  }
+  .descriptionLodging{
+    padding-bottom: 10px;
+  }
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .section h5 {
+    width: 50%;
+    font-size: 22px !important;
+  }
 }
