@@ -29,7 +29,6 @@ public class ReservaController {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.editar(reservaDTO)).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','cliente')")
     public ResponseEntity<WrapperResponse<String>>eliminar(@PathVariable Long id) {
         if (reservaService.buscar(id) != null) {
             reservaService.eliminar(id);
@@ -43,7 +42,6 @@ public class ReservaController {
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",reservaService.listarTodos()).createResponse(HttpStatus.OK);
     }
     @PostMapping()
-    @PreAuthorize("hasAnyRole('admin','cliente')")
     public ResponseEntity<WrapperResponse<ReservaDTO>> agregar(@RequestBody ReservaDTO reservaDTO){
         return  new WrapperResponse<>(true,HttpStatus.CREATED,"Succes",reservaService.agregar(reservaDTO)).createResponse(HttpStatus.CREATED);
     }
