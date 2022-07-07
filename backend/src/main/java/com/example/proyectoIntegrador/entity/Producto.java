@@ -35,10 +35,10 @@ public class Producto{
     private Integer habitaciones;
 
     @Column(name = "longitud")
-    private Integer longitud;
+    private Double longitud;
 
     @Column(name = "latitud")
-    private Integer latitud;
+    private Double latitud;
 
 
     @ManyToOne
