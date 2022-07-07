@@ -69,7 +69,8 @@ const FormularioReserva = ({ id }) => {
     } else {
       setAlert(true);
       e.preventDefault();
-    }
+    } 
+    console.log("post");
   };
 
   const postReserva = async (body) => {
@@ -88,6 +89,16 @@ const FormularioReserva = ({ id }) => {
       return false;
     }
   };
+
+  const handleChange = (e) => {
+    if (e.target.id === "textarea-vendedor") {
+      setValues({...values, datosParaVendedor : e.target.value})
+    }else{
+      setValues({...values, vacunaCovid : e.target.checked})
+    }
+  }
+
+  console.log(values);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -160,7 +171,7 @@ const FormularioReserva = ({ id }) => {
       </div>
       <div className="checkbox-covid">
         <label htmlFor="cbox1">
-          <input type="checkbox" name="covid" id="cbox1" value=""></input>¿Tiene
+          <input type="checkbox" name="covid" id="cbox1" onChange={handleChange}></input>¿Tiene
           colocada al menos dos vacunas?
         </label>
       </div>
@@ -168,7 +179,7 @@ const FormularioReserva = ({ id }) => {
         <label className="title-textarea" htmlFor="textarea-vendedor">
           Informacion para vendedor
         </label>
-        <textarea id="textarea-vendedor" name="info para vendedor"></textarea>
+        <textarea id="textarea-vendedor" name="info para vendedor" onChange={handleChange}></textarea>
       </div>
       <div className="form_boton">
         <button onClick={handleClick} type="submit">
