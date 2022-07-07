@@ -35,8 +35,8 @@ public class CategoriaController {
     @PreAuthorize("hasRole('admin')")
     public ResponseEntity<WrapperResponse<CategoriaDTO>> editar(@RequestBody CategoriaDTO categoriaDTO){
         CategoriaDTO categoriaDTO1=null;
-        if(categoriaDTO.getId() == null)
-            categoriaDTO1 = categoriaService.editar(categoriaDTO);
+        if(categoriaDTO.getId() != null){
+            categoriaDTO1 = categoriaService.editar(categoriaDTO);}
         else throw new NoDataFoundExceptions("el cuerpo no tiene id");
         return  new WrapperResponse<>(true,HttpStatus.OK,"Succes",categoriaDTO1).createResponse(HttpStatus.OK);
     }

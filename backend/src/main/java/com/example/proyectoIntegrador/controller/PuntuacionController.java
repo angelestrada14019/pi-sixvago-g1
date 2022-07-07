@@ -37,7 +37,7 @@ public class PuntuacionController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<WrapperResponse<String>>  eliminar(@PathVariable Long id) {
-        if (puntuacionService.buscar(id) == null) {
+        if (puntuacionService.buscar(id) != null) {
             puntuacionService.eliminar(id);
         } else {
             throw new NoDataFoundExceptions("no existe la puntuacion con ese id");
