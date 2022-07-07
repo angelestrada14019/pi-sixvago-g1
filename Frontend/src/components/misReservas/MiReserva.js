@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ApiCall from "../../utils/ApiCall";
+import ImageGallerry from "../imageGallery/ImageGallerry";
 import "./miReserva.css";
 
 const MiReserva = () => {
@@ -20,9 +21,11 @@ const MiReserva = () => {
       {misReservas.length > 0 ? (
         misReservas.map((reserva, i) => (
           <div key={i} className="card-miReserva">
-            <div className="img-miReserva">
-              <img src={reserva.productosProductos.listadeimagenes[0].urlImagen} alt="" />
-            </div>
+            <img
+              className="img-miReserva"
+              src={reserva.productosProductos.listadeimagenes[0].urlImagen}
+              alt=""
+            />
             <div className="datos-miReserva">
               <div className="nombre-miReserva">
                 {" "}
