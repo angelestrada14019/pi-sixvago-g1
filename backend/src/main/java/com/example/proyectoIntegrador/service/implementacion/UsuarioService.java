@@ -93,6 +93,8 @@ public class UsuarioService{
         String verifyURL="http://"+ hostWeb + "/verify?code="+ usuarioDTO1.getVerification_code();
         mailContent += "<h3><a href=\""+verifyURL+"\">Verificar</a><h3>";
         mailContent += "<p> Gracias de parte de SixVago team</p>";
+        String img ="https://g1-sixvago-s3.s3.amazonaws.com/SixVago-dorado.png";
+        mailContent += "<img src=\""+img+"\" alt='logo'/>";
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(email,senderName);
