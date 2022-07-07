@@ -16,7 +16,6 @@ const MiReserva = () => {
     const response = await ApiCall.invokeGET(`/reservas/usuario?id=${user.id}`);
     setMisReservas(response.body);
   };
-
   return (
     <div className="container-miReserva">
       {misReservas.length > 0 ? (

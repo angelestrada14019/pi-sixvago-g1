@@ -29,7 +29,7 @@ const Producto = () => {
       <div className="containerProducto">
         <ImageGallerry id={id} />
         <Descripcion producto={producto} />
-        {/* <Caracteristicas producto={producto} /> */}
+        <Caracteristicas producto={producto} />
         <FechasDisponibles />
         <div className="maps">
           <h2>¿Donde vas a estar?</h2>

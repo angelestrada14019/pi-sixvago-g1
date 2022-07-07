@@ -1,3 +1,11 @@
+.container-miReserva{
+    height: 100%;
+    display: flex;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .card-miReserva {
   display: flex;
   box-shadow: 0px 0px 10px #262626;

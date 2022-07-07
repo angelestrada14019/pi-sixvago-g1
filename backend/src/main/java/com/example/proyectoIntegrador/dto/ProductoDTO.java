@@ -25,8 +25,8 @@ public class ProductoDTO {
     private String descripcion;
     private String direccion;
     private Integer habitaciones;
-    private Integer longitud;
-    private Integer latitud;
+    private Double longitud;
+    private Double latitud;
     private List<Politica> politicas;
 
     private Categoria categorias_id;
