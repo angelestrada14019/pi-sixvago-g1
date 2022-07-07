@@ -77,7 +77,7 @@
   display: flex;
   align-items: center;
   background-color: #f1f1f1;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   border-radius: 10px;
 }
 /* .botonAgregarAtributo i{
@@ -208,9 +208,10 @@ justify-content: center;
 }
 
 .politicas-contenedor div h3 {
-  font-size: 18px;
+  font-size: 23px;
   font-weight: 500;
   padding-top: 20px;
+  color: #262626;
 }
 
 .titulo-politicas {
@@ -341,4 +342,14 @@ justify-content: center;
     rgb(148, 122, 53) 110%
   );
   color: #262626;
+}
+@media (max-width: 824px) {
+  .datos-atributos {
+    width: 43%;
+}
+}
+
+
+@media (max-width: 578px) {
+  .datos-atributos{width: 40%;}
 }

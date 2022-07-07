@@ -26,7 +26,7 @@
 }
 
 @media (max-width: 576px) {
-  .footer-icons {
-    display: none;
-  }
+  .footer-icons i {
+  padding: 10px;
+  font-size: 25px;}
 }
