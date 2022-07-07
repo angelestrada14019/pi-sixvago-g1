@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./FormularioReserva.css";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Stars from "../stars/Stars";
+import { Alert, Snackbar } from "@mui/material";
 
 const FormularioReserva = ({ id }) => {
   const [alert, setAlert] = useState(false);
@@ -100,19 +101,20 @@ const FormularioReserva = ({ id }) => {
     <div className="Form_Reserva">
       {!alert ? null : (
         <Snackbar
+          sx={{ marginBottom: "4rem" }}
           open={alert}
           autoHideDuration={6000}
           onClose={handleClose}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
           <Alert
-            severity="error"
+            severity="info"
             variant="outlined"
             sx={{
-              marginTop: "150px",
+              marginBottom: "10px",
               background: "#262626",
               fontWeight: "bold",
-              color: "#c93330",
+              color: "#0c8dc7",
               padding: "10px 20px",
             }}
           >

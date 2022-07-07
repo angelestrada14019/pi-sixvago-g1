@@ -56,7 +56,7 @@ const MiReserva = () => {
         ))
       ) : (
         <div className="no-reservas">
-          <h1>No tienes reservas</h1>
+          <h1>Aún no has efectuado ninguna reserva.</h1>
         </div>
       )}
     </div>
