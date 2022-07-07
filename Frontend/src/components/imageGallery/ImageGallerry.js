@@ -114,7 +114,7 @@ const ImageGallerry = ({ id }) => {
             style={{cursor: 'pointer'}}
             className="fa-solid fa-share-nodes social fa-2x"
           ></i>
-          <Favorito/>
+          <Favorito producto={producto} enableFav={enableFav}/>
           <div>
           {!desable && (
             <SimpleShareButtons
