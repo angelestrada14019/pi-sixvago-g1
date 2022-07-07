@@ -15,14 +15,13 @@ const MiReserva = () => {
     const response = await ApiCall.invokeGET(`/reservas/usuario?id=${user.id}`);
     setMisReservas(response.body);
   };
-
   return (
     <div className="container-miReserva">
       {misReservas.length > 0 ? (
         misReservas.map((reserva, i) => (
           <div key={i} className="card-miReserva">
             <div className="img-miReserva">
-              <img src="" alt="" />
+              <img src={reserva.productosProductos.listadeimagenes[0].urlImagen} alt="" />
             </div>
             <div className="datos-miReserva">
               <div className="nombre-miReserva">
