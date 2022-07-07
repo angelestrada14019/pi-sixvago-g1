@@ -8,12 +8,20 @@ import InputNormas from "./InputNormas";
 import InputSaludSeguridad from "./InputSaludSeguridad";
 import InputPoliticasCancelacion from "./InputPoliticasCancelacion";
 import InputImagenes from "./InputImagenes";
+import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
 const CreateProduct = () => {
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
+  const [emptyFields, setEmptyFields] = useState(false);
   const [product, setProduct] = useState({
     nombre: "",
     descripcion: "",
     direccion: "",
+    habitaciones: 0,
+    latitud: 0,
+    longitud: 0,
     categorias_id: {
       id: 0,
     },
@@ -73,9 +81,26 @@ const CreateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // validar los campos
-    // if (validar los campos) {
-    postNewProduct();
-    // }
+    if (
+      product.nombre === "" ||
+      product.descripcion === "" ||
+      product.direccion === "" ||
+      product.categorias_id.id === 0 ||
+      product.ciudades_id.ciudades_id === 0 ||
+      product.habitaciones === "" ||
+      product.latitud === "" ||
+      product.longitud === "" ||
+      caracteristicasConId[0].nombre === "" ||
+      caracteristicasConId[0].icono === "" ||
+      Object.keys(imagenesProducto[0]).length === 0 ||
+      normasProducto[0].descripcion === "" ||
+      seguridadProducto[0].descripcion === "" ||
+      cancelacionProducto[0].descripcion === ""
+    ) {
+      setEmptyFields(true);
+    } else {
+      postNewProduct();
+    }
   };
 
   const postNewProduct = async () => {
@@ -156,10 +181,6 @@ const CreateProduct = () => {
       }
       auxProducto.caracteristicas = auxCaract;
       auxProducto.politicas = auxPoliticas;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      // validar que no haya campos vacios
       console.log("POST PRODUCTO", auxProducto);
       const postProducto = await ApiCall.invokePOST("/productos", auxProducto);
       console.log(postProducto.body);
@@ -177,6 +198,11 @@ const CreateProduct = () => {
         const postImg = await ApiCall.invokePOST("/imagenes", img);
         console.log(postImg);
       }
+    } catch (error) {
+      console.log(error);
+      setAlert(true);
+    } finally {
+      navigate("productoExitoso");
     }
   };
   //------------------------------------------------------------------------------------------------
@@ -255,10 +281,65 @@ const CreateProduct = () => {
       );
     }
   };
-
+  //------------------------------------------------------------------------------------------------
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      setAlert(false);
+      setEmptyFields(false);
+      return;
+    }
+    setAlert(false);
+    setEmptyFields(false);
+  };
   //------------------------------------------------------------------------------------------------
   return (
     <div className="creacion-producto">
+      {!emptyFields ? null : (
+        <Snackbar
+          sx={{ marginBottom: "4rem" }}
+          open={emptyFields}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            severity="info"
+            variant="outlined"
+            sx={{
+              marginBottom: "10px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#0c8dc7",
+              padding: "10px 20px",
+            }}
+          >
+            Todos los campos son obligatorios.
+          </Alert>
+        </Snackbar>
+      )}
+      {!alert ? null : (
+        <Snackbar
+          open={alert}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            severity="error"
+            variant="outlined"
+            sx={{
+              marginTop: "150px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#c93330",
+              padding: "10px 20px",
+            }}
+          >
+            Lamentablemente el producto no ha podido crearse. Por favor intente
+            más tarde.
+          </Alert>
+        </Snackbar>
+      )}
       <div className="datos-container">
         <div className="datos-propiedad">
           <label>Nombre de la propiedad</label>

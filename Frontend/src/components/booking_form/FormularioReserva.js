@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./FormularioReserva.css";
 import { useStateContext } from "../../contexts/ContextProvider";
 import Stars from "../stars/Stars";
+import { Alert, Snackbar } from "@mui/material";
 
 const FormularioReserva = ({ id }) => {
+  const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -65,7 +67,7 @@ const FormularioReserva = ({ id }) => {
     if (okR && okU) {
       navigate(`reservaExitosa`);
     } else {
-      alert("no se creo la reserva");
+      setAlert(true);
       e.preventDefault();
     }
   };
@@ -87,8 +89,40 @@ const FormularioReserva = ({ id }) => {
     }
   };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      setAlert(false);
+      return;
+    }
+    setAlert(false);
+  };
+
   return (
     <div className="Form_Reserva">
+      {!alert ? null : (
+        <Snackbar
+          sx={{ marginBottom: "4rem" }}
+          open={alert}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            severity="info"
+            variant="outlined"
+            sx={{
+              marginBottom: "10px",
+              background: "#262626",
+              fontWeight: "bold",
+              color: "#0c8dc7",
+              padding: "10px 20px",
+            }}
+          >
+            Lamentablemente no se ha podido crear la reserva. Por favor intente
+            más tarde.
+          </Alert>
+        </Snackbar>
+      )}
       <img
         className="form-img"
         src={producto?.listadeimagenes[0]?.urlImagen}
@@ -126,12 +160,15 @@ const FormularioReserva = ({ id }) => {
       </div>
       <div className="checkbox-covid">
         <label htmlFor="cbox1">
-        <input type="checkbox" name="covid" id="cbox1" value="" >
-        </input>¿Tiene colocada la vacuna contra COVID19?</label>
+          <input type="checkbox" name="covid" id="cbox1" value=""></input>¿Tiene
+          colocada al menos dos vacunas?
+        </label>
       </div>
       <div className="textarea-reserva">
-      <label className="title-textarea" htmlFor="textarea-vendedor">Informacion para vendedor</label>
-      <textarea id="textarea-vendedor" name="info para vendedor"></textarea>
+        <label className="title-textarea" htmlFor="textarea-vendedor">
+          Informacion para vendedor
+        </label>
+        <textarea id="textarea-vendedor" name="info para vendedor"></textarea>
       </div>
       <div className="form_boton">
         <button onClick={handleClick} type="submit">

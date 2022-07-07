@@ -27,7 +27,10 @@ root.render(
           <Route path="signUp" />
           <Route index element={<Home />} />
           <Route path="buscar" element={<Home />} />
-          <Route path="user/:id/mireserva" element={<ProtectedRoute children={<MisReservas />} />} />
+          <Route
+            path="user/:id/mireserva"
+            element={<ProtectedRoute children={<MisReservas />} />}
+          />
           <Route
             path="administracion"
             element={<ProtectedRoute children={<Administracion />} />}

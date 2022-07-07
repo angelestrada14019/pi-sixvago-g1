@@ -115,6 +115,8 @@ public class ReservaService implements IGeneralService<ReservaDTO, Long> {
         String verifyURL="http://"+ hostWeb + "/producto/"+reserva.getProductosProductos().getProductos_id();
         mailContent += "<h3><a href=\""+verifyURL+"\">Visitar producto</a><h3>";
         mailContent += "<p> Gracias de parte de SixVago team</p>";
+        String img ="https://g1-sixvago-s3.s3.amazonaws.com/SixVago-dorado.png";
+        mailContent += "<img src=\""+img+"\" alt='logo'/>";
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(email,senderName);
