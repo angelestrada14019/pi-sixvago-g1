@@ -50,8 +50,8 @@ root.render(
               element={<ProtectedRoute children={<ReservaExitosa />} />}
             />
           </Route>
-          <Route path="verify" element={<Verify />} />
         </Route>
+          <Route path="verify" element={<Verify />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -1,7 +1,6 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 .image-gallery-thumbnails {
-  width: 200%;
 }
 .image_Container {
   width: 50%;
