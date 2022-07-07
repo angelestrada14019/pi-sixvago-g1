@@ -37,9 +37,7 @@ const Verify = () => {
             <p className="subtitulo-exitoso">
                 Su cuenta se ha verificado con exito.
             </p>
-            <Link to={"/"}>
-                <button className="boton-succes"> Volver al menu</button>
-            </Link>
+            
         </div>
         </div>:
         <>
@@ -52,9 +50,7 @@ const Verify = () => {
             <p className="subtitulo-exitoso">
                 Su cuenta no se ha verificado correctamente.
             </p>
-            <Link to={"/"}>
-                <button className="boton-succes"> Volver al menu</button>
-            </Link>
+            
             </div>
             </div>
         </>
