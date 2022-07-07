@@ -28,7 +28,7 @@ public class CiudadService implements IGeneralService<CiudadDTO, Long> {
     @Override
     public CiudadDTO agregar(CiudadDTO ciudadDTO) {
         try {
-            if (ciudadDTO != null || ciudadDTO.getNombre() != null) {
+            if (ciudadDTO == null || ciudadDTO.getNombre() == null) {
                 throw new NoDataFoundExceptions("Los datos ingresados no existen");
             } else {
                 Ciudad ciudadNueva = mapper.convertValue(ciudadDTO, Ciudad.class);
