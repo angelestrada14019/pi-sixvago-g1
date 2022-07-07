@@ -114,7 +114,6 @@ const CreateProduct = () => {
   const getCiudades = async () => {
     const lista = await ApiCall.invokeGET("/ciudades");
     setCiudades(lista.body);
-    console.log(lista.body);
   };
 
   const getCaracteristicas = async () => {
@@ -356,14 +355,17 @@ const CreateProduct = () => {
     if (actionMeta.action === "select-option") {
       if (newValue.id) {
         // console.log("Selecciono una ciudad");
+        setNuevaCiudad({ nombre: "", pais: "" });
         setProduct({ ...product, ciudades_id: { ciudades_id: newValue.id } });
-      } else {
-        // console.log("Creo una ciudad");
-        let arr = nuevaCiudadValue.split(",");
-        let nombre = arr[0].trim();
-        let pais = arr[1].trim();
-        setNuevaCiudad({ nombre: nombre, pais: pais });
       }
+    }
+    if (actionMeta.action === "create-option") {
+      // console.log("Creo una ciudad");
+      setProduct({ ...product, ciudades_id: { ciudades_id: 0 } });
+      let arr = nuevaCiudadValue.split(",");
+      let nombre = arr[0].trim();
+      let pais = arr[1].trim();
+      setNuevaCiudad({ nombre: nombre, pais: pais });
     }
   };
   const handleInputCategoria = (inputValue) => {
@@ -542,7 +544,7 @@ const CreateProduct = () => {
           <div className="checkBoxCaracteristicas">
             {checkBoxCaract.map((caracteristica, index) => (
               <>
-                <div className="checkbox">
+                <div key={index} className="checkbox">
                   <input
                     type="checkbox"
                     onChange={handleCheckBoxChange}

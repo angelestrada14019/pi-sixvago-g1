@@ -289,13 +289,11 @@
 .input-cargaimagenes {
   display: flex;
   background-color: #f1f1f1;
-  height: 90px;
   min-width: 97%;
   margin-bottom: 30px;
   border-radius: 10px;
   align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 .input-cargaimagenes input {
@@ -308,6 +306,9 @@
   width: 90%;
   display: flex;
   margin-left: 10px;
+}
+.botonAgregarAtributo i {
+  margin-top: 0 !important;
 }
 .botonAgregarAtributo {
   margin-left: 10px;
@@ -359,5 +360,8 @@
 @media (max-width: 578px) {
   .datos-atributos {
     width: 40%;
+  }
+  .datos-imagenes {
+    width: 75%;
   }
 }
