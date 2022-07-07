@@ -37,10 +37,6 @@ const MiReserva = () => {
                   Categoria: {reserva.productosProductos.categorias_id.titulo}
                 </p>
                 <p>Nombre lugar: {reserva.productosProductos.nombre}</p>
-                <p>
-                  N° Habitaciones reservadas:{" "}
-                  {reserva.productosProductos.habitaciones}
-                </p>
               </div>
               <hr />
               <div className="check-miReserva">
