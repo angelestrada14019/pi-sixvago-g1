@@ -30,7 +30,7 @@ jobs_desarrollo_container_back:
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script: 
     - echo "Docker build started"
-    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG .
+    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} --build-arg EMAIL_USERNAME=${EMAIL_USERNAME} --build-arg EMAIL_PASSWORD=${EMAIL_PASSWORD} .
     - echo "Docker push started"
     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG
     - echo "Docker tag started"
