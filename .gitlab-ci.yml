@@ -1,11 +1,11 @@
 stages:
   - test_back
   - container
-  - deploy_back
-  - test_front
-  - test_postman
+#  - deploy_back
+#  - test_front
+#  - test_postman
   - build
-  - deploy_front
+#  - deploy_front
 
 
 jobs_desarrollo_tests_back:
@@ -18,88 +18,109 @@ jobs_desarrollo_tests_back:
   only:
     - desarrollo 
 
-
 jobs_desarrollo_container_back:
-  image: 
-    name: amazon/aws-cli:latest
-    entrypoint: [""]
+  image: docker:latest
   stage: container
-  variables: 
-    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
-    APP_NAME: g1-sixvago
   services:
     - docker:dind
   before_script:
-    - cd ./backend
     - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
-    - amazon-linux-extras install docker
-    - aws --version
-    - docker --version
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script: 
     - echo "Docker build started"
-    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$TAG --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} --build-arg EMAIL_USERNAME=${EMAIL_USERNAME} --build-arg EMAIL_PASSWORD=${EMAIL_PASSWORD} .   
-    - docker push $DOCKER_REGISTRY/$APP_NAME:$TAG
-    - docker tag $DOCKER_REGISTRY/$APP_NAME:$TAG $DOCKER_REGISTRY/$APP_NAME:latest
-    - docker push $DOCKER_REGISTRY/$APP_NAME:latest
+    - docker build -t $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG .
+    - echo "Docker push started"
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG
+    - echo "Docker tag started"
+    - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:$TAG $CI_REGISTRY/${CI_PROJECT_PATH}:latest
+    - echo "Docker push latest"
+    - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
   only:
     - desarrollo
 
 
-jobs_deploy_back_ec2: 
-  stage: deploy_back
-  variables: 
-    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
-  before_script:
-  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-  - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
-  - chmod 644 ~/.ssh/known_hosts
-  script:    
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo chmod 666 /var/run/docker.sock"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker stop app && echo 'atop succes' || echo 'not succes'"
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker system prune -f && echo 'remove succes' || echo 'not succes' "
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker rmi 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago && echo 'remove succes' || echo 'not succes' "
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --name app --env-file ./env.list 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
-  only:
-    - desarrollo
+#jobs_desarrollo_container_back:
+#  image: 
+#    name: amazon/aws-cli:latest
+#    entrypoint: [""]
+#  stage: container
+#  variables: 
+#    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
+#    APP_NAME: g1-sixvago
+#  services:
+#    - docker:dind
+#  before_script:
+#    - cd ./backend
+#    - export TAG=${CI_COMMIT_SHORT_SHA}-${CI_JOB_ID}
+#    - amazon-linux-extras install docker
+#    - aws --version
+#    - docker --version
+#    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+#  script: 
+#    - echo "Docker build started"
+#    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$TAG --build-arg USERNAME=${USERNAME} --build-arg PASSWORD=${PASSWORD} --build-arg SECRET_KEY=${SECRET_KEY} --build-arg EMAIL_USERNAME=${EMAIL_USERNAME} --build-arg EMAIL_PASSWORD=${EMAIL_PASSWORD} .   
+#    - docker push $DOCKER_REGISTRY/$APP_NAME:$TAG
+#    - docker tag $DOCKER_REGISTRY/$APP_NAME:$TAG $DOCKER_REGISTRY/$APP_NAME:latest
+#    - docker push $DOCKER_REGISTRY/$APP_NAME:latest
+#  only:
+#    - desarrollo
 
-jobs_tests_front:
-  image: node:16
-  stage: test_front
-  script: 
-    - cd ./Frontend
-    - npm install
-    - cd ./src
-    - pwd
-    - npm test
-  only:
-    - desarrollo 
-  when: manual
 
-test_job_postman:
-  stage: test_postman
-  image: 
-    name: postman/newman_alpine33    
-    entrypoint: [""]
-  script:
-    - newman --version
-    - npm config set unsafe-perm true
-    - npm install -g newman-reporter-html 
-    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
-  artifacts:
-    when: always
-    paths:
-      - report.html
-    reports:
-      junit: report.xml
-  when: manual
-  only:
-    - desarrollo
+
+#jobs_deploy_back_ec2: 
+#  stage: deploy_back
+#  variables: 
+#    DOCKER_REGISTRY: 145504712931.dkr.ecr.us-east-1.amazonaws.com 
+#  before_script:
+#  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+#  - eval $(ssh-agent -s)
+#  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+#  - mkdir -p ~/.ssh
+#  - chmod 700 ~/.ssh
+#  - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
+#  - chmod 644 ~/.ssh/known_hosts
+#  script:    
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY"
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo chmod 666 /var/run/docker.sock"
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker stop app && echo 'atop succes' || echo 'not succes'"
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker system prune -f && echo 'remove succes' || echo 'not succes' "
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker rmi 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago && echo 'remove succes' || echo 'not succes' "
+#    - ssh -o StrictHostKeyChecking=no $SSH_USER@$EC2_IPADDRESS "sudo docker run -d -p 8080:8080 --name app --env-file ./env.list 145504712931.dkr.ecr.us-east-1.amazonaws.com/g1-sixvago:latest"
+#  only:
+#    - desarrollo
+
+#jobs_tests_front:
+#  image: node:16
+#  stage: test_front
+#  script: 
+#    - cd ./Frontend
+#    - npm install
+#    - cd ./src
+#    - pwd
+#    - npm test
+#  only:
+#    - desarrollo 
+#  when: manual
+
+#test_job_postman:
+#  stage: test_postman
+#  image: 
+#    name: postman/newman_alpine33    
+#    entrypoint: [""]
+#  script:
+#    - newman --version
+#    - npm config set unsafe-perm true
+#    - npm install -g newman-reporter-html 
+#    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
+#  artifacts:
+#    when: always
+#    paths:
+#      - report.html
+#    reports:
+#      junit: report.xml
+#  when: manual
+#  only:
+#    - desarrollo
 
 jobs_build_front:
   image: node:16.15.1 #node:10
@@ -116,18 +137,18 @@ jobs_build_front:
     - desarrollo
 
 
-jobs_deploy_front_s3:
-  image:
-    name: amazon/aws-cli:latest
-    entrypoint: [""]
-  dependencies:
-    - jobs_build_front
-  stage: deploy_front
-  script:
-    - aws --version
-    - aws s3 rm s3://$S3_BUCKET --recursive
-    - aws s3 cp ./Frontend/build/ s3://$S3_BUCKET --recursive
-  only:
-    - desarrollo
+#jobs_deploy_front_s3:
+#  image:
+#    name: amazon/aws-cli:latest
+#    entrypoint: [""]
+#  dependencies:
+#    - jobs_build_front
+#  stage: deploy_front
+#  script:
+#    - aws --version
+#    - aws s3 rm s3://$S3_BUCKET --recursive
+#    - aws s3 cp ./Frontend/build/ s3://$S3_BUCKET --recursive
+#  only:
+#    - desarrollo
 
     
