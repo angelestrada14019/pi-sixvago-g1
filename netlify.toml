@@ -1,2 +1,2 @@
 [build]
-  publish = "./Frontend/build"
+  publish = "build"
