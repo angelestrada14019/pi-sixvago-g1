@@ -90,7 +90,7 @@ public class UsuarioService{
         String senderName = "SixVago Team";
         String mailContent = "<p>Para "+ usuarioDTO1.getApellido()+", "+usuarioDTO1.getNombre()+",</p>";
         mailContent += "<p> Click en el siguiente link para verificar el registro: </p>";
-        String verifyURL="http://"+ hostWeb + "/verify?code="+ usuarioDTO1.getVerification_code();
+        String verifyURL="https://"+ hostWeb + "/verify?code="+ usuarioDTO1.getVerification_code();
         mailContent += "<h3><a href=\""+verifyURL+"\">Verificar</a><h3>";
         mailContent += "<p> Gracias de parte de SixVago team</p>";
         String img ="https://g1-sixvago-s3.s3.amazonaws.com/SixVago-dorado.png";
