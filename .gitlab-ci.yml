@@ -3,9 +3,10 @@ stages:
   - container
   - deploy_heroku_back
 #  - deploy_back
-#  - test_front
-#  - test_postman
-  - build
+  - test_front
+  - test_postman
+#  - build
+  - deploy_netlify_front
 #  - deploy_front
 
 
@@ -109,54 +110,66 @@ deploy_to_heroku:
 #  only:
 #    - desarrollo
 
-#jobs_tests_front:
-#  image: node:16
-#  stage: test_front
-#  script: 
-#    - cd ./Frontend
-#    - npm install
-#    - cd ./src
-#    - pwd
-#    - npm test
-#  only:
-#    - desarrollo 
-#  when: manual
-
-#test_job_postman:
-#  stage: test_postman
-#  image: 
-#    name: postman/newman_alpine33    
-#    entrypoint: [""]
-#  script:
-#    - newman --version
-#    - npm config set unsafe-perm true
-#    - npm install -g newman-reporter-html 
-#    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
-#  artifacts:
-#    when: always
-#    paths:
-#      - report.html
-#    reports:
-#      junit: report.xml
-#  when: manual
-#  only:
-#    - desarrollo
-
-jobs_build_front:
-  image: node:16.15.1 #node:10
-  stage: build  
-  script:
+jobs_tests_front:
+  image: node:16
+  stage: test_front
+  script: 
     - cd ./Frontend
     - npm install
-    - npm run build
+    - cd ./src
+    - pwd
+    - npm test
+  only:
+    - desarrollo 
+  when: manual
+
+test_job_postman:
+  stage: test_postman
+  image: 
+    name: postman/newman_alpine33    
+    entrypoint: [""]
+  script:
+    - newman --version
+    - npm config set unsafe-perm true
+    - npm install -g newman-reporter-html 
+    - newman run proyecto_integrador.postman_collection.json --globals usen_esto.postman_environment.json  --reporters cli,html,junit --reporter-html-export  report.html --reporter-junit-export  report.xml
   artifacts:
     when: always
     paths:
-      - ./Frontend/build/
+      - report.html
+    reports:
+      junit: report.xml
+  when: manual
+  only:
+    - desarrollo
+
+#jobs_build_front:
+#  image: node:16.15.1 #node:10
+#  stage: build  
+#  script:
+#    - cd ./Frontend
+#    - npm install
+#    - npm run build
+#  artifacts:
+#    when: always
+#    paths:
+#      - ./Frontend/build/
+#  only:
+#    - desarrollo
+#  when: manual
+
+jobs_deploy_front_netlify:
+  image: node:16.15.1
+  stage: deploy_netlify_front
+  before_script:
+    - npm install
+    - npm install -g netlify-cli --unsafe-perm=true
+    - npm run build
+  script:
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir ./Frontend/build/ --prod
   only:
     - desarrollo
   when: manual
-
 
 #jobs_deploy_front_s3:
 #  image:
