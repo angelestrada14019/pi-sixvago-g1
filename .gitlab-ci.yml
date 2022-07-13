@@ -1,6 +1,7 @@
 stages:
   - test_back
   - container
+  - deploy_heroku_back
 #  - deploy_back
 #  - test_front
 #  - test_postman
@@ -40,6 +41,14 @@ jobs_desarrollo_container_back:
   only:
     - desarrollo
 
+deploy_to_heroku:
+  stage: deploy_heroku_back
+  services:
+  - docker:dind
+  script:
+    - docker login --username=$EMAIL_HEROKU --password=$HEROKU_TOKEN registry.heroku.com
+    - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:latest registry.heroku.com/${CI_PROJECT_PATH}:latest
+    - docker push registry.heroku.com/${CI_PROJECT_PATH}:latest
 
 #jobs_desarrollo_container_back:
 #  image: 
