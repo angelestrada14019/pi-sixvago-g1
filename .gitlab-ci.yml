@@ -163,10 +163,10 @@ jobs_deploy_front_netlify:
   stage: deploy_netlify_front    
   script:
     - cd ./Frontend
-    - npm install
-    - npm install -g netlify-cli --unsafe-perm=true
+    - npm i
+    # your build command
     - npm run build
-    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir public/ --prod
+    - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
   only:
     - desarrollo
   when: manual
