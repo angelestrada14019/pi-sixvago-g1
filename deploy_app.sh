@@ -4,11 +4,11 @@ curl --netrc -X PATCH https://api.heroku.com/apps/back-pi-sixvago-g1-c2/formatio
   "updates": [
     {
       "type": "web",
-      "docker_image": "$IMAGE_ID"
+      "docker_image": "${IMAGE_ID}"
     },
     {
       "type": "worker",
-      "docker_image": "$IMAGE_ID"
+      "docker_image": "{$IMAGE_ID}"
     }
   ]
 }' \
