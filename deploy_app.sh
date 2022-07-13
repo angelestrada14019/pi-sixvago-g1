@@ -4,6 +4,7 @@ set -x
 DATA='{ "updates": [ { "type": "web", "docker_image":"'
 DATA="$DATA$IMAGE_ID"
 DATA=$DATA'"}, { "type": "worker", "docker_image":"'
+DATA="$DATA$IMAGE_ID"
 DATA=$DATA'" } ] }'
 
 curl --netrc -X PATCH https://api.heroku.com/apps/back-pi-sixvago-g1-c2/formation \
