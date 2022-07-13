@@ -54,7 +54,7 @@ deploy_to_heroku:
     - docker pull $CI_REGISTRY/${CI_PROJECT_PATH}:latest
     - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:latest registry.heroku.com/back-pi-sixvago-g1-c2:latest
     - docker push registry.heroku.com/back-pi-sixvago-g1-c2:latest
-    - export IMAGE_ID=`docker inspect registry.heroku.com/back-pi-sixvago-g1-c2:latest--format={{.Id}}`
+    - export IMAGE_ID=`docker inspect registry.heroku.com/back-pi-sixvago-g1-c2:latest --format={{.Id}}`
     - chmod u+x deploy_app.sh
     - ./deploy_app.sh
   when: manual
