@@ -48,6 +48,7 @@ deploy_to_heroku:
   - docker:dind
   script:
     - docker login --username=$EMAIL_HEROKU --password=$HEROKU_TOKEN registry.heroku.com
+    - docker pull $CI_REGISTRY/${CI_PROJECT_PATH}:latest
     - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:latest registry.heroku.com/back-pi-sixvago-g1-c2:latest
     - docker push registry.heroku.com/back-pi-sixvago-g1-c2:latest
     - ./deploy_app.sh
