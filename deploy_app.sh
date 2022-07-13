@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/sh
 set -x 
 echo "1"
 DATA='{ "updates": [ { "type": "web", "docker_image":"'
