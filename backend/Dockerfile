@@ -14,7 +14,7 @@ FROM openjdk:8-jre-alpine
 
 COPY --from=builder /usr/src/app/target/*.jar /app.jar
 
-EXPOSE 8080
+CMD gunicorn --bind 0.0.0.0:$PORT wsgi
 
 ENTRYPOINT ["java"]
 CMD ["-jar", "/app.jar"]

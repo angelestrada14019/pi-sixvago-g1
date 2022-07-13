@@ -155,6 +155,7 @@ jobs_build_front:
       - ./Frontend/build/
   only:
     - desarrollo
+  when: manual
 
 
 #jobs_deploy_front_s3:
