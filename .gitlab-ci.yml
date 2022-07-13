@@ -19,6 +19,7 @@ jobs_desarrollo_tests_back:
       - mvn clean test
   only:
     - desarrollo 
+  when: manual
 
 jobs_desarrollo_container_back:
   image: docker:latest
@@ -40,6 +41,7 @@ jobs_desarrollo_container_back:
     - docker push $CI_REGISTRY/${CI_PROJECT_PATH}:latest
   only:
     - desarrollo
+  when: manual
 
 deploy_to_heroku:
   image: docker:latest
@@ -53,7 +55,9 @@ deploy_to_heroku:
     - docker tag $CI_REGISTRY/${CI_PROJECT_PATH}:latest registry.heroku.com/back-pi-sixvago-g1-c2:latest
     - docker push registry.heroku.com/back-pi-sixvago-g1-c2:latest
     - export IMAGE_ID=`docker inspect registry.heroku.com/back-pi-sixvago-g1-c2:latest--format={{.Id}}`
+    - chmod u+x ./deploy_app.sh
     - ./deploy_app.sh
+  when: manual
 
 #jobs_desarrollo_container_back:
 #  image: 
