@@ -42,6 +42,7 @@ jobs_desarrollo_container_back:
     - desarrollo
 
 deploy_to_heroku:
+  image: docker:latest
   stage: deploy_heroku_back
   services:
   - docker:dind
